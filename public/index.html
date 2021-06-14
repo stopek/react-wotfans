@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl" itemscope itemtype="http://schema.org/WebPage" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#00bffc" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="supported"></div>
+    <div id="fb-root"></div>
+    <div id="root"></div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0YMTQBL6B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H0YMTQBL6B');
+    </script>
+
+
+    <!-- Load Facebook SDK for JavaScript -->
+<!--    <script>-->
+<!--      window.fbAsyncInit = function() {-->
+<!--        FB.init({-->
+<!--          xfbml            : true,-->
+<!--          version          : 'v10.0'-->
+<!--        });-->
+<!--      };-->
+
+<!--      (function(d, s, id) {-->
+<!--        var js, fjs = d.getElementsByTagName(s)[0];-->
+<!--        if (d.getElementById(id)) return;-->
+<!--        js = d.createElement(s); js.id = id;-->
+<!--        js.src = 'https://connect.facebook.net/pl_PL/sdk/xfbml.customerchat.js';-->
+<!--        fjs.parentNode.insertBefore(js, fjs);-->
+<!--      }(document, 'script', 'facebook-jssdk'));-->
+<!--    </script>-->
+
+<!--    &lt;!&ndash; Your Chat Plugin code &ndash;&gt;-->
+<!--    <div-->
+<!--        class="fb-customerchat"-->
+<!--        attribution="setup_tool"-->
+<!--        page_id="%REACT_APP_FACEBOOK_PAGE_ID%"-->
+<!--    ></div>-->
+
+    <script>
+      const isIE = document.documentMode;
+      if (isIE) {
+        document.getElementById("supported").innerHTML =
+          '<div style="' +
+            'background: #1c1c1c; ' +
+            'color: #00bffc; ' +
+            'line-height: 1; ' +
+            'text-align: center; ' +
+            'font-size: 30px; ' +
+            'top: 0; ' +
+            'left: 0; ' +
+            'width: 100%; ' +
+            'height: 100%; ' +
+            'display: flex; ' +
+            'align-items: center; ' +
+            'justify-content: center; ' +
+            'flex-direction: column;' +
+            'font-family: Verdana, sans-serif; ' +
+            'position: absolute;' +
+            '"' +
+            '>' +
+            '<img src="%PUBLIC_URL%/logo192.png" style="margin-bottom: 15px;" />' +
+            '<strong>IE is not supported.</strong><small>Please install Chrome/Firefox/Opera.</small>' +
+          '</div>';
+      }
+    </script>
+  </body>
+</html>

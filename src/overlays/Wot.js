@@ -1,0 +1,62 @@
+import Error from "components/core/Error";
+import FullPreloader from "components/core/FullPreloader";
+import Footer from "components/Footer";
+import Menu from "components/wot/navigation/Menu";
+import Base from "overlays/Base";
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectError, selectNotFound } from "reducers/wotSlice";
+import styled from "styled-components";
+import { COLOR_DARK } from "styles/colors";
+
+const Content = styled(Base)`
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px 15px 15px 75px;
+  overflow-x: hidden;
+  ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK}`}
+`;
+
+const Container = styled.div`
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+`;
+
+export default function WotOverlay(
+  {
+    breadcrumbs = [],
+    title = '',
+    children,
+    ...props
+  }
+) {
+  const isError = useSelector(selectError);
+  const isNotFound = useSelector(selectNotFound);
+
+  return (
+    <Content {...props}>
+      <Menu />
+
+      <Container>
+        <FullPreloader />
+        {isError && (
+          <Error message={`Wystąpił problem podczas wykonywania tej operacji.`} />
+        )}
+
+        {isNotFound && (
+          <Error message={`Szukana przez Ciebie zawartość nie została znaleziona`} />
+        )}
+
+        {children}
+        <Footer />
+      </Container>
+
+    </Content>
+  );
+};

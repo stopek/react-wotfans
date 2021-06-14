@@ -1,0 +1,43 @@
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #868686;
+    background: rgba(134, 134, 134, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 137, 160, 1);
+}
+
+body {
+    overflow: overlay;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    body.no-scroll-sm {
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 960px) {
+    body.no-scroll-md {
+        overflow: hidden;
+    }
+}

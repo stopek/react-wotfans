@@ -1,0 +1,67 @@
+{
+  "name": "gadget-project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/data-grid": "^4.0.0-alpha.23",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@nivo/bar": "^0.70.1",
+    "@nivo/core": "^0.70.1",
+    "env-cmd": "^10.1.0",
+    "framer-motion": "^4.1.17",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-slick": "^0.28.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build:prod": "env-cmd -f .env.production.local react-scripts build",
+    "build:dev": "env-cmd -f .env.development.local react-scripts build",
+    "test": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@nivo/pie": "^0.70.1",
+    "@reduxjs/toolkit": "^1.5.1",
+    "axios": "^0.21.1",
+    "date-fns": "^2.19.0",
+    "html-react-parser": "^1.2.4",
+    "js-cookie": "^2.2.1",
+    "react": "^17.0.2",
+    "react-intl": "^5.15.5",
+    "react-particles-js": "^3.4.1",
+    "react-redux": "^7.2.3",
+    "styled-components": "^5.2.3",
+    "terser-brunch": "^4.0.0",
+    "uuid": "^8.3.2"
+  }
+}
