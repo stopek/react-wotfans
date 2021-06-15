@@ -1,12 +1,14 @@
 import Error from "components/core/Error";
 import FullPreloader from "components/core/FullPreloader";
 import Footer from "components/Footer";
+import LoggedUserMenu from "components/wot/navigation/LoggedUserMenu";
 import Menu from "components/wot/navigation/Menu";
 import Base from "overlays/Base";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectError, selectNotFound } from "reducers/wotSlice";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { COLOR_DARK } from "styles/colors";
 
 const Content = styled(Base)`
@@ -15,9 +17,13 @@ const Content = styled(Base)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 15px 15px 15px 75px;
+  padding: 35px 15px 15px 60px;
   overflow-x: hidden;
-  ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK}`}
+
+  @media ${breakpoint.md} {
+    padding: 35px 15px 15px 75px;
+  }
+  ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK};`}
 `;
 
 const Container = styled.div`
@@ -42,6 +48,8 @@ export default function WotOverlay(
   return (
     <Content {...props}>
       <Menu />
+
+      <LoggedUserMenu />
 
       <Container>
         <FullPreloader />

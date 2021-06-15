@@ -1,8 +1,20 @@
-import { CLAN_URL, CLANS_URL, EXP_WN8_URL, MAIN_URL, PLAYER_URL, SEARCH_URL, TANKS_URL } from "app/routes";
+import {
+  ACCOUNT_URL,
+  CLAN_URL,
+  CLANS_URL,
+  EXP_WN8_URL,
+  LOGIN_URL,
+  MAIN_URL,
+  PLAYER_URL,
+  SEARCH_URL,
+  TANKS_URL
+} from "app/routes";
+import AccountContainer from "containers/AccountContainer";
 import ClanContainer from "containers/ClanContainer";
 import ClansContainer from "containers/ClansContainer";
 import ExpWn8Container from "containers/ExpWn8Container";
 import IndexContainer from "containers/IndexContainer";
+import LoginContainer from "containers/LoginContainer";
 import PlayerContainer from "containers/PlayerContainer";
 import SearchPlayerContainer from "containers/SearchPlayerContainer";
 import TanksContainer from "containers/TanksContainer";
@@ -44,9 +56,19 @@ const routing = [
     Component: ExpWn8Container
   },
   {
-    header: "Lista czołgów",
+    header: "Tanks list",
     route: TANKS_URL,
     Component: TanksContainer
+  },
+  {
+    header: "Login",
+    route: LOGIN_URL,
+    Component: LoginContainer
+  },
+  {
+    header: "Account",
+    route: ACCOUNT_URL,
+    Component: AccountContainer
   },
 ];
 

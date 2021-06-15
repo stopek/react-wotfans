@@ -69,7 +69,7 @@ function TanksContainer(...props) {
                 options={[{ label: 'Wszystkie', value: '' }].concat(premiumFilter)}
               />
             </Grid>
-            <Grid xs={12} container alignItems={`center`} justify={`flex-end`}>
+            <Grid item xs={12} container alignItems={`center`} justify={`flex-end`}>
               <Paginator
                 page={page}
                 count={tanks?.response?.pagination?.pages}
@@ -78,7 +78,10 @@ function TanksContainer(...props) {
             </Grid>
           </Grid>
 
-          <TanksList tanks={tanks?.response?.data} no_wn8 price no_stats />
+          <TanksList
+            tanks={tanks?.response?.data}
+            no_wn8 price no_stats
+          />
         </>
       )}
     </WotOverlay>

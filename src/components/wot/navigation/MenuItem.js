@@ -63,16 +63,26 @@ const LiItem = styled(motion.li)`
   cursor: pointer;
 `;
 
-export const MenuItem = ({ title, icon, route, ...props }) => {
+export const MenuItem = ({ title, icon, href, route, ...props }) => {
   const history = useHistory();
+
+  let links = {};
+  if (!!href) {
+    links = {
+      as: 'a',
+      href: href,
+      target: '_blank'
+    };
+  }
 
   return (
     <LiItem
-      onClick={() => history.push(route)}
+      onClick={() => !!route && history.push(route)}
       variants={variants}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.85 }}
       {...props}
+      {...links}
     >
       <IconPlaceholder>{icon}</IconPlaceholder>
       {!props?.no_title && (

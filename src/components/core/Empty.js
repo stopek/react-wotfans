@@ -1,21 +1,33 @@
-import Texts from "components/ui/Texts";
 import React from "react";
 import styled from "styled-components";
+import { COLOR_THEME } from "styles/colors";
 
 const EmptyContent = styled.div`
   margin: 20px 0;
+  border-left: 5px dashed ${COLOR_THEME};
+  padding: 15px 25px;
 `;
 
-export default function Empty({ message = null, align = 'left', children }) {
+const Header = styled.div`
+  font-size: 30px;
+  color: #c9c9c9;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+`;
+
+const Text = styled.div`
+  font-size: 20px;
+  color: #808080;
+  line-height: 1;
+`;
+
+export default function Empty({ message = null, children }) {
   return (
     <EmptyContent>
-      {message && <Texts size="25px" display="block" align={align} weight={900} bottom={children && 10}>
-        {message}
-      </Texts>}
+      {message && <Header>{message}</Header>}
 
-      {children && <Texts display="block" size="15px" align={align} weight={500} bottom={10}>
-        {children}
-      </Texts>}
+      {children && <Text>{children}</Text>}
     </EmptyContent>
   );
 };

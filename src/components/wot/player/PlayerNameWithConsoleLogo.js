@@ -27,6 +27,10 @@ const getConsoleLogo = (name) => {
 }
 
 export default function PlayerNameWithConsoleLogo({ name = '' }) {
+  if (!name) {
+    return null;
+  }
+
   const pattern = /(.*)([- ])([^- ]*$)/;
 
   const nick = name.replace(pattern,"$1");

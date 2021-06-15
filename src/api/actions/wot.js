@@ -1,10 +1,9 @@
 import { WOT_ENDPOINT } from "api/endpoints";
 import instance from "api/service";
 import fillRoute from "helpers/fillRoute";
-import { expWn8List } from "reducers/wotSlice";
 
 export class Wot {
-  static async action(action, params) {
+  static async action(action, params = {}) {
     const path = fillRoute(WOT_ENDPOINT, {
       action: action
     });
@@ -17,6 +16,10 @@ export class Wot {
 
   static async search_player(params) {
     return Wot.action('search_player', params);
+  }
+
+  static async logout(params) {
+    return Wot.action('logout', params);
   }
 
   static async tanks(params) {

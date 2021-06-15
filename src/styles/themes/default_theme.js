@@ -119,6 +119,7 @@ const default_theme = createMuiTheme({
     MuiPaginationItem: {
       page: {
         background: 'white',
+        margin: 5,
         '&.Mui-selected': {
           backgroundColor: COLOR_THEME
         }

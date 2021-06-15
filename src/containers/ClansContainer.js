@@ -1,5 +1,6 @@
+import { Grid } from "@material-ui/core";
 import { CLAN_URL } from "app/routes";
-import ClanPaginator from "components/wot/clans/ClanPaginator";
+import Paginator from "components/ui/Paginator";
 import ClansList from "components/wot/clans/ClansList";
 import SearchClanForm from "components/wot/clans/SearchClanForm";
 import fillRoute from "helpers/fillRoute";
@@ -12,14 +13,12 @@ import { clansList, selectClansList } from "reducers/wotSlice";
 function IndexContainer(...props) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [clans_page, setClansPage] = useState(0);
-  const clans_list = useSelector(selectClansList);
+  const clans = useSelector(selectClansList);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(clansList({ page: clans_page }));
-  }, [dispatch, clans_page]);
-
-  const response = clans_list?.response;
+    dispatch(clansList({ page: page }));
+  }, [dispatch, page]);
 
   const handleSearchClanByTag = (tag) => {
     history.push(fillRoute(CLAN_URL, { tag: tag }));
@@ -35,13 +34,19 @@ function IndexContainer(...props) {
     <WotOverlay {...props}>
       <SearchClanForm submit={handleSearchClan} />
 
-      <ClanPaginator page={clans_page} setClansPage={setClansPage} />
+      <Grid container spacing={2}>
+        <Grid item xs={12} container alignItems={`center`} justify={`flex-end`}>
+          <Paginator
+            page={page}
+            count={clans?.response?.pagination?.pages}
+            onChange={(page) => setPage(page)}
+          />
+        </Grid>
+      </Grid>
 
-      {response && (
-        <ClansList clans={response} check={handleSearchClanByTag} />
+      {clans?.response?.data && (
+        <ClansList clans={clans?.response?.data} check={handleSearchClanByTag} />
       )}
-
-      <ClanPaginator page={clans_page} setClansPage={setClansPage} />
     </WotOverlay>
   );
 }

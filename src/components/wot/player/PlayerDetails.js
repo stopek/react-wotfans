@@ -1,8 +1,9 @@
+import Empty from "components/core/Empty";
 import CharsList from "components/wot/char/CharsList";
 import { PieChar } from "components/wot/char/PieChar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatsList from "components/wot/StatsList";
-import TanksList from "components/wot/tanks/TanksList";
+import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import TanksListAndFilters from "components/wot/tanks/TanksListAndFilters";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { priceFormat } from "helpers/priceFormat";
@@ -23,12 +24,14 @@ const pf = (value, unit) => {
 }
 
 export default function PlayerDetails({ player = {}, statistics = {} }) {
-  const player_statistics = player.stats[0];
+  const player_statistics = player.stats[0] || [];
 
   const winsPercentage = (100 * player_statistics?.wins) / player_statistics?.battles;
   const lossesPercentage = (100 * player_statistics?.losses) / player_statistics?.battles;
   const drawPercentage = (100 - winsPercentage - lossesPercentage);
   const survivedPercentage = (100 * player_statistics?.survived_battles) / player_statistics?.battles;
+
+  const haveStats = Object.values(player_statistics)?.length > 0;
 
   const win_pie_data = [
     {
@@ -61,10 +64,17 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
     },
   ];
 
-  // const wn8_boost_tanks = Object.values(player?.tanks).sort(function (a, b) {
-  //   return b.weight - a.weight;
-  // }).slice(0, 12)
+  const tanks_wn8 = statistics?.tanks_wn8 || {};
 
+  //łączymy tankStats z obliczeniami wn8
+  const tanks_stats = Object.values(player?.tanksStats || []).map((tankStats) => {
+    return Object.assign({}, tankStats, tanks_wn8[tankStats.tank.id] || {});
+  });
+
+  //boostowe czołgi
+  const wn8_boost_tanks = Object.values(tanks_stats).sort(function (a, b) {
+    return b.weight - a.weight;
+  }).slice(0, 12);
 
   return (
     <>
@@ -79,75 +89,86 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
         </Wn8BarContent>
       </LargeHeader>
 
-      <Header>
-        Podsumowanie gracza
-      </Header>
-      <StatsList list={[
-        { title: 'Rozegranych bitew', value: player_statistics?.battles },
-        { title: 'Zadane uszkodzenia', value: player_statistics?.damage_dealt },
-        { title: 'Otrzymane uszkodzenia', value: player_statistics?.damage_received },
-        { title: 'Zniszczonych czołgów', value: player_statistics?.frags },
-        { title: 'Przebić', value: player_statistics?.hits },
-        { title: 'Przegranych bitew', value: player_statistics?.losses },
-        { title: 'Oddanych strzałów', value: player_statistics?.shots },
-        { title: 'Wykrytych czołgów', value: player_statistics?.spotted },
-        { title: 'Przetrwanych bitew', value: player_statistics?.survived_battles },
-        { title: 'Wygranych bitew', value: player_statistics?.wins },
-        { title: 'Zdobyte XP', value: player_statistics?.xp },
-      ]} />
+      {haveStats ? (
+        <>
+          <Header>
+            Podsumowanie gracza
+          </Header>
+          <StatsList list={[
+            { title: 'Rozegranych bitew', value: player_statistics?.battles },
+            { title: 'Zadane uszkodzenia', value: player_statistics?.damage_dealt },
+            { title: 'Otrzymane uszkodzenia', value: player_statistics?.damage_received },
+            { title: 'Zniszczonych czołgów', value: player_statistics?.frags },
+            { title: 'Przebić', value: player_statistics?.hits },
+            { title: 'Przegranych bitew', value: player_statistics?.losses },
+            { title: 'Oddanych strzałów', value: player_statistics?.shots },
+            { title: 'Wykrytych czołgów', value: player_statistics?.spotted },
+            { title: 'Przetrwanych bitew', value: player_statistics?.survived_battles },
+            { title: 'Wygranych bitew', value: player_statistics?.wins },
+            { title: 'Zdobyte XP', value: player_statistics?.xp },
+          ]} />
 
-      <Header>
-        Osiągnięcia
-      </Header>
-      <StatsList list={[
-        { title: 'Damage przez wykrycie', value: player_statistics?.damage_assisted_radio },
-        { title: 'Damage przez gąski', value: player_statistics?.damage_assisted_track },
-        { title: 'Otrzymany damage', value: player_statistics?.direct_hits_received },
-        { title: 'explosion_hits', value: player_statistics?.explosion_hits },
-        { title: 'explosion_hits_received', value: player_statistics?.explosion_hits_received },
-        { title: 'Maxymalny damage', value: player_statistics?.max_damage },
-        { title: 'Maksymalna ilość fragów', value: player_statistics?.max_frags },
-        { title: 'Maksymalne zdobyte PD', value: player_statistics?.max_xp },
-        { title: 'Strzałów odbitych', value: player_statistics?.no_damage_direct_hits_received },
-        { title: 'piercings', value: player_statistics?.piercings },
-        { title: 'piercings_received', value: player_statistics?.piercings_received },
-        { title: 'Przewróconych drzew', value: player_statistics?.trees_cut }
-      ]} />
+          <Header>
+            Osiągnięcia
+          </Header>
+          <StatsList list={[
+            { title: 'Damage przez wykrycie', value: player_statistics?.damage_assisted_radio },
+            { title: 'Damage przez gąski', value: player_statistics?.damage_assisted_track },
+            { title: 'Otrzymany damage', value: player_statistics?.direct_hits_received },
+            { title: 'explosion_hits', value: player_statistics?.explosion_hits },
+            { title: 'explosion_hits_received', value: player_statistics?.explosion_hits_received },
+            { title: 'Maxymalny damage', value: player_statistics?.max_damage },
+            { title: 'Maksymalna ilość fragów', value: player_statistics?.max_frags },
+            { title: 'Maksymalne zdobyte PD', value: player_statistics?.max_xp },
+            { title: 'Strzałów odbitych', value: player_statistics?.no_damage_direct_hits_received },
+            { title: 'piercings', value: player_statistics?.piercings },
+            { title: 'piercings_received', value: player_statistics?.piercings_received },
+            { title: 'Przewróconych drzew', value: player_statistics?.trees_cut }
+          ]} />
 
-      <Header>
-        Statystyki
-      </Header>
-      <StatsList list={[
-        { title: '% wygranych', value: pf(winsPercentage, '%') },
-        { title: '% przegranych', value: pf(lossesPercentage, '%') },
-        { title: '% remisów', value: pf(drawPercentage, '%') },
-        { title: 'XP/bitwa', value: pf(player_statistics?.xp / player_statistics?.battles, 'PD') },
-        { title: 'Strzałów/bitwa', value: pf(player_statistics?.shots / player_statistics?.battles, '') },
-        { title: 'Fragów/bitwa', value: pf(player_statistics?.frags / player_statistics?.battles, '') },
-        { title: 'Ścięte drzewa/bitwa', value: pf(player_statistics?.trees_cut / player_statistics?.battles, '') },
-        { title: '% przetrwanych bitew', value: pf(survivedPercentage, '') }
-      ]} />
+          <Header>
+            Statystyki
+          </Header>
+          <StatsList list={[
+            { title: '% wygranych', value: pf(winsPercentage, '%') },
+            { title: '% przegranych', value: pf(lossesPercentage, '%') },
+            { title: '% remisów', value: pf(drawPercentage, '%') },
+            { title: 'XP/bitwa', value: pf(player_statistics?.xp / player_statistics?.battles, 'PD') },
+            { title: 'Strzałów/bitwa', value: pf(player_statistics?.shots / player_statistics?.battles, '') },
+            { title: 'Fragów/bitwa', value: pf(player_statistics?.frags / player_statistics?.battles, '') },
+            { title: 'Ścięte drzewa/bitwa', value: pf(player_statistics?.trees_cut / player_statistics?.battles, '') },
+            { title: '% przetrwanych bitew', value: pf(survivedPercentage, '') }
+          ]} />
 
-      <CharsList list={[
-        <PieChar data={win_pie_data} />,
-        <PieChar data={survived_pie_data} />
-      ]} />
+          <CharsList list={[
+            <PieChar data={win_pie_data} />,
+            <PieChar data={survived_pie_data} />
+          ]} />
 
-      {/*<Header>*/}
-      {/*  Czołgi*/}
-      {/*</Header>*/}
+          <Header>
+            Czołgi
+          </Header>
 
-      {/*<TanksListAndFilters tanks={player?.tanks} />*/}
+          <TanksListAndFilters
+            tanks_stats={tanks_stats}
+          />
 
-      {/*<Header>*/}
-      {/*  Czołgi WN8*/}
-      {/*  <small>12 czołgów najbardziej wpływających na końcowe WN8 gracza</small>*/}
-      {/*</Header>*/}
+          <Header>
+            Czołgi WN8
+            <small>12 czołgów najbardziej wpływających na końcowe WN8 gracza</small>
+          </Header>
 
-      {/*<TanksList*/}
-      {/*  tanks={wn8_boost_tanks}*/}
-      {/*  weight*/}
-      {/*/>*/}
+          <TanksStatsList
+            tanks_stats={wn8_boost_tanks}
+            weight
+          />
+        </>
+      ) : (
+        <Empty message={`Spokojnie, będzie dobrze!`}>
+          Aktualizacja graczy trochę trwa...<br />
+          Ten gracz oczekuje w swojej kolejce na aktualizację!
+        </Empty>
+      )}
     </>
   );
 }

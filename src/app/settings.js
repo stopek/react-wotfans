@@ -4,7 +4,7 @@ import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import { CLANS_URL, EXP_WN8_URL, MAIN_URL, SEARCH_URL, TANKS_URL } from "app/routes";
 import MyLocationRoundedIcon from '@material-ui/icons/MyLocationRounded';
-
+import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import React from "react";
 
 export const menuItems = [
@@ -12,7 +12,8 @@ export const menuItems = [
   { title: 'Lista klanów', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL },
   { title: 'Szukaj gracza', i: 3, icon: <GamesRoundedIcon />, route: SEARCH_URL },
   { title: 'Exp WN8', i: 4, icon: <BarChartRoundedIcon />, route: EXP_WN8_URL },
-  { title: 'Lista czołgów', i: 5, icon: <MyLocationRoundedIcon />, route: TANKS_URL }
+  { title: 'Lista czołgów', i: 5, icon: <MyLocationRoundedIcon />, route: TANKS_URL },
+  { title: 'Zbiórka', i: 6, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj'}
 ]
 
 export const all_static_pages = [];

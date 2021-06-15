@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import * as React from "react";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 
 const Path = props => (
   <motion.path
@@ -22,13 +23,17 @@ const ToggleButton = styled.button`
   position: absolute;
   top: 15px;
   left: 15px;
-  width: 50px;
+  width: 30px;
   height: 50px;
-  border-radius: 50%;
+  padding: 0;
   background: transparent;
   dispay: flex;
   align-items: center;
   justify-content: center;
+
+  @media ${breakpoint.md} {
+    width: 50px;
+  }
   
   svg {
     fill: white;

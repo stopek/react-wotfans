@@ -1,6 +1,7 @@
 export const COLOR_THEME = "#00bffc";
 export const COLOR_DARK = '#1c1c1c';
 export const COLOR_SECOND = '#296c5b';
+export const COLOR_SECOND_DARKER = '#1c5245';
 
 export const COLOR_GREY_DARK_3 = '#373737';
 export const COLOR_GREY_DARK = '#505050';

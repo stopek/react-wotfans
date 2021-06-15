@@ -1,11 +1,9 @@
-import { TEXT_PAGE_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
-import fillRoute from "helpers/fillRoute";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled, { css, keyframes } from "styled-components";
-import { COLOR_TEXT_DARK, COLOR_THEME } from "styles/colors";
+import { COLOR_GREY_DARK_3 } from "styles/colors";
 
 const slidUp = keyframes`
   0% {
@@ -22,14 +20,13 @@ const slideUpCss = css`
 `;
 
 const CookieBox = styled.div`
-  background: white;
+  background: ${COLOR_GREY_DARK_3};
   padding: 15px;
-  border-top-left-radius: 20px;
   position: fixed;
   width: 100%;
   z-index: 2000;
   font-size: 16px;
-  color: ${COLOR_TEXT_DARK};
+  color: white;
   line-height: 1.5;
   bottom: -100%;
   max-width: 600px;
@@ -42,13 +39,6 @@ const CookieBox = styled.div`
 const TextContent = styled.div`
   margin-bottom: 15px;
   text-align: justify;
-  min-height: 105px;
-`;
-
-const PolicyUrl = styled.span`
-  cursor: pointer;
-  color: ${COLOR_THEME};
-  font-weight: 700;
 `;
 
 export default function Cookie() {
@@ -68,7 +58,8 @@ export default function Cookie() {
   return (
     <CookieBox animation={!accepted && !accept && slideUpCss}>
       <TextContent>
-        Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać działanie naszego serwisu.
+        Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać
+        działanie naszego serwisu.
       </TextContent>
 
       <ButtonInput label="Wyrażam zgodę" onClick={handleAccept} />

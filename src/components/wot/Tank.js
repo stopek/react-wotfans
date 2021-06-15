@@ -71,7 +71,7 @@ const Weight = styled.div`
   transition: all .3s ease-in-out;
 `;
 
-export default function Tank({ tank = {}, ...props }) {
+export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props }) {
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -79,7 +79,11 @@ export default function Tank({ tank = {}, ...props }) {
     <>
       {!props?.no_stats && (
         <CardDetailsDialog open={open} handleClose={() => setOpen(false)}>
-          <TankCard tank={tank} />
+          <TankCard
+            tank={tank}
+            statistics={statistics}
+            stats={stats}
+          />
         </CardDetailsDialog>
       )}
 
@@ -91,15 +95,15 @@ export default function Tank({ tank = {}, ...props }) {
         pointer={!props?.no_stats}
       >
         {props?.weight && (
-          <Weight hover={hover}>{priceFormat(tank?.weight, ',', '%')}</Weight>
+          <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%')}</Weight>
         )}
 
         <TankName hover={hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />
 
         {!props?.no_wn8 && (
-          <Wn8 title={tank?.weight}>
-            <Wn8Bar value={tank?.wn8} unit={`WN8`} />
+          <Wn8 title={stats?.weight}>
+            <Wn8Bar value={stats?.wn8} unit={`WN8`} />
           </Wn8>
         )}
 

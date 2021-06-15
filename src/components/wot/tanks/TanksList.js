@@ -1,33 +1,21 @@
+import { Grid } from "@material-ui/core";
 import Tank from "components/wot/Tank";
 import React from "react";
-import styled from "styled-components";
-import { breakpoint } from "styles/breakpoints";
-
-const Tanks = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin: 15px 0;
-
-  @media ${breakpoint.sm} {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  @media ${breakpoint.md} {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  
-  @media ${breakpoint.lg} {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-`;
 
 export default function TanksList({ tanks = [], tier = '', ...props }) {
   return (
-    <Tanks>
-      {tanks.filter((tank) => (tier !== '' ? tank?.tier === tier : true)).map((tank) => (
-        <Tank tank={tank} key={`tank-${tank.id}`} {...props} />
+    <Grid container spacing={2}>
+      {tanks.map((tank) => (
+        <Grid
+          key={`tank-${tank?.id}`}
+          item sm={6} xs={12} md={4} lg={3}
+        >
+          <Tank
+            tank={tank}
+            {...props}
+          />
+        </Grid>
       ))}
-    </Tanks>
+    </Grid>
   );
 }

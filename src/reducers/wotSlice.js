@@ -1,5 +1,9 @@
 import { AnyAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { AuthWot } from "api/actions/auth_wot";
 import { Wot } from "api/actions/wot";
+import instance from "api/service";
+import { removeToken } from "helpers/cookies";
+import { logOutUser } from "helpers/user";
 
 const initialState = {
   loading: false,
@@ -13,8 +17,39 @@ const initialState = {
   players_list: [],
   user_tanks_achievements: [],
   exp_wn8_list: [],
-  tanks: []
+  tanks: [],
+
+  get_user: {}
 };
+
+const ignoreChangingAction = [
+  'wot/get_user/fulfilled',
+  'wot/get_user/pending'
+];
+
+function isPendingAction(action: AnyAction) {
+  if (ignoreChangingAction.includes(action?.type)) return false;
+
+  return action.type.endsWith('pending');
+}
+
+function isUnauthorizedAction(action: AnyAction) {
+  return action.type.endsWith('rejected') && action?.payload?.status === 401;
+}
+
+function isRejectedErrorAction(action: AnyAction) {
+  return action.type.endsWith('rejected') && action?.payload?.status !== 404;
+}
+
+function isRejectedNotFoundAction(action: AnyAction) {
+  return action.type.endsWith('rejected') && action?.payload?.status === 404;
+}
+
+function isFulfilledAction(action: AnyAction) {
+  if (ignoreChangingAction.includes(action?.type)) return false;
+
+  return action.type.endsWith('fulfilled');
+}
 
 export const handleRejectValues = (name, action) => createAsyncThunk(
   name,
@@ -42,21 +77,7 @@ export const clansList = handleRejectValues('wot/clans_list', Wot.clans);
 export const expWn8List = handleRejectValues('wot/wn8', Wot.exp_wn8);
 export const loadTanks = handleRejectValues('wot/tanks', Wot.tanks);
 
-function isPendingAction(action: AnyAction) {
-  return action.type.endsWith('pending');
-}
-
-function isRejectedErrorAction(action: AnyAction) {
-  return action.type.endsWith('rejected') && action?.payload?.status !== 404;
-}
-
-function isRejectedNotFoundAction(action: AnyAction) {
-  return action.type.endsWith('rejected') && action?.payload?.status === 404;
-}
-
-function isFulfilledAction(action: AnyAction) {
-  return action.type.endsWith('fulfilled')
-}
+export const getUser = handleRejectValues('wot/get_user', AuthWot.get_user);
 
 export const wotSlice = createSlice({
   name: "wot",
@@ -72,6 +93,15 @@ export const wotSlice = createSlice({
 
   extraReducers: builder => {
     builder
+      .addCase(getUser.pending, (state) => {
+        state.get_user = {};
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.get_user = action.payload;
+      })
+
+      /********************************************************
+       */
       .addCase(loadTanks.pending, (state) => {
         state.tanks = [];
       })
@@ -169,7 +199,18 @@ export const wotSlice = createSlice({
           state.not_found = true;
           state.error = false;
         }
-      );
+      )
+      .addMatcher(
+        isUnauthorizedAction,
+        (state, action) => {
+          state.loading = false;
+          state.not_found = false;
+          state.error = false;
+
+          logOutUser();
+        }
+      )
+    ;
   },
 });
 
@@ -181,6 +222,7 @@ export const selectUserTanks = (state) => state.wot.user_tanks;
 export const selectUserTanksAchievements = (state) => state.wot.user_tanks_achievements;
 export const selectClansList = (state) => state.wot.clans_list;
 export const selectTanks = (state) => state.wot.tanks;
+export const selectUser = (state) => state.wot.get_user;
 export const selectLoadPlayers = (state) => state.wot.players_list;
 export const selectExpWn8List = (state) => state.wot.exp_wn8_list;
 export const selectLoading = (state) => state.wot.loading;

@@ -7,7 +7,7 @@ const Text = styled.span`
   text-align: center;
   width: 100%;
   position: relative;
-  padding: 25px 0;
+  padding: 25px;
   max-width: 800px;
   display: table;
   margin: auto;

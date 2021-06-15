@@ -1,13 +1,13 @@
 import SelectInput from "components/ui/input/SelectInput";
 import DarkBox from "components/wot/DarkBox";
-import TanksList from "components/wot/tanks/TanksList";
+import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import React, { useState } from "react";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-const getTiersFromTanks = (tanks = []) => {
+const getTiersFromTanksStats = (tanks = []) => {
   tanks = Object.values(tanks);
   if (!tanks?.length) {
     return [];
@@ -30,18 +30,20 @@ const getTiersFromTanks = (tanks = []) => {
   return key_value;
 }
 
-export default function TanksListAndFilters({ tanks = [] }) {
+export default function TanksListAndFilters({ tanks_stats = [] }) {
   const [tier, setTier] = useState('');
-  if (!Object.keys(tanks)?.length) {
+  if (!Object.keys(tanks_stats)?.length) {
     return null;
   }
 
-  const tiersOptions = [{ label: 'Wszystkie', value: '' }].concat(getTiersFromTanks(tanks));
+  const tiersOptions = [{ label: 'Wszystkie', value: '' }].concat(getTiersFromTanksStats(tanks_stats));
 
-  tanks = Object.values(tanks);
-  tanks = tanks.sort(function (a, b) {
+  tanks_stats = Object.values(tanks_stats);
+  tanks_stats = tanks_stats.sort(function (a, b) {
     return b.wn8 - a.wn8;
   });
+
+  console.log(tanks_stats);
 
   return (
     <>
@@ -55,8 +57,8 @@ export default function TanksListAndFilters({ tanks = [] }) {
         />
       </DarkBox>
 
-      <TanksList
-        tanks={tanks}
+      <TanksStatsList
+        tanks_stats={tanks_stats}
         tier={tier}
       />
     </>

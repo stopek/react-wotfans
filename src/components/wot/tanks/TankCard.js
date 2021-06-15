@@ -87,9 +87,7 @@ const Stat = ({ title, value }) => {
   );
 }
 
-export default function TankCard({ tank = {} }) {
-  const stats = tank?.statistics;
-  const all = stats?.all;
+export default function TankCard({ tank = {}, stats = {}, statistics = {} }) {
 
   const infos_data = [
     {title: 'Nacja czołgu', value: tank.nation},
@@ -107,7 +105,7 @@ export default function TankCard({ tank = {} }) {
             <TankTypeIcon type={tank?.type} dark />
             {tank?.name}
           </TankName>
-          <Image image={tank?.images?.big_icon} />
+          <Image image={tank?.image} />
           <Description>
             {tank?.description}
           </Description>
@@ -122,31 +120,31 @@ export default function TankCard({ tank = {} }) {
 
         <Grid item md={6}>
           <StatsList>
-            <Stat title={`WN8 na czołgu`} value={tank?.wn8} />
+            <Stat title={`WN8 na czołgu`} value={stats?.wn8} />
             <Stat title={`Maksymalna ilość fragów`} value={stats?.max_frags || 0} />
-            <Stat title={`Wpływ na ogólne WN8`} value={`${tank?.weight}%`} />
+            <Stat title={`Wpływ na ogólne WN8`} value={`${stats?.weight}%`} />
 
-            <Stat title={`Rozegranych bitew`} value={all.battles || 0} />
-            <Stat title={`Punkty zajęcia bazy`} value={all?.capture_points || 0} />
-            <Stat title={`Uszkodzenia przez wykrycia`} value={all?.damage_assisted_radio || 0} />
-            <Stat title={`Uszkodzenia przez gąski`} value={all?.damage_assisted_track || 0} />
-            <Stat title={`Uszkodzenia zadane`} value={all?.damage_dealt || 0} />
-            <Stat title={`Uszkodzenia otrzymane`} value={all?.damage_received || 0} />
-            <Stat title={`Przebicia otrzymane`} value={all?.direct_hits_received || 0} />
-            <Stat title={`dropped_capture_points`} value={all?.dropped_capture_points || 0} />
-            <Stat title={`explosion_hits`} value={all?.explosion_hits || 0} />
-            <Stat title={`explosion_hits_received`} value={all?.explosion_hits_received || 0} />
-            <Stat title={`Fragów`} value={all?.frags || 0} />
-            <Stat title={`Przebić`} value={all?.hits || 0} />
-            <Stat title={`Przegranych bitew`} value={all?.losses || 0} />
-            <Stat title={`Strzały odbite`} value={all?.no_damage_direct_hits_received || 0} />
-            <Stat title={`piercings`} value={all?.piercings || 0} />
-            <Stat title={`piercings_received`} value={all?.piercings_received || 0} />
-            <Stat title={`Oddanych strzałów`} value={all?.shots || 0} />
-            <Stat title={`Punktów wyspotowania`} value={all?.spotted || 0} />
-            <Stat title={`Przetrwanych bitew`} value={all?.survived_battles || 0} />
-            <Stat title={`Wygranych bitew`} value={all?.wins || 0} />
-            <Stat title={`Zdobyte PD`} value={all?.xp || 0} />
+            <Stat title={`Rozegranych bitew`} value={statistics.battles || 0} />
+            <Stat title={`Punkty zajęcia bazy`} value={statistics?.capture_points || 0} />
+            <Stat title={`Uszkodzenia przez wykrycia`} value={statistics?.damage_assisted_radio || 0} />
+            <Stat title={`Uszkodzenia przez gąski`} value={statistics?.damage_assisted_track || 0} />
+            <Stat title={`Uszkodzenia zadane`} value={statistics?.damage_dealt || 0} />
+            <Stat title={`Uszkodzenia otrzymane`} value={statistics?.damage_received || 0} />
+            <Stat title={`Przebicia otrzymane`} value={statistics?.direct_hits_received || 0} />
+            <Stat title={`dropped_capture_points`} value={statistics?.dropped_capture_points || 0} />
+            <Stat title={`explosion_hits`} value={statistics?.explosion_hits || 0} />
+            <Stat title={`explosion_hits_received`} value={statistics?.explosion_hits_received || 0} />
+            <Stat title={`Fragów`} value={statistics?.frags || 0} />
+            <Stat title={`Przebić`} value={statistics?.hits || 0} />
+            <Stat title={`Przegranych bitew`} value={statistics?.losses || 0} />
+            <Stat title={`Strzały odbite`} value={statistics?.no_damage_direct_hits_received || 0} />
+            <Stat title={`piercings`} value={statistics?.piercings || 0} />
+            <Stat title={`piercings_received`} value={statistics?.piercings_received || 0} />
+            <Stat title={`Oddanych strzałów`} value={statistics?.shots || 0} />
+            <Stat title={`Punktów wyspotowania`} value={statistics?.spotted || 0} />
+            <Stat title={`Przetrwanych bitew`} value={statistics?.survived_battles || 0} />
+            <Stat title={`Wygranych bitew`} value={statistics?.wins || 0} />
+            <Stat title={`Zdobyte PD`} value={statistics?.xp || 0} />
           </StatsList>
         </Grid>
       </Grid>
