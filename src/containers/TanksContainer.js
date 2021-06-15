@@ -5,10 +5,11 @@ import Paginator from "components/ui/Paginator";
 import TanksList from "components/wot/tanks/TanksList";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTanks, selectTanks } from "reducers/wotSlice";
 
-function TanksContainer(...props) {
+export default function TanksContainer({ ...props }) {
   const dispatch = useDispatch();
   const tanks = useSelector(selectTanks);
   const [page, setPage] = useState(1);
@@ -37,36 +38,36 @@ function TanksContainer(...props) {
               <SelectInput
                 value={tier || null}
                 variant={`standard`}
-                label={`Tier`}
+                label={<FormattedMessage id={`tier`} />}
                 onChange={(value) => setTier(value)}
-                options={[{ label: 'Wszystkie', value: '' }].concat(tiersList)}
+                options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(tiersList)}
               />
             </Grid>
             <Grid item md xs={12}>
               <SelectInput
                 value={nation || null}
                 variant={`standard`}
-                label={`Nacja`}
+                label={<FormattedMessage id={`nation`} />}
                 onChange={(value) => setNation(value)}
-                options={[{ label: 'Wszystkie', value: '' }].concat(nationList)}
+                options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(nationList)}
               />
             </Grid>
             <Grid item md xs={12}>
               <SelectInput
                 value={type || null}
                 variant={`standard`}
-                label={`Typ`}
+                label={<FormattedMessage id={`type`} />}
                 onChange={(value) => setType(value)}
-                options={[{ label: 'Wszystkie', value: '' }].concat(typeList)}
+                options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(typeList)}
               />
             </Grid>
             <Grid item md xs={12}>
               <SelectInput
                 value={premium || null}
                 variant={`standard`}
-                label={`Premium`}
+                label={<FormattedMessage id={`premium`} />}
                 onChange={(value) => setPremium(value)}
-                options={[{ label: 'Wszystkie', value: '' }].concat(premiumFilter)}
+                options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(premiumFilter)}
               />
             </Grid>
             <Grid item xs={12} container alignItems={`center`} justify={`flex-end`}>
@@ -87,5 +88,3 @@ function TanksContainer(...props) {
     </WotOverlay>
   );
 }
-
-export default TanksContainer;

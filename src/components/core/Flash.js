@@ -1,6 +1,7 @@
 import { backgroundByType, prepareMessages } from "helpers/flashHelper";
 import nl2br from "helpers/nl2br";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { flashMessages } from "reducers/flashSlice";
 import styled, { keyframes } from "styled-components";
@@ -46,7 +47,7 @@ export default function Flash() {
   const messages_list = prepareMessages(dispatch, messages).map((item) => {
     return (
       <Message key={item.id} type={item.type} data-id={item.id} onLoad={item.remove()}>
-        {item.display_message && nl2br(item.display_message)}
+        <FormattedMessage id={item.display_message} />
       </Message>
     );
   });

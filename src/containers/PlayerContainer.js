@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { searchPlayerById, selectSearchPlayer } from "reducers/wotSlice";
 
-function PlayerContainer(match, ...props) {
+export default function PlayerContainer({ match, ...props }) {
   let { account_id } = useParams();
   const dispatch = useDispatch();
   const player_data = useSelector(selectSearchPlayer);
@@ -15,7 +15,10 @@ function PlayerContainer(match, ...props) {
   }, [account_id, dispatch]);
 
   return (
-    <WotOverlay {...props}>
+    <WotOverlay
+      seo_values={{ name: player_data?.response?.player?.name || '' }}
+      {...props}
+    >
       {player_data?.response && (
         <PlayerDetails
           player={player_data?.response?.player}
@@ -25,5 +28,3 @@ function PlayerContainer(match, ...props) {
     </WotOverlay>
   );
 }
-
-export default PlayerContainer;

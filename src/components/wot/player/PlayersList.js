@@ -7,6 +7,7 @@ import { priceFormat } from "helpers/priceFormat";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
@@ -60,21 +61,21 @@ export default function PlayersList({ players = [] }) {
   return (
     <List>
       <Item header>
-        <Name>Nazwa gracza</Name>
-        <Small>WN8</Small>
-        <Small>Bitew</Small>
-        <Small>% Wygranych</Small>
-        <Small>Fragów</Small>
-        <Small>Globalny rating</Small>
-        <Small>W grze od</Small>
-        <Small>W klanie od</Small>
-        <Small>Ostatnia bitwa</Small>
-        <Info>Szczegóły</Info>
+        <Name><FormattedMessage id={`player.name`} /></Name>
+        <Small><FormattedMessage id={`wn8`} /></Small>
+        <Small><FormattedMessage id={`battles`} /></Small>
+        <Small><FormattedMessage id={`win.percentage`} /></Small>
+        <Small><FormattedMessage id={`frags`} /></Small>
+        <Small><FormattedMessage id={`global.rating`} /></Small>
+        <Small><FormattedMessage id={`in.game.at`} /></Small>
+        <Small><FormattedMessage id={`clan.joined.at`} /></Small>
+        <Small><FormattedMessage id={`last.battle.time`} /></Small>
+        <Info><FormattedMessage id={`details`} /></Info>
       </Item>
 
       {players.map((player) => {
         const statistics = player.stats[0] ?? {};
-        const winPercentage = (100 * statistics?.wins) / statistics.battles;
+        const winPercentage = (100 * statistics?.wins) / statistics.battles || 0;
 
         return (
           <Item key={`player-${player?.id}`}>
@@ -98,7 +99,7 @@ export default function PlayersList({ players = [] }) {
               <ButtonInput
                 color={`secondary`}
                 onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))}
-                label={`Zobacz profil`}
+                label={<FormattedMessage id={`see.profile`} />}
               />
             </Info>
           </Item>

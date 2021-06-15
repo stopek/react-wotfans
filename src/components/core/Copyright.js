@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Text = styled.span`
+const Text = styled.div`
   font-size: 14px;
   color: #6c6a6a;
   text-align: center;
   width: 100%;
   position: relative;
-  padding: 25px;
+  padding: 25px 10px;
   max-width: 800px;
   display: table;
   margin: auto;

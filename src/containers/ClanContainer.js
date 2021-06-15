@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { searchClan, selectSearchClan } from "reducers/wotSlice";
 
-function ClanContainer(match, ...props) {
+export default function ClanContainer({ match, ...props }) {
   let { tag } = useParams();
   const dispatch = useDispatch();
   const clan = useSelector(selectSearchClan);
@@ -17,7 +17,7 @@ function ClanContainer(match, ...props) {
   }, [tag, dispatch]);
 
   return (
-    <WotOverlay {...props}>
+    <WotOverlay {...props} seo_values={{ name: clan?.response?.clan?.name || '' }}>
       {clan?.response && (
         <ClanDetails
           clan={clan?.response?.clan}
@@ -27,5 +27,3 @@ function ClanContainer(match, ...props) {
     </WotOverlay>
   );
 }
-
-export default ClanContainer;

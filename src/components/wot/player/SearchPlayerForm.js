@@ -2,6 +2,7 @@ import ButtonInput from "components/ui/input/ButtonInput";
 import SelectInput from "components/ui/input/SelectInput";
 import TextInput from "components/ui/input/TextInput";
 import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 export default function SearchPlayerForm({ submit }) {
   const [player, setPlayer] = useState('');
@@ -14,11 +15,11 @@ export default function SearchPlayerForm({ submit }) {
       <SelectInput
         value={type}
         variant={`standard`}
-        label={`Okreś sposób wyszukiwania gracza`}
+        label={<FormattedMessage id={`search.player.type`} />}
         onChange={(value) => setType(value)}
         options={[
-          { value: 1, label: 'Według nazwy gracza' },
-          { value: 2, label: 'Według identyfikatora gracza' }
+          { value: 1, label: <FormattedMessage id={`search.by.name`} /> },
+          { value: 2, label: <FormattedMessage id={`search.by.id`} /> }
         ]}
       />
       {type > 0 && (
@@ -29,10 +30,12 @@ export default function SearchPlayerForm({ submit }) {
             value={player}
             variant={`standard`}
             type={type === 1 ? `text` : `number`}
-            label={type === 1 ? 'Wprowadź nazwę gracza' : 'Wprowadź identyfikator gracza'}
+            label={
+              <FormattedMessage id={type === 1 ? 'type.player.name' : 'type.player.id'} />
+            }
           />
 
-          <ButtonInput label={`Szukaj gracza`} large />
+          <ButtonInput label={<FormattedMessage id={`search.player`} />} large />
         </>
       )}
     </form>

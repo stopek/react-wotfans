@@ -26,7 +26,12 @@ export default function StatsList({ list = [] }) {
   return (
     <Stats>
       {Object.values(list).map((stat, stat_no) => (
-        <StatBox value={stat.value} title={stat.title} button={stat?.button} key={stat_no} />
+        <StatBox
+          value={stat.value}
+          translation={stat.translation}
+          button={stat?.button}
+          key={stat_no}
+        />
       ))}
     </Stats>
   );

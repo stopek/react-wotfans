@@ -2,10 +2,12 @@ import { PLAYER_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
 import PlayersList from "components/wot/player/PlayersList";
 import StatsList from "components/wot/StatsList";
+import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
@@ -40,7 +42,7 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     <ButtonInput
       color={`secondary`}
       onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: account_id }))}
-      label={`Zobacz profil`}
+      label={<FormattedMessage id={`see.profile`} />}
     />
   );
 
@@ -50,18 +52,23 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     //   value: clan_details?.creator_name,
     //   button: <ProfileButton account_id={clan_details?.creator_id} />
     // },
-    { title: 'Data założenia', value: date_from_unix(clan?.clan_created_at) },
+    {
+      translation: 'created.date',
+      value: date_from_unix(clan?.clan_created_at)
+    },
     // {
     //   title: 'Dowódca',
     //   value: clan_details?.leader_name,
     //   button: <ProfileButton account_id={clan_details?.leader_id} />
     // },
     // { title: 'Ilość graczy', value: clan_data?.members_count },
+    {
+      translation: 'clan.wn8',
+      value: <Wn8Bar value={statistics?.wn8} />
+    }
   ];
 
-  statsList.push({
-    title: 'WN8 Klanu', value: priceFormat(statistics?.wn8, ',', '')
-  });
+  statsList.push();
 
   const players = Object.values(clan.players).map((player) => {
     return Object.assign({}, player, { wn8: statistics?.players[player.id] || -1 });

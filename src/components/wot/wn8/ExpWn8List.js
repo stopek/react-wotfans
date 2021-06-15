@@ -1,5 +1,6 @@
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 
@@ -51,16 +52,16 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
   return (
     <List>
       <Item header>
-        <Name>Czołg</Name>
-        <Small>Grafika</Small>
-        <Small>Nation</Small>
-        <Small>Tier</Small>
-        <Small>Type</Small>
-        <Small>Damage</Small>
-        <Small>Def</Small>
-        <Small>Frag</Small>
-        <Small>Spot</Small>
-        <Small>WinRate</Small>
+        <Name><FormattedMessage id={`tank.name`} /></Name>
+        <Small><FormattedMessage id={`image`} /></Small>
+        <Small><FormattedMessage id={`nation`} /></Small>
+        <Small><FormattedMessage id={`tier`} /></Small>
+        <Small><FormattedMessage id={`tank.type`} /></Small>
+        <Small><FormattedMessage id={`exp.damage`} /></Small>
+        <Small><FormattedMessage id={`exp.def`} /></Small>
+        <Small><FormattedMessage id={`exp.frag`} /></Small>
+        <Small><FormattedMessage id={`exp.spot`} /></Small>
+        <Small><FormattedMessage id={`exp.win`} /></Small>
       </Item>
 
       {exp_wn8.map((tank, key) => (

@@ -16,6 +16,7 @@ import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
 import { isLogged, logOutUser } from "helpers/user";
 import React, { useState } from 'react';
+import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
@@ -106,7 +107,7 @@ export default function LoggedUserMenu() {
       logOutUser();
 
       dispatch(setSuccessMessage(
-        "Zostałeś prawidłowo wylogowany",
+        'logout.success',
         true
       ));
 
@@ -121,17 +122,17 @@ export default function LoggedUserMenu() {
 
   const menuItems = user?.response ? [
     {
-      title: 'Twoje konto',
+      translation: 'menu.your.account',
       icon: <AssignmentIndRoundedIcon fontSize="small" />,
       route: ACCOUNT_URL
     },
     {
-      title: 'Twój profil',
+      translation: 'menu.your.profile',
       icon: <RecentActorsRoundedIcon fontSize="small" />,
       route: fillRoute(PLAYER_URL, { account_id: user_data?.id })
     },
     {
-      title: 'Twój klan',
+      translation: 'menu.your.clan',
       icon: <SupervisorAccountRoundedIcon fontSize="small" />,
       route: fillRoute(CLAN_URL, { tag: user_data?.clan?.tag })
     },
@@ -158,7 +159,9 @@ export default function LoggedUserMenu() {
                 <ListItemIcon>
                   {menu.icon}
                 </ListItemIcon>
-                <ListItemText primary={menu.title} />
+                <ListItemText primary={
+                  <FormattedMessage id={menu.translation} />
+                } />
               </StyledMenuItem>
             ))}
 
@@ -166,7 +169,7 @@ export default function LoggedUserMenu() {
               <ListItemIcon>
                 <ExitToAppRoundedIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="Wyloguj" />
+              <ListItemText primary={<FormattedMessage id={`menu.logout`} />} />
             </StyledMenuItem>
           </StyledMenu>
         </>

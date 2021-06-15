@@ -7,10 +7,11 @@ import { useQuery } from "helpers/useQuery";
 import { isLogged } from "helpers/user";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { FormattedMessage } from "react-intl";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
-import { getUser, selectUser } from "reducers/wotSlice";
+import { getUser } from "reducers/wotSlice";
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -25,16 +26,11 @@ const Info = styled.div`
   }
 `;
 
-const WargamingLogo = styled.img`
-  
-`;
-
-function LoginContainer(...props) {
+export default function LoginContainer({ ...props }) {
   const dispatch = useDispatch();
   const query = useQuery();
   const token = query.get('token');
   const history = useHistory();
-  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (token?.length > 0) {
@@ -56,15 +52,16 @@ function LoginContainer(...props) {
   }
 
   return (
-    <WotOverlay title={`Logowanie`} {...props}>
-      <WargamingLogo src={`https://developers.wargaming.net/static/1.12.0/assets/img/header/wg_logo.png`} />
+    <WotOverlay {...props}>
+      <img
+        src={`https://developers.wargaming.net/static/1.12.0/assets/img/header/wg_logo.png`}
+        alt=""
+      />
 
       <Info>
-        Aby dokonać autoryzacji i zalogować się do portalu kliknij w poniższy przycisk
+        <FormattedMessage id={`login.message.1`} />
         <strong>
-          Portal nie gromadzi żadnych prywatnych danych użytkowników.<br />
-          Logowanie służy jedynie do prawidłowego połączenia
-          utworzonego w systemie konta z zalogowanym użytkownikiem
+          <FormattedMessage id={`login.message.2`} />
         </strong>
       </Info>
 
@@ -72,11 +69,9 @@ function LoginContainer(...props) {
         as={`a`}
         href={`${process.env.REACT_APP_BACKEND_SERVICE_URL}${LOGIN_ENDPOINT}`}
         rel={`nofollow`}
-        label={`Zaloguj się`}
+        label={<FormattedMessage id={`log.in`} />}
         large
       />
     </WotOverlay>
   );
 }
-
-export default LoginContainer;

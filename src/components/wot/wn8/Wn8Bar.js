@@ -1,5 +1,6 @@
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import {
   RADIUS,
@@ -49,7 +50,7 @@ const getWn8Color = (value) => {
 export default function Wn8Bar({ value = 0, unit = '' }) {
   return (
     <Bar color={getWn8Color(value)}>
-      {value >= 0 ? priceFormat(value, ',', unit) : 'brak danych'}
+      {value >= 0 ? priceFormat(value, ',', unit) : <FormattedMessage id={`no.data`} />}
     </Bar>
   );
 }

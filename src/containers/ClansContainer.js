@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clansList, selectClansList } from "reducers/wotSlice";
 
-function IndexContainer(...props) {
+export default function IndexContainer({ ...props }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const clans = useSelector(selectClansList);
@@ -50,5 +50,3 @@ function IndexContainer(...props) {
     </WotOverlay>
   );
 }
-
-export default IndexContainer;

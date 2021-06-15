@@ -1,6 +1,7 @@
 import ButtonInput from "components/ui/input/ButtonInput";
 import { date_from_unix } from "helpers/date";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 
@@ -46,11 +47,11 @@ export default function ClansList({ clans = [], check }) {
   return (
     <Clans>
       <Item header>
-        <Small>Skrót</Small>
-        <Name>Pełna nazwa klanu</Name>
-        <Small>Data utworzenia</Small>
-        <Small>Ilość</Small>
-        <Info>Szczegóły</Info>
+        <Small><FormattedMessage id={`shortcut`} /></Small>
+        <Name><FormattedMessage id={`full.clan.name`} /></Name>
+        <Small><FormattedMessage id={`created.date`} /></Small>
+        <Small><FormattedMessage id={`amount`} /></Small>
+        <Info><FormattedMessage id={`details`} /></Info>
       </Item>
 
       {clans.map((clan, clan_key) => (
@@ -62,7 +63,7 @@ export default function ClansList({ clans = [], check }) {
           <Info>
             <ButtonInput
               color={`secondary`}
-              label={`Zobacz profil`}
+              label={<FormattedMessage id={`see.profile`} />}
               onClick={() => check(clan?.tag)}
             />
           </Info>

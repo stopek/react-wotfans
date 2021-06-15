@@ -30,7 +30,13 @@ const Ul = styled(motion.ul)`
 export const Navigation = () => (
   <Ul variants={variants}>
     {menuItems.map(item => (
-      <MenuItem key={item.i} title={item.title} icon={item.icon} route={item?.route} href={item?.href} />
+      <MenuItem
+        key={item.i}
+        translation={item.translation}
+        icon={item.icon}
+        route={item?.route}
+        href={item?.href}
+      />
     ))}
   </Ul>
 );

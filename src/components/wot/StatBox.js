@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_THEME, RADIUS } from "styles/colors";
 
@@ -32,10 +33,12 @@ const Value = styled.div`
   font-weight: 700;
 `;
 
-export default function StatBox({ title, value, button }) {
+export default function StatBox({ translation, value, button }) {
   return (
     <Box>
-      <Title>{title}</Title>
+      <Title>
+        <FormattedMessage id={translation} />
+      </Title>
       <Value>{value}</Value>
       {!!button && button}
     </Box>

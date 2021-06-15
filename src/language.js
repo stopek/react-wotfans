@@ -9,8 +9,8 @@ export default function LanguageProvider({ children }) {
 
   return (
     <IntlProvider
-      locale="pl"
-      defaultLocale="pl"
+      locale={language}
+      defaultLocale={language}
       messages={getDateTranslations(language)}
     >
       {children}

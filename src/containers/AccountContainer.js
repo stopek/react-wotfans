@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, selectUser } from "reducers/wotSlice";
 
-function AccountContainer(...props) {
+export default function AccountContainer(...props) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -22,5 +22,3 @@ function AccountContainer(...props) {
     </WotOverlay>
   );
 }
-
-export default AccountContainer;

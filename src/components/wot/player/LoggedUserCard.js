@@ -1,7 +1,8 @@
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatBox from "components/wot/StatBox";
-import { priceFormat } from "helpers/priceFormat";
+import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_SECOND, RADIUS } from "styles/colors";
 
@@ -21,15 +22,20 @@ const Details = styled.div`
 
 export default function LoggedUserCard({ user = {} }) {
   return (
-    <>
-      <Card>
-        <PlayerNameWithConsoleLogo name={user?.user?.player?.name} />
-        <Details>
-          Twój klan: {user?.user?.player?.clan?.name}
-        </Details>
-        <hr />
-        <StatBox value={priceFormat(user?.statistics, ',', '')} title={`WN8`} />
-      </Card>
-    </>
+    <Card>
+      <PlayerNameWithConsoleLogo name={user?.user?.player?.name} />
+      <Details>
+        <FormattedMessage id={`your.clan`} />: {user?.user?.player?.clan?.name}
+      </Details>
+
+      <hr />
+
+      <StatBox
+        value={
+          <Wn8Bar value={user?.statistics} />
+        }
+        translation={`wn8`}
+      />
+    </Card>
   );
 }

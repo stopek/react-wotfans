@@ -3,20 +3,26 @@ import CharsList from "components/wot/char/CharsList";
 import { PieChar } from "components/wot/char/PieChar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatsList from "components/wot/StatsList";
-import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import TanksListAndFilters from "components/wot/tanks/TanksListAndFilters";
+import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { Header, LargeHeader } from "styles/GlobalStyled";
 
 const Wn8BarContent = styled.div`
-  position: absolute;
-  right: 0;
   font-size: 30px;
-  top: 50%;
-  transform: translateY(-50%);
+  margin: 10px 0;
+
+  @media ${breakpoint.lg} {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 0;
+  }
 `;
 
 const pf = (value, unit) => {
@@ -36,17 +42,17 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   const win_pie_data = [
     {
       "id": "wins",
-      "label": "Wygrane",
+      "label": <FormattedMessage id={`pie.wins`} />,
       "value": parseFloat(winsPercentage.toFixed(2)),
     },
     {
       "id": "losses",
-      "label": "Przegrane",
+      "label": <FormattedMessage id={`pie.losses`} />,
       "value": parseFloat(lossesPercentage.toFixed(2)),
     },
     {
       "id": "draws",
-      "label": "Remisy",
+      "label": <FormattedMessage id={`pie.draws`} />,
       "value": parseFloat(drawPercentage.toFixed(2)),
     },
   ];
@@ -54,12 +60,12 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   const survived_pie_data = [
     {
       "id": "survived",
-      "label": "Przetrwał",
+      "label": <FormattedMessage id={`pie.survived`} />,
       "value": parseFloat(survivedPercentage.toFixed(2)),
     },
     {
-      "id": "dead",
-      "label": "Zginął",
+      "id": "died",
+      "label": <FormattedMessage id={`pie.died`} />,
       "value": parseFloat((100 - survivedPercentage).toFixed(2)),
     },
   ];
@@ -81,7 +87,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
       <LargeHeader>
         <PlayerNameWithConsoleLogo name={player?.name} />
         <small>
-          Globalny rating: {player?.global_rating}
+          <FormattedMessage id={`global.rating`} />: {player?.global_rating}
         </small>
 
         <Wn8BarContent>
@@ -92,52 +98,52 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
       {haveStats ? (
         <>
           <Header>
-            Podsumowanie gracza
+            <FormattedMessage id={`player.summary`} />
           </Header>
           <StatsList list={[
-            { title: 'Rozegranych bitew', value: player_statistics?.battles },
-            { title: 'Zadane uszkodzenia', value: player_statistics?.damage_dealt },
-            { title: 'Otrzymane uszkodzenia', value: player_statistics?.damage_received },
-            { title: 'Zniszczonych czołgów', value: player_statistics?.frags },
-            { title: 'Przebić', value: player_statistics?.hits },
-            { title: 'Przegranych bitew', value: player_statistics?.losses },
-            { title: 'Oddanych strzałów', value: player_statistics?.shots },
-            { title: 'Wykrytych czołgów', value: player_statistics?.spotted },
-            { title: 'Przetrwanych bitew', value: player_statistics?.survived_battles },
-            { title: 'Wygranych bitew', value: player_statistics?.wins },
-            { title: 'Zdobyte XP', value: player_statistics?.xp },
+            { translation: 'battles', value: player_statistics?.battles },
+            { translation: 'damage.dealt', value: player_statistics?.damage_dealt },
+            { translation: 'damage.received', value: player_statistics?.damage_received },
+            { translation: 'frags', value: player_statistics?.frags },
+            { translation: 'hits', value: player_statistics?.hits },
+            { translation: 'losses', value: player_statistics?.losses },
+            { translation: 'shots', value: player_statistics?.shots },
+            { translation: 'spotted', value: player_statistics?.spotted },
+            { translation: 'survived.battles', value: player_statistics?.survived_battles },
+            { translation: 'wins', value: player_statistics?.wins },
+            { translation: 'xp', value: player_statistics?.xp },
           ]} />
 
           <Header>
-            Osiągnięcia
+            <FormattedMessage id={`achievements`} />
           </Header>
           <StatsList list={[
-            { title: 'Damage przez wykrycie', value: player_statistics?.damage_assisted_radio },
-            { title: 'Damage przez gąski', value: player_statistics?.damage_assisted_track },
-            { title: 'Otrzymany damage', value: player_statistics?.direct_hits_received },
-            { title: 'explosion_hits', value: player_statistics?.explosion_hits },
-            { title: 'explosion_hits_received', value: player_statistics?.explosion_hits_received },
-            { title: 'Maxymalny damage', value: player_statistics?.max_damage },
-            { title: 'Maksymalna ilość fragów', value: player_statistics?.max_frags },
-            { title: 'Maksymalne zdobyte PD', value: player_statistics?.max_xp },
-            { title: 'Strzałów odbitych', value: player_statistics?.no_damage_direct_hits_received },
-            { title: 'piercings', value: player_statistics?.piercings },
-            { title: 'piercings_received', value: player_statistics?.piercings_received },
-            { title: 'Przewróconych drzew', value: player_statistics?.trees_cut }
+            { translation: 'damage.assisted.radio', value: player_statistics?.damage_assisted_radio },
+            { translation: 'damage.assisted.track', value: player_statistics?.damage_assisted_track },
+            { translation: 'direct.hits.received', value: player_statistics?.direct_hits_received },
+            { translation: 'explosion.hits', value: player_statistics?.explosion_hits },
+            { translation: 'explosion.hits.received', value: player_statistics?.explosion_hits_received },
+            { translation: 'max.damage', value: player_statistics?.max_damage },
+            { translation: 'max.frags', value: player_statistics?.max_frags },
+            { translation: 'max.xp', value: player_statistics?.max_xp },
+            { translation: 'no.damage.direct.hits.received', value: player_statistics?.no_damage_direct_hits_received },
+            { translation: 'piercings', value: player_statistics?.piercings },
+            { translation: 'piercings.received', value: player_statistics?.piercings_received },
+            { translation: 'trees.cut', value: player_statistics?.trees_cut }
           ]} />
 
           <Header>
-            Statystyki
+            <FormattedMessage id={`stats`} />
           </Header>
           <StatsList list={[
-            { title: '% wygranych', value: pf(winsPercentage, '%') },
-            { title: '% przegranych', value: pf(lossesPercentage, '%') },
-            { title: '% remisów', value: pf(drawPercentage, '%') },
-            { title: 'XP/bitwa', value: pf(player_statistics?.xp / player_statistics?.battles, 'PD') },
-            { title: 'Strzałów/bitwa', value: pf(player_statistics?.shots / player_statistics?.battles, '') },
-            { title: 'Fragów/bitwa', value: pf(player_statistics?.frags / player_statistics?.battles, '') },
-            { title: 'Ścięte drzewa/bitwa', value: pf(player_statistics?.trees_cut / player_statistics?.battles, '') },
-            { title: '% przetrwanych bitew', value: pf(survivedPercentage, '') }
+            { translation: 'win.percentage', value: pf(winsPercentage, '%') },
+            { translation: 'losses.percentage', value: pf(lossesPercentage, '%') },
+            { translation: 'draw.percentage', value: pf(drawPercentage, '%') },
+            { translation: 'xp.battle.stats', value: pf(player_statistics?.xp / player_statistics?.battles, 'PD') },
+            { translation: 'shots.battle.stats', value: pf(player_statistics?.shots / player_statistics?.battles, '') },
+            { translation: 'frags.battle.stats', value: pf(player_statistics?.frags / player_statistics?.battles, '') },
+            { translation: 'trees.battle.stats', value: pf(player_statistics?.trees_cut / player_statistics?.battles, '') },
+            { translation: 'survived.percentage', value: pf(survivedPercentage, '') }
           ]} />
 
           <CharsList list={[
@@ -146,7 +152,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
           ]} />
 
           <Header>
-            Czołgi
+            <FormattedMessage id={`tanks.list`} />
           </Header>
 
           <TanksListAndFilters
@@ -154,8 +160,10 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
           />
 
           <Header>
-            Czołgi WN8
-            <small>12 czołgów najbardziej wpływających na końcowe WN8 gracza</small>
+            <FormattedMessage id={`wn8.tanks`} />
+            <small>
+              <FormattedMessage id={`wn8.tanks.message`} />
+            </small>
           </Header>
 
           <TanksStatsList
@@ -164,9 +172,8 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
           />
         </>
       ) : (
-        <Empty message={`Spokojnie, będzie dobrze!`}>
-          Aktualizacja graczy trochę trwa...<br />
-          Ten gracz oczekuje w swojej kolejce na aktualizację!
+        <Empty message={<FormattedMessage id={`no.stats.header`} />}>
+          <FormattedMessage id={`no.stats.message`} />
         </Empty>
       )}
     </>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
@@ -63,31 +64,23 @@ const LiItem = styled(motion.li)`
   cursor: pointer;
 `;
 
-export const MenuItem = ({ title, icon, href, route, ...props }) => {
+export const MenuItem = ({ translation, icon, href, route, ...props }) => {
   const history = useHistory();
-
-  let links = {};
-  if (!!href) {
-    links = {
-      as: 'a',
-      href: href,
-      target: '_blank'
-    };
-  }
 
   return (
     <LiItem
-      onClick={() => !!route && history.push(route)}
+      onClick={() => !!route ? history.push(route) : window.open(href, '_blank')}
       variants={variants}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.85 }}
       {...props}
-      {...links}
     >
       <IconPlaceholder>{icon}</IconPlaceholder>
       {!props?.no_title && (
         <TextPlaceholder>
-          <span>{title}</span>
+          <span>
+            <FormattedMessage id={translation} />
+          </span>
         </TextPlaceholder>
       )}
     </LiItem>

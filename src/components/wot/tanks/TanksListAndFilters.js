@@ -2,20 +2,21 @@ import SelectInput from "components/ui/input/SelectInput";
 import DarkBox from "components/wot/DarkBox";
 import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-const getTiersFromTanksStats = (tanks = []) => {
-  tanks = Object.values(tanks);
-  if (!tanks?.length) {
+const getTiersFromTanksStats = (tanks_stats = []) => {
+  tanks_stats = Object.values(tanks_stats);
+  if (!tanks_stats?.length) {
     return [];
   }
 
   let tiers = [];
-  tanks.forEach((tank) => {
-    tiers.push(tank.tier);
+  tanks_stats.forEach((tank_stat) => {
+    tiers.push(tank_stat.tank.tier);
   });
 
   tiers = tiers.filter(onlyUnique).sort(function (a, b) {
@@ -36,14 +37,12 @@ export default function TanksListAndFilters({ tanks_stats = [] }) {
     return null;
   }
 
-  const tiersOptions = [{ label: 'Wszystkie', value: '' }].concat(getTiersFromTanksStats(tanks_stats));
+  const tiersOptions = [{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(getTiersFromTanksStats(tanks_stats));
 
   tanks_stats = Object.values(tanks_stats);
   tanks_stats = tanks_stats.sort(function (a, b) {
     return b.wn8 - a.wn8;
   });
-
-  console.log(tanks_stats);
 
   return (
     <>
@@ -51,7 +50,7 @@ export default function TanksListAndFilters({ tanks_stats = [] }) {
         <SelectInput
           value={tier || null}
           variant={`standard`}
-          label={`Filtruj tier`}
+          label={<FormattedMessage id={`tier.filter`} />}
           onChange={(value) => setTier(value)}
           options={tiersOptions}
         />

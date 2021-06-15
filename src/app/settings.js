@@ -1,19 +1,20 @@
-import GamesRoundedIcon from '@material-ui/icons/GamesRounded';
-import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
-import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
-import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
-import { CLANS_URL, EXP_WN8_URL, MAIN_URL, SEARCH_URL, TANKS_URL } from "app/routes";
-import MyLocationRoundedIcon from '@material-ui/icons/MyLocationRounded';
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
+import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
+import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
+import MyLocationRoundedIcon from '@material-ui/icons/MyLocationRounded';
+import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import { CLANS_URL, EXP_WN8_URL, MAIN_URL, SEARCH_URL, TANKS_URL } from "app/routes";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 export const menuItems = [
-  { title: 'Strona główna', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL },
-  { title: 'Lista klanów', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL },
-  { title: 'Szukaj gracza', i: 3, icon: <GamesRoundedIcon />, route: SEARCH_URL },
-  { title: 'Exp WN8', i: 4, icon: <BarChartRoundedIcon />, route: EXP_WN8_URL },
-  { title: 'Lista czołgów', i: 5, icon: <MyLocationRoundedIcon />, route: TANKS_URL },
-  { title: 'Zbiórka', i: 6, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj'}
+  { translation: 'homepage', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL },
+  { translation: 'clans.list', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL },
+  { translation: 'search.player', i: 3, icon: <SearchRoundedIcon />, route: SEARCH_URL },
+  { translation: 'exp.wn8', i: 4, icon: <BarChartRoundedIcon />, route: EXP_WN8_URL },
+  { translation: 'tanks.list', i: 5, icon: <MyLocationRoundedIcon />, route: TANKS_URL },
+  { translation: 'fundraising', i: 6, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
 ]
 
 export const all_static_pages = [];
@@ -32,29 +33,29 @@ export const tiersList = [
 ];
 
 export const nationList = [
-  { value: 'ussr', label: 'USSR' },
-  { value: 'sweden', label: 'Szwedzkie' },
-  { value: 'uk', label: 'Brytyjskie' },
-  { value: 'czech', label: 'Czeskie' },
-  { value: 'italy', label: 'Włoskie' },
-  { value: 'poland', label: 'Polskie' },
-  { value: 'usa', label: 'USA' },
-  { value: 'france', label: 'Francuskie' },
-  { value: 'japan', label: 'Japońskie' },
-  { value: 'china', label: 'Chińskie' },
-  { value: 'merc', label: 'MERC' },
-  { value: 'germany', label: 'Niemieckie' }
+  { value: 'ussr', label: <FormattedMessage id={`nation.ussr`} /> },
+  { value: 'sweden', label: <FormattedMessage id={`nation.sweden`} /> },
+  { value: 'uk', label: <FormattedMessage id={`nation.uk`} /> },
+  { value: 'czech', label: <FormattedMessage id={`nation.czech`} /> },
+  { value: 'italy', label: <FormattedMessage id={`nation.italy`} /> },
+  { value: 'poland', label: <FormattedMessage id={`nation.poland`} /> },
+  { value: 'usa', label: <FormattedMessage id={`nation.usa`} /> },
+  { value: 'france', label: <FormattedMessage id={`nation.france`} /> },
+  { value: 'japan', label: <FormattedMessage id={`nation.japan`} /> },
+  { value: 'china', label: <FormattedMessage id={`nation.china`} /> },
+  { value: 'merc', label: <FormattedMessage id={`nation.mercenaries`} /> },
+  { value: 'germany', label: <FormattedMessage id={`nation.germany`} /> }
 ];
 
 export const typeList = [
-  { value: 'lightTank', label: 'Czołg lekki' },
-  { value: 'mediumTank', label: 'Czołg średni' },
-  { value: 'heavyTank', label: 'Czołg ciężki' },
-  { value: 'AT-SPG', label: 'Niszczyciel czołgów' },
-  { value: 'SPG', label: 'Artyleria' },
+  { value: 'lightTank', label: <FormattedMessage id={`type.lightTank`} /> },
+  { value: 'mediumTank', label: <FormattedMessage id={`type.mediumTank`} /> },
+  { value: 'heavyTank', label: <FormattedMessage id={`type.heavyTank`} /> },
+  { value: 'AT-SPG', label: <FormattedMessage id={`type.td`} /> },
+  { value: 'SPG', label: <FormattedMessage id={`type.artillery`} /> },
 ];
 
 export const premiumFilter = [
-  { value: 'only_premium', label: 'Tylko premium' },
-  { value: 'without_premium', label: 'Wyklucz premium' },
+  { value: 'only_premium', label: <FormattedMessage id={`only.premium`} /> },
+  { value: 'without_premium', label: <FormattedMessage id={`without.premium`} /> },
 ];

@@ -21,54 +21,94 @@ import TanksContainer from "containers/TanksContainer";
 
 const routing = [
   {
-    header: "Strona główna",
+    header: "homepage",
     route: MAIN_URL,
     Component: IndexContainer,
     params: {
       seo: {
-        title: 'WOT Console - API Testing',
+        title: 'seo.homepage',
       }
     }
   },
   {
-    header: "Lista klanów",
+    header: "clans.list",
     route: CLANS_URL,
     Component: ClansContainer,
+    params: {
+      seo: {
+        title: 'seo.clans.list',
+      }
+    }
   },
   {
-    header: "Szczegóły klanu",
+    header: "clan.profile",
     route: CLAN_URL,
-    Component: ClanContainer
+    Component: ClanContainer,
+    params: {
+      seo: {
+        title: 'seo.clan.profile',
+      }
+    }
   },
   {
-    header: "Szukaj gracza",
+    header: "search.player",
     route: SEARCH_URL,
-    Component: SearchPlayerContainer
+    Component: SearchPlayerContainer,
+    params: {
+      seo: {
+        title: 'seo.search.player',
+      }
+    }
   },
   {
-    header: "Karta gracza",
+    header: "player.profile",
     route: PLAYER_URL,
-    Component: PlayerContainer
+    Component: PlayerContainer,
+    params: {
+      seo: {
+        title: 'seo.player.profile',
+      }
+    }
   },
   {
-    header: "Exp WN8",
+    header: "exp.wn8",
     route: EXP_WN8_URL,
-    Component: ExpWn8Container
+    Component: ExpWn8Container,
+    params: {
+      seo: {
+        title: 'seo.exp.wn8',
+      }
+    }
   },
   {
-    header: "Tanks list",
+    header: "tanks.list",
     route: TANKS_URL,
-    Component: TanksContainer
+    Component: TanksContainer,
+    params: {
+      seo: {
+        title: 'seo.tanks.list',
+      }
+    }
   },
   {
-    header: "Login",
+    header: "login.view",
     route: LOGIN_URL,
-    Component: LoginContainer
+    Component: LoginContainer,
+    params: {
+      seo: {
+        title: 'seo.login.view',
+      }
+    }
   },
   {
-    header: "Account",
+    header: "menu.your.account",
     route: ACCOUNT_URL,
-    Component: AccountContainer
+    Component: AccountContainer,
+    params: {
+      seo: {
+        title: 'seo.your.account',
+      }
+    }
   },
 ];
 
