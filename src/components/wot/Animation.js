@@ -3,109 +3,110 @@ import React from "react";
 import Particles from "react-particles-js";
 
 export default function Animation() {
+  // return (
+  //   <Particles
+  //     width='100vw' height="100vh"
+  //     params={{
+  //       "particles": {
+  //         "number": {
+  //           "value": 400,
+  //           "density": {
+  //             "enable": false
+  //           }
+  //         },
+  //         "size": {
+  //           "value": 5,
+  //           "random": true,
+  //           "anim": {
+  //             "speed": 4,
+  //             "size_min": 0.1
+  //           }
+  //         },
+  //         "line_linked": {
+  //           "enable": false
+  //         },
+  //         "move": {
+  //           "random": true,
+  //           "speed": 1,
+  //           "direction": "top",
+  //           "out_mode": "out"
+  //         }
+  //       },
+  //       "interactivity": {
+  //         "events": {
+  //           "onhover": {
+  //             "enable": true,
+  //             "mode": "bubble"
+  //           },
+  //           "onclick": {
+  //             "enable": true,
+  //             "mode": "repulse"
+  //           }
+  //         },
+  //         "modes": {
+  //           "bubble": {
+  //             "distance": 150,
+  //             "duration": 2,
+  //             "size": 0,
+  //             "opacity": 0
+  //           },
+  //           "repulse": {
+  //             "distance": 300,
+  //             "duration": 4
+  //           }
+  //         }
+  //       }
+  //     }} />
+  // );
+
   return (
     <Particles
       width='100vw' height="100vh"
       params={{
         "particles": {
           "number": {
-            "value": 400,
+            "value": 60,
             "density": {
-              "enable": false
-            }
-          },
-          "size": {
-            "value": 5,
-            "random": true,
-            "anim": {
-              "speed": 4,
-              "size_min": 0.1
+              "enable": true,
+              "value_area": 1500
             }
           },
           "line_linked": {
-            "enable": false
+            "enable": true,
+            "opacity": 0.02
           },
           "move": {
-            "random": true,
-            "speed": 1,
-            "direction": "top",
-            "out_mode": "out"
+            "direction": "right",
+            "speed": 0.05
+          },
+          "size": {
+            "value": 1
+          },
+          "opacity": {
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.05
+            }
           }
         },
         "interactivity": {
           "events": {
-            "onhover": {
-              "enable": true,
-              "mode": "bubble"
-            },
             "onclick": {
               "enable": true,
-              "mode": "repulse"
+              "mode": "push"
             }
           },
           "modes": {
-            "bubble": {
-              "distance": 150,
-              "duration": 2,
-              "size": 0,
-              "opacity": 0
-            },
-            "repulse": {
-              "distance": 300,
-              "duration": 4
+            "push": {
+              "particles_nb": 1
             }
           }
-        }
-      }} />
+        },
+        "retina_detect": true
+      }}
+    />
   );
-
-  // return (
-  //   <Particles
-  //     params={{
-  //       "particles": {
-  //         "number": {
-  //           "value": 200,
-  //           "density": {
-  //             "enable": true,
-  //             "value_area": 1500
-  //           }
-  //         },
-  //         "line_linked": {
-  //           "enable": true,
-  //           "opacity": 0.02
-  //         },
-  //         "move": {
-  //           "direction": "right",
-  //           "speed": 0.05
-  //         },
-  //         "size": {
-  //           "value": 1
-  //         },
-  //         "opacity": {
-  //           "anim": {
-  //             "enable": true,
-  //             "speed": 1,
-  //             "opacity_min": 0.5
-  //           }
-  //         }
-  //       },
-  //       "interactivity": {
-  //         "events": {
-  //           "onclick": {
-  //             "enable": true,
-  //             "mode": "push"
-  //           }
-  //         },
-  //         "modes": {
-  //           "push": {
-  //             "particles_nb": 1
-  //           }
-  //         }
-  //       },
-  //       "retina_detect": true
-  //     }}
-  //   />
-  // );
 
   // return (
   //   <Particles

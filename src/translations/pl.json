@@ -148,5 +148,7 @@
   "type.td": "Niszczyciele czołgów",
   "type.artillery": "Artylerie",
 
-  "logout.success": "Zostałeś prawidłowo wylogowany"
+  "logout.success": "Zostałeś prawidłowo wylogowany",
+  "accept.cookies": "Wyrażam zgodę",
+  "cookies.text": "Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać działanie naszego serwisu."
 }

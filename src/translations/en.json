@@ -132,5 +132,7 @@
   "type.heavyTank": "Heavy tanks",
   "type.td": "Tank Destroyers",
   "type.artillery": "Artillery",
-  "logout.success": "You have been successfully logged out"
+  "logout.success": "You have been successfully logged out",
+  "accept.cookies": "Accept cookies",
+  "cookies.text": "We use cookies and other technologies to customize advertisements, measure their effectiveness and improve the operation of our website."
 }

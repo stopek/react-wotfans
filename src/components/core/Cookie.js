@@ -1,6 +1,7 @@
 import ButtonInput from "components/ui/input/ButtonInput";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router";
 import styled, { css, keyframes } from "styled-components";
 import { COLOR_GREY_DARK_3 } from "styles/colors";
@@ -58,11 +59,13 @@ export default function Cookie() {
   return (
     <CookieBox animation={!accepted && !accept && slideUpCss}>
       <TextContent>
-        Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać
-        działanie naszego serwisu.
+        <FormattedMessage id={`cookies.text`} />
       </TextContent>
 
-      <ButtonInput label="Wyrażam zgodę" onClick={handleAccept} />
+      <ButtonInput
+        label={<FormattedMessage id={`accept.cookies`} />}
+        onClick={handleAccept}
+      />
     </CookieBox>
   );
 };

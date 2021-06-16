@@ -62,8 +62,12 @@ const Content = styled.div`
   top: 15px;
   z-index: 1000;
   background: ${COLOR_DARK};
-  padding: 0 10px;
+  padding: 0 5px;
   display: flex;
+  svg {
+    width: 35px !important;
+    height: 35px !important;
+  }
 `;
 
 const OpenMenuIcon = styled.div`

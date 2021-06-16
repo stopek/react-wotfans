@@ -53,7 +53,7 @@ const Languages = styled.div`
 `;
 
 const Language = styled.div`
-  padding: 15px;
+  padding: 5px 15px;
   background: ${COLOR_DARK};
   font-size: 12px;
   line-height: 1;
