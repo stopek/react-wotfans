@@ -4,6 +4,7 @@ import Flash from "components/core/Flash";
 import Seo from "components/core/Seo";
 import { getToken } from "helpers/cookies";
 import React, { useEffect } from "react";
+import { FormattedMessage } from "react-intl";
 import { useDispatch } from "react-redux";
 import { clearMessages } from "reducers/flashSlice";
 import { getUser } from "reducers/wotSlice";
@@ -23,13 +24,21 @@ export default function Base({ children, seo, seo_values = {}, ...props }) {
     }
   }, [dispatch, token]);
 
+  const values = Object.assign({}, seo?.values || {}, seo_values || {});
+
   return (
     <div {...props}>
-      <Seo
-        title={seo?.title}
-        description={seo?.description}
-        values={Object.assign({}, seo?.values || {}, seo_values || {})}
-      />
+      {!!seo?.title && (
+        <FormattedMessage id={seo?.title}>
+          {translation => (
+            <Seo
+              title={translation[0]}
+              description={seo?.description}
+              values={values}
+            />
+          )}
+        </FormattedMessage>
+      )}
 
       {children}
 

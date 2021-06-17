@@ -6,7 +6,7 @@ import {
   LOGIN_URL,
   MAIN_URL,
   PLAYER_URL,
-  SEARCH_URL,
+  SEARCH_URL, TANK_URL,
   TANKS_URL
 } from "app/routes";
 import AccountContainer from "containers/AccountContainer";
@@ -17,6 +17,7 @@ import IndexContainer from "containers/IndexContainer";
 import LoginContainer from "containers/LoginContainer";
 import PlayerContainer from "containers/PlayerContainer";
 import SearchPlayerContainer from "containers/SearchPlayerContainer";
+import TankContainer from "containers/TankContainer";
 import TanksContainer from "containers/TanksContainer";
 
 const routing = [
@@ -47,6 +48,16 @@ const routing = [
     params: {
       seo: {
         title: 'seo.clan.profile',
+      }
+    }
+  },
+  {
+    header: "tank.profile",
+    route: TANK_URL,
+    Component: TankContainer,
+    params: {
+      seo: {
+        title: 'seo.tank.profile',
       }
     }
   },

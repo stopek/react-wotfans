@@ -18,6 +18,7 @@ const initialState = {
   user_tanks_achievements: [],
   exp_wn8_list: [],
   tanks: [],
+  search_tank: {},
 
   get_user: {}
 };
@@ -71,6 +72,7 @@ export const searchPlayer = handleRejectValues('wot/search_player', Wot.search_p
 export const searchPlayerById = handleRejectValues('wot/search_player_by_id', Wot.search_player_by_id);
 export const loadPlayers = handleRejectValues('wot/load_players', Wot.load_players);
 export const searchClan = handleRejectValues('wot/search_clan', Wot.search_clan);
+export const searchTank = handleRejectValues('wot/search_tank', Wot.search_tank);
 export const userTanks = handleRejectValues('wot/user_tanks', Wot.user_tanks);
 export const userTanksAchievements = handleRejectValues('wot/user_tanks_achievements', Wot.user_tanks_achievements);
 export const clansList = handleRejectValues('wot/clans_list', Wot.clans);
@@ -102,6 +104,13 @@ export const wotSlice = createSlice({
 
       /********************************************************
        */
+      .addCase(searchTank.pending, (state) => {
+        state.search_tank = {};
+      })
+      .addCase(searchTank.fulfilled, (state, action) => {
+        state.search_tank = action.payload;
+      })
+
       .addCase(loadTanks.pending, (state) => {
         state.tanks = [];
       })
@@ -218,6 +227,7 @@ export const { setError, clearSearchPlayer } = wotSlice.actions;
 
 export const selectSearchPlayer = (state) => state.wot.search_player;
 export const selectSearchClan = (state) => state.wot.search_clan;
+export const selectSearchTank = (state) => state.wot.search_tank;
 export const selectUserTanks = (state) => state.wot.user_tanks;
 export const selectUserTanksAchievements = (state) => state.wot.user_tanks_achievements;
 export const selectClansList = (state) => state.wot.clans_list;

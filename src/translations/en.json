@@ -30,6 +30,7 @@
   "image": "Graphics",
   "nation": "Nation",
   "tier": "Tier",
+  "type": "Type",
   "tank.type": "Tank type",
   "exp.damage": "Damage",
   "exp.def": "Def",
@@ -134,5 +135,9 @@
   "type.artillery": "Artillery",
   "logout.success": "You have been successfully logged out",
   "accept.cookies": "Accept cookies",
-  "cookies.text": "We use cookies and other technologies to customize advertisements, measure their effectiveness and improve the operation of our website."
+  "cookies.text": "We use cookies and other technologies to customize advertisements, measure their effectiveness and improve the operation of our website.",
+  "wn8.weight": "Effect on general WN8",
+  "capture.points": "Base capture points",
+  "hits.received": "Received hits",
+  "capture.points.dropped": "Base decap points"
 }

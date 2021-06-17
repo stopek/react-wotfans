@@ -2,7 +2,6 @@
   "not-found": "Przepraszamy, ale ten serwer jest niedostępny. 404 | Strona nie została odnaleziona",
   "try-again": "Spróbuj ponownie",
   "go-to-homepage": "Idź do strony głównej",
-
   "menu.your.account": "Twoje konto",
   "menu.your.profile": "Twój profil",
   "menu.your.clan": "Twój klan",
@@ -19,6 +18,7 @@
   "created.date": "Data utworzenia",
   "amount": "Ilość",
   "details": "Szczegóły",
+  "type": "Typ",
   "search.clan": "Znajdź klan",
   "type.clan.name": "Wprowadź nazwę klanu",
   "search.player.type": "Sposób wyszukiwania graczy",
@@ -48,7 +48,6 @@
   "wn8.tanks": "Czołgi WN8",
   "wn8.tanks.message": "Lista czołgów najbardziej wpływających na końcowe WN8",
   "achievements": "Oznaczenia",
-
   "win.percentage": "% wygranych",
   "losses.percentage": "% przegranych",
   "draw.percentage": "% remisów",
@@ -57,11 +56,9 @@
   "frags.battle.stats": "Fragów/bitwa",
   "trees.battle.stats": "Ściętych drzew/bitwa",
   "survived.percentage": "% przetrwanych bitew",
-
   "stats": "Statystyki",
-
-  "damage.assisted.radio": "Asysty przez wykrycia",
-  "damage.assisted.track": "Asysty przez zablokowanie",
+  "damage.assisted.radio": "Uszkodzenia przez wykrycia",
+  "damage.assisted.track": "Uszkodzenia przez zablokowanie",
   "direct.hits.received": "Bezpośrednie strzały otrzymane",
   "explosion.hits": "Strzały wysadzające zadano",
   "explosion.hits.received": "Strzały wysadzające otrzymano",
@@ -72,7 +69,6 @@
   "piercings": "Oznaczenia",
   "piercings.received": "Oznaczenia otrzymane",
   "trees.cut": "Ścięte drzewa",
-
   "battles": "Bitew",
   "damage.dealt": "Zadane uszkodzenia",
   "damage.received": "Otrzymane uszkodzenia",
@@ -84,28 +80,22 @@
   "survived.battles": "Przetrwanych bitew",
   "wins": "Wygranych",
   "xp": "Punktów PD",
-
   "pie.wins": "wygrał",
   "pie.losses": "przegrał",
   "pie.draws": "zremisował",
   "pie.survived": "przetrwał",
   "pie.died": "zginął",
-
   "all.items": "Wszystkie",
   "tier.filter": "Filtruj według tieru",
-
   "price.gold": "Cena w złocie",
   "price.silver": "Cena w srebrze",
   "price.xp": "Cena w doświadczeniu",
-
   "wn8": "WN8",
   "tank.wn8": "WN8 Czołgu",
   "clan.wn8": "WN8 Klanu",
-
   "clan.profile": "Profil klanu",
   "player.profile": "Profil gracza",
   "login.view": "Logowanie",
-
   "seo.homepage": "Portal dla Fanów WOT - WotFans",
   "seo.clans.list": "Lista klanów na WotFans",
   "seo.clan.profile": "Profil klanu {name} na WotFans",
@@ -115,7 +105,6 @@
   "seo.login.view": "Logowanie - WotFans",
   "seo.your.account": "Twoje konto - WotFans",
   "seo.player.profile": "Profil gracza {name} na WotFans",
-
   "last.battle.time": "Ostatnia bitwa",
   "player.name": "Nazwa gracza",
   "clan.joined.at": "W klanie od",
@@ -123,12 +112,10 @@
   "version": "Wersja",
   "your.clan": "Twój klan",
   "log.in": "Zaloguj",
-
   "loading.error": "Wystąpił problem podczas wczytywania tej zawartości",
   "loading.not.found": "Nie znaleziono wyników dla tego zapytania",
   "login.message.1": "Aby zalogować się kliknij w przycisk poniżej",
   "login.message.2": "Portal nie gromadzi żadnych prywatnych danych użytkowników. Logowanie służy wyłącznie do poprawnego połączenia konta utworzonego w systemie z zalogowanym użytkownikiem",
-
   "nation.ussr": "Radzieckie",
   "nation.sweden": "Szwedzkie",
   "nation.uk": "UK",
@@ -141,14 +128,16 @@
   "nation.china": "Chińskie",
   "nation.mercenaries": "Najemnicy",
   "nation.germany": "Niemiecki",
-
   "type.lightTank": "Czołgi lekkie",
   "type.mediumTank": "Czołgi średnie",
   "type.heavyTank": "Czołgi ciężkie",
   "type.td": "Niszczyciele czołgów",
   "type.artillery": "Artylerie",
-
   "logout.success": "Zostałeś prawidłowo wylogowany",
   "accept.cookies": "Wyrażam zgodę",
-  "cookies.text": "Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać działanie naszego serwisu."
+  "cookies.text": "Używamy ciasteczek i innych technologii, aby dostosowywać reklamy, mierzyć ich skuteczność oraz poprawiać działanie naszego serwisu.",
+  "wn8.weight": "Wpływ na ogólne WN8",
+  "capture.points": "Punjkty zajęcia bazy",
+  "hits.received": "Otrzymane przebicia",
+  "capture.points.dropped": "Punkty dekapowania bazy"
 }

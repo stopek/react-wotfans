@@ -81,7 +81,7 @@ export default function TanksContainer({ ...props }) {
 
           <TanksList
             tanks={tanks?.response?.data}
-            no_wn8 price no_stats
+            no_wn8 price no_stats tank_profile
           />
         </>
       )}

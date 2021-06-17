@@ -1,9 +1,12 @@
+import { TANK_URL } from "app/routes";
 import CardDetailsDialog from "components/ui/dialog/CardDetailsDialog";
 import TankCard from "components/wot/tanks/TankCard";
 import TankPriceBox from "components/wot/tanks/TankPriceBox";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
+import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLOR_THEME, RADIUS } from "styles/colors";
 
@@ -75,6 +78,9 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const history = useHistory();
+  const route = fillRoute(TANK_URL, {tank_id: tank.id});
+
   return (
     <>
       {!props?.no_stats && (
@@ -90,9 +96,9 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
       <TankItem
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={() => setOpen(true)}
+        onClick={() => (props?.tank_profile ? history.push(route) : setOpen(true))}
         premium={tank?.is_premium || false}
-        pointer={!props?.no_stats}
+        pointer={!props?.no_stats || props?.tank_profile}
       >
         {props?.weight && (
           <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%')}</Weight>

@@ -8,8 +8,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Icon = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background: url(${props => props?.image}) no-repeat center center;
   background-size: contain;
   ${props => props?.dark && `filter: brightness(-150%);`}

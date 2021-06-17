@@ -7,3 +7,4 @@ export const EXP_WN8_URL = "/expected";
 export const TANKS_URL = "/tanks";
 export const LOGIN_URL = "/login";
 export const ACCOUNT_URL = "/account";
+export const TANK_URL = "/tank/:tank_id";

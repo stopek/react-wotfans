@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, selectUser } from "reducers/wotSlice";
 
-export default function AccountContainer(...props) {
+export default function AccountContainer({ ...props }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 

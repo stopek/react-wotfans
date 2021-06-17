@@ -25,6 +25,12 @@ const Wn8BarContent = styled.div`
   }
 `;
 
+const TanksListOverflow = styled.div`
+  max-height: 605px;
+  overflow: auto;
+  padding: 0 10px;
+`;
+
 const pf = (value, unit) => {
   return priceFormat(value, ',', unit);
 }
@@ -78,7 +84,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   });
 
   //boostowe czołgi
-  const wn8_boost_tanks = Object.values(tanks_stats).sort(function (a, b) {
+  const wn8_boost_tanks = Object.values(tanks_stats).filter((item) => item.weight > 0).sort(function (a, b) {
     return b.weight - a.weight;
   }).slice(0, 12);
 
@@ -155,21 +161,27 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             <FormattedMessage id={`tanks.list`} />
           </Header>
 
-          <TanksListAndFilters
-            tanks_stats={tanks_stats}
-          />
+          <TanksListOverflow>
+            <TanksListAndFilters
+              tanks_stats={tanks_stats}
+            />
+          </TanksListOverflow>
 
-          <Header>
-            <FormattedMessage id={`wn8.tanks`} />
-            <small>
-              <FormattedMessage id={`wn8.tanks.message`} />
-            </small>
-          </Header>
+          {wn8_boost_tanks?.length > 0 && (
+            <>
+              <Header>
+                <FormattedMessage id={`wn8.tanks`} />
+                <small>
+                  <FormattedMessage id={`wn8.tanks.message`} />
+                </small>
+              </Header>
 
-          <TanksStatsList
-            tanks_stats={wn8_boost_tanks}
-            weight
-          />
+              <TanksStatsList
+                tanks_stats={wn8_boost_tanks}
+                weight
+              />
+            </>
+          )}
         </>
       ) : (
         <Empty message={<FormattedMessage id={`no.stats.header`} />}>

@@ -34,6 +34,10 @@ export class Wot {
     return Wot.action('search_clan', params);
   }
 
+  static async search_tank(params) {
+    return Wot.action('search_tank', params);
+  }
+
   static async user_tanks(params) {
     return Wot.action('user_tanks', params);
   }
