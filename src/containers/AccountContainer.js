@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core";
-import MapRotator from "components/wot/MapRotator";
+import { mapsRotations } from "app/settings";
+import MapRotator from "components/wot/map_rotator/MapRotator";
 import LoggedUserCard from "components/wot/player/LoggedUserCard";
 import WotOverlay from "overlays/Wot";
 import React from 'react';
@@ -17,11 +18,15 @@ export default function AccountContainer({ ...props }) {
             <LoggedUserCard user={user?.response} />
           </Grid>
           <Grid item md={6} xs={12}>
-            <MapRotator limit={6} />
+            <MapRotator
+              limit={6}
+              maps={mapsRotations}
+              cycle={4}
+              tier={`IX-X`}
+            />
           </Grid>
         </Grid>
       )}
-
     </WotOverlay>
   );
 }
