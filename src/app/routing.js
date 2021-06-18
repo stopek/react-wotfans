@@ -6,7 +6,8 @@ import {
   LOGIN_URL,
   MAIN_URL,
   PLAYER_URL,
-  SEARCH_URL, TANK_URL,
+  SEARCH_URL,
+  TANK_URL,
   TANKS_URL
 } from "app/routes";
 import AccountContainer from "containers/AccountContainer";

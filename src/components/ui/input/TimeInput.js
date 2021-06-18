@@ -1,12 +1,11 @@
 import DateFnsUtils from '@date-io/date-fns';
-
 import { KeyboardTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { nanoid } from "@reduxjs/toolkit";
-import ThemeProvider from "components/styles/themes/ThemeProvider";
 import { getDateLocale } from "helpers/languages";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
+import ThemeProvider from "styles/themes/ThemeProvider";
 
 export default function TimeInput(
   {

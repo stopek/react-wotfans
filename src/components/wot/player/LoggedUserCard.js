@@ -1,6 +1,7 @@
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatBox from "components/wot/StatBox";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
+import { date_from_unix } from "helpers/date";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -16,6 +17,11 @@ const Card = styled.div`
   border-radius: ${RADIUS};
 `;
 
+const Text = styled.div`
+  display: block;
+  font-size: 15px;
+`;
+
 const Details = styled.div`
   font-size: 20px;
 `;
@@ -28,6 +34,9 @@ export default function LoggedUserCard({ user = {} }) {
         <FormattedMessage id={`your.clan`} />: {user?.user?.player?.clan?.name}
       </Details>
 
+      <Text>
+        Ostatnia bitwa: {date_from_unix(user?.user?.player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
+      </Text>
       <hr />
 
       <StatBox

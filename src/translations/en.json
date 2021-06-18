@@ -115,7 +115,7 @@
   "loading.error": "There was a problem loading this content",
   "loading.not.found": "No results found for this query",
   "login.message.1": "To log in click the button below",
-  "login.message.2": "The portal does not collect any private user data. Logging in is only used to correctly connect the account created in the system with the logged in user",
+  "login.message.2": "The portal does not collect any private user data. Logging in is only used to correctly connect the player created in the system with the logged in user",
   "nation.ussr": "Soviet",
   "nation.sweden": "Swedish",
   "nation.uk": "UK",

@@ -115,7 +115,7 @@
   "loading.error": "Wystąpił problem podczas wczytywania tej zawartości",
   "loading.not.found": "Nie znaleziono wyników dla tego zapytania",
   "login.message.1": "Aby zalogować się kliknij w przycisk poniżej",
-  "login.message.2": "Portal nie gromadzi żadnych prywatnych danych użytkowników. Logowanie służy wyłącznie do poprawnego połączenia konta utworzonego w systemie z zalogowanym użytkownikiem",
+  "login.message.2": "Portal nie gromadzi żadnych prywatnych danych użytkowników. Logowanie służy wyłącznie do poprawnego połączenia gracza utworzonego w systemie z zalogowanym użytkownikiem",
   "nation.ussr": "Radzieckie",
   "nation.sweden": "Szwedzkie",
   "nation.uk": "UK",

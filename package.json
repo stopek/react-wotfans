@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/data-grid": "^4.0.0-alpha.23",
+    "@date-io/date-fns": "1.x",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@nivo/bar": "^0.70.1",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/pickers": "^3.3.10",
     "@nivo/pie": "^0.70.1",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",

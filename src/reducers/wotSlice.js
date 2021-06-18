@@ -95,9 +95,6 @@ export const wotSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(getUser.pending, (state) => {
-        state.get_user = {};
-      })
       .addCase(getUser.fulfilled, (state, action) => {
         state.get_user = action.payload;
       })
