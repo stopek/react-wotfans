@@ -1,7 +1,8 @@
+import MapPreview from "components/wot/maps/MapPreview";
 import { format } from "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { COLOR_DARK, COLOR_SECOND, COLOR_THEME } from "styles/colors";
+import { COLOR_DARK, COLOR_RED, COLOR_THEME } from "styles/colors";
 
 const List = styled.div`
   color: white;
@@ -14,23 +15,16 @@ const List = styled.div`
   justify-content: center;
 `;
 
-const pulseBg = keyframes`
-  0% {
-    background-color: ${COLOR_DARK};
-  }
-  100% {
-    background-color: ${COLOR_SECOND};
-  }
-`;
-
 const pulseDot = keyframes`
   0% {
     -webkit-transform: scale(0.1, 0.1);
     opacity: 0.0;
   }
+
   50% {
     opacity: 1.0;
   }
+
   100% {
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0.0;
@@ -39,27 +33,8 @@ const pulseDot = keyframes`
 
 const Item = styled.div`
   width: 100%;
-  padding: 10px;
-  display: flex;
-  gap: 10px;
   position: relative;
-  transform-origin: center;
-  background-color: ${props => props?.current ? COLOR_SECOND : COLOR_DARK};
-
-  img {
-    width: 500px;
-    height: 500px;
-    position: absolute;
-    border-radius: 5px;
-  }
 `;
-
-/*
-// background: ${props => props?.current ? COLOR_SECOND : COLOR_DARK};
-// transform: scale(${props => `${props.size}`});
-// opacity: ${props => props.size - parseFloat(`0.${limit + 1}`)};
-// z-index: ${props => parseInt(10 + props.size * 10)};
- */
 
 const Dot = styled.div`
   flex: 1;
@@ -72,13 +47,13 @@ const Dot = styled.div`
 const Circle = styled.div`
   width: 15px;
   height: 15px;
-  background-color: ${COLOR_THEME};
+  background-color: ${props => props?.current ? COLOR_RED : COLOR_THEME};
   border-radius: 50%;
   position: absolute;
 `;
 
 const RingRing = styled.div`
-  border: 3px solid ${COLOR_THEME};
+  border: 3px solid ${props => props?.current ? COLOR_RED : COLOR_THEME};
   -webkit-border-radius: 30px;
   height: 25px;
   width: 25px;
@@ -103,24 +78,76 @@ const MapTime = styled.div`
   align-items: center;
 `;
 
+const Content = styled.div`
+  position: relative;
+  z-index: 2;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  background-color: ${COLOR_DARK};
+  cursor: pointer;
+  
+  ${props => props?.current && `
+    position: absolute;
+    padding-bottom: 150px;
+    top: 0;
+    left:0;
+    white-space: nowrap;
+    width: 100%;
+    background: rgb(28,28,28);
+    background: linear-gradient(180deg, rgba(28,28,28,1) 20%, rgba(28,28,28,0) 100%);
+  `}
+`;
+
+const Map = styled.div`
+  position: relative;
+  z-index: 1;
+`;
+
 export default function MapRotatorList({ list = [] }) {
+  const [current, setCurrent] = useState(null);
+
+  const preview = (key) => {
+    if (current === key) {
+      setCurrent(null);
+      return;
+    }
+
+    setCurrent(key);
+  }
+
+  console.log(list);
+
   return (
     <List>
-      {list.map((map, key) => (
-        <Item key={`map-${key}`} current={map.status === 'current'} size={map.size}>
-          {/*<img src={map.map.image} />*/}
-          <MapName>{map.map.name}</MapName>
-          <Dot>
-            <RingRing current={map.status === 'current'} />
-            <Circle />
-          </Dot>
-          <MapTime>
-            {format(map.from, 'HH:mm')}
-            {` - `}
-            {format(map.to, 'HH:mm')}
-          </MapTime>
-        </Item>
-      ))}
+      {list.map((map, key) => {
+        const is_current = (map.status === 'current' || current === key);
+        const is_real_current = (map.status === 'current');
+
+        return (
+          <Item key={`map-${key}`} onClick={() => preview(key)}>
+            {is_current && (
+              <Map>
+                <MapPreview video={map.map?.video} height={250} />
+              </Map>
+            )}
+
+            <Content current={is_current}>
+              <MapName>{map.map.name}</MapName>
+              <Dot>
+                <RingRing current={is_real_current} />
+                <Circle current={is_real_current} />
+              </Dot>
+
+              <MapTime>
+                {format(map.from, 'HH:mm')}
+                {` - `}
+                {format(map.to, 'HH:mm')}
+              </MapTime>
+            </Content>
+          </Item>
+        );
+      })}
     </List>
   );
 }

@@ -4,7 +4,7 @@ import {
   CLANS_URL,
   EXP_WN8_URL,
   LOGIN_URL,
-  MAIN_URL,
+  MAIN_URL, MAPS_URL,
   PLAYER_URL,
   SEARCH_URL,
   TANK_URL,
@@ -16,6 +16,7 @@ import ClansContainer from "containers/ClansContainer";
 import ExpWn8Container from "containers/ExpWn8Container";
 import IndexContainer from "containers/IndexContainer";
 import LoginContainer from "containers/LoginContainer";
+import MapsContainer from "containers/MapsContainer";
 import PlayerContainer from "containers/PlayerContainer";
 import SearchPlayerContainer from "containers/SearchPlayerContainer";
 import TankContainer from "containers/TankContainer";
@@ -119,6 +120,16 @@ const routing = [
     params: {
       seo: {
         title: 'seo.your.account',
+      }
+    }
+  },
+  {
+    header: "maps.list",
+    route: MAPS_URL,
+    Component: MapsContainer,
+    params: {
+      seo: {
+        title: 'seo.maps',
       }
     }
   },

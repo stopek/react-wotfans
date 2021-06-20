@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { COLOR_DARK, COLOR_GRAY, COLOR_SECOND, COLOR_TEXT_DARK, COLOR_THEME, RADIUS, } from "styles/colors";
+import { COLOR_GRAY, COLOR_SECOND, COLOR_TEXT_DARK, COLOR_THEME, RADIUS, } from "styles/colors";
 
 const default_theme = createMuiTheme({
   palette: {
@@ -23,7 +23,7 @@ const default_theme = createMuiTheme({
     MuiButton: {
       contained: {
         borderRadius: RADIUS,
-        padding: '10px 25px',
+        padding: '5px 25px',
         boxShadow: 'none',
         '&.MuiButton-contained': {
           fontSize: 15,
@@ -33,11 +33,14 @@ const default_theme = createMuiTheme({
           color: 'white',
           '& .MuiButton-label': {
             color: 'white'
+          },
+          '& .MuiSvgIcon-root': {
+            fill: 'white'
           }
         },
         '&.MuiButton-containedSizeLarge': {
           padding: '15px 35px'
-        }
+        },
       },
       outlined: {
         '&.MuiButton-outlined': {
@@ -116,10 +119,18 @@ const default_theme = createMuiTheme({
         borderRadius: RADIUS
       }
     },
+    MuiPagination: {
+      root: {
+        margin: '15px 0'
+      },
+      ul: {
+        gap: 10
+      }
+    },
     MuiPaginationItem: {
       page: {
         background: 'white',
-        margin: 5,
+        margin: 0,
         '&.Mui-selected': {
           backgroundColor: COLOR_THEME
         }

@@ -9,20 +9,20 @@ import { useDispatch } from "react-redux";
 import { clearMessages } from "reducers/flashSlice";
 import { getUser } from "reducers/wotSlice";
 
+const action = (dispatch, token) => {
+  if (token?.length > 0) {
+    instance.defaults.headers.common["X-Auth-Token"] = token;
+    dispatch(getUser());
+  }
+}
+
 export default function Base({ children, seo, seo_values = {}, ...props }) {
   const dispatch = useDispatch();
   const token = getToken();
 
-  const action = () => {
-    if (token?.length > 0) {
-      instance.defaults.headers.common["X-Auth-Token"] = token;
-      dispatch(getUser());
-    }
-  }
-
   useEffect(() => {
     const timer = setInterval(() => {
-      action();
+      action(dispatch, token);
     }, 10000);
 
     return () => {
@@ -30,12 +30,10 @@ export default function Base({ children, seo, seo_values = {}, ...props }) {
     }
   }, []);
 
-
   useEffect(() => {
     dispatch(clearMessages());
+    action(dispatch, token);
   }, [dispatch]);
-
-  action();
 
   const values = Object.assign({}, seo?.values || {}, seo_values || {});
 

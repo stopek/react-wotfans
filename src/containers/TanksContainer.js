@@ -34,7 +34,7 @@ export default function TanksContainer({ ...props }) {
       {tanks?.response && (
         <>
           <Grid container spacing={2}>
-            <Grid item md xs={12}>
+            <Grid item md xs={6}>
               <SelectInput
                 value={tier || null}
                 variant={`standard`}
@@ -43,7 +43,7 @@ export default function TanksContainer({ ...props }) {
                 options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(tiersList)}
               />
             </Grid>
-            <Grid item md xs={12}>
+            <Grid item md xs={6}>
               <SelectInput
                 value={nation || null}
                 variant={`standard`}
@@ -52,7 +52,7 @@ export default function TanksContainer({ ...props }) {
                 options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(nationList)}
               />
             </Grid>
-            <Grid item md xs={12}>
+            <Grid item md xs={6}>
               <SelectInput
                 value={type || null}
                 variant={`standard`}
@@ -61,7 +61,7 @@ export default function TanksContainer({ ...props }) {
                 options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(typeList)}
               />
             </Grid>
-            <Grid item md xs={12}>
+            <Grid item md xs={6}>
               <SelectInput
                 value={premium || null}
                 variant={`standard`}
@@ -70,18 +70,17 @@ export default function TanksContainer({ ...props }) {
                 options={[{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(premiumFilter)}
               />
             </Grid>
-            <Grid item xs={12} container alignItems={`center`} justify={`flex-end`}>
-              <Paginator
-                page={page}
-                count={tanks?.response?.pagination?.pages}
-                onChange={(page) => setPage(page)}
-              />
-            </Grid>
           </Grid>
 
           <TanksList
             tanks={tanks?.response?.data}
             no_wn8 price no_stats tank_profile
+          />
+
+          <Paginator
+            page={page}
+            count={tanks?.response?.pagination?.pages}
+            onChange={(page) => setPage(page)}
           />
         </>
       )}

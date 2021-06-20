@@ -71,11 +71,11 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
           <Small>{tank.nation}</Small>
           <Small>{tank.tier}</Small>
           <Small>{tank.type}</Small>
-          <Small title={tank.damage}>{priceFormat(tank.damage, '.', '', 4)}</Small>
-          <Small title={tank.def}>{priceFormat(tank.def, '.', '', 4)}</Small>
-          <Small title={tank.frag}>{priceFormat(tank.frag, '.', '', 4)}</Small>
-          <Small title={tank.spot}>{priceFormat(tank.spot, '.', '', 4)}</Small>
-          <Small title={tank.win}>{priceFormat(tank.win, '.', '', 4)}</Small>
+          <Small title={tank.damage}>{priceFormat(tank.damage, ',', '', 4)}</Small>
+          <Small title={tank.def}>{priceFormat(tank.def, ',', '', 4)}</Small>
+          <Small title={tank.frag}>{priceFormat(tank.frag, ',', '', 4)}</Small>
+          <Small title={tank.spot}>{priceFormat(tank.spot, ',', '', 4)}</Small>
+          <Small title={tank.win}>{priceFormat(tank.win, ',', '', 4)}</Small>
         </Item>
       ))}
     </List>

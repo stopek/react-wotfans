@@ -1,15 +1,21 @@
 import { Grid } from "@material-ui/core";
-import { mapsRotations } from "app/settings";
 import MapRotator from "components/wot/map_rotator/MapRotator";
 import LoggedUserCard from "components/wot/player/LoggedUserCard";
 import WotOverlay from "overlays/Wot";
-import React from 'react';
-import { useSelector } from "react-redux";
-import { selectUser } from "reducers/wotSlice";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { loadMapGenerator, selectMapGenerator, selectUser } from "reducers/wotSlice";
 
 export default function AccountContainer({ ...props }) {
+  const dispatch = useDispatch();
+
   const user = useSelector(selectUser);
-  
+  const map_generator = useSelector(selectMapGenerator);
+
+  useEffect(() => {
+    dispatch(loadMapGenerator());
+  }, [dispatch]);
+
   return (
     <WotOverlay {...props}>
       {user?.response && (
@@ -17,14 +23,16 @@ export default function AccountContainer({ ...props }) {
           <Grid item md={6} xs={12}>
             <LoggedUserCard user={user?.response} />
           </Grid>
-          <Grid item md={6} xs={12}>
-            <MapRotator
-              limit={6}
-              maps={mapsRotations}
-              cycle={4}
-              tier={`IX-X`}
-            />
-          </Grid>
+          {map_generator?.response && (
+            <Grid item md={6} xs={12}>
+              <MapRotator
+                limit={6}
+                maps={map_generator?.response}
+                cycle={4}
+                tier={`IX-X`}
+              />
+            </Grid>
+          )}
         </Grid>
       )}
     </WotOverlay>

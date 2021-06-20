@@ -23,6 +23,10 @@ const Tier = styled.div`
   margin: auto;
 `;
 
+const Rotator = styled.div`
+  width: 100%;
+  max-width: 500px;
+`;
 
 export const mapsResultList = (user_date, result_maps, limit) => {
   const t = new Date();
@@ -69,7 +73,7 @@ const mapsIntervalsList = (maps, date, cycle) => {
     const date = addMinutes(loop, cycle);
 
     result_maps.push({
-      map: maps[i],
+      map: maps[i].map,
       from: loop,
       to: date
     });
@@ -106,7 +110,7 @@ export default function MapRotator({ limit = 5, maps = {}, cycle = 4, tier = '' 
   const result_maps = mapsIntervalsList(maps, date, cycle);
 
   return (
-    <>
+    <Rotator>
       <Time>
         {format(user_date, 'HH:mm')}
       </Time>
@@ -116,6 +120,6 @@ export default function MapRotator({ limit = 5, maps = {}, cycle = 4, tier = '' 
       <Tier>
         {tier}
       </Tier>
-    </>
+    </Rotator>
   );
 }

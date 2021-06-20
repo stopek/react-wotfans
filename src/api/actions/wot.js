@@ -57,4 +57,12 @@ export class Wot {
   static async load_players(params) {
     return Wot.action('load_players', params);
   }
+
+  static async load_maps(params) {
+    return Wot.action('maps', params);
+  }
+
+  static async map_generator(params) {
+    return Wot.action('map_generator', params);
+  }
 }
