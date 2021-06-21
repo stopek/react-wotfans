@@ -15,7 +15,7 @@ const Header = styled.div`
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   width: 100%;
-  top: 0;
+  bottom: 0;
   z-index: 10;
   align-items: center;
 `;
@@ -31,7 +31,7 @@ const Button = styled.div`
   padding: 5px;
 `;
 
-export default function MapCard({ map = {} }) {
+export default function MapCard({ map = {}, height = 300 }) {
   const [preview, setPreview] = useState(false)
   return (
     <Card>
@@ -51,6 +51,7 @@ export default function MapCard({ map = {} }) {
         autoplay={preview}
         loop={false}
         onEnded={() => setPreview(false)}
+        height={height}
       />
     </Card>
   );

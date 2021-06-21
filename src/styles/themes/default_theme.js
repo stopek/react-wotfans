@@ -151,13 +151,14 @@ const default_theme = createMuiTheme({
       },
       positionStart: {
         '& .MuiButtonBase-root': {
-          padding: 0
+          padding: '0 !important'
         },
         '& .MuiSvgIcon-root': {
-          fill: 'rgba(0, 0, 0, 0.54)'
+          fill: 'white'
         },
         '& svg': {
-          fill: 'rgba(0, 0, 0, 0.54)'
+          fill: 'white',
+          padding: '0 !important'
         }
       }
     },

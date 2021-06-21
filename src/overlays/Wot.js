@@ -20,11 +20,11 @@ const Content = styled(Base)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 35px 15px 15px 60px;
+  padding: 55px 10px 15px 60px;
   overflow-x: hidden;
 
   @media ${breakpoint.md} {
-    padding: 35px 15px 15px 75px;
+    padding: 55px 10px 15px 75px;
   }
   ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK};`}
 `;

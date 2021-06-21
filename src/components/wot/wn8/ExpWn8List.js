@@ -37,11 +37,32 @@ const Small = styled(Name)`
 const TankImage = styled.img`
   max-width: 50px;
   transition: transform .2s ease-in-out;
-  
+
   &:hover {
     transform: scale(3);
   }
 `;
+
+const getTranslationByTankType = (type) => {
+  switch (type) {
+    case 'mediumTank':
+      return 'type.mediumTank';
+    case 'heavyTank':
+      return 'type.heavyTank';
+    case 'lightTank':
+      return 'type.lightTank';
+    case 'AT-SPG':
+      return 'type.td';
+    case 'SPG':
+      return 'type.artillery';
+    default:
+      return type;
+  }
+}
+
+const getTranslationByNation = (nation) => {
+  return 'nation.' + nation;
+}
 
 export default function ExpWn8List({ exp_wn8 = [] }) {
   exp_wn8 = Object.values(exp_wn8);
@@ -66,11 +87,15 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
 
       {exp_wn8.map((tank, key) => (
         <Item key={`tank-${key}`}>
-          <Name>{tank.name}</Name>
-          <Small><TankImage src={tank?.image} /></Small>
-          <Small>{tank.nation}</Small>
-          <Small>{tank.tier}</Small>
-          <Small>{tank.type}</Small>
+          <Name>{tank.tank.name}</Name>
+          <Small><TankImage src={tank.tank.image} /></Small>
+          <Small>
+            <FormattedMessage id={getTranslationByNation(tank.tank.nation)} />
+          </Small>
+          <Small>{tank.tank.tier}</Small>
+          <Small>
+            <FormattedMessage id={getTranslationByTankType(tank.tank.type)} />
+          </Small>
           <Small title={tank.damage}>{priceFormat(tank.damage, ',', '', 4)}</Small>
           <Small title={tank.def}>{priceFormat(tank.def, ',', '', 4)}</Small>
           <Small title={tank.frag}>{priceFormat(tank.frag, ',', '', 4)}</Small>

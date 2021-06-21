@@ -77,11 +77,13 @@ export default function TanksContainer({ ...props }) {
             no_wn8 price no_stats tank_profile
           />
 
-          <Paginator
-            page={page}
-            count={tanks?.response?.pagination?.pages}
-            onChange={(page) => setPage(page)}
-          />
+          {tanks?.response?.pagination?.pages > 1 && (
+            <Paginator
+              page={page}
+              count={tanks?.response?.pagination?.pages}
+              onChange={(page) => setPage(page)}
+            />
+          )}
         </>
       )}
     </WotOverlay>

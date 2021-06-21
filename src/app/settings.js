@@ -69,7 +69,7 @@ export const mapsRotations = {
   1: { name: 'Fredvang', video: 'maps/fredvang' },    //zrobione
   2: { name: 'Himmelsdorf', video: 'maps/himmelsdorf' }, //zrobione
   3: { name: 'El Haluf', video: 'maps/el_haluf' },    //zrobione
-  4: { name: 'Cao Bang', video: 'maps/himmelsdorf' },                                             //brakuje jednej sceny
+  4: { name: 'Cao Bang', video: 'maps/himmelsdorf' }, //zrobione
   5: { name: 'Urwisko', video: 'maps/urwisko' },     //zrobione
   6: { name: 'Winnice', video: 'maps/winnice' },     //zrobione
   7: { name: 'Mannheim', video: 'maps/manheim' },    //zrobione
@@ -81,7 +81,7 @@ export const mapsRotations = {
   13: { name: 'Fredvang', video: 'maps/fredvang' }, //---//zrobione
   14: { name: 'Kasserin', video: 'maps/himmelsdorf' },
   15: { name: 'Step', video: 'maps/himmelsdorf' },
-  16: { name: 'Cao Bang', video: 'maps/himmelsdorf' }, //---
+  16: { name: 'Cao Bang', video: 'maps/himmelsdorf' }, //---//zrobione
   17: { name: 'Zatoka Rybacka', video: 'maps/urwisko' },
   18: { name: 'Wybrzeże', video: 'maps/fredvang' },
   19: { name: 'Mannheim', video: 'maps/manheim' }, //---//zrobione

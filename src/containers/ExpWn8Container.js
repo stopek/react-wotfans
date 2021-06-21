@@ -1,6 +1,11 @@
+import { Grid } from "@material-ui/core";
+import FormatClearRoundedIcon from '@material-ui/icons/FormatClearRounded';
+import ButtonInput from "components/ui/input/ButtonInput";
+import TextInput from "components/ui/input/TextInput";
+import Paginator from "components/ui/Paginator";
 import ExpWn8List from "components/wot/wn8/ExpWn8List";
 import WotOverlay from "overlays/Wot";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { expWn8List, selectExpWn8List } from "reducers/wotSlice";
@@ -10,10 +15,24 @@ export default function ExpWn8Container({ ...props }) {
   const dispatch = useDispatch();
   const exp_wn8 = useSelector(selectExpWn8List);
   const response = exp_wn8?.response;
+  const [page, setPage] = useState(1);
+  const [tank, setTank] = useState('');
+
+  const search = (page_no, name) => {
+    setPage(page_no);
+    setTank(name);
+
+    dispatch(expWn8List({ page: page_no, tank_name: name }));
+  }
+
+  const clear = () => {
+    setPage(1);
+    search(1, '');
+  }
 
   useEffect(() => {
-    dispatch(expWn8List());
-  }, [dispatch]);
+    search(page, tank);
+  }, [dispatch, page]);
 
   return (
     <WotOverlay {...props}>
@@ -21,10 +40,39 @@ export default function ExpWn8Container({ ...props }) {
         <>
           <Header up>
             <FormattedMessage id={`last.update`} />
-            <small><FormattedMessage id={`version`} />: {response?.version}</small>
+            <small><FormattedMessage id={`version`} />: {response?.update?.version}</small>
           </Header>
 
-          <ExpWn8List exp_wn8={response?.expTanks} />
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            search(1, tank);
+          }}>
+            <Grid container spacing={2}>
+              <Grid item sm xs={12}>
+                <TextInput
+                  required
+                  onChange={(value) => setTank(value)}
+                  value={tank}
+                  variant={`standard`}
+                  prefix_icon={<FormatClearRoundedIcon onClick={clear} style={{ cursor: 'pointer' }} />}
+                />
+              </Grid>
+
+              <Grid item sm xs={12}>
+                <ButtonInput label={<FormattedMessage id={`search.tank`} />} large />{' '}
+              </Grid>
+            </Grid>
+          </form>
+
+          <ExpWn8List exp_wn8={response?.data} />
+
+          {exp_wn8?.response?.pagination?.pages > 1 && (
+            <Paginator
+              page={page}
+              count={exp_wn8?.response?.pagination?.pages}
+              onChange={(page) => setPage(page)}
+            />
+          )}
         </>
       )}
     </WotOverlay>

@@ -6,6 +6,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_SECOND, RADIUS } from "styles/colors";
+import LoopRoundedIcon from '@material-ui/icons/LoopRounded';
 
 const Card = styled.div`
   background: ${COLOR_SECOND};
@@ -18,7 +19,9 @@ const Card = styled.div`
 `;
 
 const Text = styled.div`
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 15px;
 `;
 
@@ -27,15 +30,26 @@ const Details = styled.div`
 `;
 
 export default function LoggedUserCard({ user = {} }) {
+  let player = user?.user?.player;
+
+  // player = Object.assign({}, player, {
+  //   is_locked: true,
+  //   updates: -1
+  // });
+
   return (
     <Card>
-      <PlayerNameWithConsoleLogo name={user?.user?.player?.name} />
+      <PlayerNameWithConsoleLogo name={player?.name} />
       <Details>
-        <FormattedMessage id={`your.clan`} />: {user?.user?.player?.clan?.name}
+        <FormattedMessage id={`your.clan`} />: {player?.clan?.name}
       </Details>
 
       <Text>
-        Ostatnia bitwa: {date_from_unix(user?.user?.player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
+        Ostatnia bitwa: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
+        {` `}
+        {player?.is_locked && player?.updates === -1 && (
+          <LoopRoundedIcon />
+        )}
       </Text>
       <hr />
 
