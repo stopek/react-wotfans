@@ -59,17 +59,17 @@ export default function ExpWn8Container({ ...props }) {
               </Grid>
 
               <Grid item sm xs={12}>
-                <ButtonInput label={<FormattedMessage id={`search.tank`} />} large />{' '}
+                <ButtonInput label={`search.tank`} large />
               </Grid>
             </Grid>
           </form>
 
           <ExpWn8List exp_wn8={response?.data} />
 
-          {exp_wn8?.response?.pagination?.pages > 1 && (
+          {response?.pagination?.pages > 1 && (
             <Paginator
               page={page}
-              count={exp_wn8?.response?.pagination?.pages}
+              count={response?.pagination?.pages}
               onChange={(page) => setPage(page)}
             />
           )}

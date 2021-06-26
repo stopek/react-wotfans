@@ -15,7 +15,7 @@ export class Wot {
   }
 
   static async search_player(params) {
-    return Wot.action('search_player', params);
+    return Wot.action('player/search', params);
   }
 
   static async logout(params) {
@@ -27,15 +27,15 @@ export class Wot {
   }
 
   static async search_player_by_id(params) {
-    return Wot.action('search_player_by_id', params);
+    return Wot.action('player/profile', params);
   }
 
   static async search_clan(params) {
-    return Wot.action('search_clan', params);
+    return Wot.action('clan/search', params);
   }
 
   static async search_tank(params) {
-    return Wot.action('search_tank', params);
+    return Wot.action('tank', params);
   }
 
   static async user_tanks(params) {
@@ -47,7 +47,7 @@ export class Wot {
   }
 
   static async clans(params) {
-    return Wot.action('clans', params);
+    return Wot.action('clans/list', params);
   }
 
   static async exp_wn8(params) {
@@ -63,6 +63,6 @@ export class Wot {
   }
 
   static async map_generator(params) {
-    return Wot.action('map_generator', params);
+    return Wot.action('maps/generator', params);
   }
 }

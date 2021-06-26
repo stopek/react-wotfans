@@ -1,7 +1,11 @@
+import { TANK_URL } from "app/routes";
+import ButtonInput from "components/ui/input/ButtonInput";
+import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import { getTranslationByNation } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 
@@ -62,6 +66,8 @@ const getTranslationByTankType = (type) => {
 }
 
 export default function ExpWn8List({ exp_wn8 = [] }) {
+  const history = useHistory();
+
   exp_wn8 = Object.values(exp_wn8);
   if (!exp_wn8?.length) {
     return null;
@@ -80,6 +86,8 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
         <Small><FormattedMessage id={`exp.frag`} /></Small>
         <Small><FormattedMessage id={`exp.spot`} /></Small>
         <Small><FormattedMessage id={`exp.win`} /></Small>
+        <Small><FormattedMessage id={`exp.win`} /></Small>
+        <Small><FormattedMessage id={`see.profile`} /></Small>
       </Item>
 
       {exp_wn8.map((tank, key) => (
@@ -98,6 +106,13 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
           <Small title={tank?.frag}>{priceFormat(tank?.frag, ',', '', 4)}</Small>
           <Small title={tank?.spot}>{priceFormat(tank?.spot, ',', '', 4)}</Small>
           <Small title={tank?.win}>{priceFormat(tank?.win, ',', '', 4)}</Small>
+          <Small>
+            <ButtonInput
+              color={`secondary`}
+              label={`see.profile`}
+              onClick={() => history.push(fillRoute(TANK_URL, { tank_id: tank?.tank?.id }))}
+            />
+          </Small>
         </Item>
       ))}
     </List>
