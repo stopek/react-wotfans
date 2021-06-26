@@ -11,3 +11,13 @@ export const logOutUser = () => {
   delete instance.defaults.headers.common["X-Auth-Token"];
   removeToken();
 }
+
+export const sortByWeight = (list) => {
+  return Object.values(list).filter((item) => item.weight > 0).sort(function (a, b) {
+    return b.weight - a.weight;
+  });
+}
+
+export const getTranslationByNation = (nation) => {
+  return 'nation.' + nation;
+}

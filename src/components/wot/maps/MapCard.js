@@ -39,12 +39,14 @@ export default function MapCard({ map = {}, height = 300 }) {
         <Name>
           {map.name}
         </Name>
-        <Button>
-          <ButtonInput
-            onClick={() => setPreview(!preview)}
-            label={preview ? <StopRoundedIcon /> : <PlayArrowRoundedIcon />}
-          />
-        </Button>
+        {!!map.video && (
+          <Button>
+            <ButtonInput
+              onClick={() => setPreview(!preview)}
+              icon={preview ? <StopRoundedIcon /> : <PlayArrowRoundedIcon />}
+            />
+          </Button>
+        )}
       </Header>
       <MapPreview
         video={map.video}

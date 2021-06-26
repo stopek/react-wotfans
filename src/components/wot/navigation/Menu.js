@@ -1,10 +1,10 @@
 import { IconNavigation } from "components/wot/navigation/IconNavigation";
-import * as React from "react";
-import { useRef } from "react";
-import { motion, useCycle } from "framer-motion";
-import { useDimensions } from "components/wot/navigation/useDimensions";
 import { MenuToggle } from "components/wot/navigation/MenuToggle";
 import { Navigation } from "components/wot/navigation/Navigation";
+import { useDimensions } from "components/wot/navigation/useDimensions";
+import { motion, useCycle } from "framer-motion";
+import * as React from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 

@@ -37,7 +37,10 @@ export default function TanksListAndFilters({ tanks_stats = [] }) {
     return null;
   }
 
-  const tiersOptions = [{ label: <FormattedMessage id={`all.items`} />, value: '' }].concat(getTiersFromTanksStats(tanks_stats));
+  const tiersOptions = [{
+    label: <FormattedMessage id={`all.items`} />,
+    value: ''
+  }].concat(getTiersFromTanksStats(tanks_stats));
 
   tanks_stats = Object.values(tanks_stats);
   tanks_stats = tanks_stats.sort(function (a, b) {

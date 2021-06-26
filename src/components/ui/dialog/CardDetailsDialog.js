@@ -25,7 +25,6 @@ const styles = {
 function CardDetailsDialog({ handleClose, open, image, children, ...props }) {
   return (
     <Dialog
-      onClick={handleClose}
       aria-labelledby="max-width-dialog-title"
       open={open}
       maxWidth="lg"
@@ -40,7 +39,7 @@ function CardDetailsDialog({ handleClose, open, image, children, ...props }) {
       </DialogContent>
 
       <ActionButtonContainer>
-        <ButtonInput onClick={handleClose} label="Zamknij" large />
+        <ButtonInput onClick={handleClose} label={`close`} large />
       </ActionButtonContainer>
     </Dialog>
   );

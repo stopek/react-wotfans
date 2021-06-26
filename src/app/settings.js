@@ -1,9 +1,9 @@
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
+import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import { CLANS_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, SEARCH_URL, TANKS_URL } from "app/routes";
 
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
@@ -16,8 +16,8 @@ export const menuItems = [
   { translation: 'search.player', i: 3, icon: <SearchRoundedIcon />, route: SEARCH_URL },
   { translation: 'exp.wn8', i: 4, icon: <BarChartRoundedIcon />, route: EXP_WN8_URL },
   { translation: 'tanks.list', i: 5, icon: <TankIcon />, route: TANKS_URL },
-  { translation: 'maps.list', i: 5, icon: <MapRoundedIcon />, route: MAPS_URL },
-  { translation: 'fundraising', i: 6, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
+  { translation: 'maps.list', i: 6, icon: <MapRoundedIcon />, route: MAPS_URL },
+  { translation: 'fundraising', i: 7, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
 ];
 
 export const all_static_pages = [];

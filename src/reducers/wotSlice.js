@@ -1,8 +1,6 @@
 import { AnyAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { AuthWot } from "api/actions/auth_wot";
 import { Wot } from "api/actions/wot";
-import instance from "api/service";
-import { removeToken } from "helpers/cookies";
 import { logOutUser } from "helpers/user";
 
 const initialState = {
@@ -11,6 +9,7 @@ const initialState = {
   not_found: false,
 
   search_player: {},
+  search_players: {},
   search_clan: {},
   user_tanks: {},
   clans_list: [],
@@ -94,6 +93,9 @@ export const wotSlice = createSlice({
     },
     clearSearchPlayer: (state) => {
       state.search_player = {};
+    },
+    clearSearchPlayers: (state) => {
+      state.search_players = {};
     }
   },
 
@@ -134,11 +136,11 @@ export const wotSlice = createSlice({
       })
 
       .addCase(searchPlayer.pending, (state) => {
-        state.search_player = {};
+        state.search_players = {};
         state.user_tanks = {};
       })
       .addCase(searchPlayer.fulfilled, (state, action) => {
-        state.search_player = action.payload;
+        state.search_players = action.payload;
       })
 
       .addCase(expWn8List.pending, (state) => {
@@ -185,9 +187,6 @@ export const wotSlice = createSlice({
         state.user_tanks_achievements = action.payload;
       })
 
-      .addCase(clansList.pending, (state) => {
-        state.clans_list = {};
-      })
       .addCase(clansList.fulfilled, (state, action) => {
         state.clans_list = action.payload;
       })
@@ -238,9 +237,10 @@ export const wotSlice = createSlice({
   },
 });
 
-export const { setError, clearSearchPlayer } = wotSlice.actions;
+export const { setError, clearSearchPlayer, clearSearchPlayers } = wotSlice.actions;
 
 export const selectSearchPlayer = (state) => state.wot.search_player;
+export const selectSearchPlayers = (state) => state.wot.search_players;
 export const selectSearchClan = (state) => state.wot.search_clan;
 export const selectSearchTank = (state) => state.wot.search_tank;
 export const selectUserTanks = (state) => state.wot.user_tanks;

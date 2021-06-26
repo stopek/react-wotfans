@@ -1,3 +1,4 @@
+import LoopRoundedIcon from '@material-ui/icons/LoopRounded';
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatBox from "components/wot/StatBox";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
@@ -6,7 +7,6 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_SECOND, RADIUS } from "styles/colors";
-import LoopRoundedIcon from '@material-ui/icons/LoopRounded';
 
 const Card = styled.div`
   background: ${COLOR_SECOND};
@@ -32,11 +32,6 @@ const Details = styled.div`
 export default function LoggedUserCard({ user = {} }) {
   let player = user?.user?.player;
 
-  // player = Object.assign({}, player, {
-  //   is_locked: true,
-  //   updates: -1
-  // });
-
   return (
     <Card>
       <PlayerNameWithConsoleLogo name={player?.name} />
@@ -45,7 +40,7 @@ export default function LoggedUserCard({ user = {} }) {
       </Details>
 
       <Text>
-        Ostatnia bitwa: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
+        <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
         {` `}
         {player?.is_locked && player?.updates === -1 && (
           <LoopRoundedIcon />
@@ -55,7 +50,7 @@ export default function LoggedUserCard({ user = {} }) {
 
       <StatBox
         value={
-          <Wn8Bar value={user?.statistics} />
+          <Wn8Bar value={user?.statistics} large />
         }
         translation={`wn8`}
       />

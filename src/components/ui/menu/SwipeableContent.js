@@ -2,7 +2,7 @@ import { SwipeableDrawer } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React from "react";
 import styled from "styled-components";
-import { COLOR_DARK, COLOR_DARK } from "styles/colors";
+import { COLOR_DARK } from "styles/colors";
 import { useSmallWhiteIcon } from "styles/use/useSmallWhiteIcon";
 
 const MobileCategoryToggle = styled.div`

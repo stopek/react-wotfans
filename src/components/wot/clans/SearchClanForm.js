@@ -1,29 +1,42 @@
-import { FormGroup, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import ButtonInput from "components/ui/input/ButtonInput";
+import RangeInput from "components/ui/input/RangeInput";
 import TextInput from "components/ui/input/TextInput";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
 export default function SearchClanForm({ submit }) {
   const [clan, setClan] = useState('');
+  const [amount, setAmount] = useState([0, 100]);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <form onSubmit={(event) => submit(event, clan)}>
-          <FormGroup>
-            <TextInput
-              required
-              onChange={(value) => setClan(value)}
-              value={clan}
-              variant={`standard`}
-              label={<FormattedMessage id={`type.clan.name`} />}
-            />
+    <form onSubmit={(event) => submit(event, { clan_name: clan, amount: amount })}>
+      <Grid container spacing={2}>
+        <Grid item md={6} xs={12}>
+          <TextInput
+            onChange={(value) => setClan(value)}
+            value={clan}
+            variant={`standard`}
+            label={<FormattedMessage id={`type.clan.name`} />}
+          />
+        </Grid>
 
-            <ButtonInput label={<FormattedMessage id={`search.clan`} />} />
-          </FormGroup>
-        </form>
+        <Grid item md={6} xs={12}>
+          <RangeInput
+            onChange={(value) => setAmount(value)}
+            value={amount}
+            step={5}
+            label={`amount`}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <ButtonInput
+            label={`search.clan`}
+            large
+          />
+        </Grid>
       </Grid>
-    </Grid>
+    </form>
   );
 }

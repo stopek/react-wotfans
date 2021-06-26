@@ -1,7 +1,7 @@
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import styled from "styled-components";
-import { COLOR_PRICE_GOLD, COLOR_PRICE_SILVER, COLOR_PRICE_XP, COLOR_THEME, RADIUS } from "styles/colors";
+import { COLOR_PRICE_GOLD, COLOR_PRICE_SILVER, COLOR_PRICE_XP, RADIUS } from "styles/colors";
 
 const PriceBox = styled.div`
   display: inline-flex;

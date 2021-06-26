@@ -13,7 +13,7 @@ const Map = styled(ReactPlayer)`
   width: 100% !important;
   height: 100% !important;
   z-index: 3;
-  
+
   video {
     object-fit: cover;
   }

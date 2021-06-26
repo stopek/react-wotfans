@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import React from 'react';
+import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
@@ -39,7 +40,9 @@ export default function ButtonInput(
         {...props}
       >
         {before && icon && icon}
-        {label}
+        {label?.length > 0 && (
+          <FormattedMessage id={label} />
+        )}
         {!before && icon && icon}
       </Button>
     </ThemeProvider>

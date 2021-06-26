@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
 import ps_logo from "assets/icons/ps_logo.png";
 import xbox_logo from "assets/icons/xbox_logo.png";
+import React from "react";
+import styled from "styled-components";
 import { RADIUS } from "styles/colors";
 
 const Name = styled.span`
@@ -33,8 +33,8 @@ export default function PlayerNameWithConsoleLogo({ name = '' }) {
 
   const pattern = /(.*)([- ])([^- ]*$)/;
 
-  const nick = name.replace(pattern,"$1");
-  const platform = name.replace(pattern,"$3");
+  const nick = name.replace(pattern, "$1");
+  const platform = name.replace(pattern, "$3");
 
   return (
     <Name title={name}>

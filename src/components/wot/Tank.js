@@ -1,6 +1,5 @@
 import { TANK_URL } from "app/routes";
-import CardDetailsDialog from "components/ui/dialog/CardDetailsDialog";
-import TankCard from "components/wot/tanks/TankCard";
+import TankModalStats from "components/wot/tanks/TankModalStats";
 import TankPriceBox from "components/wot/tanks/TankPriceBox";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import fillRoute from "helpers/fillRoute";
@@ -79,18 +78,18 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
   const [open, setOpen] = useState(false);
 
   const history = useHistory();
-  const route = fillRoute(TANK_URL, {tank_id: tank.id});
+  const route = fillRoute(TANK_URL, { tank_id: tank.id });
 
   return (
     <>
       {!props?.no_stats && (
-        <CardDetailsDialog open={open} handleClose={() => setOpen(false)}>
-          <TankCard
-            tank={tank}
-            statistics={statistics}
-            stats={stats}
-          />
-        </CardDetailsDialog>
+        <TankModalStats
+          tank={tank}
+          stats={stats}
+          statistics={statistics}
+          setOpen={setOpen}
+          open={open}
+        />
       )}
 
       <TankItem

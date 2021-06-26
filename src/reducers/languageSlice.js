@@ -5,7 +5,7 @@ const getDefaultLanguage = () => {
   const browser_language = navigator.language.split(/[-_]/)[0];
 
   const available_language = Object.keys(default_languages).includes(browser_language);
-  if (browser_language) {
+  if (available_language) {
     return browser_language;
   }
 

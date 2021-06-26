@@ -22,6 +22,8 @@ const Bar = styled.span`
   padding: 5px;
   display: inline-block;
   color: white;
+  font-weight: 600;
+  font-size: ${props => props?.large ? 32 : 16}px;
 `;
 
 const getWn8Color = (value) => {
@@ -47,9 +49,9 @@ const getWn8Color = (value) => {
   return response_color;
 }
 
-export default function Wn8Bar({ value = 0, unit = '' }) {
+export default function Wn8Bar({ value = -1, unit = '', large = false }) {
   return (
-    <Bar color={getWn8Color(value)}>
+    <Bar color={getWn8Color(value)} large={large}>
       {value >= 0 ? priceFormat(value, ',', unit) : <FormattedMessage id={`no.data`} />}
     </Bar>
   );

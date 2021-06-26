@@ -1,9 +1,9 @@
+import logo from "assets/images/logo.png";
 import Error from "components/core/Error";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from 'styled-components';
 import { RADIUS } from "styles/colors";
-import logo from "assets/images/logo.png";
 
 const NotFoundBoxContainer = styled.div`
   padding: 55px;

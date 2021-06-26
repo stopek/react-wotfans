@@ -17,7 +17,10 @@ export default function ClanContainer({ match, ...props }) {
   }, [tag, dispatch]);
 
   return (
-    <WotOverlay {...props} seo_values={{ name: clan?.response?.clan?.name || '' }}>
+    <WotOverlay
+      seo_values={{ name: clan?.response?.clan?.tag || '' }}
+      {...props}
+    >
       {clan?.response && (
         <ClanDetails
           clan={clan?.response?.clan}

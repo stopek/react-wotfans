@@ -3,7 +3,7 @@ import Cookie from "components/core/Cookie";
 import Flash from "components/core/Flash";
 import Seo from "components/core/Seo";
 import { getToken } from "helpers/cookies";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import { useDispatch } from "react-redux";
 import { clearMessages } from "reducers/flashSlice";

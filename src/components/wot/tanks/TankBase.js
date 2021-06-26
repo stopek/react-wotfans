@@ -1,0 +1,98 @@
+import { TANK_URL } from "app/routes";
+import TankTypeIcon from "components/wot/tanks/TankTypeIcon";
+import fillRoute from "helpers/fillRoute";
+import { priceFormat } from "helpers/priceFormat";
+import { getTranslationByNation } from "helpers/user";
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { COLOR_SECOND, COLOR_THEME } from "styles/colors";
+
+const BoxesInfo = styled.div`
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+`;
+
+const BoxInfos = styled.div`
+  display: inline-flex;
+  padding: 15px;
+  background: ${COLOR_SECOND};
+  border-radius: 5px;
+  color: white;
+  line-height: 1;
+  flex-direction: column;
+  font-size: 15px;
+  width: 100%;
+
+  span {
+    display: block;
+    font-size: 150%;
+    font-weight: 700;
+  }
+`;
+
+const TankName = styled.h2`
+  font-size: 30px;
+  margin: 0 0 15px 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  color: black;
+
+  ${props => props?.more && `
+    cursor: pointer;
+    
+    &:hover {
+      color: ${COLOR_THEME};
+    }
+  `}
+`;
+
+const Description = styled.p`
+  font-size: 15px;
+  color: gray;
+`;
+
+const Image = styled.div`
+  width: 100%;
+  min-height: 250px;
+  background: #e7e7e7 url(${props => props?.image}) no-repeat center center;
+  background-size: auto;
+  display: flex;
+`;
+
+export default function TankBase({ tank = {}, more }) {
+  const history = useHistory();
+
+  const infos_data = [
+    { translation: 'nation', value: <FormattedMessage id={getTranslationByNation(tank.nation)} /> },
+    { translation: 'tier', value: tank.tier },
+    { translation: 'price.silver', value: priceFormat(tank?.price_credit, ',', '', 0) },
+    { translation: 'price.gold', value: priceFormat(tank?.price_gold, ',', '', 0) },
+    { translation: 'price.xp', value: priceFormat(tank?.prices_xp, ',', '', 0) }
+  ];
+
+  return (
+    <>
+      <TankName more={more} onClick={() => more && history.push(fillRoute(TANK_URL, { tank_id: tank?.id }))}>
+        <TankTypeIcon type={tank?.type} dark />
+        {tank?.name}
+      </TankName>
+      <Image image={tank?.image} />
+      <Description>
+        {tank?.description}
+      </Description>
+
+      <BoxesInfo>
+        {infos_data.map((item, key) => (
+          <BoxInfos key={`box-info-${key}`}>
+            <FormattedMessage id={item.translation} />
+            <span>{item.value}</span>
+          </BoxInfos>
+        ))}
+      </BoxesInfo>
+    </>
+  );
+}

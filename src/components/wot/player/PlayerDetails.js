@@ -3,27 +3,16 @@ import CharsList from "components/wot/char/CharsList";
 import { PieChar } from "components/wot/char/PieChar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatsList from "components/wot/StatsList";
+import TankModalStats from "components/wot/tanks/TankModalStats";
 import TanksListAndFilters from "components/wot/tanks/TanksListAndFilters";
 import TanksStatsList from "components/wot/tanks/TanksStatsList";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { priceFormat } from "helpers/priceFormat";
-import React from "react";
+import { sortByWeight } from "helpers/user";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { breakpoint } from "styles/breakpoints";
-import { Header, LargeHeader } from "styles/GlobalStyled";
-
-const Wn8BarContent = styled.div`
-  font-size: 30px;
-  margin: 10px 0;
-
-  @media ${breakpoint.lg} {
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-    right: 0;
-  }
-`;
+import { Header, LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
 const TanksListOverflow = styled.div`
   max-height: 605px;
@@ -44,7 +33,6 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   const survivedPercentage = (100 * player_statistics?.survived_battles) / player_statistics?.battles;
 
   const haveStats = Object.values(player_statistics)?.length > 0;
-
   const win_pie_data = [
     {
       "id": "wins",
@@ -62,7 +50,6 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
       "value": parseFloat(drawPercentage.toFixed(2)),
     },
   ];
-
   const survived_pie_data = [
     {
       "id": "survived",
@@ -75,21 +62,39 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
       "value": parseFloat((100 - survivedPercentage).toFixed(2)),
     },
   ];
-
   const tanks_wn8 = statistics?.tanks_wn8 || {};
+  const tanksStats = player?.tanksStats || [];
 
   //łączymy tankStats z obliczeniami wn8
-  const tanks_stats = Object.values(player?.tanksStats || []).map((tankStats) => {
+  const tanks_stats = Object.values(tanksStats).map((tankStats) => {
     return Object.assign({}, tankStats, tanks_wn8[tankStats.tank.id] || {});
   });
 
   //boostowe czołgi
-  const wn8_boost_tanks = Object.values(tanks_stats).filter((item) => item.weight > 0).sort(function (a, b) {
-    return b.weight - a.weight;
-  }).slice(0, 12);
+  const wn8_boost_tanks = sortByWeight(tanks_stats).slice(0, 12);
+  const [previewTank, setPreviewTank] = useState({});
+  const [open, setOpen] = useState(false);
+  const [preview_stats, setPreviewStats] = useState({});
+  const [preview_statistics, setPreviewStatistics] = useState({});
+
+  const preview = (tank) => {
+    setPreviewTank(tank);
+    setOpen(true);
+    setPreviewStats(tanks_wn8[tank.id] || {});
+    setPreviewStatistics(Object.values(tanksStats).find((tank_stat) => tank_stat.tank.id === tank.id) || {});
+  }
 
   return (
     <>
+      <TankModalStats
+        tank={previewTank}
+        stats={preview_stats}
+        statistics={preview_statistics}
+        setOpen={setOpen}
+        open={open}
+        card_props={{ more: true }}
+      />
+
       <LargeHeader>
         <PlayerNameWithConsoleLogo name={player?.name} />
         <small>
@@ -97,7 +102,11 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
         </small>
 
         <Wn8BarContent>
-          <Wn8Bar value={statistics?.wn8 || 0} unit={`WN8`} />
+          <Wn8Bar
+            value={statistics?.wn8}
+            unit={`WN8`}
+            large
+          />
         </Wn8BarContent>
       </LargeHeader>
 
@@ -129,9 +138,35 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             { translation: 'direct.hits.received', value: player_statistics?.direct_hits_received },
             { translation: 'explosion.hits', value: player_statistics?.explosion_hits },
             { translation: 'explosion.hits.received', value: player_statistics?.explosion_hits_received },
-            { translation: 'max.damage', value: player_statistics?.max_damage },
-            { translation: 'max.frags', value: player_statistics?.max_frags },
-            { translation: 'max.xp', value: player_statistics?.max_xp },
+            {
+              translation: 'max.damage', value: player_statistics?.max_damage,
+              tank: {
+                tank: player_statistics?.max_damage_tank,
+                props: {
+                  onClick: () => preview(player_statistics?.max_damage_tank)
+                }
+              }
+            },
+            {
+              translation: 'max.frags',
+              value: player_statistics?.max_frags,
+              tank: {
+                tank: player_statistics?.max_frags_tank,
+                props: {
+                  onClick: () => preview(player_statistics?.max_frags_tank)
+                }
+              }
+            },
+            {
+              translation: 'max.xp',
+              value: player_statistics?.max_xp,
+              tank: {
+                tank: player_statistics?.max_xp_tank,
+                props: {
+                  onClick: () => preview(player_statistics?.max_xp_tank)
+                }
+              }
+            },
             { translation: 'no.damage.direct.hits.received', value: player_statistics?.no_damage_direct_hits_received },
             { translation: 'piercings', value: player_statistics?.piercings },
             { translation: 'piercings.received', value: player_statistics?.piercings_received },
@@ -148,7 +183,10 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             { translation: 'xp.battle.stats', value: pf(player_statistics?.xp / player_statistics?.battles, 'PD') },
             { translation: 'shots.battle.stats', value: pf(player_statistics?.shots / player_statistics?.battles, '') },
             { translation: 'frags.battle.stats', value: pf(player_statistics?.frags / player_statistics?.battles, '') },
-            { translation: 'trees.battle.stats', value: pf(player_statistics?.trees_cut / player_statistics?.battles, '') },
+            {
+              translation: 'trees.battle.stats',
+              value: pf(player_statistics?.trees_cut / player_statistics?.battles, '')
+            },
             { translation: 'survived.percentage', value: pf(survivedPercentage, '') }
           ]} />
 

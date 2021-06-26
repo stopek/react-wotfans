@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { COLOR_GRAY, COLOR_SECOND, COLOR_TEXT_DARK, COLOR_THEME, RADIUS, } from "styles/colors";
+import hexToRgbA from "helpers/hexToRgbA";
+import { COLOR_GRAY, COLOR_SECOND, COLOR_TEXT, COLOR_TEXT_DARK, COLOR_THEME, RADIUS, } from "styles/colors";
 
 const default_theme = createMuiTheme({
   palette: {
@@ -128,12 +129,22 @@ const default_theme = createMuiTheme({
       }
     },
     MuiPaginationItem: {
+      root: {
+        '&.MuiPaginationItem-ellipsis': {
+          color: COLOR_TEXT
+        }
+      },
       page: {
         background: 'white',
         margin: 0,
         '&.Mui-selected': {
           backgroundColor: COLOR_THEME
         }
+      }
+    },
+    MuiTypography: {
+      root: {
+        color: COLOR_TEXT
       }
     },
     MuiInputAdornment: {
@@ -160,6 +171,13 @@ const default_theme = createMuiTheme({
           fill: 'white',
           padding: '0 !important'
         }
+      }
+    },
+    MuiSlider: {
+      root: {
+        marginTop: 60,
+        paddingTop: 2,
+        paddingBottom: 2
       }
     },
     MuiInputBase: {
@@ -190,7 +208,14 @@ const default_theme = createMuiTheme({
         minHeight: 150
       }
     },
-    MuiInput: {},
+    MuiInput: {
+      underline: {
+        '&:before': {
+          borderBottomColor: hexToRgbA(COLOR_THEME, 0.38),
+          borderBottomWidth: 2
+        }
+      }
+    },
     MuiFormLabel: {
       root: {
         '&': {

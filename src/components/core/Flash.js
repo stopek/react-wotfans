@@ -1,5 +1,4 @@
 import { backgroundByType, prepareMessages } from "helpers/flashHelper";
-import nl2br from "helpers/nl2br";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";

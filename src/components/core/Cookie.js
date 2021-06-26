@@ -2,7 +2,6 @@ import ButtonInput from "components/ui/input/ButtonInput";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router";
 import styled, { css, keyframes } from "styled-components";
 import { COLOR_GREY_DARK_3 } from "styles/colors";
 
@@ -43,7 +42,6 @@ const TextContent = styled.div`
 `;
 
 export default function Cookie() {
-  const history = useHistory();
   const accepted = Cookies.get('accept_cookie') || null;
   const [accept, setAccept] = useState(false);
 
@@ -63,7 +61,7 @@ export default function Cookie() {
       </TextContent>
 
       <ButtonInput
-        label={<FormattedMessage id={`accept.cookies`} />}
+        label={`accept.cookies`}
         onClick={handleAccept}
       />
     </CookieBox>

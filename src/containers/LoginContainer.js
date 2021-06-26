@@ -69,7 +69,7 @@ export default function LoginContainer({ ...props }) {
         as={`a`}
         href={`${process.env.REACT_APP_BACKEND_SERVICE_URL}${LOGIN_ENDPOINT}`}
         rel={`nofollow`}
-        label={<FormattedMessage id={`log.in`} />}
+        label={`log.in`}
         large
       />
     </WotOverlay>

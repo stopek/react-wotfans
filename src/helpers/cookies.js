@@ -1,4 +1,3 @@
-import instance from "api/service";
 import Cookies from "js-cookie";
 
 export function removeToken() {

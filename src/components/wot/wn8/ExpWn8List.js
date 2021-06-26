@@ -1,4 +1,5 @@
 import { priceFormat } from "helpers/priceFormat";
+import { getTranslationByNation } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -60,10 +61,6 @@ const getTranslationByTankType = (type) => {
   }
 }
 
-const getTranslationByNation = (nation) => {
-  return 'nation.' + nation;
-}
-
 export default function ExpWn8List({ exp_wn8 = [] }) {
   exp_wn8 = Object.values(exp_wn8);
   if (!exp_wn8?.length) {
@@ -96,11 +93,11 @@ export default function ExpWn8List({ exp_wn8 = [] }) {
           <Small>
             <FormattedMessage id={getTranslationByTankType(tank.tank.type)} />
           </Small>
-          <Small title={tank.damage}>{priceFormat(tank.damage, ',', '', 4)}</Small>
-          <Small title={tank.def}>{priceFormat(tank.def, ',', '', 4)}</Small>
-          <Small title={tank.frag}>{priceFormat(tank.frag, ',', '', 4)}</Small>
-          <Small title={tank.spot}>{priceFormat(tank.spot, ',', '', 4)}</Small>
-          <Small title={tank.win}>{priceFormat(tank.win, ',', '', 4)}</Small>
+          <Small title={tank?.damage}>{priceFormat(tank?.damage, ',', '', 4)}</Small>
+          <Small title={tank?.def}>{priceFormat(tank?.def, ',', '', 4)}</Small>
+          <Small title={tank?.frag}>{priceFormat(tank?.frag, ',', '', 4)}</Small>
+          <Small title={tank?.spot}>{priceFormat(tank?.spot, ',', '', 4)}</Small>
+          <Small title={tank?.win}>{priceFormat(tank?.win, ',', '', 4)}</Small>
         </Item>
       ))}
     </List>

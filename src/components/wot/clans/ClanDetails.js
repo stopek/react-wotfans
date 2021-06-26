@@ -1,15 +1,15 @@
 import { PLAYER_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
+import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import PlayersList from "components/wot/player/PlayersList";
 import StatsList from "components/wot/StatsList";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
-import { priceFormat } from "helpers/priceFormat";
 import React from "react";
-import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
 const ClanName = styled.div`
   font-size: 45px;
@@ -24,51 +24,41 @@ const ClanName = styled.div`
   }
 `;
 
-const Info = styled.div`
-  font-size: 12px;
-  color: white;
-`;
-
 export default function ClanDetails({ clan = {}, statistics = {} }) {
   const history = useHistory();
 
-  // const response = players?.response;
-  // const players_data = response?.players;
-  // const players_clan = response?.clan_data;
-  //
-  // const clan_data = clan?.data;
-
-  const ProfileButton = ({ account_id }) => (
+  const ProfileButton = ({ account_id, ...props }) => (
     <ButtonInput
       color={`secondary`}
       onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: account_id }))}
-      label={<FormattedMessage id={`see.profile`} />}
+      label={`see.profile`}
+      {...props}
     />
   );
 
+  const is_creator = clan?.creator;
+  const is_leader = clan?.leader;
+
   let statsList = [
-    // {
-    //   title: 'Założyciel',
-    //   value: clan_details?.creator_name,
-    //   button: <ProfileButton account_id={clan_details?.creator_id} />
-    // },
+    {
+      translation: 'creator',
+      value: is_creator ? <PlayerNameWithConsoleLogo name={clan.creator.name} /> : 'no.data',
+      button: is_creator ? <ProfileButton account_id={clan.creator.id} /> : null
+    },
     {
       translation: 'created.date',
       value: date_from_unix(clan?.clan_created_at)
     },
-    // {
-    //   title: 'Dowódca',
-    //   value: clan_details?.leader_name,
-    //   button: <ProfileButton account_id={clan_details?.leader_id} />
-    // },
-    // { title: 'Ilość graczy', value: clan_data?.members_count },
     {
-      translation: 'clan.wn8',
-      value: <Wn8Bar value={statistics?.wn8} />
+      translation: 'leader',
+      value: is_leader ? <PlayerNameWithConsoleLogo name={clan.leader.name} /> : 'no.data',
+      button: is_leader ? <ProfileButton account_id={clan.leader.id} /> : null
+    },
+    {
+      translation: 'amount',
+      value: clan?.members_count
     }
   ];
-
-  statsList.push();
 
   const players = Object.values(clan.players).map((player) => {
     return Object.assign({}, player, { wn8: statistics?.players[player.id] || -1 });
@@ -76,16 +66,22 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
 
   return (
     <>
-      <ClanName>
-        {clan?.tag}
-        <small>{clan?.name}</small>
-      </ClanName>
+
+      <LargeHeader>
+        <ClanName>
+          {clan?.tag}
+          <small>{clan?.name}</small>
+        </ClanName>
+
+        <Wn8BarContent>
+          <Wn8Bar value={statistics?.wn8 || 0} unit={`WN8`} large />
+        </Wn8BarContent>
+      </LargeHeader>
 
       <StatsList list={statsList} />
 
       <PlayersList
         players={players}
-        clan={clan || []}
       />
     </>
   );

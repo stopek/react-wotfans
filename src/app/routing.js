@@ -4,18 +4,21 @@ import {
   CLANS_URL,
   EXP_WN8_URL,
   LOGIN_URL,
-  MAIN_URL, MAPS_URL,
+  MAIN_URL,
+  MAP_ROTATOR_URL,
+  MAPS_URL,
   PLAYER_URL,
   SEARCH_URL,
   TANK_URL,
   TANKS_URL
 } from "app/routes";
-import AccountContainer from "containers/AccountContainer";
+import AccountContainer from "containers/account/AccountContainer";
 import ClanContainer from "containers/ClanContainer";
 import ClansContainer from "containers/ClansContainer";
 import ExpWn8Container from "containers/ExpWn8Container";
 import IndexContainer from "containers/IndexContainer";
 import LoginContainer from "containers/LoginContainer";
+import MapRotatorContainer from "containers/MapRotatorContainer";
 import MapsContainer from "containers/MapsContainer";
 import PlayerContainer from "containers/PlayerContainer";
 import SearchPlayerContainer from "containers/SearchPlayerContainer";
@@ -130,6 +133,16 @@ const routing = [
     params: {
       seo: {
         title: 'seo.maps',
+      }
+    }
+  },
+  {
+    header: "map.rotator",
+    route: MAP_ROTATOR_URL,
+    Component: MapRotatorContainer,
+    params: {
+      seo: {
+        title: 'seo.map.rotator',
       }
     }
   },

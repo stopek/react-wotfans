@@ -1,6 +1,6 @@
 import StatBox from "components/wot/StatBox";
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
 
 const Stats = styled.div`
@@ -29,6 +29,7 @@ export default function StatsList({ list = [] }) {
         <StatBox
           value={stat.value}
           translation={stat.translation}
+          tank={stat?.tank}
           button={stat?.button}
           key={stat_no}
         />

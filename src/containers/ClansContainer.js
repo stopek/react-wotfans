@@ -1,8 +1,8 @@
-import { Grid } from "@material-ui/core";
 import { CLAN_URL } from "app/routes";
-import Paginator from "components/ui/Paginator";
+import Empty from "components/core/Empty";
 import ClansList from "components/wot/clans/ClansList";
 import SearchClanForm from "components/wot/clans/SearchClanForm";
+import SimplePagination from "components/wot/SimplePagination";
 import fillRoute from "helpers/fillRoute";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect, useState } from 'react';
@@ -15,38 +15,51 @@ export default function IndexContainer({ ...props }) {
   const dispatch = useDispatch();
   const clans = useSelector(selectClansList);
   const [page, setPage] = useState(1);
+  const response_length = clans?.response?.length > 0;
+  const clans_length = clans?.response?.data?.length > 0;
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    dispatch(clansList({ page: page }));
+    dispatch(clansList({ page: page, ...data }));
   }, [dispatch, page]);
 
-  const handleSearchClanByTag = (tag) => {
-    history.push(fillRoute(CLAN_URL, { tag: tag }));
+  const goToClanPage = (tag) => {
+    return history.push(fillRoute(CLAN_URL, { tag: tag }));
   }
 
   const handleSearchClan = (event, data) => {
     event.preventDefault();
+    setData(data);
 
-    handleSearchClanByTag(data);
+    dispatch(clansList({ page: 1, ...data }));
   }
 
   return (
     <WotOverlay {...props}>
       <SearchClanForm submit={handleSearchClan} />
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} container alignItems={`center`} justify={`flex-end`}>
-          <Paginator
-            page={page}
-            count={clans?.response?.pagination?.pages}
-            onChange={(page) => setPage(page)}
-          />
-        </Grid>
-      </Grid>
+      <SimplePagination
+        page={page}
+        setPage={setPage}
+        pages={clans?.response?.pagination?.pages}
+      />
 
-      {clans?.response?.data && (
-        <ClansList clans={clans?.response?.data} check={handleSearchClanByTag} />
+      {clans_length && (
+        <ClansList
+          clans={clans?.response?.data}
+          check={goToClanPage}
+        />
       )}
+
+      {response_length && !clans_length && (
+        <Empty message={`Lista klanow jest pusta`} />
+      )}
+
+      <SimplePagination
+        page={page}
+        setPage={setPage}
+        pages={clans?.response?.pagination?.pages}
+      />
     </WotOverlay>
   );
 }

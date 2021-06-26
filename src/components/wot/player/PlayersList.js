@@ -3,9 +3,9 @@ import ButtonInput from "components/ui/input/ButtonInput";
 import PlayerClanRoleIcon from "components/wot/clans/PlayerClanRoleIcon";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
-import { priceFormat } from "helpers/priceFormat";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
+import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
@@ -54,7 +54,7 @@ export default function PlayersList({ players = [] }) {
     return null;
   }
 
-  players = players.sort(function(a,b) {
+  players = players.sort(function (a, b) {
     return b.wn8 - a.wn8;
   });
 
@@ -99,7 +99,7 @@ export default function PlayersList({ players = [] }) {
               <ButtonInput
                 color={`secondary`}
                 onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))}
-                label={<FormattedMessage id={`see.profile`} />}
+                label={`see.profile`}
               />
             </Info>
           </Item>

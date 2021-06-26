@@ -38,7 +38,7 @@ export default function Crash({ message = 'Internal error', ...props }) {
         {!type && !props?.children && (
           <ButtonInput
             onClick={() => setType(true)}
-            label="Zgłoś problem"
+            label={`report.problem`}
           />
         )}
       </Text>

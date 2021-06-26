@@ -5,7 +5,7 @@ import { COLOR_DARK, COLOR_THEME, RADIUS } from "styles/colors";
 
 const Box = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   position: relative;
   align-items: flex-start;
@@ -13,11 +13,11 @@ const Box = styled.div`
   width: 100%;
   height: 100%;
   background: ${COLOR_DARK};
-  padding: 25px;
   border-radius: ${RADIUS};
   line-height: 1;
   color: white;
-  
+  flex-wrap: nowrap;
+
   &:hover {
     background: ${COLOR_THEME};
     color: black;
@@ -33,14 +33,36 @@ const Value = styled.div`
   font-weight: 700;
 `;
 
-export default function StatBox({ translation, value, button }) {
+const Tank = styled.div`
+  flex: 3;
+  background: ${COLOR_THEME} url(${props => props?.image}) no-repeat center center;
+  background-size: contain;
+  display: flex;
+  height: 100%;
+  border-radius: ${RADIUS};
+  cursor: pointer;
+`;
+
+const Content = styled.div`
+  flex: 4;
+  padding: 25px;
+`;
+
+
+export default function StatBox({ translation, value, button, tank }) {
   return (
     <Box>
-      <Title>
-        <FormattedMessage id={translation} />
-      </Title>
-      <Value>{value}</Value>
-      {!!button && button}
+      <Content>
+        <Title>
+          <FormattedMessage id={translation} />
+        </Title>
+        <Value>{value}</Value>
+        {!!button && button}
+      </Content>
+
+      {!!tank?.tank && (
+        <Tank image={tank?.tank?.image} {...tank?.props} />
+      )}
     </Box>
   );
 }

@@ -15,22 +15,20 @@ const ErrorContent = styled.div`
   border-radius: ${RADIUS};
 `;
 
-export default function Error({ message = 'Page Not Found', ...props }) {
+export default function Error({ message = '', ...props }) {
   const history = useHistory();
 
   return (
     <ErrorContent>
-      {message}
+      {message?.length > 0 && (
+        <FormattedMessage id={message} />
+      )}
 
       <Box>
         {props?.reload ? (
-          <FormattedMessage id="try-again">
-            {translation => (<ButtonInput onClick={() => window.location.reload(false)} label={translation} />)}
-          </FormattedMessage>
+          <ButtonInput onClick={() => window.location.reload(false)} label={`try-again`} />
         ) : (
-          <FormattedMessage id="go-to-homepage">
-            {translation => (<ButtonInput onClick={() => history.push(MAIN_URL)} label={translation} />)}
-          </FormattedMessage>
+          <ButtonInput onClick={() => history.push(MAIN_URL)} label={`go-to-homepage`} />
         )}
       </Box>
     </ErrorContent>

@@ -10,13 +10,13 @@ export const PieChar = ({ data /* see data tab */ }) => (
     activeOuterRadiusOffset={8}
     colors={{ scheme: 'nivo' }}
     borderWidth={1}
-    borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
+    borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
     arcLinkLabelsSkipAngle={10}
     arcLinkLabelsTextColor="#ffffff"
     arcLinkLabelsThickness={2}
     arcLinkLabelsColor={{ from: 'color' }}
     arcLabelsSkipAngle={10}
-    arcLabelsTextColor={{ from: 'color', modifiers: [ [ 'darker', 2 ] ] }}
+    arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
     defs={[
       {
         id: 'dots',

@@ -1,5 +1,4 @@
-import { Grid } from "@material-ui/core";
-import MapCard from "components/wot/maps/MapCard";
+import MapsList from "components/wot/maps/MapsList";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -16,13 +15,7 @@ export default function MapsContainer({ ...props }) {
   return (
     <WotOverlay {...props}>
       {maps?.response && (
-        <Grid spacing={2} container>
-          {maps.response.map((map) => (
-            <Grid item xs={12} md={6} lg={4} xl={4}>
-              <MapCard map={map} key={`map-${map.id}`} height={400} />
-            </Grid>
-          ))}
-        </Grid>
+        <MapsList maps={maps?.response} />
       )}
     </WotOverlay>
   );

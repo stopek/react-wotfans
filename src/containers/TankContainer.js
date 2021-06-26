@@ -1,5 +1,5 @@
-import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import WotOverlay from "overlays/Wot";
+import TankPage from "pages/TankPage";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -19,10 +19,10 @@ export default function TankContainer({ match, ...props }) {
   return (
     <WotOverlay {...props}>
       {tank?.response && (
-        <>
-          Średnie WN8 na tym czołgu to:<br />
-          <Wn8Bar value={tank?.response?.wn8} />
-        </>
+        <TankPage
+          tank={tank?.response?.tank}
+          wn8={tank?.response?.wn8}
+        />
       )}
     </WotOverlay>
   );
