@@ -1,4 +1,4 @@
-import { pl } from 'date-fns/locale'
+import { pl, ru } from 'date-fns/locale'
 import en_translations from "translations/en.json";
 import pl_translations from "translations/pl.json";
 import ru_translation from "translations/ru.json";
@@ -6,7 +6,7 @@ import ru_translation from "translations/ru.json";
 export const default_languages = {
   pl: { label: "PL", value: "pl", date_locale: pl, translations: pl_translations },
   en: { label: "EN", value: "en", date_locale: null, translations: en_translations },
-  ru: { label: "RU", value: "ru", date_locale: null, translations: ru_translation }
+  ru: { label: "RU", value: "ru", date_locale: ru, translations: ru_translation }
 };
 
 export function getDateLocale(language_name) {

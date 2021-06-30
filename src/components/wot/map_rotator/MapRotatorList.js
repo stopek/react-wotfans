@@ -116,8 +116,6 @@ export default function MapRotatorList({ list = [] }) {
     setCurrent(key);
   }
 
-  console.log(list);
-
   return (
     <List>
       {list.map((map, key) => {

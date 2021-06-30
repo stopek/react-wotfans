@@ -24,6 +24,7 @@ const Content = styled(Base)`
   @media ${breakpoint.md} {
     padding: 55px 10px 15px 75px;
   }
+  
   ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK};`}
 `;
 

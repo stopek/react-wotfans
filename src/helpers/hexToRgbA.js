@@ -10,6 +10,5 @@ export default function hexToRgbA(hex, opacity = 1) {
     return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + opacity + ')';
   }
 
-  console.log('Kolor: ' + hex + ' nie zdał! :(');
   return 'transparent';
 }

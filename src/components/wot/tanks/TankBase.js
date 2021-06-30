@@ -1,5 +1,5 @@
 import { TANK_URL } from "app/routes";
-import TankTypeIcon from "components/wot/tanks/TankTypeIcon";
+import TankTypeIcon from "components/wot/tanks/components/TankTypeIcon";
 import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import { getTranslationByNation } from "helpers/user";
@@ -7,12 +7,17 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { COLOR_SECOND, COLOR_THEME } from "styles/colors";
 
 const BoxesInfo = styled.div`
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  
+  @media ${breakpoint.md} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const BoxInfos = styled.div`
@@ -34,13 +39,17 @@ const BoxInfos = styled.div`
 `;
 
 const TankName = styled.h2`
-  font-size: 30px;
+  font-size: 20px;
   margin: 0 0 15px 0;
   display: flex;
   gap: 15px;
   align-items: center;
   color: black;
 
+  @media ${breakpoint.md} {
+    font-size: 30px;
+  }
+  
   ${props => props?.more && `
     cursor: pointer;
     

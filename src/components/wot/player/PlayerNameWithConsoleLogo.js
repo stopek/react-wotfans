@@ -1,6 +1,11 @@
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import ps_logo from "assets/icons/ps_logo.png";
 import xbox_logo from "assets/icons/xbox_logo.png";
+import { date_ago_from_unix } from "helpers/date";
+import { getDateLocale } from "helpers/languages";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { RADIUS } from "styles/colors";
 
@@ -26,7 +31,23 @@ const getConsoleLogo = (name) => {
   return xbox_logo;
 }
 
-export default function PlayerNameWithConsoleLogo({ name = '' }) {
+const LastBattle = styled.div`
+  font-size: 12px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+const NameBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default function PlayerNameWithConsoleLogo({ name = '', last_battle = '' }) {
+  const language = useSelector(selectedLanguage);
+  const date_locale = getDateLocale(language);
+
   if (!name) {
     return null;
   }
@@ -39,7 +60,18 @@ export default function PlayerNameWithConsoleLogo({ name = '' }) {
   return (
     <Name title={name}>
       <Logo image={getConsoleLogo(platform)} />
-      <span>{nick}</span>
+      <NameBox>
+        <span>{nick}</span>
+
+        {last_battle?.length > 0 && (
+          <LastBattle>
+            <SportsEsportsIcon />
+            {date_ago_from_unix(last_battle, 'yyyy-MM-dd HH:mm', {
+              locale: date_locale
+            })}
+          </LastBattle>
+        )}
+      </NameBox>
     </Name>
   );
 }

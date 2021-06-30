@@ -42,8 +42,8 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
   let statsList = [
     {
       translation: 'creator',
-      value: is_creator ? <PlayerNameWithConsoleLogo name={clan.creator.name} /> : 'no.data',
-      button: is_creator ? <ProfileButton account_id={clan.creator.id} /> : null
+      value: is_creator ? <PlayerNameWithConsoleLogo name={is_creator.name} /> : 'no.data',
+      button: is_creator ? <ProfileButton account_id={is_creator.id} /> : null
     },
     {
       translation: 'created.date',
@@ -51,8 +51,8 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     },
     {
       translation: 'leader',
-      value: is_leader ? <PlayerNameWithConsoleLogo name={clan.leader.name} /> : 'no.data',
-      button: is_leader ? <ProfileButton account_id={clan.leader.id} /> : null
+      value: is_leader ? <PlayerNameWithConsoleLogo name={is_leader.name} /> : 'no.data',
+      button: is_leader ? <ProfileButton account_id={is_leader.id} /> : null
     },
     {
       translation: 'amount',
@@ -66,7 +66,6 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
 
   return (
     <>
-
       <LargeHeader>
         <ClanName>
           {clan?.tag}

@@ -1,4 +1,5 @@
 import PlayerDetails from "components/wot/player/PlayerDetails";
+import playerName from "helpers/playerName";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -14,11 +15,13 @@ export default function PlayerContainer({ match, ...props }) {
     dispatch(searchPlayerById({ account_id }));
   }, [account_id, dispatch]);
 
+  let data = {};
+  if (player_data?.response) {
+    data = { seo_values: { name: playerName(player_data?.response?.player?.name) || '' }, ...props };
+  }
+
   return (
-    <WotOverlay
-      seo_values={{ name: player_data?.response?.player?.name || '' }}
-      {...props}
-    >
+    <WotOverlay {...data}>
       {player_data?.response && (
         <PlayerDetails
           player={player_data?.response?.player}

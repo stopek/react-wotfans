@@ -1,12 +1,12 @@
 import Tab from "@material-ui/core/Tab";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
-export default function TabItem({ title, value, Icon, ...props }) {
+export default function TabItem({ translation, value, ...props }) {
   return (
     <Tab
-      label={title}
+      label={<FormattedMessage id={translation} />}
       value={value}
-      icon={<Icon />}
       {...props}
     />
   );

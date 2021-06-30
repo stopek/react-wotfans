@@ -3,6 +3,31 @@ export function priceFormat(num = '', replaceValue = ',', unit = false, digits =
 }
 
 
+export const xpResult = (value) => {
+  return format_number(value, 2, ',', '');
+}
+
+export const numberResult = (value) => {
+  return format_number(value, 2, ',', ' ');
+}
+
+export const percentageDisplay = (value) => {
+  return format_number(value, 2, ',', '') + '%';
+}
+
+export const perBattleDisplay = (value) => {
+  return format_number(value, 2, ',', ' ');
+}
+
+export const percentageCalculator = (amount, total) => {
+  return format_number((100 * amount) / total, '.', '', 4);
+}
+
+export const perBattleCalculator = (amount, battles) => {
+  return format_number(amount / battles, 2, '.', '');
+}
+
+
 const format_number = (number, decimals, dec_point, thousands_sep) => {
   let n = !isFinite(+number) ? 0 : +number,
     prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),

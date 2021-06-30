@@ -1,23 +1,12 @@
+import { wn8Ranges } from "app/settings";
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import {
-  RADIUS,
-  WN8_ABOVE_AVERAGE,
-  WN8_AVERAGE,
-  WN8_BAD,
-  WN8_BELOW_AVERAGE,
-  WN8_GOOD,
-  WN8_GREAT,
-  WN8_SUPER_UNICUM,
-  WN8_UNICUM,
-  WN8_VERY_BAD,
-  WN8_VERY_GOOD
-} from "styles/colors";
+import { RADIUS } from "styles/colors";
 
 const Bar = styled.span`
-  background: ${props => props?.color};
+  background: ${props => props?.background};
   border-radius: ${RADIUS};
   padding: 5px;
   display: inline-block;
@@ -26,23 +15,11 @@ const Bar = styled.span`
   font-size: ${props => props?.large ? 32 : 16}px;
 `;
 
-const getWn8Color = (value) => {
-  const values = [
-    { amount: 450, color: WN8_BAD },
-    { amount: 450, color: WN8_BELOW_AVERAGE },
-    { amount: 650, color: WN8_AVERAGE },
-    { amount: 900, color: WN8_ABOVE_AVERAGE },
-    { amount: 1200, color: WN8_GOOD },
-    { amount: 1600, color: WN8_VERY_GOOD },
-    { amount: 2000, color: WN8_GREAT },
-    { amount: 2450, color: WN8_UNICUM },
-    { amount: 2900, color: WN8_SUPER_UNICUM },
-  ];
-
-  let response_color = WN8_VERY_BAD;
-  values.map(({ amount, color }) => {
-    if (value >= amount) {
-      response_color = color;
+const getWn8Color = (wn8_value) => {
+  let response_color = 'transparent';
+  wn8Ranges.map(({ value, background }) => {
+    if (wn8_value >= value) {
+      response_color = background;
     }
   });
 
@@ -51,7 +28,7 @@ const getWn8Color = (value) => {
 
 export default function Wn8Bar({ value = -1, unit = '', large = false }) {
   return (
-    <Bar color={getWn8Color(value)} large={large}>
+    <Bar background={getWn8Color(value)} large={large}>
       {value >= 0 ? priceFormat(value, ',', unit) : <FormattedMessage id={`no.data`} />}
     </Bar>
   );

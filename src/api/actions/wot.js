@@ -46,6 +46,20 @@ export class Wot {
     return Wot.action('user_tanks_achievements', params);
   }
 
+  static async upload(params) {
+    const path = fillRoute(WOT_ENDPOINT, {
+      action: 'upload'
+    });
+
+    const response = await instance.post(path, params, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      },
+    });
+
+    return response.data;
+  }
+
   static async clans(params) {
     return Wot.action('clans/list', params);
   }

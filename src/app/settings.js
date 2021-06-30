@@ -9,6 +9,15 @@ import { CLANS_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, SEARCH_URL, TANKS_URL } fro
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import {
+  WN8_ABOVE_AVERAGE,
+  WN8_AVERAGE,
+  WN8_BAD,
+  WN8_BELOW_AVERAGE,
+  WN8_GOOD,
+  WN8_GREAT, WN8_SUPER_UNICUM, WN8_UNICUM, WN8_VERY_BAD,
+  WN8_VERY_GOOD
+} from "styles/colors";
 
 export const menuItems = [
   { translation: 'homepage', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL },
@@ -19,8 +28,6 @@ export const menuItems = [
   { translation: 'maps.list', i: 6, icon: <MapRoundedIcon />, route: MAPS_URL },
   { translation: 'fundraising', i: 7, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
 ];
-
-export const all_static_pages = [];
 
 export const tiersList = [
   { value: 1, label: 1 },
@@ -63,30 +70,15 @@ export const premiumFilter = [
   { value: 'without_premium', label: <FormattedMessage id={`without.premium`} /> },
 ];
 
-
-export const mapsRotations = {
-  0: { name: 'Malinowka', video: 'maps/himmelsdorf' },                                            //poprawić końcowy strzał
-  1: { name: 'Fredvang', video: 'maps/fredvang' },    //zrobione
-  2: { name: 'Himmelsdorf', video: 'maps/himmelsdorf' }, //zrobione
-  3: { name: 'El Haluf', video: 'maps/el_haluf' },    //zrobione
-  4: { name: 'Cao Bang', video: 'maps/himmelsdorf' }, //zrobione
-  5: { name: 'Urwisko', video: 'maps/urwisko' },     //zrobione
-  6: { name: 'Winnice', video: 'maps/winnice' },     //zrobione
-  7: { name: 'Mannheim', video: 'maps/manheim' },    //zrobione
-  8: { name: 'Kowno', video: 'maps/urwisko' },
-  9: { name: 'Autostrada', video: 'maps/himmelsdorf' },
-  10: { name: 'Dezful', video: 'maps/himmelsdorf' },
-  11: { name: 'Przełęcz', video: 'maps/himmelsdorf' },
-  12: { name: 'Prochorowka', video: 'maps/fredvang' },
-  13: { name: 'Fredvang', video: 'maps/fredvang' }, //---//zrobione
-  14: { name: 'Kasserin', video: 'maps/himmelsdorf' },
-  15: { name: 'Step', video: 'maps/himmelsdorf' },
-  16: { name: 'Cao Bang', video: 'maps/himmelsdorf' }, //---//zrobione
-  17: { name: 'Zatoka Rybacka', video: 'maps/urwisko' },
-  18: { name: 'Wybrzeże', video: 'maps/fredvang' },
-  19: { name: 'Mannheim', video: 'maps/manheim' }, //---//zrobione
-  20: { name: 'Koło Podbiegunowe', video: 'maps/winnice' },
-  21: { name: 'Pilzno', video: 'maps/urwisko' },
-  22: { name: 'Dezful', video: 'maps/himmelsdorf' }, //---
-  23: { name: 'Piaszczysta rzeka', video: 'maps/el_haluf' }
-};
+export const wn8Ranges = [
+  { value: 0, background: WN8_VERY_BAD, translation: 'wn8.very.bad' },
+  { value: 300, background: WN8_BAD, translation: 'wn8.bad' },
+  { value: 450, background: WN8_BELOW_AVERAGE, translation: 'wn8.below.average' },
+  { value: 650, background: WN8_AVERAGE, translation: 'wn8.average' },
+  { value: 900, background: WN8_ABOVE_AVERAGE, translation: 'wn8.above.average' },
+  { value: 1200, background: WN8_GOOD, translation: 'wn8.good' },
+  { value: 1600, background: WN8_VERY_GOOD, translation: 'wn8.very.good' },
+  { value: 2000, background: WN8_GREAT, translation: 'wn8.great' },
+  { value: 2450, background: WN8_UNICUM, translation: 'wn8.unicum' },
+  { value: 2900, background: WN8_SUPER_UNICUM, translation: 'wn8.super.unicum' },
+];

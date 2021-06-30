@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 
@@ -22,11 +23,16 @@ const Text = styled.div`
   line-height: 1;
 `;
 
-export default function Empty({ message = null, children }) {
+export default function Empty({ translation = '', message = null, children }) {
   return (
     <EmptyContent>
-      {message && <Header>{message}</Header>}
+      {translation?.length > 0 && (
+        <Header>
+          <FormattedMessage id={translation} />
+        </Header>
+      )}
 
+      {message && <Header>{message}</Header>}
       {children && <Text>{children}</Text>}
     </EmptyContent>
   );

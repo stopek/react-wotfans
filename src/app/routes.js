@@ -10,3 +10,4 @@ export const ACCOUNT_URL = "/account";
 export const TANK_URL = "/tank/:tank_id";
 export const MAP_ROTATOR_URL = "/rotator";
 export const MAPS_URL = "/maps";
+export const UPLOAD_URL = "/upload";

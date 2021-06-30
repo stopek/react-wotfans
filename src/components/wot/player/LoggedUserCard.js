@@ -16,6 +16,7 @@ const Card = styled.div`
   font-size: 30px;
   max-width: 500px;
   border-radius: ${RADIUS};
+  margin-bottom: 15px;
 `;
 
 const Text = styled.div`

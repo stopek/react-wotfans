@@ -1,8 +1,9 @@
-import { Dialog, DialogContent, DialogContentText, withStyles } from "@material-ui/core";
+import { Dialog, DialogContent, withStyles } from "@material-ui/core";
 import ButtonInput from "components/ui/input/ButtonInput";
 import React from "react";
 import styled from "styled-components";
 import { RADIUS } from "styles/colors";
+import ThemeProvider from "styles/themes/ThemeProvider";
 
 const ActionButtonContainer = styled.div`
   position: relative;
@@ -10,7 +11,7 @@ const ActionButtonContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  bottom: 10px;
+  padding: 5px 0;
 `;
 
 const styles = {
@@ -22,26 +23,32 @@ const styles = {
   }
 };
 
-function CardDetailsDialog({ handleClose, open, image, children, ...props }) {
+function CardDetailsDialog(
+  {
+    handleClose, open, image,
+    theme = 'default_theme',
+    children, ...props
+  }
+) {
   return (
-    <Dialog
-      aria-labelledby="max-width-dialog-title"
-      open={open}
-      maxWidth="lg"
-      fullWidth={true}
-      {...props}
-    >
+    <ThemeProvider theme={theme}>
+      <Dialog
+        aria-labelledby="max-width-dialog-title"
+        open={open}
+        maxWidth="lg"
+        fullWidth={true}
+        {...props}
+      >
 
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContent>
           {children}
-        </DialogContentText>
-      </DialogContent>
+        </DialogContent>
 
-      <ActionButtonContainer>
-        <ButtonInput onClick={handleClose} label={`close`} large />
-      </ActionButtonContainer>
-    </Dialog>
+        <ActionButtonContainer>
+          <ButtonInput onClick={handleClose} label={`close`} />
+        </ActionButtonContainer>
+      </Dialog>
+    </ThemeProvider>
   );
 }
 

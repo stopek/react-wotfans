@@ -56,17 +56,19 @@ export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...pr
   return (
     <Card>
       <Grid container spacing={2}>
-        <Grid item md={6}>
+        <Grid item md={6} xs={12}>
           <TankBase
             tank={tank}
             {...props}
           />
         </Grid>
 
-        <Grid item md={6}>
+        <Grid item md={6} xs={12}>
           <StatsList>
             <Stat translation={`wn8`} value={<Wn8Bar value={stats?.wn8} />} />
-            <Stat translation={`wn8.weight`} value={priceFormat(stats?.weight, ',', '%')} />
+            <Stat translation={`wn7`} value={priceFormat(stats?.wn7, ',', '', 2)} />
+            <Stat translation={`wn8.weight`} value={priceFormat(stats?.weight, ',', '%', 5)} />
+            <Stat translation={`efficiency`} value={priceFormat(stats?.efficiency, ',', '', 2)} />
 
             <Stat translation={`max.frags`} value={statistics?.max_frags || 0} />
             <Stat translation={`battles`} value={statistics?.battles || 0} />

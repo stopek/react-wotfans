@@ -18,6 +18,12 @@ export const sortByWeight = (list) => {
   });
 }
 
+export const sortByWN8 = (list) => {
+  return Object.values(list).sort(function (a, b) {
+    return b?.wn8 > a?.wn8 ? 1 : -1;
+  });
+}
+
 export const getTranslationByNation = (nation) => {
   return 'nation.' + nation;
 }

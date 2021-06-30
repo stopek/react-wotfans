@@ -57,13 +57,24 @@ const default_theme = createMuiTheme({
     },
     MuiTabs: {
       root: {
-        flexGrow: 1
+        background: 'rgba(0, 0, 0, 0.5)',
+      },
+      indicator: {
+        background: COLOR_THEME
+      }
+    },
+    MuiDialogContent: {
+      root: {
+        padding: 10
       }
     },
     MuiTab: {
       root: {
-        flexGrow: 1,
-        maxWidth: 'none'
+        maxWidth: 'none',
+        color: 'white'
+      },
+      wrapper: {
+        color: COLOR_TEXT
       }
     },
     MuiPaper: {
@@ -90,6 +101,14 @@ const default_theme = createMuiTheme({
     MuiSvgIcon: {
       root: {
         color: COLOR_THEME
+      }
+    },
+    MuiList: {
+      root: {
+        '& .MuiCheckbox-root': {
+          padding: 0,
+          marginRight: 5
+        }
       }
     },
     MuiSelect: {

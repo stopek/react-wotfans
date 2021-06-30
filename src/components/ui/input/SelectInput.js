@@ -5,18 +5,13 @@ import CheckIcon from "@material-ui/icons/Check";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
-import styled from "styled-components";
+import { FormattedMessage, injectIntl } from "react-intl";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
-const Placeholder = styled.span`
-  font-weight: 600;
-  color: rgb(162 162 162);
-`;
-
-export default function SelectInput(
+function SelectInput(
   {
-    label,
-    placeholder,
+    intl,
+    translation,
     prefix_icon,
     onChange,
     theme = 'default_theme',
@@ -29,10 +24,14 @@ export default function SelectInput(
   }
 ) {
   const getMenuItemValue = (id) => {
-    return Object.values(options).find((item) => (id === item.id || id === item.value))?.label;
+    const item = Object.values(options).find((item) => (id === item.id || id === item.value));
+
+    return item?.label ?? (item?.translation ? intl.formatMessage({ id: item?.translation }) : item.value);
   }
 
-  const menuItems = options.map(({ value, label }) => {
+  const menuItems = options.map(({ value, label = '', translation = '' }) => {
+    label = translation?.length > 0 ? <FormattedMessage id={translation} /> : label;
+
     return (
       <MenuItem value={value} key={value}>
         {props.multiple && render_checkbox && Array.isArray(current) ? (
@@ -50,23 +49,17 @@ export default function SelectInput(
   });
 
   let custom_params = {};
-  if (placeholder) {
-    custom_params.renderValue = (selected) => {
-      if (!selected?.toString()?.length) {
-        return (
-          <Placeholder>
-            {placeholder}
-          </Placeholder>
-        );
-      }
+  custom_params.renderValue = (selected) => {
+    if (!selected?.toString()?.length) {
+      return null;
+    }
 
-      const output_value_text = Array.isArray(selected) ?
-        selected.map((selection) => getMenuItemValue(selection)).join(', ') :
-        getMenuItemValue(selected);
+    const output_value_text = Array.isArray(selected) ?
+      selected.map((selection) => getMenuItemValue(selection)).join(', ') :
+      getMenuItemValue(selected);
 
-      return (!!value_overlay ? value_overlay(output_value_text) : output_value_text);
-    };
-  }
+    return (!!value_overlay ? value_overlay(output_value_text) : output_value_text);
+  };
 
   if (prefix_icon) {
     custom_params.startAdornment = <InputAdornment position="start">{prefix_icon}</InputAdornment>
@@ -75,13 +68,14 @@ export default function SelectInput(
   return (
     <ThemeProvider theme={theme}>
       <FormControl {...props}>
-        <InputLabel id="select-input-label">{label}</InputLabel>
+        <InputLabel id="select-input-label">
+          <FormattedMessage id={translation} />
+        </InputLabel>
         <Select
           displayEmpty
           labelId="select-input-label"
           variant={variant}
           id={`standard-select-input-${nanoid()}`}
-          label={label}
           value={current}
           onChange={(event) => onChange && onChange(event.target.value, event)}
           {...custom_params}
@@ -92,4 +86,6 @@ export default function SelectInput(
       </FormControl>
     </ThemeProvider>
   );
-};
+}
+
+export default injectIntl(SelectInput);

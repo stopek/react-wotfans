@@ -1,5 +1,6 @@
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
-import { addHours, addMinutes, differenceInHours, format } from "date-fns";
+import { addDays, addHours, addMinutes, differenceInHours, format } from "date-fns";
+import { getDayOfThisWeek } from "helpers/date";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { COLOR_TEXT_DARK, RADIUS } from "styles/colors";
@@ -67,8 +68,10 @@ export const mapsResultList = (user_date, result_maps, limit) => {
 const mapsIntervalsList = (maps, date, cycle) => {
   let i = 0;
   const result_maps = [];
-  let loop = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
-  let end = addHours(loop, 24);
+  // let loop = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
+
+  let loop = getDayOfThisWeek('Mon');
+  let end = addDays(loop, 7);
   while (loop < end) {
     const date = addMinutes(loop, cycle);
 

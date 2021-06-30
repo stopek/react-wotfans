@@ -12,7 +12,6 @@ const Role = styled.span`
   display: inline-flex;
   position: relative;
   align-items: center;
-  cursor: help;
   margin: 0 5px;
 `;
 
@@ -44,6 +43,7 @@ const Letter = styled.div`
   font-size: 25px;
   font-weight: 700;
   line-height: 1;
+  cursor: help;
   display: flex;
 `;
 
@@ -70,11 +70,12 @@ export default function PlayerClanRoleIcon({ role_name = '' }) {
   const color = getRoleColor(role_letter);
 
   return (
-    <Role
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      <Letter color={color}>{role_letter}</Letter>
+    <Role>
+      <Letter
+        color={color}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >{role_letter}</Letter>
       <RoleFullName
         hover={hover}
         color={color}

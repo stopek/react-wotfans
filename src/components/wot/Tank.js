@@ -1,19 +1,25 @@
 import { TANK_URL } from "app/routes";
+import TankMarkOfMastery from "components/wot/tanks/components/TankMarkOfMastery";
 import TankModalStats from "components/wot/tanks/TankModalStats";
-import TankPriceBox from "components/wot/tanks/TankPriceBox";
+import TankPriceBox from "components/wot/tanks/components/TankPriceBox";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { COLOR_THEME, RADIUS } from "styles/colors";
+import styled, { css } from "styled-components";
+import { COLOR_SECOND, COLOR_THEME, RADIUS } from "styles/colors";
+
+const hoverCss = css`
+  transition: all .2s ease-in-out;
+  opacity: ${props => props?.hover ? 0.1 : 1};
+`;
 
 const TankItem = styled.div`
   background: #cccccc;
   border-radius: 10px;
   position: relative;
-  transition: all 0.2s ease-in-out;
+  transform: scale(0.95);
   ${props => props?.pointer && `cursor: pointer;`};
   ${props => props?.premium && `
       background: #ffcf40;
@@ -21,7 +27,7 @@ const TankItem = styled.div`
   `};
 
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.00);
     z-index: 20;
   }
 `;
@@ -30,15 +36,17 @@ const TankName = styled.div`
   text-align: center;
   position: absolute;
   line-height: 1;
-  font-weight: 700;
-  background: rgba(33, 150, 243, .8);
-  transition: all 0.3s ease-in-out;
+  font-weight: 600;
+  background: ${COLOR_SECOND};
   opacity: ${props => props?.hover ? 1 : 1};
   color: white;
   bottom: -5px;
   right: -5px;
   padding: 5px;
   border-radius: ${RADIUS};
+  font-size: 16px;
+  
+  ${hoverCss}
 `;
 
 const TankImage = styled.div`
@@ -53,6 +61,8 @@ const Wn8 = styled.div`
   position: absolute;
   top: -5px;
   left: -5px;
+
+  ${hoverCss}
 `;
 
 const Weight = styled.div`
@@ -64,13 +74,23 @@ const Weight = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 50%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  opacity: ${props => props?.hover ? 0.5 : 1};
-  transition: all .3s ease-in-out;
+
+  ${hoverCss}
+`;
+
+const MarkPosition = styled.div`
+  position: absolute;
+  left: -1px;
+  border-radius: ${RADIUS};
+  overflow: hidden;
+  bottom: -1px;
+
+  ${hoverCss}
 `;
 
 export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props }) {
@@ -100,14 +120,18 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         pointer={!props?.no_stats || props?.tank_profile}
       >
         {props?.weight && (
-          <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%')}</Weight>
+          <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%', 4)}</Weight>
         )}
+
+        <MarkPosition hover={hover}>
+          <TankMarkOfMastery mark={statistics?.mark_of_mastery} size={30} />
+        </MarkPosition>
 
         <TankName hover={hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />
 
-        {!props?.no_wn8 && (
-          <Wn8 title={stats?.weight}>
+        {!props?.no_wn8 && statistics?.battles > 0 && (
+          <Wn8 title={stats?.weight} hover={hover}>
             <Wn8Bar value={stats?.wn8} unit={`WN8`} />
           </Wn8>
         )}

@@ -10,7 +10,7 @@ import {
   PLAYER_URL,
   SEARCH_URL,
   TANK_URL,
-  TANKS_URL
+  TANKS_URL, UPLOAD_URL
 } from "app/routes";
 import AccountContainer from "containers/account/AccountContainer";
 import ClanContainer from "containers/ClanContainer";
@@ -24,6 +24,7 @@ import PlayerContainer from "containers/PlayerContainer";
 import SearchPlayerContainer from "containers/SearchPlayerContainer";
 import TankContainer from "containers/TankContainer";
 import TanksContainer from "containers/TanksContainer";
+import UploadContainer from "containers/UploadContainer";
 
 const routing = [
   {
@@ -36,6 +37,11 @@ const routing = [
       }
     }
   },
+  // {
+  //   header: "upload",
+  //   route: UPLOAD_URL,
+  //   Component: UploadContainer,
+  // },
   {
     header: "clans.list",
     route: CLANS_URL,
