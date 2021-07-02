@@ -25,6 +25,7 @@ const TanksListOverflow = styled.div`
 `;
 
 export default function PlayerDetails({ player = {}, statistics = {} }) {
+
   const [previewTank, setPreviewTank] = useState({});
   const [open, setOpen] = useState(false);
   const [preview_stats, setPreviewStats] = useState({});

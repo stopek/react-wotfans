@@ -4,27 +4,27 @@ export function priceFormat(num = '', replaceValue = ',', unit = false, digits =
 
 
 export const xpResult = (value) => {
-  return format_number(value, 2, ',', '');
+  return format_number(value, 5, ',', '');
 }
 
 export const numberResult = (value) => {
-  return format_number(value, 2, ',', ' ');
+  return format_number(value, 5, ',', ' ');
 }
 
 export const percentageDisplay = (value) => {
-  return format_number(value, 2, ',', '') + '%';
+  return format_number(value, 3, ',', '') + '%';
 }
 
 export const perBattleDisplay = (value) => {
-  return format_number(value, 2, ',', ' ');
+  return format_number(value, 5, ',', ' ');
 }
 
 export const percentageCalculator = (amount, total) => {
-  return format_number((100 * amount) / total, '.', '', 4);
+  return format_number((100 * amount) / total, 5, '.', '');
 }
 
 export const perBattleCalculator = (amount, battles) => {
-  return format_number(amount / battles, 2, '.', '');
+  return format_number(amount / battles, 5, '.', '');
 }
 
 

@@ -3,7 +3,8 @@ import { addDays, addHours, addMinutes, differenceInHours, format } from "date-f
 import { getDayOfThisWeek } from "helpers/date";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { COLOR_TEXT_DARK, RADIUS } from "styles/colors";
+import { COLOR_TEXT, COLOR_TEXT_DARK, COLOR_THEME, RADIUS } from "styles/colors";
+import {ReactComponent as DiscordIcon} from "assets/svg/discord.svg";
 
 const Time = styled.div`
   background: white;
@@ -26,10 +27,36 @@ const Tier = styled.div`
 
 const Rotator = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
 `;
 
-export const mapsResultList = (user_date, result_maps, limit) => {
+const Author = styled.div`
+  font-size: 12px;
+  line-height: 1.6;
+  color: ${COLOR_TEXT};
+  margin-bottom: 15px;
+  vertical-align: center;
+  
+  span {
+    color: #5c6bc0;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: -7px;
+    margin-left: 10px;
+    margin-right: 4px;
+  }
+  
+  strong {
+    color: ${COLOR_THEME};
+  }
+`;
+
+export const mapsResultList = (user_date, result_maps, limit = [1, 1]) => {
   const t = new Date();
   let display_maps = [];
   let a = 1;
@@ -44,7 +71,7 @@ export const mapsResultList = (user_date, result_maps, limit) => {
 
   result_maps.forEach((map, key) => {
     if (new Date(map.from) <= t && new Date(map.to) > t) {
-      for (let i = key - limit; i < key; i++) {
+      for (let i = key - limit[0]; i < key; i++) {
         if (result_maps[i]) {
           display_maps.push(Object.assign({}, timeForUser(result_maps[i]), { status: 'prev', size: a }));
           a = parseFloat(a + 0.1);
@@ -53,7 +80,7 @@ export const mapsResultList = (user_date, result_maps, limit) => {
 
       display_maps.push(Object.assign({}, timeForUser(map), { status: 'current', size: a }));
 
-      for (let i = key + 1; i <= key + limit; i++) {
+      for (let i = key + 1; i <= key + limit[1]; i++) {
         if (result_maps[i]) {
           a = a - 0.1;
           display_maps.push(Object.assign({}, timeForUser(result_maps[i]), { status: 'next', size: a }));
@@ -94,7 +121,7 @@ const mapsIntervalsList = (maps, date, cycle) => {
   return result_maps;
 }
 
-export default function MapRotator({ limit = 5, maps = {}, cycle = 4, tier = '' }) {
+export default function MapRotator({ limit = [1, 1], maps = {}, cycle = 4, tier = '' }) {
   const [date, setDate] = useState(new Date());
   const hour = format(date, 'HH');
   const user_date = date.setHours(hour);
@@ -119,7 +146,10 @@ export default function MapRotator({ limit = 5, maps = {}, cycle = 4, tier = '' 
       </Time>
 
       <MapRotatorList list={mapsResultList(user_date, result_maps, limit)} />
-
+      <Author>
+        Map generation algorithm created by <strong>wzorek2000</strong> with a lot of help from <strong>Z__Buta_Wjezdzam</strong> & <strong>kkpb17</strong>.
+        Do you have any question for him? <DiscordIcon /> <span>wzorek2000#8053</span>
+      </Author>
       <Tier>
         {tier}
       </Tier>

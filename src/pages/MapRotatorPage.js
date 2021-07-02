@@ -17,7 +17,7 @@ export default function MapRotatorPage() {
 
   return (
     <MapRotator
-      limit={6}
+      limit={[1, 10]}
       maps={map_generator?.response}
       cycle={4}
       tier={`IX-X`}

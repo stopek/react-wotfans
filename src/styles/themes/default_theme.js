@@ -58,6 +58,7 @@ const default_theme = createMuiTheme({
     MuiTabs: {
       root: {
         background: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: RADIUS
       },
       indicator: {
         background: COLOR_THEME
@@ -71,7 +72,7 @@ const default_theme = createMuiTheme({
     MuiTab: {
       root: {
         maxWidth: 'none',
-        color: 'white'
+        color: 'white',
       },
       wrapper: {
         color: COLOR_TEXT

@@ -2,7 +2,7 @@ import MapPreview from "components/wot/maps/MapPreview";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { COLOR_DARK, COLOR_RED, COLOR_THEME } from "styles/colors";
+import { COLOR_DARK, COLOR_RED, COLOR_THEME, RADIUS } from "styles/colors";
 
 const List = styled.div`
   color: white;
@@ -13,6 +13,8 @@ const List = styled.div`
   margin: 15px auto;
   align-items: center;
   justify-content: center;
+  border-radius: ${RADIUS};
+  overflow: hidden;
 `;
 
 const pulseDot = keyframes`
@@ -86,7 +88,7 @@ const Content = styled.div`
   gap: 10px;
   background-color: ${COLOR_DARK};
   cursor: pointer;
-  
+
   ${props => props?.current && `
     position: absolute;
     padding-bottom: 150px;
@@ -95,7 +97,7 @@ const Content = styled.div`
     white-space: nowrap;
     width: 100%;
     background: rgb(28,28,28);
-    background: linear-gradient(180deg, rgba(28,28,28,1) 20%, rgba(28,28,28,0) 100%);
+    background: linear-gradient(180deg, rgba(28,28,28,1) 10%, rgba(28,28,28,0) 70%);
   `}
 `;
 
