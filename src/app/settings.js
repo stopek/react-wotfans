@@ -15,7 +15,10 @@ import {
   WN8_BAD,
   WN8_BELOW_AVERAGE,
   WN8_GOOD,
-  WN8_GREAT, WN8_SUPER_UNICUM, WN8_UNICUM, WN8_VERY_BAD,
+  WN8_GREAT,
+  WN8_SUPER_UNICUM,
+  WN8_UNICUM,
+  WN8_VERY_BAD,
   WN8_VERY_GOOD
 } from "styles/colors";
 
@@ -81,6 +84,27 @@ export const wn8Ranges = [
   { value: 2000, background: WN8_GREAT, translation: 'wn8.great' },
   { value: 2450, background: WN8_UNICUM, translation: 'wn8.unicum' },
   { value: 2900, background: WN8_SUPER_UNICUM, translation: 'wn8.super.unicum' },
+];
+
+export const wn7Ranges = [
+  { value: 0, background: WN8_VERY_BAD, translation: 'wn8.very.bad' },
+  { value: 500, background: WN8_BAD, translation: 'wn8.bad' },
+  { value: 700, background: WN8_BELOW_AVERAGE, translation: 'wn8.below.average' },
+  { value: 900, background: WN8_AVERAGE, translation: 'wn8.average' },
+  { value: 1100, background: WN8_GOOD, translation: 'wn8.good' },
+  { value: 1350, background: WN8_VERY_GOOD, translation: 'wn8.very.good' },
+  { value: 1550, background: WN8_GREAT, translation: 'wn8.great' },
+  { value: 1850, background: WN8_UNICUM, translation: 'wn8.unicum' },
+  { value: 2050, background: WN8_SUPER_UNICUM, translation: 'wn8.super.unicum' },
+];
+
+export const efficiencyRanges = [
+  { value: 0, background: WN8_BAD, translation: 'wn8.bad' },
+  { value: 630, background: WN8_BELOW_AVERAGE, translation: 'wn8.below.average' },
+  { value: 860, background: WN8_AVERAGE, translation: 'wn8.average' },
+  { value: 1140, background: WN8_GOOD, translation: 'wn8.good' },
+  { value: 1460, background: WN8_GREAT, translation: 'wn8.great' },
+  { value: 1735, background: WN8_UNICUM, translation: 'wn8.unicum' }
 ];
 
 export const pie_data = [

@@ -1,5 +1,7 @@
 import LoopRoundedIcon from '@material-ui/icons/LoopRounded';
+import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
+import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import React from "react";
@@ -29,8 +31,17 @@ const Details = styled.div`
   font-size: 20px;
 `;
 
+const StatisticsBar = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+`;
+
 export default function LoggedUserCard({ user = {} }) {
-  let player = user?.user?.player;
+  const player = user?.user?.player;
+  const statistics = user?.statistics;
 
   return (
     <Card>
@@ -46,8 +57,15 @@ export default function LoggedUserCard({ user = {} }) {
           <LoopRoundedIcon />
         )}
       </Text>
+
       <hr />
-      <Wn8Bar value={user?.statistics} unit={`WN8`} large />
+
+
+      <StatisticsBar>
+        <Wn8Bar value={statistics?.wn8} unit={`WN8`} />
+        <WN7Bar value={statistics?.wn7} unit={`WN7`} />
+        <EfficiencyBar value={statistics?.efficiency} unit={`EFFI`} />
+      </StatisticsBar>
     </Card>
   );
 }
