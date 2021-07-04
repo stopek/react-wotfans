@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@material-ui/core";
 import Empty from "components/core/Empty";
+import FullPreloader from "components/core/FullPreloader";
 import TabsList from "components/ui/tabs/TabsList";
 import UserStatisticsChar from "components/wot/char/UserStatisticsChar";
 import LoggedUserCard from "components/wot/player/LoggedUserCard";
@@ -67,6 +68,10 @@ export default function AccountContainer({ ...props }) {
 
   return (
     <WotOverlay {...props}>
+      {!user?.response && (
+        <FullPreloader force={true} />
+      )}
+
       {user?.response && (
         <>
           <Grid container spacing={2}>

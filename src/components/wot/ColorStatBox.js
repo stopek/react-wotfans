@@ -14,12 +14,16 @@ const Bar = styled.span`
   font-size: ${props => props?.large ? 32 : 16}px;
   position: relative;
   text-align: center;
+  line-height: 1;
 
+  ${props => props?.small && `padding: 3px; font-size: 13px; border-radius: 0;`}
+  
   > div {
     background: ${props => props?.background};
     position: absolute;
     width: 100%;
     height: 100%;
+    font-size: 10px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -28,15 +32,16 @@ const Bar = styled.span`
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: all .2s ease-in-out;
     cursor: help;
 
     &:hover {
-      transform: translate(-50%, -50%) scale(1.15);
       opacity: 1;
-      z-index: 10;
     }
   }
+`;
+
+const Value = styled.span`
+  white-space: nowrap;
 `;
 
 const getValue = (check_value, list, key) => {
@@ -50,15 +55,20 @@ const getValue = (check_value, list, key) => {
   return response_color;
 }
 
-export default function ColorStatBox({ list = [], value = -1, unit = '', large = false }) {
+export default function ColorStatBox({ list = [], value = -1, unit = '', large = false, small = false }) {
   const color = getValue(value, list, 'background');
 
   return (
-    <Bar background={color} large={large}>
-      <div>
-        <FormattedMessage id={getValue(value, list, 'translation')} />
-      </div>
-      {value >= 0 ? priceFormat(value, ',', unit) : <FormattedMessage id={`no.data`} />}
+    <Bar background={color} large={large} small={small}>
+      {value >= 0 && (
+        <div>
+          <FormattedMessage id={getValue(value, list, 'translation')} />
+        </div>
+      )}
+
+      <Value>
+        {value >= 0 ? priceFormat(value, ',', unit) : <FormattedMessage id={`no.data`} />}
+      </Value>
     </Bar>
   );
 }

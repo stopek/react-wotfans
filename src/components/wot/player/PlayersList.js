@@ -1,7 +1,11 @@
+import { Hidden } from "@material-ui/core";
 import { PLAYER_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
+import ClanSmallCard from "components/wot/clans/ClanSmallCard";
 import RoleWithClanButton from "components/wot/clans/RoleWithClanButton";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
+import PlayerSmallCard from "components/wot/player/PlayerSmallCard";
+import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
@@ -11,42 +15,13 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { COLOR_THEME } from "styles/colors";
+import { FitTableTd, SimpleTable, TableTbody, TableTdSmall, TableThead, TableTr } from "styles/GlobalStyled";
 
 const List = styled.div`
   position: relative;
   z-index: 2;
   color: white;
   margin: 15px 0;
-`;
-
-const Item = styled.div`
-  background: #1c1c1c;
-  display: flex;
-  width: 100%;
-  margin: 5px 0;
-  flex-wrap: wrap;
-
-  ${props => props?.header && `background: ${COLOR_THEME}; color: white; font-weight: 900;`}
-`;
-
-const Name = styled.div`
-  font-size: 15px;
-  flex: 5;
-  padding: 5px 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const Small = styled(Name)`
-  flex: 1;
-  white-space: nowrap;
-`;
-
-const Info = styled(Name)`
-  flex: 1.5;
-  text-align: center;
 `;
 
 export default function PlayersList({ players = [] }) {
@@ -61,52 +36,73 @@ export default function PlayersList({ players = [] }) {
 
   return (
     <List>
-      <Item header>
-        <Name><FormattedMessage id={`player.name`} /></Name>
-        <Small><FormattedMessage id={`wn8`} /></Small>
-        <Small><FormattedMessage id={`battles`} /></Small>
-        <Small><FormattedMessage id={`win.percentage`} /></Small>
-        <Small><FormattedMessage id={`frags`} /></Small>
-        <Small><FormattedMessage id={`in.game.at`} /></Small>
-        <Small><FormattedMessage id={`clan.role`} /></Small>
-        <Info><FormattedMessage id={`details`} /></Info>
-      </Item>
+      <SimpleTable>
+        <Hidden smDown>
+          <TableThead>
+            <TableTr>
+              <TableTdSmall><FormattedMessage id={`player.name`} /></TableTdSmall>
+              <FitTableTd><FormattedMessage id={`wn8`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`wn7`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`battles`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`win.percentage`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`frags`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`in.game.at`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`clan.role`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`details`} /></FitTableTd>
+            </TableTr>
+          </TableThead>
+        </Hidden>
 
-      {players.map((player) => {
-        const statistics = player.stats[0] ?? {};
-        const winPercentage = percentageCalculator(statistics?.wins, statistics?.battles);
+        <TableTbody>
+          {players.map((player) => {
+            const statistics = player.stats[0] ?? {};
+            const winPercentage = percentageCalculator(statistics?.wins, statistics?.battles);
 
-        return (
-          <Item key={`player-${player?.id}`}>
-            <Name>
-              <PlayerNameWithConsoleLogo
-                name={player?.name}
-                last_battle={player?.last_battle_time}
-              />
-            </Name>
-            <Small>
-              <Wn8Bar value={player?.wn8 || 0} />
-            </Small>
-            <Small>{statistics?.battles}</Small>
-            <Small>{priceFormat(winPercentage, ',', '%')}</Small>
-            <Small>{statistics?.frags}</Small>
-            <Small>{date_from_unix(player?.player_created_at)}</Small>
-            <Small>
-              <RoleWithClanButton
-                role={player?.role}
-                tag={player?.clan?.tag}
-              />
-            </Small>
-            <Info>
-              <ButtonInput
-                color={`secondary`}
-                onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))}
-                label={`see.profile`}
-              />
-            </Info>
-          </Item>
-        );
-      })}
+            return (
+              <TableTr key={`player-${player?.id}`}>
+                <Hidden mdUp>
+                  <PlayerSmallCard player={player} as={`td`} />
+                </Hidden>
+
+                <Hidden smDown>
+                  <TableTdSmall>
+                    <PlayerNameWithConsoleLogo
+                      name={player?.name}
+                      last_battle={player?.last_battle_time}
+                    />
+                  </TableTdSmall>
+
+                  <FitTableTd>
+                    <Wn8Bar value={player?.wn8 || 0} />
+                  </FitTableTd>
+
+                  <FitTableTd>
+                    <WN7Bar value={player?.wn7 || 0} />
+                  </FitTableTd>
+
+                  <FitTableTd>{statistics?.battles}</FitTableTd>
+                  <FitTableTd>{priceFormat(winPercentage, ',', '%')}</FitTableTd>
+                  <FitTableTd>{statistics?.frags}</FitTableTd>
+                  <FitTableTd>{date_from_unix(player?.player_created_at)}</FitTableTd>
+                  <FitTableTd>
+                    <RoleWithClanButton
+                      role={player?.role}
+                      tag={player?.clan?.tag}
+                    />
+                  </FitTableTd>
+                  <FitTableTd>
+                    <ButtonInput
+                      color={`secondary`}
+                      onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))}
+                      label={`see.profile`}
+                    />
+                  </FitTableTd>
+                </Hidden>
+              </TableTr>
+            );
+          })}
+        </TableTbody>
+      </SimpleTable>
     </List>
   );
 }

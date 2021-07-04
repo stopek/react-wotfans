@@ -30,12 +30,12 @@ const Loading = styled.div`
   animation: ${fadeInOut} forwards .5s;
 `;
 
-export default function FullPreloader() {
+export default function FullPreloader({ force = false }) {
   const loader = useSelector(selectLoading);
 
   return (
     <>
-      {loader && (
+      {(loader || force) && (
         <Loading>
           <Preloader />
         </Loading>

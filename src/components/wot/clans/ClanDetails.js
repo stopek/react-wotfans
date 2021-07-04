@@ -11,19 +11,6 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
-const ClanName = styled.div`
-  font-size: 45px;
-  line-height: 1.2;
-  font-weight: 700;
-  margin: 45px 0;
-  color: white;
-
-  small {
-    display: block;
-    font-size: 15px;
-  }
-`;
-
 export default function ClanDetails({ clan = {}, statistics = {} }) {
   const history = useHistory();
 
@@ -61,16 +48,19 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
   ];
 
   const players = Object.values(clan.players).map((player) => {
-    return Object.assign({}, player, { wn8: statistics?.players[player.id] || -1 });
+    return Object.assign({}, player, {
+      wn8: statistics?.players?.wn8[player.id] || -1,
+      wn7: statistics?.players?.wn7[player.id] || -1
+    });
   });
 
   return (
     <>
       <LargeHeader>
-        <ClanName>
+        <div>
           {clan?.tag}
           <small>{clan?.name}</small>
-        </ClanName>
+        </div>
 
         <Wn8BarContent>
           <Wn8Bar value={statistics?.wn8 || 0} unit={`WN8`} large />

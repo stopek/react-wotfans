@@ -4,6 +4,7 @@ import StatsList from "components/wot/StatsList";
 import TankModalStats from "components/wot/tanks/TankModalStats";
 import TanksListAndFilters from "components/wot/tanks/TanksListAndFilters";
 import TanksStatsList from "components/wot/tanks/TanksStatsList";
+import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import {
   perBattleCalculator,
@@ -55,7 +56,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   const haveStats = Object.values(ps)?.length > 0;
 
   const tanks_wn8 = statistics?.tanks_wn8 || {};
-  const tanksStats = player?.tanksStats || [];
+  const tanksStats = Object.values(player?.tanksStats || []);
 
   //boostowe czołgi
   const wn8_boost_tanks = sortByWeight(tanksStats).slice(0, 12);
@@ -87,6 +88,11 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
           <Wn8Bar
             value={statistics?.wn8}
             unit={`WN8`}
+            large
+          />
+          <WN7Bar
+            value={statistics?.wn7}
+            unit={`WN7`}
             large
           />
         </Wn8BarContent>

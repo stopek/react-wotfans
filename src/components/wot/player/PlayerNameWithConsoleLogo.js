@@ -13,6 +13,7 @@ const Name = styled.span`
   display: inline-flex;
   gap: 10px;
   align-items: center;
+  white-space: nowrap;
 `;
 
 const Logo = styled.div`

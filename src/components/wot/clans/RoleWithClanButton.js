@@ -10,6 +10,7 @@ const Name = styled.div`
   display: flex;
   width: 100%;
   color: ${COLOR_TEXT};
+  padding: 0 15px 0 0;
 `;
 
 const Content = styled.div`

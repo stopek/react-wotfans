@@ -45,7 +45,10 @@ export default function SearchPlayerContainer({ match, ...props }) {
     const statistics = players?.response?.statistics;
 
     players_list = Object.values(players?.response?.data || []).map((player) => {
-      return Object.assign({}, player, { wn8: statistics[player.id] || -1 });
+      return Object.assign({}, player, {
+        wn8: statistics?.wn8[player.id] || -1,
+        wn7: statistics?.wn7[player.id] || -1
+      });
     });
   }
 

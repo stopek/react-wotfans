@@ -51,15 +51,13 @@ export default function LoggedUserCard({ user = {} }) {
       </Details>
 
       <Text>
-        <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}
-        {` `}
+        <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
         {player?.is_locked && player?.updates === -1 && (
           <LoopRoundedIcon />
         )}
       </Text>
 
       <hr />
-
 
       <StatisticsBar>
         <Wn8Bar value={statistics?.wn8} unit={`WN8`} />
