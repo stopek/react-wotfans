@@ -78,6 +78,7 @@ export default function PlayerSmallCard({ player = {}, check, ...props }) {
             <StatsBox>
               <Wn8Bar value={player?.wn8 || 0} small unit={`WN8`} />
               <WN7Bar value={player?.wn7 || 0} small unit={`WN7`} />
+              <WN7Bar value={player?.efficiency || 0} small unit={`EFFI`} />
             </StatsBox>
           </NameWithStatistics>
         </Grid>

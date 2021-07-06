@@ -1,5 +1,6 @@
 import { Hidden } from "@material-ui/core";
 import RoleWithClanButton from "components/wot/clans/RoleWithClanButton";
+import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import PlayerProfileButton from "components/wot/player/PlayerProfileButton";
 import PlayerSmallCard from "components/wot/player/PlayerSmallCard";
@@ -38,6 +39,7 @@ export default function PlayersList({ players = [] }) {
               <TableTdSmall><FormattedMessage id={`player.name`} /></TableTdSmall>
               <FitTableTd><FormattedMessage id={`wn8`} /></FitTableTd>
               <FitTableTd><FormattedMessage id={`wn7`} /></FitTableTd>
+              <FitTableTd><FormattedMessage id={`efficiency`} /></FitTableTd>
               <FitTableTd><FormattedMessage id={`battles`} /></FitTableTd>
               <FitTableTd><FormattedMessage id={`win.percentage`} /></FitTableTd>
               <FitTableTd><FormattedMessage id={`frags`} /></FitTableTd>
@@ -73,6 +75,10 @@ export default function PlayersList({ players = [] }) {
 
                   <FitTableTd>
                     <WN7Bar value={player?.wn7 || 0} />
+                  </FitTableTd>
+
+                  <FitTableTd>
+                    <EfficiencyBar value={player?.efficiency || 0} />
                   </FitTableTd>
 
                   <FitTableTd>{statistics?.battles}</FitTableTd>

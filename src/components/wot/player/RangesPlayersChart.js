@@ -1,5 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
-import { nivoTheme, wn8Ranges } from "app/settings";
+import { nivoTheme } from "app/settings";
 import PlayerWnTooltip from "components/wot/player/chart/PlayerWnTooltip";
 import { sortByNumberMulti } from "helpers/user";
 import React from "react";
@@ -9,29 +9,29 @@ import styled from "styled-components";
 const Content = styled.div`
   width: 100%;
   height: 250px;
-  position: relative;
+  position: relative; 
 `;
 
-function Wn8PlayersChart({ players = [], intl }) {
+function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
   let colors = {};
   let summary = {};
   const totalPlayers = players?.length || 0;
 
-  wn8Ranges.forEach((wn) => {
+  ranges.forEach((wn) => {
     colors[intl.formatMessage({ id: wn.translation })] = wn.background;
   });
 
   Object.values(players).forEach((player) => {
     let found = false;
 
-    sortByNumberMulti(wn8Ranges, 'value').forEach(({ value, translation }) => {
+    sortByNumberMulti(ranges, 'value').forEach(({ value, translation }) => {
       const translated = intl.formatMessage({ id: translation });
 
       if (!summary[translated]) {
         summary[translated] = 0;
       }
 
-      if (player.wn8 >= value && !found) {
+      if (player[data_key] >= value && !found) {
         summary[translated] += 1;
         found = true;
       }
@@ -56,12 +56,13 @@ function Wn8PlayersChart({ players = [], intl }) {
         data={data}
         keys={keys}
         indexBy="wn.name"
-        margin={{ top: 10, right: 200, bottom: 30, left: 40 }}
-        padding={0.3}
+        margin={{ top: 10, right: 150, bottom: 5, left: 40 }}
+        padding={0.2}
         colors={(bar) => colors[bar.id] ?? 'black'}
         colorBy="indexValue"
         axisTop={null}
         axisRight={null}
+        axisBottom={null}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
@@ -75,9 +76,9 @@ function Wn8PlayersChart({ players = [], intl }) {
             anchor: 'bottom-right',
             direction: 'column',
             justify: false,
-            translateX: 120,
+            translateX: 110,
             translateY: 0,
-            itemsSpacing: 2,
+            itemsSpacing: 4,
             itemWidth: 100,
             itemHeight: 20,
             itemDirection: 'left-to-right',
@@ -98,4 +99,4 @@ function Wn8PlayersChart({ players = [], intl }) {
   );
 }
 
-export default injectIntl(Wn8PlayersChart);
+export default injectIntl(RangesPlayersChart);
