@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { searchClan, selectSearchClan } from "reducers/wotSlice";
 
-export default function ClanContainer({ match, ...props }) {
+export default function ClanProfileContainer({ match, ...props }) {
   let { tag } = useParams();
   const dispatch = useDispatch();
   const clan = useSelector(selectSearchClan);

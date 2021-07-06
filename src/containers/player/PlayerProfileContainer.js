@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { searchPlayerById, selectSearchPlayer } from "reducers/wotSlice";
 
-export default function PlayerContainer({ match, ...props }) {
+export default function PlayerProfileContainer({ match, ...props }) {
   let { account_id } = useParams();
   const dispatch = useDispatch();
   const player_data = useSelector(selectSearchPlayer);

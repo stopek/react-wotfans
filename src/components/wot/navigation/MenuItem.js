@@ -64,18 +64,28 @@ const LiItem = styled(motion.li)`
   display: flex;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
 `;
 
 export const MenuItem = ({ translation, icon, href, route, ...props }) => {
   const history = useHistory();
 
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    return !!route ? history.push(route) : window.open(href, '_blank');
+  }
+
   return (
     <LiItem
-      onClick={() => !!route ? history.push(route) : window.open(href, '_blank')}
+      onClick={handleClick}
       variants={variants}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.85 }}
+      href={!!route ? route : href}
+      target={`_blank`}
       {...props}
+      as={`a`}
     >
       <IconPlaceholder>{icon}</IconPlaceholder>
       {!props?.no_title && (

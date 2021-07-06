@@ -16,17 +16,9 @@ import {
 import { sortByWeight, sortByWN8 } from "helpers/user";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
 import { Header, LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
-const TanksListOverflow = styled.div`
-  //max-height: 605px;
-  //overflow: auto;
-  padding: 0 10px;
-`;
-
 export default function PlayerDetails({ player = {}, statistics = {} }) {
-
   const [previewTank, setPreviewTank] = useState({});
   const [open, setOpen] = useState(false);
   const [preview_stats, setPreviewStats] = useState({});
@@ -153,16 +145,6 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             },
           ]} />
 
-          <Header>
-            <FormattedMessage id={`tanks.list`} />
-          </Header>
-
-          {/*<TanksListOverflow>*/}
-          <TanksListAndFilters
-            tanks_stats={sortByWN8(tanksStats)}
-          />
-          {/*</TanksListOverflow>*/}
-
           {wn8_boost_tanks?.length > 0 && (
             <>
               <Header>
@@ -178,6 +160,13 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
               />
             </>
           )}
+
+          <Header>
+            <FormattedMessage id={`tanks.list`} />
+          </Header>
+          <TanksListAndFilters
+            tanks_stats={sortByWN8(tanksStats)}
+          />
         </>
       ) : (
         <Empty message={<FormattedMessage id={`no.stats.header`} />}>

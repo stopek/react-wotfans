@@ -9,16 +9,20 @@ const Stats = styled.div`
   margin: 15px 0;
   gap: 15px;
 
-  @media ${breakpoint.md} {
+  @media ${breakpoint.sm} {
     grid-template-columns: 1fr 1fr;
   }
   
-  @media ${breakpoint.lg} {
+  @media ${breakpoint.md} {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  
-  @media ${breakpoint.xl} {
+
+  @media ${breakpoint.lg} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media ${breakpoint.xl} {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 `;
 

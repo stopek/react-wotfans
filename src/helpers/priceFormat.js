@@ -11,8 +11,8 @@ export const numberResult = (value) => {
   return format_number(value, 5, ',', ' ');
 }
 
-export const percentageDisplay = (value) => {
-  return format_number(value, 3, ',', '') + '%';
+export const percentageDisplay = (value, decimals = 3) => {
+  return format_number(value, decimals, ',', '') + '%';
 }
 
 export const perBattleDisplay = (value) => {

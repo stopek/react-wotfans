@@ -1,6 +1,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { COLOR_DARK, COLOR_THEME, RADIUS } from "styles/colors";
 
 const Box = styled.div`
@@ -29,8 +30,12 @@ const Title = styled.div`
 `;
 
 const Value = styled.div`
-  font-size: 35px;
+  font-size: 20px;
   font-weight: 700;
+  
+  @media ${breakpoint.md} {
+    font-size: 35px;
+  }
 `;
 
 const Tank = styled.div`
@@ -45,7 +50,7 @@ const Tank = styled.div`
 
 const Content = styled.div`
   flex: 4;
-  padding: 25px;
+  padding: 15px;
 `;
 
 

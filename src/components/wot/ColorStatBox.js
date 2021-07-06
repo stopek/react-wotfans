@@ -2,6 +2,7 @@ import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { RADIUS } from "styles/colors";
 
 const Bar = styled.span`
@@ -11,19 +12,23 @@ const Bar = styled.span`
   display: inline-block;
   color: white;
   font-weight: 600;
-  font-size: ${props => props?.large ? 32 : 16}px;
+  font-size: ${props => props?.large ? 25 : 20}px;
   position: relative;
   text-align: center;
   line-height: 1;
 
   ${props => props?.small && `padding: 3px; font-size: 13px; border-radius: 0;`}
   
+  @media ${breakpoint.md} {
+    font-size: ${props => props?.large ? 32 : 16}px;
+  }
+
   > div {
     background: ${props => props?.background};
     position: absolute;
     width: 100%;
     height: 100%;
-    font-size: 10px;
+    font-size: 60%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -46,7 +51,7 @@ const Value = styled.span`
 
 const getValue = (check_value, list, key) => {
   let response_color = 'transparent';
-  list.map((item) => {
+  list.forEach((item) => {
     if (check_value >= item.value) {
       response_color = item[key];
     }

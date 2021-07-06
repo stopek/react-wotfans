@@ -1,9 +1,9 @@
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
-import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
 import { CLANS_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, SEARCH_URL, TANKS_URL } from "app/routes";
 
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
@@ -26,7 +26,7 @@ export const menuItems = [
   { translation: 'homepage', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL },
   { translation: 'clans.list', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL },
   { translation: 'search.player', i: 3, icon: <SearchRoundedIcon />, route: SEARCH_URL },
-  { translation: 'exp.wn8', i: 4, icon: <BarChartRoundedIcon />, route: EXP_WN8_URL },
+  { translation: 'exp.wn8', i: 4, icon: <TuneRoundedIcon />, route: EXP_WN8_URL },
   { translation: 'tanks.list', i: 5, icon: <TankIcon />, route: TANKS_URL },
   { translation: 'maps.list', i: 6, icon: <MapRoundedIcon />, route: MAPS_URL },
   { translation: 'fundraising', i: 7, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
@@ -106,6 +106,46 @@ export const efficiencyRanges = [
   { value: 1460, background: WN8_GREAT, translation: 'wn8.great' },
   { value: 1735, background: WN8_UNICUM, translation: 'wn8.unicum' }
 ];
+
+export const nivoTheme = {
+  textColor: "#ffffff",
+  fontSize: 11,
+  tooltip: {
+    container: {
+      position: 'absolute',
+      padding: 0,
+      borderRadius: 0,
+      width: 200
+    }
+  },
+  axis: {
+    domain: {
+      line: {
+        stroke: 'transparent',
+        strokeWidth: 1
+      }
+    },
+    ticks: {
+      line: {
+        stroke: "#777777",
+        strokeWidth: 1
+      }
+    }
+  },
+  crosshair: {
+    line: {
+      stroke: '#ffffff',
+      strokeWidth: 1,
+      strokeOpacity: 1,
+    },
+  },
+  grid: {
+    line: {
+      stroke: "#ffffff",
+      strokeWidth: 1
+    }
+  }
+}
 
 export const pie_data = [
   {

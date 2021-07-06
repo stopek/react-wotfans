@@ -10,21 +10,22 @@ import {
   PLAYER_URL,
   SEARCH_URL,
   TANK_URL,
-  TANKS_URL, UPLOAD_URL
+  TANKS_URL,
+  UPGRADE_URL
 } from "app/routes";
 import AccountContainer from "containers/account/AccountContainer";
-import ClanContainer from "containers/ClanContainer";
-import ClansContainer from "containers/ClansContainer";
-import ExpWn8Container from "containers/ExpWn8Container";
+import ClanProfileContainer from "containers/clan/ClanProfileContainer";
+import ClansContainer from "containers/clan/ClansListContainer";
+import ExpMoeContainer from "containers/tank/ExpMoeContainer";
 import IndexContainer from "containers/IndexContainer";
-import LoginContainer from "containers/LoginContainer";
-import MapRotatorContainer from "containers/MapRotatorContainer";
-import MapsContainer from "containers/MapsContainer";
-import PlayerContainer from "containers/PlayerContainer";
-import SearchPlayerContainer from "containers/SearchPlayerContainer";
-import TankContainer from "containers/TankContainer";
-import TanksContainer from "containers/TanksContainer";
-import UploadContainer from "containers/UploadContainer";
+import LoginContainer from "containers/auth/LoginContainer";
+import MapRotatorContainer from "containers/map/MapRotatorContainer";
+import MapsListContainer from "containers/map/MapsListContainer";
+import PlayerProfileContainer from "containers/player/PlayerProfileContainer";
+import SearchPlayerContainer from "containers/player/SearchPlayerContainer";
+import TankContainer from "containers/tank/TankContainer";
+import TanksListContainer from "containers/tank/TanksListContainer";
+import UpgradeContainer from "containers/system/UpgradeContainer";
 
 const routing = [
   {
@@ -36,6 +37,10 @@ const routing = [
         title: 'seo.homepage',
       }
     }
+  },
+  {
+    route: UPGRADE_URL,
+    Component: UpgradeContainer,
   },
   // {
   //   header: "upload",
@@ -55,7 +60,7 @@ const routing = [
   {
     header: "clan.profile",
     route: CLAN_URL,
-    Component: ClanContainer,
+    Component: ClanProfileContainer,
     params: {
       seo: {
         title: 'seo.clan.profile',
@@ -85,7 +90,7 @@ const routing = [
   {
     header: "player.profile",
     route: PLAYER_URL,
-    Component: PlayerContainer,
+    Component: PlayerProfileContainer,
     params: {
       seo: {
         title: 'seo.player.profile',
@@ -95,7 +100,7 @@ const routing = [
   {
     header: "exp.wn8",
     route: EXP_WN8_URL,
-    Component: ExpWn8Container,
+    Component: ExpMoeContainer,
     params: {
       seo: {
         title: 'seo.exp.wn8',
@@ -105,7 +110,7 @@ const routing = [
   {
     header: "tanks.list",
     route: TANKS_URL,
-    Component: TanksContainer,
+    Component: TanksListContainer,
     params: {
       seo: {
         title: 'seo.tanks.list',
@@ -135,7 +140,7 @@ const routing = [
   {
     header: "maps.list",
     route: MAPS_URL,
-    Component: MapsContainer,
+    Component: MapsListContainer,
     params: {
       seo: {
         title: 'seo.maps',

@@ -45,7 +45,7 @@ export default function LoginContainer({ ...props }) {
 
       return () => clearTimeout(timer);
     }
-  }, [dispatch]);
+  }, [dispatch, token, history]);
 
   if (isLogged()) {
     return <Redirect to={ACCOUNT_URL} />

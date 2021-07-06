@@ -1,15 +1,16 @@
+import { menuItems } from "app/settings";
 import Error from "components/core/Error";
 import FullPreloader from "components/core/FullPreloader";
 import Footer from "components/Footer";
-import LanguagesBox from "components/LanguagesBox";
+import DialMenu from "components/ui/menu/DialMenu";
+import LanguagesBox from "components/wot/LanguagesBox";
 import LoggedUserMenu from "components/wot/navigation/LoggedUserMenu";
-import Menu from "components/wot/navigation/Menu";
 import Base from "overlays/Base";
+import MinimalOverlay from "overlays/Minimal";
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectError, selectNotFound } from "reducers/wotSlice";
+import { selectCrash, selectError, selectNotFound } from "reducers/wotSlice";
 import styled from "styled-components";
-import { breakpoint } from "styles/breakpoints";
 import { COLOR_DARK } from "styles/colors";
 
 const Content = styled(Base)`
@@ -18,13 +19,9 @@ const Content = styled(Base)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 55px 10px 15px 60px;
+  padding: 55px 10px 15px 10px;
   overflow-x: hidden;
 
-  @media ${breakpoint.md} {
-    padding: 55px 10px 15px 75px;
-  }
-  
   ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK};`}
 `;
 
@@ -36,39 +33,62 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const DialMenuContent = styled.div`
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  z-index: 100;
+  white-space: nowrap;
+`;
+
 export default function WotOverlay(
   {
     breadcrumbs = [],
     title = '',
     children,
+    full = false,
     ...props
   }
 ) {
   const isError = useSelector(selectError);
   const isNotFound = useSelector(selectNotFound);
+  const isCrash = useSelector(selectCrash);
 
   return (
-    <Content {...props}>
-      <Menu />
+    <>
+      {isCrash && (
+        <MinimalOverlay>
+          <Error message={`crash.error`} />
+          <LanguagesBox />
+        </MinimalOverlay>
+      )}
 
-      <LoggedUserMenu />
+      {!isCrash && (
+        <Content {...props}>
+          <DialMenuContent>
+            <DialMenu actions={menuItems} />
+          </DialMenuContent>
 
-      <Container>
-        <FullPreloader />
+          <LoggedUserMenu />
 
-        {isError && (
-          <Error message={`loading.error`} />
-        )}
+          <Container>
+            <FullPreloader />
 
-        {isNotFound && (
-          <Error message={`loading.not.found`} />
-        )}
+            {isError && (
+              <Error message={`loading.error`} />
+            )}
 
-        {children}
-        <Footer />
-      </Container>
+            {isNotFound && (
+              <Error message={`loading.not.found`} />
+            )}
 
-      <LanguagesBox />
-    </Content>
+            {children}
+            <Footer />
+          </Container>
+
+          <LanguagesBox />
+        </Content>
+      )}
+    </>
   );
 };

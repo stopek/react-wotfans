@@ -16,7 +16,7 @@
   "shortcut": "Skrót",
   "full.clan.name": "Pełna nazwa klanu",
   "created.date": "Data utworzenia",
-  "amount": "Ilość graczy",
+  "amount": "Liczba graczy",
   "details": "Szczegóły",
   "type": "Typ",
   "search.clan": "Znajdź klan",
@@ -99,9 +99,11 @@
   "seo.search.player": "Wyszukiwarka graczy na WotFans",
   "seo.exp.wn8": "Wymagalności dla czołgów - WotFans",
   "seo.tanks.list": "Lista czołgów",
+  "seo.tank.profile": "Profil czołgu {name} na WotFans",
   "seo.login.view": "Logowanie - WotFans",
   "seo.your.account": "Twoje konto - WotFans",
   "seo.player.profile": "{name} na WotFans",
+  "seo.maps": "Lista map WOT na WotFans",
   "last.battle.time": "Ostatnia bitwa",
   "player.name": "Nazwa gracza",
   "clan.joined.at": "W klanie od",
@@ -126,6 +128,7 @@
   "nation.china": "Chińskie",
   "nation.mercenaries": "Najemnicy",
   "nation.germany": "Niemiecki",
+  "nation.merc": "Najemnicy",
   "type.lightTank": "Czołgi lekkie",
   "type.mediumTank": "Czołgi średnie",
   "type.heavyTank": "Czołgi ciężkie",
@@ -180,5 +183,8 @@
   "wn8.super.unicum": "SUPER UNICUM",
 
   "wn8.filter": "Filtruj według WN8",
-  "efficiency": "Wskaźnik efektywności(Effi)"
+  "efficiency": "Wskaźnik efektywności(Effi)",
+  "crash.error": "Wystąpił krytyczny błąd serwera. Spróbuj ponownie za chwilę.",
+  "active.players.percentage": "Procent aktywnych graczy",
+  "maps.list": "Mapy"
 }

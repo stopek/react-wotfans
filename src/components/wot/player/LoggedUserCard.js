@@ -32,11 +32,15 @@ const Details = styled.div`
 `;
 
 const StatisticsBar = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap;
+
+  > span {
+    flex: 1;
+  }
 `;
 
 export default function LoggedUserCard({ user = {} }) {
@@ -51,7 +55,8 @@ export default function LoggedUserCard({ user = {} }) {
       </Details>
 
       <Text>
-        <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
+        <FormattedMessage
+          id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
         {player?.is_locked && player?.updates === -1 && (
           <LoopRoundedIcon />
         )}

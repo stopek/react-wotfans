@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadTanks, selectTanks } from "reducers/wotSlice";
 
-export default function TanksContainer({ ...props }) {
+export default function TanksListContainer({ ...props }) {
   const dispatch = useDispatch();
   const tanks = useSelector(selectTanks);
   const [page, setPage] = useState(1);
@@ -50,7 +50,7 @@ export default function TanksContainer({ ...props }) {
         </Grid>
         <Grid item md xs={6}>
           <SelectInput
-            value={tier || null}
+            current={tier}
             variant={`standard`}
             translation={`tier`}
             onChange={(value) => setTier(value)}
@@ -59,7 +59,7 @@ export default function TanksContainer({ ...props }) {
         </Grid>
         <Grid item md xs={6}>
           <SelectInput
-            value={nation || null}
+            current={nation}
             variant={`standard`}
             translation={`nation`}
             onChange={(value) => setNation(value)}
@@ -68,7 +68,7 @@ export default function TanksContainer({ ...props }) {
         </Grid>
         <Grid item md xs={6}>
           <SelectInput
-            value={type || null}
+            current={type}
             variant={`standard`}
             translation={`type`}
             onChange={(value) => setType(value)}
@@ -77,7 +77,7 @@ export default function TanksContainer({ ...props }) {
         </Grid>
         <Grid item md xs={6}>
           <SelectInput
-            value={premium || null}
+            current={premium}
             variant={`standard`}
             translation={`premium`}
             onChange={(value) => setPremium(value)}

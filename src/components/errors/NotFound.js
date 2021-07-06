@@ -1,11 +1,11 @@
-import NotFoundBox from "components/errors/NotFoundBox";
+import Error from "components/core/Error";
 import MinimalOverlay from "overlays/Minimal";
 import React from "react";
 
 export default function NotFound() {
   return (
     <MinimalOverlay>
-      <NotFoundBox />
+      <Error message={`not-found`} />
     </MinimalOverlay>
   );
 }

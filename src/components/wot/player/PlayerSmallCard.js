@@ -27,6 +27,7 @@ const NameWithStatistics = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 5px;
+  flex-wrap: wrap;
 `;
 
 const DetailsList = styled.ul`
@@ -54,10 +55,9 @@ const StatsBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
   gap: 5px;
   flex-wrap: wrap;
-  padding: 5px;
+  flex: 1;
 `;
 
 export default function PlayerSmallCard({ player = {}, check, ...props }) {
@@ -68,7 +68,7 @@ export default function PlayerSmallCard({ player = {}, check, ...props }) {
 
   return (
     <Content onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))} {...props}>
-      <Grid container spacing={0}>
+      <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
           <NameWithStatistics>
             <PlayerNameWithConsoleLogo

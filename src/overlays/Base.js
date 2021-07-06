@@ -28,12 +28,12 @@ export default function Base({ children, seo, seo_values = {}, ...props }) {
     return () => {
       clearInterval(timer);
     }
-  }, []);
+  }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(clearMessages());
     action(dispatch, token);
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const values = Object.assign({}, seo?.values || {}, seo_values || {});
 

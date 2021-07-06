@@ -34,7 +34,7 @@ const Small = styled.div`
 
 export default function ClanSmallCard({ clan = {}, check, ...props }) {
   return (
-    <Content onClick={() => check(clan?.tag)} {...props}>
+    <Content onClick={(event) => check(event, clan?.tag)} {...props}>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
           <Tag>{clan?.tag}</Tag>

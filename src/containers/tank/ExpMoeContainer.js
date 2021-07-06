@@ -3,7 +3,8 @@ import FormatClearRoundedIcon from '@material-ui/icons/FormatClearRounded';
 import ButtonInput from "components/ui/input/ButtonInput";
 import TextInput from "components/ui/input/TextInput";
 import Paginator from "components/ui/Paginator";
-import ExpWn8List from "components/wot/wn8/ExpWn8List";
+import ExpectedFullList from "components/wot/expected/ExpectedFullList";
+import ThanksBox from "components/wot/ThanksBox";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from "react-intl";
@@ -11,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { expWn8List, selectExpWn8List } from "reducers/wotSlice";
 import { Header } from "styles/GlobalStyled";
 
-export default function ExpWn8Container({ ...props }) {
+export default function ExpMoeContainer({ ...props }) {
   const dispatch = useDispatch();
   const exp_wn8 = useSelector(selectExpWn8List);
   const response = exp_wn8?.response;
@@ -64,7 +65,12 @@ export default function ExpWn8Container({ ...props }) {
             </Grid>
           </form>
 
-          <ExpWn8List exp_wn8={response?.data} />
+          <ThanksBox>
+            Expected values and MoE values are provided by wotclans.com.br - visit his
+            <a href={`https://wotclans.com.br`} target={`_blank`} rel={`nofollow`}>website</a>
+          </ThanksBox>
+
+          <ExpectedFullList exp_wn8={response?.data} />
 
           {response?.pagination?.pages > 1 && (
             <Paginator

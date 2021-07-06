@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadMaps, selectLoadMaps } from "reducers/wotSlice";
 
-export default function MapsContainer({ ...props }) {
+export default function MapsListContainer({ ...props }) {
   const dispatch = useDispatch();
   const maps = useSelector(selectLoadMaps);
 

@@ -13,6 +13,7 @@ const Role = styled.span`
   position: relative;
   align-items: center;
   margin: 0 5px;
+  z-index: 10;
 `;
 
 const RoleFullName = styled.div`
@@ -35,12 +36,12 @@ const Letter = styled.div`
   z-index: 2;
   background: ${props => props?.color};
   border-radius: ${RADIUS};
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1;
   cursor: help;

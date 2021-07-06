@@ -1,19 +1,15 @@
 import { Hidden } from "@material-ui/core";
-import { PLAYER_URL } from "app/routes";
-import ButtonInput from "components/ui/input/ButtonInput";
-import ClanSmallCard from "components/wot/clans/ClanSmallCard";
 import RoleWithClanButton from "components/wot/clans/RoleWithClanButton";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
+import PlayerProfileButton from "components/wot/player/PlayerProfileButton";
 import PlayerSmallCard from "components/wot/player/PlayerSmallCard";
 import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
-import fillRoute from "helpers/fillRoute";
 import { percentageCalculator, priceFormat } from "helpers/priceFormat";
-import { sortByWN8 } from "helpers/user";
+import { sortByActivityAndWN8 } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { FitTableTd, SimpleTable, TableTbody, TableTdSmall, TableThead, TableTr } from "styles/GlobalStyled";
 
@@ -26,13 +22,12 @@ const List = styled.div`
 
 export default function PlayersList({ players = [] }) {
   players = Object.values(players);
-  const history = useHistory();
 
   if (!players?.length) {
     return null;
   }
 
-  players = sortByWN8(players);
+  players = sortByActivityAndWN8(players);
 
   return (
     <List>
@@ -59,7 +54,7 @@ export default function PlayersList({ players = [] }) {
             const winPercentage = percentageCalculator(statistics?.wins, statistics?.battles);
 
             return (
-              <TableTr key={`player-${player?.id}`}>
+              <TableTr key={`player-${player?.id}`} disable={!!player?.is_inactive}>
                 <Hidden mdUp>
                   <PlayerSmallCard player={player} as={`td`} />
                 </Hidden>
@@ -91,11 +86,7 @@ export default function PlayersList({ players = [] }) {
                     />
                   </FitTableTd>
                   <FitTableTd>
-                    <ButtonInput
-                      color={`secondary`}
-                      onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))}
-                      label={`see.profile`}
-                    />
+                    <PlayerProfileButton account_id={player?.id} />
                   </FitTableTd>
                 </Hidden>
               </TableTr>

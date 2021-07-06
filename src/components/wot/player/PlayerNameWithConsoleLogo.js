@@ -7,6 +7,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { RADIUS } from "styles/colors";
 
 const Name = styled.span`
@@ -17,11 +18,16 @@ const Name = styled.span`
 `;
 
 const Logo = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: url(${props => props?.image}) no-repeat center center;
   background-size: cover;
   border-radius: ${RADIUS};
+  
+  @media ${breakpoint.md} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const getConsoleLogo = (name) => {

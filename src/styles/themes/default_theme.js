@@ -55,6 +55,41 @@ const default_theme = createMuiTheme({
         }
       }
     },
+    MuiCircularProgress: {
+      svg: {
+        width: 40,
+        height: 40
+      }
+    },
+    MuiFab: {
+      root: {
+        width: 35,
+        height: 35,
+        minHeight: 35,
+        borderRadius: RADIUS
+      }
+    },
+    MuiSpeedDialAction: {
+      fab: {
+        margin: '5px 0',
+        '& svg': {
+          fill: COLOR_THEME,
+          width: '1em',
+          height: '1em',
+          fontSize: '1.5rem'
+        }
+      },
+      tooltipPlacementRight: {
+        cursor: 'pointer'
+      }
+    },
+    MuiSpeedDial: {
+      fab: {
+        '& .MuiSvgIcon-root': {
+          fill: 'white'
+        }
+      },
+    },
     MuiTabs: {
       root: {
         background: 'rgba(0, 0, 0, 0.5)',

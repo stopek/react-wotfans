@@ -16,7 +16,7 @@
   "shortcut": "Abbreviation",
   "full.clan.name": "Full clan name",
   "created.date": "Creation date",
-  "amount": "Amount",
+  "amount": "Total players",
   "details": "Details",
   "search.clan": "Find Clan",
   "type.clan.name": "Enter clan name",
@@ -59,6 +59,7 @@
   "direct.hits.received": "Direct shots received",
   "explosion.hits": "The shots exploding were asked",
   "explosion.hits.received": "Blasting shots received",
+  "seo.tank.profile": "{name}'s profile on WotFans",
   "max.damage": "Maximum number of damage",
   "max.frags": "Maximum number of frags",
   "max.xp": "Maximum XP per bit",
@@ -104,6 +105,7 @@
   "seo.your.account": "Your account - WotFans",
   "seo.player.profile": "{name}'s profile on WotFans",
   "last.battle.time": "The last battle",
+  "seo.maps": "Maps list on WotFans",
   "player.name": "Player name",
   "clan.joined.at": "In clan since",
   "in.game.at": "In game since",
@@ -180,5 +182,8 @@
   "wn8.super.unicum": "SUPER UNICUM",
 
   "wn8.filter": "Filter by WN8",
-  "efficiency": "Effectiveness Index (Effi)"
+  "efficiency": "Effectiveness Index (Effi)",
+  "crash.error": "A fatal server error has occurred. Please try again in a moment.",
+  "active.players.percentage": "Percentage of active players",
+  "maps.list": "Maps list"
 }

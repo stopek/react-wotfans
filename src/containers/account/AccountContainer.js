@@ -81,9 +81,7 @@ export default function AccountContainer({ ...props }) {
             </Grid>
             <Grid item md={8} xs={12}>
               <CharContainer>
-                <UserStatisticsChar
-                  raw={data.playerStatsHistories}
-                />
+                <UserStatisticsChar raw={data.playerStatsHistories} />
               </CharContainer>
 
               <TabsList
@@ -102,7 +100,7 @@ export default function AccountContainer({ ...props }) {
 
                   <TanksListAndFilters
                     tanks_stats={data.recently}
-                    grid_props={{ xl: 4 }}
+                    grid_props={{ xl: 3 }}
                     weight
                   />
                 </TabPanel>

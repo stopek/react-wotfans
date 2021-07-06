@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,8 +17,7 @@ const Text = styled.div`
 export default function Copyright() {
   return (
     <Text>
-      Wargaming API testing <br />
-      © 2021 wotfans.online - All rights reserved. <br /><br />
+      © {format(new Date(), 'Y')} wotfans.online - All rights reserved. <br /><br />
 
       Statistical data provided by Wargaming API.<br />
       Images of in-game elements are under ownership of Wargaming.

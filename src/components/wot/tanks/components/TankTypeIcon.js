@@ -8,8 +8,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Icon = styled.div`
-  width: 30px;
-  height: 30px;
+  width: ${props => props?.size}px;
+  height: ${props => props?.size}px;
   background: url(${props => props?.image}) no-repeat center center;
   background-size: contain;
   ${props => props?.dark && `filter: brightness(-150%);`}
@@ -30,8 +30,8 @@ const getIconByType = (type) => {
   }
 }
 
-export default function TankTypeIcon({ type = '', ...props }) {
+export default function TankTypeIcon({ type = '', size = 30, ...props }) {
   return (
-    <Icon image={getIconByType(type)} {...props} />
+    <Icon size={size} image={getIconByType(type)} {...props} />
   );
 }

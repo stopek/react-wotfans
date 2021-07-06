@@ -1,40 +1,9 @@
 import { ResponsiveLine } from "@nivo/line";
+import { nivoTheme } from "app/settings";
 import { date_format, date_parse } from "helpers/date";
 import React from "react";
 
 export default function UserStatisticsChar({ raw = [] }) {
-  const theme = {
-    "textColor": "#ffffff",
-    "fontSize": 11,
-    "axis": {
-      domain: {
-        line: {
-          stroke: 'transparent',
-          strokeWidth: 1
-        }
-      },
-      "ticks": {
-        "line": {
-          "stroke": "#777777",
-          "strokeWidth": 1
-        }
-      }
-    },
-    crosshair: {
-      line: {
-        stroke: '#ffffff',
-        strokeWidth: 1,
-        strokeOpacity: 1,
-      },
-    },
-    "grid": {
-      "line": {
-        "stroke": "#dddddd",
-        "strokeWidth": 1
-      }
-    }
-  };
-
   let data = [
     { id: "WN8", key: 'wn8', data: [] },
     { id: "WN7", key: 'wn7', data: [] },
@@ -53,7 +22,7 @@ export default function UserStatisticsChar({ raw = [] }) {
   return (
     <>
       <ResponsiveLine
-        theme={theme}
+        theme={nivoTheme}
         data={data}
         margin={{ top: 10, right: 60, bottom: 50, left: 40 }}
         xScale={{

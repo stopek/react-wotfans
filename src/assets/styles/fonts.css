@@ -9,3 +9,9 @@
     src: url("/src/assets/fonts/Lato/Lato-Bold.ttf") format("truetype");
     font-weight: 600 700;
 }
+
+@font-face {
+    font-family: "Lato";
+    src: url("/src/assets/fonts/Lato/Lato-Black.ttf") format("truetype");
+    font-weight: 900;
+}

@@ -8,7 +8,7 @@ export default function TanksList({ tanks = [], tier = '', ...props }) {
       {tanks.map((tank) => (
         <Grid
           key={`tank-${tank?.id}`}
-          item sm={6} xs={12} md={4} lg={3}
+          item sm={6} xs={12} md={4} lg={3} xl={2}
         >
           <Tank
             tank={tank}

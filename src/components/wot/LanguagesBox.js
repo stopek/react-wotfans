@@ -3,7 +3,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage, selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
-import { breakpoint } from "styles/breakpoints";
 import { COLOR_DARK, COLOR_THEME } from "styles/colors";
 
 const Languages = styled.div`
@@ -14,11 +13,7 @@ const Languages = styled.div`
   width: 50px;
   flex-wrap: wrap;
   z-index: 2000;
-  left: 5px;
-
-  @media ${breakpoint.md} {
-    left: 13px;
-  }
+  left: 10px;
 `;
 
 const Language = styled.div`

@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: false,
   not_found: false,
+  crash: false,
 
   search_player: {},
   search_players: {},
@@ -40,11 +41,15 @@ function isUnauthorizedAction(action: AnyAction) {
 }
 
 function isRejectedErrorAction(action: AnyAction) {
-  return action.type.endsWith('rejected') && action?.payload?.status !== 404;
+  return action.type.endsWith('rejected') && false === [404, 500].includes(action?.payload?.status);
 }
 
 function isRejectedNotFoundAction(action: AnyAction) {
   return action.type.endsWith('rejected') && action?.payload?.status === 404;
+}
+
+function isCrashedAction(action: AnyAction) {
+  return action.type.endsWith('rejected') && action?.payload?.status === 500;
 }
 
 function isFulfilledAction(action: AnyAction) {
@@ -201,7 +206,7 @@ export const wotSlice = createSlice({
       )
       .addMatcher(
         isPendingAction,
-        (state, action) => {
+        (state) => {
           state.loading = true;
           state.not_found = false;
           state.error = false;
@@ -209,7 +214,7 @@ export const wotSlice = createSlice({
       )
       .addMatcher(
         isFulfilledAction,
-        (state, action) => {
+        (state) => {
           state.loading = false;
           state.not_found = false;
           state.error = false;
@@ -217,7 +222,7 @@ export const wotSlice = createSlice({
       )
       .addMatcher(
         isRejectedNotFoundAction,
-        (state, action) => {
+        (state) => {
           state.loading = false;
           state.not_found = true;
           state.error = false;
@@ -225,14 +230,22 @@ export const wotSlice = createSlice({
       )
       .addMatcher(
         isUnauthorizedAction,
-        (state, action) => {
+        (state) => {
           state.loading = false;
           state.not_found = false;
           state.error = false;
 
           logOutUser();
         }
-      )
+      ).addMatcher(
+      isCrashedAction,
+      (state) => {
+        state.loading = false;
+        state.not_found = false;
+        state.error = false;
+        state.crash = true;
+      }
+    )
     ;
   },
 });
@@ -255,5 +268,6 @@ export const selectExpWn8List = (state) => state.wot.exp_wn8_list;
 export const selectLoading = (state) => state.wot.loading;
 export const selectError = (state) => state.wot.error;
 export const selectNotFound = (state) => state.wot.not_found;
+export const selectCrash = (state) => state.wot.crash;
 
 export default wotSlice.reducer;

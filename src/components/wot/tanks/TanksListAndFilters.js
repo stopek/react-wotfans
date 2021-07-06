@@ -3,7 +3,6 @@ import { wn8Ranges } from "app/settings";
 import SelectInput from "components/ui/input/SelectInput";
 import DarkBox from "components/wot/DarkBox";
 import TanksStatsList from "components/wot/tanks/TanksStatsList";
-import { sortByWN8 } from "helpers/user";
 import React, { useState } from "react";
 
 function onlyUnique(value, index, self) {

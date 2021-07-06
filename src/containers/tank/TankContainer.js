@@ -16,8 +16,13 @@ export default function TankContainer({ match, ...props }) {
     }))
   }, [tank_id, dispatch]);
 
+  let data = {};
+  if (tank?.response) {
+    data = { seo_values: { name: tank?.response?.tank?.name }, ...props };
+  }
+
   return (
-    <WotOverlay {...props}>
+    <WotOverlay {...data}>
       {tank?.response && (
         <TankPage
           tank={tank?.response?.tank}

@@ -29,13 +29,17 @@ export const Header = styled.h2`
 `;
 
 export const LargeHeader = styled.div`
-  font-size: 45px;
+  font-size: 25px;
   line-height: 1.2;
   font-weight: 700;
   margin: 0 0 25px 0;
   position: relative;
   color: white;
 
+  @media ${breakpoint.md} {
+    font-size: 45px;
+  }
+  
   small {
     display: block;
     font-size: 15px;
@@ -44,13 +48,14 @@ export const LargeHeader = styled.div`
 
 
 export const Wn8BarContent = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   margin: 10px 0;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   
   @media ${breakpoint.lg} {
+    font-size: 30px;
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
@@ -66,7 +71,7 @@ export const SimpleTable = styled.table`
 `;
 
 export const TableThead = styled.thead`
-  background: ${COLOR_THEME};
+  background: ${COLOR_THEME} !important;
 `;
 
 export const TableTdSmall = styled.td`
@@ -79,18 +84,21 @@ export const FitTableTd = styled(TableTdSmall)`
   white-space: nowrap;
 `;
 
-export const TableTr = styled.tr``;
+export const TableTr = styled.tr`
+  ${props => !!props?.disable && `opacity: 0.2;`}
+`;
 
 export const TableTbody = styled.tbody`
   tr {
     background: ${COLOR_DARK};
-    
+
     &:nth-child(2n + 1) {
       background: ${COLOR_DARK_2};
     }
 
     &:hover {
       background: ${COLOR_GREY_DARK_3};
+      opacity: 1;
     }
   }
 `;

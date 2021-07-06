@@ -28,7 +28,7 @@ const Ul = styled(motion.ul)`
 `;
 
 export const Navigation = () => (
-  <Ul variants={variants}>
+  <Ul variants={variants} as={`div`}>
     {menuItems.map(item => (
       <MenuItem
         key={item.i}

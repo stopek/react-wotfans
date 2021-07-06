@@ -1,10 +1,11 @@
+import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
+import ThanksBox from "components/wot/ThanksBox";
 import { addDays, addHours, addMinutes, differenceInHours, format } from "date-fns";
 import { getDayOfThisWeek } from "helpers/date";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { COLOR_TEXT, COLOR_TEXT_DARK, COLOR_THEME, RADIUS } from "styles/colors";
-import {ReactComponent as DiscordIcon} from "assets/svg/discord.svg";
+import { COLOR_TEXT_DARK, RADIUS } from "styles/colors";
 
 const Time = styled.div`
   background: white;
@@ -27,33 +28,6 @@ const Tier = styled.div`
 
 const Rotator = styled.div`
   width: 100%;
-  max-width: 700px;
-`;
-
-const Author = styled.div`
-  font-size: 12px;
-  line-height: 1.6;
-  color: ${COLOR_TEXT};
-  margin-bottom: 15px;
-  vertical-align: center;
-  
-  span {
-    color: #5c6bc0;
-    font-weight: 600;
-    font-size: 14px;
-  }
-  
-  svg {
-    width: 20px;
-    height: 20px;
-    margin-bottom: -7px;
-    margin-left: 10px;
-    margin-right: 4px;
-  }
-  
-  strong {
-    color: ${COLOR_THEME};
-  }
 `;
 
 export const mapsResultList = (user_date, result_maps, limit = [1, 1]) => {
@@ -135,7 +109,7 @@ export default function MapRotator({ limit = [1, 1], maps = {}, cycle = 4, tier 
     return () => {
       clearInterval(timer);
     }
-  }, []);
+  }, [hour]);
 
   const result_maps = mapsIntervalsList(maps, date, cycle);
 
@@ -146,10 +120,11 @@ export default function MapRotator({ limit = [1, 1], maps = {}, cycle = 4, tier 
       </Time>
 
       <MapRotatorList list={mapsResultList(user_date, result_maps, limit)} />
-      <Author>
-        Map generation algorithm created by <strong>wzorek2000</strong> with a lot of help from <strong>Z__Buta_Wjezdzam</strong> & <strong>kkpb17</strong>.
-        Do you have any question for him? <DiscordIcon /> <span>wzorek2000#8053</span>
-      </Author>
+      <ThanksBox>
+        Generation algorithm created by <strong>wzorek2000</strong> with a lot of help
+        from <strong>Z__Buta_Wjezdzam</strong> & <strong>kkpb17</strong>.
+        Do you have any question for him? <DiscordLink username={`wzorek2000#8053`} />
+      </ThanksBox>
       <Tier>
         {tier}
       </Tier>

@@ -12,6 +12,7 @@ import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
 import { Wot } from "api/actions/wot";
 import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL } from "app/routes";
+import ProgressCircular from "components/ui/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
 import { isLogged, logOutUser } from "helpers/user";
@@ -21,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER } from "styles/colors";
+import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER, RADIUS } from "styles/colors";
 
 const StyledMenu = withStyles({
   paper: {
@@ -59,11 +60,13 @@ const StyledMenuItem = withStyles((theme) => ({
 const Content = styled.div`
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 10px;
   z-index: 1000;
   background: ${COLOR_DARK};
   padding: 0 5px;
   display: flex;
+  border-radius: ${RADIUS};
+
   svg {
     width: 35px !important;
     height: 35px !important;
@@ -142,9 +145,18 @@ export default function LoggedUserMenu() {
     },
   ] : [];
 
+  const loading = isLogged() && !Object.keys(user?.response || {})?.length;
+  const loggedAndLoaded = isLogged() && Object.keys(user?.response || {})?.length > 0;
+
   return (
     <Content>
-      {isLogged() ? (
+      {loading && (
+        <OpenMenuIcon onClick={() => history.push(LOGIN_URL)}>
+          <ProgressCircular />
+        </OpenMenuIcon>
+      )}
+
+      {loggedAndLoaded ? (
         <>
           <OpenMenuIcon onClick={handleClick}>
             {!!user_name && <NickName>{user_name}</NickName>}
@@ -177,10 +189,11 @@ export default function LoggedUserMenu() {
             </StyledMenuItem>
           </StyledMenu>
         </>
-      ) : (
-        <OpenMenuIcon onClick={() => history.push(LOGIN_URL)}>
-          <VpnLockRoundedIcon />
-        </OpenMenuIcon>
+      ) : (!loading && (
+          <OpenMenuIcon onClick={() => history.push(LOGIN_URL)}>
+            <VpnLockRoundedIcon />
+          </OpenMenuIcon>
+        )
       )}
     </Content>
   );
