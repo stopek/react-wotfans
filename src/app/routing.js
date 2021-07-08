@@ -1,3 +1,4 @@
+import loadable from "@loadable/component";
 import {
   ACCOUNT_URL,
   CLAN_URL,
@@ -13,25 +14,16 @@ import {
   TANKS_URL,
   UPGRADE_URL
 } from "app/routes";
-import AccountContainer from "containers/account/AccountContainer";
-import ClanProfileContainer from "containers/clan/ClanProfileContainer";
-import ClansContainer from "containers/clan/ClansListContainer";
-import ExpMoeContainer from "containers/tank/ExpMoeContainer";
-import IndexContainer from "containers/IndexContainer";
-import LoginContainer from "containers/auth/LoginContainer";
-import MapRotatorContainer from "containers/map/MapRotatorContainer";
-import MapsListContainer from "containers/map/MapsListContainer";
-import PlayerProfileContainer from "containers/player/PlayerProfileContainer";
-import SearchPlayerContainer from "containers/player/SearchPlayerContainer";
-import TankContainer from "containers/tank/TankContainer";
-import TanksListContainer from "containers/tank/TanksListContainer";
-import UpgradeContainer from "containers/system/UpgradeContainer";
+
+const load = (component) => {
+  return loadable(() => import(`containers/${component}`));
+}
 
 const routing = [
   {
     header: "homepage",
     route: MAIN_URL,
-    Component: IndexContainer,
+    Component: load('IndexContainer'),
     params: {
       seo: {
         title: 'seo.homepage',
@@ -40,7 +32,7 @@ const routing = [
   },
   {
     route: UPGRADE_URL,
-    Component: UpgradeContainer,
+    Component: load('system/UpgradeContainer'),
   },
   // {
   //   header: "upload",
@@ -50,7 +42,7 @@ const routing = [
   {
     header: "clans.list",
     route: CLANS_URL,
-    Component: ClansContainer,
+    Component: load('clan/ClansListContainer'),
     params: {
       seo: {
         title: 'seo.clans.list',
@@ -60,7 +52,7 @@ const routing = [
   {
     header: "clan.profile",
     route: CLAN_URL,
-    Component: ClanProfileContainer,
+    Component: load('clan/ClanProfileContainer'),
     params: {
       seo: {
         title: 'seo.clan.profile',
@@ -70,7 +62,7 @@ const routing = [
   {
     header: "tank.profile",
     route: TANK_URL,
-    Component: TankContainer,
+    Component: load('tank/TankContainer'),
     params: {
       seo: {
         title: 'seo.tank.profile',
@@ -80,7 +72,7 @@ const routing = [
   {
     header: "search.player",
     route: SEARCH_URL,
-    Component: SearchPlayerContainer,
+    Component: load('player/SearchPlayerContainer'),
     params: {
       seo: {
         title: 'seo.search.player',
@@ -90,7 +82,7 @@ const routing = [
   {
     header: "player.profile",
     route: PLAYER_URL,
-    Component: PlayerProfileContainer,
+    Component: load('player/PlayerProfileContainer'),
     params: {
       seo: {
         title: 'seo.player.profile',
@@ -100,7 +92,7 @@ const routing = [
   {
     header: "exp.wn8",
     route: EXP_WN8_URL,
-    Component: ExpMoeContainer,
+    Component: load('tank/ExpMoeContainer'),
     params: {
       seo: {
         title: 'seo.exp.wn8',
@@ -110,7 +102,7 @@ const routing = [
   {
     header: "tanks.list",
     route: TANKS_URL,
-    Component: TanksListContainer,
+    Component: load('tank/TanksListContainer'),
     params: {
       seo: {
         title: 'seo.tanks.list',
@@ -120,7 +112,7 @@ const routing = [
   {
     header: "login.view",
     route: LOGIN_URL,
-    Component: LoginContainer,
+    Component: load('auth/LoginContainer'),
     params: {
       seo: {
         title: 'seo.login.view',
@@ -130,7 +122,7 @@ const routing = [
   {
     header: "menu.your.account",
     route: ACCOUNT_URL,
-    Component: AccountContainer,
+    Component: load('account/AccountContainer'),
     params: {
       seo: {
         title: 'seo.your.account',
@@ -140,7 +132,7 @@ const routing = [
   {
     header: "maps.list",
     route: MAPS_URL,
-    Component: MapsListContainer,
+    Component: load('map/MapsListContainer'),
     params: {
       seo: {
         title: 'seo.maps',
@@ -150,7 +142,7 @@ const routing = [
   {
     header: "map.rotator",
     route: MAP_ROTATOR_URL,
-    Component: MapRotatorContainer,
+    Component: load('map/MapRotatorContainer'),
     params: {
       seo: {
         title: 'seo.map.rotator',

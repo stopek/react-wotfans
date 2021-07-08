@@ -82,6 +82,11 @@ export const TableTdSmall = styled.td`
 export const FitTableTd = styled(TableTdSmall)`
   width: 0;
   white-space: nowrap;
+  
+  small {
+    display: block;
+    font-size: 70%;
+  }
 `;
 
 export const TableTr = styled.tr`

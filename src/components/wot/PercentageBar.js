@@ -9,7 +9,6 @@ const Content = styled.div`
   height: 15px;
   border-radius: ${RADIUS};
   background: ${COLOR_DARK_3};
-  margin-top: 25px;
   position: relative;
 `;
 
@@ -22,7 +21,7 @@ const Percent = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 1;
-  font-size: 12px;
+  font-size: 10px;
   white-space: nowrap;
 `;
 
@@ -45,7 +44,7 @@ export default function PercentageBar({ amount = 0, translation = '', total = 0 
       )}
 
       <Percent width={percent}>
-        {percentageDisplay(percent)} ({amount}/{total})
+        {percentageDisplay(percent, 2)} ({amount}/{total})
       </Percent>
     </Content>
   );

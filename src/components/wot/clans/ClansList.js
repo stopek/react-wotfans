@@ -2,6 +2,8 @@ import { Hidden } from "@material-ui/core";
 import { CLAN_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
 import ClanSmallCard from "components/wot/clans/ClanSmallCard";
+import PercentageBar from "components/wot/PercentageBar";
+import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
 import React from "react";
@@ -39,14 +41,14 @@ export default function ClansList({ clans = [] }) {
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`shortcut`} />
               </FitTableTd>
-              <TableTdSmall as={`th`}>
-                <FormattedMessage id={`full.clan.name`} />
-              </TableTdSmall>
               <FitTableTd as={`th`}>
-                <FormattedMessage id={`created.date`} />
+                <FormattedMessage id={`active.players.percentage`} />
               </FitTableTd>
               <FitTableTd as={`th`}>
-                <FormattedMessage id={`amount`} />
+                <FormattedMessage id={`wn8`} />
+              </FitTableTd>
+              <FitTableTd as={`th`}>
+                <FormattedMessage id={`created.date`} />
               </FitTableTd>
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`details`} />
@@ -63,10 +65,17 @@ export default function ClansList({ clans = [] }) {
               </Hidden>
 
               <Hidden smDown>
-                <FitTableTd>{clan?.tag}</FitTableTd>
-                <TableTdSmall>{clan?.name}</TableTdSmall>
+                <FitTableTd>
+                  {clan?.tag}
+                  <small>{clan?.name}</small>
+                </FitTableTd>
+                <TableTdSmall>
+                  <PercentageBar amount={clan?.active_players ?? 0} total={clan?.members_count ?? 0} />
+                </TableTdSmall>
+                <FitTableTd>
+                  <Wn8Bar value={clan?.wn8} />
+                </FitTableTd>
                 <FitTableTd>{date_from_unix(clan?.clan_created_at)}</FitTableTd>
-                <FitTableTd>{clan?.members_count}</FitTableTd>
                 <FitTableTd>
                   <ButtonInput
                     color={`secondary`}

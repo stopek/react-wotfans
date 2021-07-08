@@ -115,6 +115,7 @@
   "loading.not.found": "Nie znaleziono wyników dla tego zapytania",
   "login.message.1": "Aby zalogować się kliknij w przycisk poniżej",
   "login.message.2": "Portal nie gromadzi żadnych prywatnych danych użytkowników. Logowanie służy wyłącznie do poprawnego połączenia gracza utworzonego w systemie z zalogowanym użytkownikiem",
+  "login.message.3": "Po co miałbym się logować? Nie ma na to konkretnej odpowiedzi. Wiele zmian wprowadzać będę w panelu zalogowanego użytkownika, w tym panelu dostępny jest tekże rotator mam oraz wykresy WN7/8/Efektywności. Największą korzyścią płynącą z bycia zalogowanym jest to, że zalogowany gracz aktualizowany jest osobnym procesem a zmiany widoczne są bez potrzeby odświeżania strony (dotyczy Twoich ogólnych statystyk oraz statystyk na czołgach, którymi ostatnio grałeś). Za chwilę będę dodawać nowe funkcjonalności do tego panelu (np generowanie turniejów, Symulatory WN8 itp) więc byłoby mi miło, gdybyś chciał zostać pewnego rodzaju beta testerem i być na bieżąco. Powodzenia w grze!",
   "nation.ussr": "Radzieckie",
   "nation.sweden": "Szwedzkie",
   "nation.uk": "UK",

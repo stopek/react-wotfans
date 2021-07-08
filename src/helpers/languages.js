@@ -4,9 +4,9 @@ import pl_translations from "translations/pl.json";
 import ru_translation from "translations/ru.json";
 
 export const default_languages = {
-  pl: { label: "PL", value: "pl", date_locale: pl, translations: pl_translations },
   en: { label: "EN", value: "en", date_locale: null, translations: en_translations },
-  ru: { label: "RU", value: "ru", date_locale: ru, translations: ru_translation }
+  ru: { label: "RU", value: "ru", date_locale: ru, translations: ru_translation },
+  pl: { label: "PL", value: "pl", date_locale: pl, translations: pl_translations },
 };
 
 export function getDateLocale(language_name) {

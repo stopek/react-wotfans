@@ -6,11 +6,11 @@
   "menu.your.profile": "Your profile",
   "menu.your.clan": "Your Clan",
   "menu.logout": "Logout",
-  "homepage": "Home page",
-  "clans.list": "Clan List",
+  "homepage": "Home",
+  "clans.list": "Clans",
   "search.player": "Search for player",
   "exp.wn8": "EXP WN8",
-  "tanks.list": "List of tanks",
+  "tanks.list": "Tanks",
   "fundraising": "Support",
   "see.profile": "View profile",
   "shortcut": "Abbreviation",
@@ -116,6 +116,7 @@
   "loading.not.found": "No results found for this query",
   "login.message.1": "To log in click the button below",
   "login.message.2": "The portal does not collect any private user data. Logging in is only used to correctly connect the player created in the system with the logged in user",
+  "login.message.3": "Why should I log in? There is no definite answer to this. Many changes are made in the player panel, in the player panel you also have a map rotator and a WN8, WN7 and Efficiency chart. The biggest advantage of being logged in is the fact that the logged in player is updated in a separate process and the changes are visible without the need to refresh the page (this applies to your general statistics and statistics on the tanks you have recently played). New features of this Panel will be introduced in a moment (e.g. generating tournaments or WN8 simulators), so it would be nice if you would like to become some kind of beta tester and be up to date. Good luck in the game!",
   "nation.ussr": "Soviet",
   "nation.sweden": "Swedish",
   "nation.uk": "UK",
@@ -185,5 +186,5 @@
   "efficiency": "Efficiency",
   "crash.error": "A fatal server error has occurred. Please try again in a moment.",
   "active.players.percentage": "Percentage of active players",
-  "maps.list": "Maps list"
+  "maps.list": "Maps"
 }

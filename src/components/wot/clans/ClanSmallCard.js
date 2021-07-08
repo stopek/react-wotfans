@@ -1,4 +1,6 @@
 import { Grid } from "@material-ui/core";
+import PercentageBar from "components/wot/PercentageBar";
+import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import React from "react";
 import { FormattedMessage } from "react-intl";
@@ -37,8 +39,15 @@ export default function ClanSmallCard({ clan = {}, check, ...props }) {
     <Content onClick={(event) => check(event, clan?.tag)} {...props}>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
-          <Tag>{clan?.tag}</Tag>
-          <Name>{clan?.name}</Name>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <Tag>{clan?.tag}</Tag>
+              <Name>{clan?.name}</Name>
+            </Grid>
+            <Grid item xs={6}>
+              <Wn8Bar value={clan?.wn8} />
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item sm={6} xs={12}>
           <Small>
@@ -47,6 +56,9 @@ export default function ClanSmallCard({ clan = {}, check, ...props }) {
           <Small>
             <FormattedMessage id={`amount`} />: <strong>{clan?.members_count}</strong>
           </Small>
+        </Grid>
+        <Grid xs={12}>
+          <PercentageBar amount={clan?.active_players ?? 0} total={clan?.members_count ?? 0} />
         </Grid>
       </Grid>
     </Content>

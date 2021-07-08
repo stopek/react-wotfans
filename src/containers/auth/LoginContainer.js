@@ -18,11 +18,19 @@ const Info = styled.div`
   color: white;
   line-height: 1.3;
   padding: 25px 0;
+  max-width: 500px;
 
   strong {
     width: 100%;
     display: block;
     font-weight: 700;
+  }
+
+  span {
+    display: block;
+    line-height: 1.5;
+    font-size: 15px;
+    margin-top: 15px;
   }
 `;
 
@@ -63,6 +71,9 @@ export default function LoginContainer({ ...props }) {
         <strong>
           <FormattedMessage id={`login.message.2`} />
         </strong>
+        <span>
+          <FormattedMessage id={`login.message.3`} />
+        </span>
       </Info>
 
       <ButtonInput

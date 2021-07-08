@@ -64,7 +64,7 @@ function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
         axisRight={null}
         axisBottom={null}
         axisLeft={{
-          tickSize: 5,
+          tickSize: 5,   
           tickPadding: 5,
           tickRotation: 0,
         }}

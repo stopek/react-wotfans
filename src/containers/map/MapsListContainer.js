@@ -17,13 +17,14 @@ export default function MapsListContainer({ ...props }) {
   return (
     <WotOverlay {...props}>
       <Grid container spacing={2}>
+        <Grid item md={4} xs={12}>
+          <MapRotatorPage />
+        </Grid>
+
         <Grid item md={8} xs={12}>
           {maps?.response && (
             <MapsList maps={maps?.response} />
           )}
-        </Grid>
-        <Grid item md={4} xs={12}>
-          <MapRotatorPage />
         </Grid>
       </Grid>
     </WotOverlay>

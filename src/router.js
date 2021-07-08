@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 export default function RouterComponent() {
   const routes_list = routes.map(({ route, header, Component, params }, key) => {
     let RouteComponent = TitledComponentHOC(Component, { ...params, header: header });
-
     return (
       <Route key={key} strict exact path={route}>
         <RouteComponent />
