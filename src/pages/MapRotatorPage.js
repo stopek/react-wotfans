@@ -6,19 +6,22 @@ import { loadMapGenerator, selectMapGenerator } from "reducers/wotSlice";
 export default function MapRotatorPage() {
   const dispatch = useDispatch();
   const map_generator = useSelector(selectMapGenerator);
+  const response = map_generator?.response;
 
   useEffect(() => {
     dispatch(loadMapGenerator());
   }, [dispatch]);
 
-  if (!map_generator?.response) {
+
+  if (!response) {
     return null;
   }
 
   return (
     <MapRotator
       limit={[1, 10]}
-      maps={map_generator?.response}
+      server_date={new Date(response?.date)}
+      maps={response?.maps}
       cycle={4}
       tier={`IX-X`}
     />

@@ -6,10 +6,11 @@ const getDefaultLanguage = () => {
 
   const available_language = Object.keys(default_languages).includes(browser_language);
   if (available_language) {
+    document.documentElement.lang = browser_language;
     return browser_language;
   }
 
-  return 'en';
+  return process.env.REACT_APP_DEFAULT_LANG;
 }
 
 export const languageSlice = createSlice({

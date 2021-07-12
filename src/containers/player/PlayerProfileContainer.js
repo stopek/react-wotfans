@@ -20,6 +20,7 @@ export default function PlayerProfileContainer({ match, ...props }) {
     data = { seo_values: { name: playerName(player_data?.response?.player?.name) || '' }, ...props };
   }
 
+
   return (
     <WotOverlay {...data}>
       {player_data?.response && (

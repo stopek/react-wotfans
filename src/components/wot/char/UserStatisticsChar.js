@@ -1,99 +1,82 @@
-import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveLine } from '@nivo/line'
 import { nivoTheme } from "app/settings";
+import { format } from "date-fns";
 import { date_format, date_parse } from "helpers/date";
+import { getDateLocale } from "helpers/languages";
+import { valueFormat } from "helpers/priceFormat";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectedLanguage } from "reducers/languageSlice";
+import styled from "styled-components";
+import { COLOR_THEME } from "styles/colors";
 
-export default function UserStatisticsChar({ raw = [] }) {
-  let data = [
-    { id: "WN8", key: 'wn8', data: [] },
-    { id: "WN7", key: 'wn7', data: [] },
-    { id: "EFFI", key: 'efficiency', data: [] },
-  ];
+const Content = styled.div`
+  width: 100%;
+  height: 350px;
+  position: relative;
+`;
 
-  data.forEach((item) => {
-    Object.values(raw).forEach((history, k) => {
-      item.data.push({
-        x: date_format(date_parse(history.created_at, 'yyyy-MM-dd HH:mm:ss'), 'yyyy-MM-dd'),
-        y: parseFloat(history[item.key])
-      });
+export default function UserStatisticsChar({ raw = [], data = {} }) {
+  let data_array = Object.assign({}, data);
+  const language = useSelector(selectedLanguage);
+
+  // let data = [
+  //   { id: "WN8", key: 'wn8', data: [] },
+  //   { id: "WN7", key: 'wn7', data: [] },
+  //   { id: "EFFI", key: 'efficiency', data: [] },
+  // ];
+
+  Object.values(raw).forEach((history, k) => {
+    data_array.data.push({
+      x: date_format(date_parse(history.created_at, 'yyyy-MM-dd HH:mm:ss'), 'yyyy-MM-dd'),
+      y: history[data_array.key] > 0 ? valueFormat(history[data_array.key], 2) : null
     });
   });
 
   return (
-    <>
+    <Content>
       <ResponsiveLine
+        data={[data_array]}
         theme={nivoTheme}
-        data={data}
-        margin={{ top: 10, right: 60, bottom: 50, left: 40 }}
+        margin={{ top: 30, right: 10, bottom: 50, left: 60 }}
         xScale={{
-          type: "time",
-          format: "%Y-%m-%d",
-          precision: "day"
+          type: 'time',
+          format: '%Y-%m-%d',
+          useUTC: false,
+          precision: 'day',
         }}
-        yFormat=" >-.2r"
+        colors={COLOR_THEME}
         xFormat="time:%Y-%m-%d"
-        enableArea={true}
-        useMesh={true}
-        isInteractive={true}
         yScale={{
-          type: "linear",
-          min: "auto",
-          max: "auto",
-          stacked: false,
-          reverse: false
+          type: 'linear',
+          min: 'auto', max: 'auto',
+          stacked: true, reverse: false
         }}
-        indexBy="date"
+        yFormat=" >-.2f"
+        curve="catmullRom"
         axisTop={null}
         axisRight={null}
-        crosshairType="cross"
+        axisBottom={{
+          format: (value) => format(new Date(value), 'do MMM', { locale: getDateLocale(language) }),
+          orient: 'bottom',
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: -35,
+        }}
         axisLeft={{
-          orient: "left",
+          orient: 'left',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          tickValues: 10
         }}
-        axisBottom={{
-          orient: "bottom",
-          tickSize: 5,
-          format: "%Y-%m-%d",
-          tickPadding: 5,
-          tickRotation: -25,
-        }}
-        colors={{ scheme: "nivo" }}
         pointSize={10}
-        pointColor={{ theme: "background" }}
+        pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
-        pointBorderColor={{ from: "serieColor" }}
-        pointLabel="y"
+        pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 90,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: "left-to-right",
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: "circle",
-            symbolBorderColor: "rgba(0, 0, 0, .5)",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
+        useMesh={true}
+        enableSlices={'y'}
       />
-    </>
+    </Content>
   );
 }

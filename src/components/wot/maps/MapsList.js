@@ -6,8 +6,8 @@ export default function MapsList({ maps = [] }) {
   return (
     <Grid spacing={2} container>
       {maps.map((map) => (
-        <Grid item xs={12} md={6} xl={4}>
-          <MapCard map={map} key={`map-${map.id}`} height={300} />
+        <Grid item xs={12} md={6} xl={4} key={`map-${map.id}`}>
+          <MapCard map={map} height={300} />
         </Grid>
       ))}
     </Grid>

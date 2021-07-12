@@ -1,5 +1,6 @@
 import MapPreview from "components/wot/maps/MapPreview";
-import { format } from "date-fns";
+import { addHours, differenceInHours, format } from "date-fns";
+import { zonedDate } from "helpers/rotator";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { COLOR_DARK, COLOR_RED, COLOR_THEME, RADIUS } from "styles/colors";
@@ -106,8 +107,9 @@ const Map = styled.div`
   z-index: 1;
 `;
 
-export default function MapRotatorList({ list = [] }) {
+export default function MapRotatorList({ list = [], server_date, date = new Date() }) {
   const [current, setCurrent] = useState(null);
+  const diffHours = differenceInHours(server_date, date);
 
   const preview = (key) => {
     if (current === key) {
@@ -140,9 +142,9 @@ export default function MapRotatorList({ list = [] }) {
               </Dot>
 
               <MapTime>
-                {format(map.from, 'HH:mm')}
+                {format(addHours(map.from, diffHours), 'HH:mm')}
                 {` - `}
-                {format(map.to, 'HH:mm')}
+                {format(addHours(map.to, diffHours), 'HH:mm')}
               </MapTime>
             </Content>
           </Item>

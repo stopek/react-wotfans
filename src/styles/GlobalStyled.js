@@ -32,7 +32,7 @@ export const LargeHeader = styled.div`
   font-size: 25px;
   line-height: 1.2;
   font-weight: 700;
-  margin: 0 0 25px 0;
+  margin: 0 0 5px 0;
   position: relative;
   color: white;
 

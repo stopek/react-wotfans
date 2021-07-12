@@ -14,15 +14,13 @@ import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK, RADIUS } from "styles/colors";
 
-
 const CharContainer = styled.div`
-  height: 400px;
+  height: 430px;
   color: white;
   margin-bottom: 25px;
   background: ${hexToRgbA(COLOR_DARK, 1)};
   position: relative;
   border-radius: ${RADIUS};
-  overflow: hidden;
 `;
 
 export default function AccountContainer({ ...props }) {
@@ -63,6 +61,36 @@ export default function AccountContainer({ ...props }) {
     // },
   ];
 
+  const statistics_tab = [
+    {
+      translation: 'wn8',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "WN8", key: 'wn8', data: [] }}
+        />
+      )
+    },
+    {
+      translation: 'wn7',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "WN7", key: 'wn7', data: [] }}
+        />
+      )
+    },
+    {
+      translation: 'efficiency',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "efficiency", key: 'efficiency', data: [] }}
+        />
+      )
+    }
+  ];
+
   return (
     <WotOverlay {...props}>
       {!user?.response && (
@@ -79,7 +107,7 @@ export default function AccountContainer({ ...props }) {
 
             <Grid item md={8} xs={12}>
               <CharContainer>
-                <UserStatisticsChar raw={data.playerStatsHistories} />
+                <Tabs tabs={statistics_tab} />
               </CharContainer>
 
               <Tabs tabs={account_tabs} />

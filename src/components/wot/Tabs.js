@@ -1,10 +1,7 @@
 import { Box, Typography } from "@material-ui/core";
 import TabsList from "components/ui/tabs/TabsList";
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
-import styled from "styled-components";
-
-const Content = styled.div``;
+import { COLOR_TEXT } from "styles/colors";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -15,7 +12,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
-      style={{ overflow: 'hidden', padding: '15px 0' }}
+      style={{ overflow: 'hidden', padding: '15px 0', color: COLOR_TEXT }}
       {...other}
     >
       {value === index && (
@@ -35,22 +32,17 @@ export default function Tabs({ tabs = [] }) {
   }
 
   return (
-    <Content>
+    <>
       <TabsList
         tabs={tabs}
         value={value}
         onChange={handleChangeIndex}
       />
-      <SwipeableViews
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        {tabs.map(({ component }, key) => (
-          <TabPanel value={value} index={key}>
-            {component}
-          </TabPanel>
-        ))}
-      </SwipeableViews>
-    </Content>
+      {tabs.map(({ component }, key) => (
+        <TabPanel value={value} index={key} key={`tab-${key}`}>
+          {component}
+        </TabPanel>
+      ))}
+    </>
   );
 }

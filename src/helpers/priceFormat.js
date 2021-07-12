@@ -2,6 +2,9 @@ export function priceFormat(num = '', replaceValue = ',', unit = false, digits =
   return format_number(num, digits, replaceValue, ' ') + (unit ? ' ' + unit : '');
 }
 
+export const valueFormat = (value, decimals = 3) => {
+  return parseFloat(format_number(value, decimals, '.', ''));
+}
 
 export const xpResult = (value) => {
   return format_number(value, 5, ',', '');

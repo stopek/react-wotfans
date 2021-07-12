@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" itemscope itemtype="http://schema.org/WebPage" prefix="og: http://ogp.me/ns#">
+<html lang="%REACT_APP_DEFAULT_LANG%" itemscope itemtype="https://schema.org/WebPage" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#00bffc" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>
   </head>
 
   <body>
@@ -17,40 +16,35 @@
     <div id="root"></div>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0YMTQBL6B"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GA%"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-H0YMTQBL6B');
+      gtag('config', '%REACT_APP_GA%');
     </script>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '%REACT_APP_FACEBOOK_PAGE_ID%',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v11.0'
+        });
 
-    <!-- Load Facebook SDK for JavaScript -->
-<!--    <script>-->
-<!--      window.fbAsyncInit = function() {-->
-<!--        FB.init({-->
-<!--          xfbml            : true,-->
-<!--          version          : 'v10.0'-->
-<!--        });-->
-<!--      };-->
+        FB.AppEvents.logPageView();
+      };
 
-<!--      (function(d, s, id) {-->
-<!--        var js, fjs = d.getElementsByTagName(s)[0];-->
-<!--        if (d.getElementById(id)) return;-->
-<!--        js = d.createElement(s); js.id = id;-->
-<!--        js.src = 'https://connect.facebook.net/pl_PL/sdk/xfbml.customerchat.js';-->
-<!--        fjs.parentNode.insertBefore(js, fjs);-->
-<!--      }(document, 'script', 'facebook-jssdk'));-->
-<!--    </script>-->
-
-<!--    &lt;!&ndash; Your Chat Plugin code &ndash;&gt;-->
-<!--    <div-->
-<!--        class="fb-customerchat"-->
-<!--        attribution="setup_tool"-->
-<!--        page_id="%REACT_APP_FACEBOOK_PAGE_ID%"-->
-<!--    ></div>-->
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <script>
       const isIE = document.documentMode;

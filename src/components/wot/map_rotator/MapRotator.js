@@ -1,22 +1,11 @@
+import Clock from "components/wot/Clock";
 import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
 import ThanksBox from "components/wot/ThanksBox";
-import { addDays, addHours, addMinutes, differenceInHours, format } from "date-fns";
-import { getDayOfThisWeek } from "helpers/date";
-import React, { useEffect, useState } from "react";
+import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { COLOR_TEXT_DARK, RADIUS } from "styles/colors";
-
-const Time = styled.div`
-  background: white;
-  font-size: 35px;
-  display: table;
-  line-height: 1;
-  padding: 5px 25px;
-  border-radius: ${RADIUS};
-  font-weight: 700;
-  margin: 0 auto 15px auto;
-`;
+import { COLOR_TEXT_DARK } from "styles/colors";
 
 const Tier = styled.div`
   color: ${COLOR_TEXT_DARK};
@@ -30,101 +19,29 @@ const Rotator = styled.div`
   width: 100%;
 `;
 
-export const mapsResultList = (user_date, result_maps, limit = [1, 1]) => {
-  const t = new Date();
-  let display_maps = [];
-  let a = 1;
-
-  const diffHours = differenceInHours(user_date, new Date());
-  const timeForUser = (map) => {
-    return Object.assign({}, map, {
-      from: addHours(map.from, diffHours * 1),
-      to: addHours(map.to, diffHours * 1)
-    });
-  }
-
-  result_maps.forEach((map, key) => {
-    if (new Date(map.from) <= t && new Date(map.to) > t) {
-      for (let i = key - limit[0]; i < key; i++) {
-        if (result_maps[i]) {
-          display_maps.push(Object.assign({}, timeForUser(result_maps[i]), { status: 'prev', size: a }));
-          a = parseFloat(a + 0.1);
-        }
-      }
-
-      display_maps.push(Object.assign({}, timeForUser(map), { status: 'current', size: a }));
-
-      for (let i = key + 1; i <= key + limit[1]; i++) {
-        if (result_maps[i]) {
-          a = a - 0.1;
-          display_maps.push(Object.assign({}, timeForUser(result_maps[i]), { status: 'next', size: a }));
-        }
-      }
-    }
-  });
-
-  return display_maps;
-}
-
-const mapsIntervalsList = (maps, date, cycle) => {
-  let i = 0;
-  const result_maps = [];
-  // let loop = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
-
-  let loop = getDayOfThisWeek('Mon');
-  let end = addDays(loop, 7);
-  while (loop < end) {
-    const date = addMinutes(loop, cycle);
-
-    result_maps.push({
-      map: maps[i].map,
-      from: loop,
-      to: date
-    });
-
-    loop = new Date(date);
-
-    if ((i + 1) === Object.keys(maps).length) {
-      i = 0;
-      continue;
-    }
-
-    i++;
-  }
-
-  return result_maps;
-}
-
-export default function MapRotator({ limit = [1, 1], maps = {}, cycle = 4, tier = '' }) {
+export default function MapRotator({ limit = [1, 1], server_date = new Date(), maps = {}, cycle = 4, tier = '' }) {
   const [date, setDate] = useState(new Date());
-  const hour = format(date, 'HH');
-  const user_date = date.setHours(hour);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const new_date = new Date();
-      setDate(new Date(new_date.getFullYear(), new_date.getMonth(), new_date.getDate(), hour, new_date.getMinutes()));
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    }
-  }, [hour]);
-
-  const result_maps = mapsIntervalsList(maps, date, cycle);
+  const result_maps = mapsIntervalsList(maps, cycle, server_date);
 
   return (
     <Rotator>
-      <Time>
-        {format(user_date, 'HH:mm')}
-      </Time>
+      <Clock
+        setDate={setDate}
+        date={date}
+      />
 
-      <MapRotatorList list={mapsResultList(user_date, result_maps, limit)} />
+      <MapRotatorList
+        list={mapsResultList(server_date, result_maps, limit)}
+        server_date={server_date}
+        date={date}
+      />
+
       <ThanksBox>
         Generation algorithm created by <strong>wzorek2000</strong> with a lot of help
         from <strong>Z__Buta_Wjezdzam</strong> & <strong>kkpb17</strong>.
         Do you have any question for him? <DiscordLink username={`wzorek2000#8053`} />
       </ThanksBox>
+
       <Tier>
         {tier}
       </Tier>

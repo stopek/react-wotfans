@@ -6,10 +6,10 @@ import {
   EXP_WN8_URL,
   LOGIN_URL,
   MAIN_URL,
-  MAP_ROTATOR_URL,
   MAPS_URL,
   PLAYER_URL,
   SEARCH_URL,
+  SESSIONS_URL,
   TANK_URL,
   TANKS_URL,
   UPGRADE_URL
@@ -33,6 +33,10 @@ const routing = [
   {
     route: UPGRADE_URL,
     Component: load('system/UpgradeContainer'),
+  },
+  {
+    route: SESSIONS_URL,
+    Component: load('account/SessionsContainer'),
   },
   // {
   //   header: "upload",
@@ -136,16 +140,6 @@ const routing = [
     params: {
       seo: {
         title: 'seo.maps',
-      }
-    }
-  },
-  {
-    header: "map.rotator",
-    route: MAP_ROTATOR_URL,
-    Component: load('map/MapRotatorContainer'),
-    params: {
-      seo: {
-        title: 'seo.map.rotator',
       }
     }
   },

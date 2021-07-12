@@ -1,4 +1,6 @@
 import Empty from "components/core/Empty";
+import ClanProfileButton from "components/wot/clans/ClanProfileButton";
+import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatsList from "components/wot/StatsList";
 import TankModalStats from "components/wot/tanks/TankModalStats";
@@ -16,7 +18,17 @@ import {
 import { sortByWeight, sortByWN8 } from "helpers/user";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
+import styled from "styled-components";
 import { Header, LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
+
+const ClanBox = styled.div`
+  font-size: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: -10px;
+`;
 
 export default function PlayerDetails({ player = {}, statistics = {} }) {
   const [previewTank, setPreviewTank] = useState({});
@@ -72,9 +84,11 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
 
       <LargeHeader>
         <PlayerNameWithConsoleLogo name={player?.name} />
-        <small>
-          <FormattedMessage id={`global.rating`} />: {player?.global_rating}
-        </small>
+
+        <ClanBox>
+          {player?.clan?.tag}
+          <ClanProfileButton tag={player?.clan?.tag} />
+        </ClanBox>
 
         <Wn8BarContent>
           <Wn8Bar
@@ -87,6 +101,11 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             unit={`WN7`}
             large
           />
+          <EfficiencyBar
+            value={statistics?.efficiency}
+            unit={`EFFI`}
+            large
+          />
         </Wn8BarContent>
       </LargeHeader>
 
@@ -96,6 +115,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             <FormattedMessage id={`stats`} />
           </Header>
           <StatsList list={[
+            { translation: 'global.rating', value: player?.global_rating },
             { translation: 'battles', value: player_battles },
             { translation: 'accuracy.percentage', value: percentageDisplay(accuracyPercentage) },
             { translation: 'win.percentage', value: percentageDisplay(winsPercentage) },

@@ -11,7 +11,7 @@ import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRo
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
 import { Wot } from "api/actions/wot";
-import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL } from "app/routes";
+import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
 import ProgressCircular from "components/ui/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER, RADIUS } from "styles/colors";
+import HistoryRoundedIcon from '@material-ui/icons/HistoryRounded';
 
 const StyledMenu = withStyles({
   paper: {
@@ -143,6 +144,11 @@ export default function LoggedUserMenu() {
       icon: <SupervisorAccountRoundedIcon fontSize="small" />,
       route: fillRoute(CLAN_URL, { tag: user_data?.clan?.tag })
     },
+    {
+      translation: 'login.sessions',
+      icon: <HistoryRoundedIcon fontSize="small" />,
+      route: SESSIONS_URL
+    },
   ] : [];
 
   const loading = isLogged() && !Object.keys(user?.response || {})?.length;
@@ -175,6 +181,7 @@ export default function LoggedUserMenu() {
                 <ListItemIcon>
                   {menu.icon}
                 </ListItemIcon>
+
                 <ListItemText primary={
                   <FormattedMessage id={menu.translation} />
                 } />

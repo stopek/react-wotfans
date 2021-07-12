@@ -35,13 +35,18 @@ export default function LanguagesBox() {
   const language = useSelector(selectedLanguage);
   const dispatch = useDispatch();
 
+  const change = (language) => {
+    document.documentElement.lang = language;
+    dispatch(changeLanguage(language));
+  }
+
   return (
     <Languages>
       {Object.values(default_languages).map((lang) => (
         <Language
           key={`language-${lang.value}`}
           current={language === lang.value}
-          onClick={() => dispatch(changeLanguage(lang.value))}
+          onClick={() => change(lang.value)}
         >{lang.value}</Language>
       ))}
     </Languages>

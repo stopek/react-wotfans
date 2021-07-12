@@ -147,6 +147,10 @@
   "leader": "Commander",
   "best.damage.players": "Biggest damage",
   "best.xp.players": "Biggest XP",
+  "browser.name": "Device name",
+  "log.out": "Log out",
+  "logged.date": "Logged date",
+  "login.sessions": "Login sessions",
   "best.frags.players": "Most enemies destroyed",
   "out.of.all.garage.tanks": "Out of all the tanks in their garage",
 
