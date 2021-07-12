@@ -19,7 +19,7 @@ export const percentageDisplay = (value, decimals = 3) => {
 }
 
 export const perBattleDisplay = (value) => {
-  return format_number(value, 5, ',', ' ');
+  return format_number(value, 3, ',', ' ');
 }
 
 export const percentageCalculator = (amount, total) => {

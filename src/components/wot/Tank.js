@@ -130,7 +130,7 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         <TankName hover={hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />
 
-        {!props?.no_wn8 && statistics?.battles > 0 && (
+        {!props?.no_wn8 && statistics?.battles > 0 && tank?.tier > 0 && (
           <Wn8 title={stats?.weight} hover={hover}>
             <Wn8Bar value={stats?.wn8} unit={`WN8`} />
           </Wn8>

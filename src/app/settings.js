@@ -4,8 +4,8 @@ import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
-import { CLANS_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, SEARCH_URL, TANKS_URL } from "app/routes";
-
+import { CLANS_URL, CONTACT_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, SEARCH_URL, TANKS_URL } from "app/routes";
+import MailRoundedIcon from '@material-ui/icons/MailRounded';
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
 import React from "react";
 import { FormattedMessage } from "react-intl";
@@ -29,7 +29,8 @@ export const menuItems = [
   { translation: 'exp.wn8', i: 4, icon: <TuneRoundedIcon />, route: EXP_WN8_URL },
   { translation: 'tanks.list', i: 5, icon: <TankIcon />, route: TANKS_URL },
   { translation: 'maps.list', i: 6, icon: <MapRoundedIcon />, route: MAPS_URL },
-  { translation: 'fundraising', i: 7, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
+  { translation: 'contact', i: 7, icon: <MailRoundedIcon />, route: CONTACT_URL },
+  { translation: 'fundraising', i: 8, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
 ];
 
 export const tiersList = [

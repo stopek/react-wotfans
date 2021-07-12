@@ -139,7 +139,7 @@ export default function LoggedUserMenu() {
       icon: <RecentActorsRoundedIcon fontSize="small" />,
       route: fillRoute(PLAYER_URL, { account_id: user_data?.id })
     },
-    {
+    !!user_data?.clan?.tag && {
       translation: 'menu.your.clan',
       icon: <SupervisorAccountRoundedIcon fontSize="small" />,
       route: fillRoute(CLAN_URL, { tag: user_data?.clan?.tag })
@@ -176,7 +176,7 @@ export default function LoggedUserMenu() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {menuItems.map((menu, key) => (
+            {menuItems.filter((item) => !!item).map((menu, key) => (
               <StyledMenuItem onClick={() => history.push(menu.route)} key={`menu-item-${key}`}>
                 <ListItemIcon>
                   {menu.icon}

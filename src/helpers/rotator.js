@@ -1,6 +1,15 @@
-import { addDays, addMinutes } from "date-fns";
+import {
+  addDays,
+  addHours,
+  addMinutes,
+  addSeconds,
+  differenceInHours, differenceInMinutes,
+  differenceInSeconds, getMinutes, getSeconds, setMinutes, setSeconds,
+  subHours,
+  subSeconds
+} from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
-import { getDayOfThisWeek } from "helpers/date";
+import { getMondayOfDate } from "helpers/date";
 
 export const zonedDate = (date = new Date(), zone = 'Europe/Warsaw') => {
   return zonedTimeToUtc(date, zone);
@@ -30,10 +39,29 @@ export const mapsResultList = (current_date, result_maps, limit = [1, 1]) => {
   return display_maps;
 }
 
+export const copyDateIS = (copy_from, copy_to) => {
+  let time;
+
+  time = setMinutes(copy_to, getMinutes(copy_from));
+  time = setSeconds(time, getSeconds(copy_from));
+
+  return time;
+}
+
+export const diffAndAddHours = (date_from, date_to, date_set) => {
+  let hours = differenceInHours(date_from, date_to);
+
+  if (typeof date_set !== 'undefined') {
+    date_to = date_set;
+  }
+
+  return subHours(date_to, hours);
+}
+
 export const mapsIntervalsList = (maps, cycle, server_date) => {
   let i = 0;
   const result_maps = [];
-  let loop = zonedDate(getDayOfThisWeek('Mon', server_date));
+  let loop = getMondayOfDate(server_date);
   let end = addDays(loop, 7);
 
   while (loop < end) {
@@ -45,7 +73,7 @@ export const mapsIntervalsList = (maps, cycle, server_date) => {
       to: date
     });
 
-    loop = new Date(date);
+    loop = date;
 
     if ((i + 1) === Object.keys(maps).length) {
       i = 0;

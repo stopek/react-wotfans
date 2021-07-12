@@ -2,6 +2,7 @@ import { LOGIN_ENDPOINT } from "api/endpoints";
 import instance from "api/service";
 import { ACCOUNT_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
+import SimpleText from "components/wot/SimpleText";
 import { saveToken } from "helpers/cookies";
 import { useQuery } from "helpers/useQuery";
 import { isLogged } from "helpers/user";
@@ -12,27 +13,6 @@ import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
 import { getUser } from "reducers/wotSlice";
-import styled from "styled-components";
-
-const Info = styled.div`
-  color: white;
-  line-height: 1.3;
-  padding: 25px 0;
-  max-width: 500px;
-
-  strong {
-    width: 100%;
-    display: block;
-    font-weight: 700;
-  }
-
-  span {
-    display: block;
-    line-height: 1.5;
-    font-size: 15px;
-    margin-top: 15px;
-  }
-`;
 
 export default function LoginContainer({ ...props }) {
   const dispatch = useDispatch();
@@ -66,15 +46,15 @@ export default function LoginContainer({ ...props }) {
         alt=""
       />
 
-      <Info>
+      <SimpleText>
         <FormattedMessage id={`login.message.1`} />
-        <strong>
-          <FormattedMessage id={`login.message.2`} />
-        </strong>
+        <div>
+          <strong><FormattedMessage id={`login.message.2`} /></strong>
+        </div>
         <span>
           <FormattedMessage id={`login.message.3`} />
         </span>
-      </Info>
+      </SimpleText>
 
       <ButtonInput
         as={`a`}

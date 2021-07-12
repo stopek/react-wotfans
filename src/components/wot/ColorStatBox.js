@@ -50,7 +50,7 @@ const Value = styled.span`
 `;
 
 const getValue = (check_value, list, key) => {
-  let response_color = 'transparent';
+  let response_color = '#dbdbdb';
   list.forEach((item) => {
     if (check_value >= item.value) {
       response_color = item[key];

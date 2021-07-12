@@ -20,18 +20,16 @@ export default function UserStatisticsChar({ raw = [], data = {} }) {
   let data_array = Object.assign({}, data);
   const language = useSelector(selectedLanguage);
 
-  // let data = [
-  //   { id: "WN8", key: 'wn8', data: [] },
-  //   { id: "WN7", key: 'wn7', data: [] },
-  //   { id: "EFFI", key: 'efficiency', data: [] },
-  // ];
-
   Object.values(raw).forEach((history, k) => {
     data_array.data.push({
       x: date_format(date_parse(history.created_at, 'yyyy-MM-dd HH:mm:ss'), 'yyyy-MM-dd'),
       y: history[data_array.key] > 0 ? valueFormat(history[data_array.key], 2) : null
     });
   });
+
+  if (!data_array.data?.length) {
+    data_array.data = [{x: format(new Date(), 'yyyy-MM-dd'), y: 0}];
+  }
 
   return (
     <Content>

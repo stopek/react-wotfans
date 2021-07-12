@@ -10,5 +10,6 @@ export const ACCOUNT_URL = "/account";
 export const SESSIONS_URL = ACCOUNT_URL + "/sessions";
 export const TANK_URL = "/tank/:tank_id";
 export const MAPS_URL = "/maps";
+export const CONTACT_URL = "/contact";
 export const UPLOAD_URL = "/upload";
 export const UPGRADE_URL = "/upgrade";

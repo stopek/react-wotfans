@@ -55,7 +55,8 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
   const radioDamageBattle = perBattleCalculator(ps?.damage_assisted_radio, player_battles);
   const trackDamageBattle = perBattleCalculator(ps?.damage_assisted_track, player_battles);
 
-  const drawPercentage = (100 - winsPercentage - lossesPercentage);
+  const totalOtherResults = winsPercentage + lossesPercentage;
+  const drawPercentage = totalOtherResults > 0 ? (100 - totalOtherResults) : 0;
 
   const haveStats = Object.values(ps)?.length > 0;
 
@@ -85,10 +86,12 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
       <LargeHeader>
         <PlayerNameWithConsoleLogo name={player?.name} />
 
-        <ClanBox>
-          {player?.clan?.tag}
-          <ClanProfileButton tag={player?.clan?.tag} />
-        </ClanBox>
+        {player?.clan?.tag?.length > 0 && (
+          <ClanBox>
+            {player?.clan?.tag}
+            <ClanProfileButton tag={player?.clan?.tag} />
+          </ClanBox>
+        )}
 
         <Wn8BarContent>
           <Wn8Bar
@@ -181,12 +184,16 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
             </>
           )}
 
-          <Header>
-            <FormattedMessage id={`tanks.list`} />
-          </Header>
-          <TanksListAndFilters
-            tanks_stats={sortByWN8(tanksStats)}
-          />
+          {Object.values(tanksStats)?.length > 0 && (
+            <>
+              <Header>
+                <FormattedMessage id={`tanks.list`} />
+              </Header>
+              <TanksListAndFilters
+                tanks_stats={sortByWN8(tanksStats)}
+              />
+            </>
+          )}
         </>
       ) : (
         <Empty message={<FormattedMessage id={`no.stats.header`} />}>

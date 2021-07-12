@@ -3,11 +3,11 @@ import {
   format,
   formatDistance,
   fromUnixTime,
-  getISODay,
   parse,
   setHours,
   setMinutes,
-  setSeconds
+  setSeconds,
+  startOfWeek
 } from "date-fns";
 
 export const date_from_unix = (date, format_pattern = 'yyyy-MM-dd') => {
@@ -36,18 +36,6 @@ export const date_parse = (date, format_pattern = 'yyyy-MM-dd') => {
   return parse(date, format_pattern, new Date());
 }
 
-export function getDayOfThisWeek(dayOfWeek, fromDate = new Date()) {
-  const dayOfWeekMap = {
-    Mon: 1,
-    Tue: 2,
-    Wed: 3,
-    Thur: 4,
-    Fri: 5,
-    Sat: 6,
-    Sun: 7,
-  };
-
-  const offsetDays = - (getISODay(fromDate) - dayOfWeekMap[dayOfWeek]);
-
-  return setSeconds(setMinutes(setHours(addDays(fromDate, offsetDays), 0), 0), 0);
+export function getMondayOfDate(fromDate) {
+  return addDays(setSeconds(setMinutes(setHours(startOfWeek(fromDate), 0), 0), 0), 1);
 }

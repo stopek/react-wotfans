@@ -67,7 +67,7 @@ const getRoleColor = (role_name) => {
 export default function PlayerClanRoleIcon({ role_name = '' }) {
   const [hover, setHover] = useState(false);
 
-  const role_letter = role_name[0] || '?';
+  const role_letter = (!!role_name && role_name[0]) || '?';
   const color = getRoleColor(role_letter);
 
   return (

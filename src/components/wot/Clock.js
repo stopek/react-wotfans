@@ -12,13 +12,14 @@ const Time = styled.div`
   border-radius: ${RADIUS};
   font-weight: 700;
   margin: 0 auto 15px auto;
+  color: black;
 `;
 
 export default function Clock({ setDate, date }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date());
-    }, 100);
+    }, 1000);
 
     return () => {
       clearInterval(timer);

@@ -16,7 +16,7 @@ const BoxesInfo = styled.div`
   grid-template-columns: 1fr;
   
   @media ${breakpoint.md} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 
@@ -78,9 +78,9 @@ export default function TankBase({ tank = {}, more }) {
   const infos_data = [
     { translation: 'nation', value: <FormattedMessage id={getTranslationByNation(tank.nation)} /> },
     { translation: 'tier', value: tank.tier },
-    { translation: 'price.silver', value: priceFormat(tank?.price_credit, ',', '', 0) },
-    { translation: 'price.gold', value: priceFormat(tank?.price_gold, ',', '', 0) },
-    { translation: 'price.xp', value: priceFormat(tank?.prices_xp, ',', '', 0) }
+    tank?.price_credit > 0 && { translation: 'price.silver', value: priceFormat(tank?.price_credit, ',', '', 0) },
+    tank?.price_gold > 0 && { translation: 'price.gold', value: priceFormat(tank?.price_gold, ',', '', 0) },
+    tank?.prices_xp > 0 && { translation: 'price.xp', value: priceFormat(tank?.prices_xp, ',', '', 0) }
   ];
 
   return (
@@ -95,7 +95,7 @@ export default function TankBase({ tank = {}, more }) {
       </Description>
 
       <BoxesInfo>
-        {infos_data.map((item, key) => (
+        {infos_data.filter((item) => !!item).map((item, key) => (
           <BoxInfos key={`box-info-${key}`}>
             <FormattedMessage id={item.translation} />
             <span>{item.value}</span>

@@ -11,7 +11,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectCrash, selectError, selectNotFound } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK } from "styles/colors";
+import { COLOR_DARK, COLOR_TEXT } from "styles/colors";
 
 const Content = styled(Base)`
   height: 100%;
@@ -21,7 +21,7 @@ const Content = styled(Base)`
   width: 100%;
   padding: 55px 10px 15px 10px;
   overflow-x: hidden;
-
+  color: ${COLOR_TEXT};
   ${props => props?.full && `overflow: hidden; background: ${COLOR_DARK};`}
 `;
 

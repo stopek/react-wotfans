@@ -3,6 +3,7 @@ import {
   ACCOUNT_URL,
   CLAN_URL,
   CLANS_URL,
+  CONTACT_URL,
   EXP_WN8_URL,
   LOGIN_URL,
   MAIN_URL,
@@ -14,6 +15,7 @@ import {
   TANKS_URL,
   UPGRADE_URL
 } from "app/routes";
+import React from "react";
 
 const load = (component) => {
   return loadable(() => import(`containers/${component}`));
@@ -35,8 +37,13 @@ const routing = [
     Component: load('system/UpgradeContainer'),
   },
   {
+    authorized: true,
     route: SESSIONS_URL,
     Component: load('account/SessionsContainer'),
+  },
+  {
+    route: CONTACT_URL,
+    Component: load('ContactContainer'),
   },
   // {
   //   header: "upload",
@@ -124,6 +131,7 @@ const routing = [
     }
   },
   {
+    authorized: true,
     header: "menu.your.account",
     route: ACCOUNT_URL,
     Component: load('account/AccountContainer'),

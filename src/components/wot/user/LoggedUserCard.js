@@ -6,6 +6,8 @@ import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK, RADIUS } from "styles/colors";
 
@@ -43,21 +45,27 @@ const StatisticsBar = styled.div`
   }
 `;
 
-export default function LoggedUserCard({ user = {} }) {
-  const player = user?.user?.player;
-  const statistics = user?.statistics;
+export default function LoggedUserCard() {
+  const user = useSelector(selectUser);
+  const player = user?.response?.user?.player;
+  const statistics = user?.response?.statistics;
 
   return (
     <Card>
       <PlayerNameWithConsoleLogo name={player?.name} />
-      <Details>
-        <FormattedMessage id={`your.clan`} />: {player?.clan?.name}
-      </Details>
+      {!!player?.clan?.name && (
+        <Details>
+          <FormattedMessage id={`your.clan`} />: {player?.clan?.name}
+        </Details>
+      )}
 
       <Text>
-        <FormattedMessage
-          id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
-        {player?.is_locked && player?.updates === -1 && (
+        {!!player?.last_battle_time && (
+          <>
+            <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
+          </>
+        )}
+        {player?.is_locked && (
           <LoopRoundedIcon />
         )}
       </Text>

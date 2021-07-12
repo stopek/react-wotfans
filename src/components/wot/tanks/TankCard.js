@@ -1,7 +1,9 @@
 import { Grid } from "@material-ui/core";
+import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
 import TankBase from "components/wot/tanks/TankBase";
+import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
-import { priceFormat } from "helpers/priceFormat";
+import { perBattleCalculator, perBattleDisplay, priceFormat } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -17,6 +19,11 @@ const StatsList = styled.ol`
   margin: 15px 0;
 `;
 
+const Gap = styled.div`
+  display: flex;
+  gap: 15px;
+`;
+
 const StatsItem = styled.li`
   font-size: 15px;
   color: black;
@@ -25,11 +32,11 @@ const StatsItem = styled.li`
 
   span {
     flex: 1;
+    text-align: right;
   }
 
-  span:last-child {
-    text-align: right;
-    font-weight: 700;
+  strong {
+    flex: 5;
   }
 
   &:not(:last-child) {
@@ -41,18 +48,43 @@ const StatsItem = styled.li`
   }
 `;
 
-const Stat = ({ translation, value }) => {
+const Stat = ({ translation, value, value2 }) => {
   return (
     <StatsItem>
-      <span>
+      <strong>
         <FormattedMessage id={translation} />
-      </span>
+      </strong>
       <span>{value}</span>
+      <span>{value2}</span>
     </StatsItem>
   );
 }
 
 export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...props }) {
+
+  const statsList = [
+    { translation: 'capture.points', value: statistics?.capture_points },
+    { translation: 'damage.assisted.radio', value: statistics?.damage_assisted_radio },
+    { translation: 'damage.assisted.track', value: statistics?.damage_assisted_track },
+    { translation: 'damage.dealt', value: statistics?.damage_dealt },
+    // { translation: 'damage.received', value: statistics?.damage_received },
+    // { translation: 'hits.received', value: statistics?.direct_hits_received },
+    { translation: 'capture.points.dropped', value: statistics?.dropped_capture_points },
+    // {translation: 'explosion.hits', value: statistics?.explosion_hits},
+    // {translation: 'explosion.hits.received', value: statistics?.explosion_hits_received},
+    { translation: 'frags', value: statistics?.frags },
+    { translation: 'hits', value: statistics?.hits },
+    { translation: 'losses', value: statistics?.losses },
+    // { translation: 'no.damage.direct.hits.received', value: statistics?.no_damage_direct_hits_received },
+    // {translation: 'piercings', value: statistics?.piercings},
+    // {translation: 'piercings.received', value: statistics?.piercings_received},
+    { translation: 'shots', value: statistics?.shots },
+    { translation: 'spotted', value: statistics?.spotted },
+    { translation: 'survived.battles', value: statistics?.survived_battles },
+    { translation: 'wins', value: statistics?.wins },
+    // {translation: 'xp', value: statistics?.xp},
+  ];
+
   return (
     <Card>
       <Grid container spacing={2}>
@@ -64,35 +96,41 @@ export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...pr
         </Grid>
 
         <Grid item md={6} xs={12}>
-          <StatsList>
-            <Stat translation={`wn8`} value={<Wn8Bar value={stats?.wn8} />} />
-            <Stat translation={`wn7`} value={priceFormat(stats?.wn7, ',', '', 2)} />
-            <Stat translation={`wn8.weight`} value={priceFormat(stats?.weight, ',', '%', 5)} />
-            <Stat translation={`efficiency`} value={priceFormat(stats?.efficiency, ',', '', 2)} />
+          {tank?.tier > 0 && (
+            <Gap>
+              <Wn8Bar value={stats?.wn8} unit={`WN8`} />
+              <WN7Bar value={stats?.wn7} unit={`WN7`} />
+              <EfficiencyBar value={stats?.efficiency} unit={`EFFI`} />
+            </Gap>
+          )}
 
-            <Stat translation={`max.frags`} value={statistics?.max_frags || 0} />
-            <Stat translation={`battles`} value={statistics?.battles || 0} />
-            <Stat translation={`capture.points`} value={statistics?.capture_points || 0} />
-            <Stat translation={`damage.assisted.radio`} value={statistics?.damage_assisted_radio || 0} />
-            <Stat translation={`damage.assisted.track`} value={statistics?.damage_assisted_track || 0} />
-            <Stat translation={`damage.dealt`} value={statistics?.damage_dealt || 0} />
-            <Stat translation={`damage.received`} value={statistics?.damage_received || 0} />
-            <Stat translation={`hits.received`} value={statistics?.direct_hits_received || 0} />
-            <Stat translation={`capture.points.dropped`} value={statistics?.dropped_capture_points || 0} />
-            <Stat translation={`explosion.hits`} value={statistics?.explosion_hits || 0} />
-            <Stat translation={`explosion.hits.received`} value={statistics?.explosion_hits_received || 0} />
-            <Stat translation={`frags`} value={statistics?.frags || 0} />
-            <Stat translation={`hits`} value={statistics?.hits || 0} />
-            <Stat translation={`losses`} value={statistics?.losses || 0} />
-            <Stat translation={`no.damage.direct.hits.received`}
-                  value={statistics?.no_damage_direct_hits_received || 0} />
-            <Stat translation={`piercings`} value={statistics?.piercings || 0} />
-            <Stat translation={`piercings.received`} value={statistics?.piercings_received || 0} />
-            <Stat translation={`shots`} value={statistics?.shots || 0} />
-            <Stat translation={`spotted`} value={statistics?.spotted || 0} />
-            <Stat translation={`survived.battles`} value={statistics?.survived_battles || 0} />
-            <Stat translation={`wins`} value={statistics?.wins || 0} />
-            <Stat translation={`xp`} value={statistics?.xp || 0} />
+          <StatsList>
+            {tank?.tier > 0 && (
+              <Stat
+                translation={`wn8.weight`}
+                value={priceFormat(stats?.weight, ',', '%', 5)}
+              />
+            )}
+
+            <Stat
+              translation={`max.frags`}
+              value={statistics?.max_frags || 0}
+            />
+
+            <Stat
+              translation={`battles`}
+              value={statistics?.battles || 0}
+              value2={<FormattedMessage id={`per.battle`} />}
+            />
+
+            {statsList.map((stat, key) => (
+              <Stat
+                key={`stat-${key}`}
+                translation={stat.translation}
+                value={stat.value || 0}
+                value2={perBattleDisplay(perBattleCalculator(stat.value, statistics?.battles))}
+              />
+            ))}
           </StatsList>
         </Grid>
       </Grid>

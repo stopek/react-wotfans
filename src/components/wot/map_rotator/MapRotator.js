@@ -2,8 +2,8 @@ import Clock from "components/wot/Clock";
 import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
 import ThanksBox from "components/wot/ThanksBox";
-import { addHours, differenceInHours } from "date-fns";
-import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
+import { differenceInHours, differenceInMinutes } from "date-fns";
+import { copyDateIS, mapsIntervalsList, mapsResultList } from "helpers/rotator";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR_TEXT_DARK } from "styles/colors";
@@ -20,11 +20,22 @@ const Rotator = styled.div`
   width: 100%;
 `;
 
-export default function MapRotator({ limit = [1, 1], server_date = new Date(), maps = {}, cycle = 4, tier = '' }) {
-  const [date, setDate] = useState(new Date());
+export default function MapRotator({ limit = [1, 1], server_date = '', maps = {}, cycle = 4, tier = '' }) {
+  const user_date = new Date();
+
+  //aktualna data użytkownika
+  const [date, setDate] = useState(user_date);
+
+  //aktualna data serwera korygowana o minuty/sekundy od użytkownika.
+  const server_date_correct = copyDateIS(date, server_date);
+
+  //lista map w oparciu o datę serwera
   const result_maps = mapsIntervalsList(maps, cycle, server_date);
 
-  server_date = addHours(date, differenceInHours(server_date, date));
+  //lista map w oparciu skorygowany czas serwera
+  const output_maps = mapsResultList(server_date_correct, result_maps, limit);
+
+  let diffHours = Math.round(differenceInMinutes(server_date_correct, user_date) / 60);
 
   return (
     <Rotator>
@@ -34,9 +45,8 @@ export default function MapRotator({ limit = [1, 1], server_date = new Date(), m
       />
 
       <MapRotatorList
-        list={mapsResultList(server_date, result_maps, limit)}
-        server_date={server_date}
-        date={date}
+        list={output_maps}
+        diff_hours={diffHours}
       />
 
       <ThanksBox>
