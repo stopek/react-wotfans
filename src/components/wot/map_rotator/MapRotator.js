@@ -2,6 +2,7 @@ import Clock from "components/wot/Clock";
 import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
 import ThanksBox from "components/wot/ThanksBox";
+import { addHours, differenceInHours } from "date-fns";
 import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -23,11 +24,13 @@ export default function MapRotator({ limit = [1, 1], server_date = new Date(), m
   const [date, setDate] = useState(new Date());
   const result_maps = mapsIntervalsList(maps, cycle, server_date);
 
+  server_date = addHours(date, differenceInHours(server_date, date));
+
   return (
     <Rotator>
       <Clock
-        setDate={setDate}
         date={date}
+        setDate={setDate}
       />
 
       <MapRotatorList

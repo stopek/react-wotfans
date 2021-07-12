@@ -1,19 +1,10 @@
 import { Grid } from "@material-ui/core";
-import MapsList from "components/wot/maps/MapsList";
 import WotOverlay from "overlays/Wot";
 import MapRotatorPage from "pages/MapRotatorPage";
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { loadMaps, selectLoadMaps } from "reducers/wotSlice";
+import MapsListPage from "pages/MapsListPage";
+import React from 'react';
 
 export default function MapsListContainer({ ...props }) {
-  const dispatch = useDispatch();
-  const maps = useSelector(selectLoadMaps);
-
-  useEffect(() => {
-    dispatch(loadMaps());
-  }, [dispatch]);
-
   return (
     <WotOverlay {...props}>
       <Grid container spacing={2}>
@@ -22,9 +13,7 @@ export default function MapsListContainer({ ...props }) {
         </Grid>
 
         <Grid item md={8} xs={12}>
-          {maps?.response && (
-            <MapsList maps={maps?.response} />
-          )}
+          <MapsListPage />
         </Grid>
       </Grid>
     </WotOverlay>
