@@ -47,7 +47,7 @@ const StatisticsBar = styled.div`
 
 export default function LoggedUserCard() {
   const user = useSelector(selectUser);
-  const player = user?.response?.user?.player;
+  const player = user?.response?.player;
   const statistics = user?.response?.statistics;
 
   return (

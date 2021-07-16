@@ -1,10 +1,50 @@
 {
+  "seo.homepage": "Portal for WOT Fans",
+  "seo.homepage.description": "Statistics of players and clans, league games, news in the world of WOT. Portal for WOT players - are you one of them?",
+
+  "seo.contact": "Contact",
+  "seo.contact.description":  "Do you have any questions? Write to us!",
+
+  "seo.clans.list": "Clan List",
+  "seo.clans.list.description": "List of the best clans in WOT. Find your clan among them!",
+
+  "seo.clan.profile": "{name}'s profile",
+  "seo.clan.profile.description": "Details of the clan {name} on WOTFANS along with the list of players.",
+
+  "seo.tank.profile": "{name}'s profile",
+  "seo.tank.profile.description": "Details of player {name} on WOTFANS. Statistics, tank list and much more.",
+
+  "seo.search.player": "Player Search",
+  "seo.search.player.description": "Find a player on WOTFANS and check their stats.",
+
+  "seo.player.profile": "{name}'s profile",
+  "seo.player.profile.description": "Player profile {name} on WOTFANS. Statistics, tank list.",
+
+  "seo.exp.wn8": "Requirements for tanks",
+  "seo.exp.wn8.description": "",
+
+  "seo.tanks.list": "Tank list",
+  "seo.tanks.list.description": "Tanks list on WOTFANS. All tanks in World Of Tanks.",
+
+  "seo.login.view": "Login",
+  "seo.login.view.description": "Join us and become a WOTFANS",
+
+  "seo.your.account": "Your account",
+  "seo.your.account.description": "Your player account on the portal",
+
+  "seo.maps": "Maps list",
+  "seo.maps.description": "Maps list on WOTFANS",
+
+
+
+
+
   "not-found": "Sorry, but this server is unavailable. 404 | Page not found",
   "try-again": "Try again",
   "go-to-homepage": "Go to homepage",
   "menu.your.account": "Your account",
   "menu.your.profile": "Your profile",
-  "menu.your.clan": "Your Clan",
+  "menu.your.clan": "Your clan",
   "menu.logout": "Logout",
   "homepage": "Home",
   "clans.list": "Clans",
@@ -59,7 +99,6 @@
   "direct.hits.received": "Direct shots received",
   "explosion.hits": "The shots exploding were asked",
   "explosion.hits.received": "Blasting shots received",
-  "seo.tank.profile": "{name}'s profile on WotFans",
   "max.damage": "Maximum number of damage",
   "max.frags": "Maximum number of frags",
   "max.xp": "Maximum XP per bit",
@@ -95,17 +134,7 @@
   "clan.profile": "Clan profile",
   "player.profile": "Player's profile",
   "login.view": "Login",
-  "seo.homepage": "Portal for WOT fans - WotFans",
-  "seo.clans.list": "WotFans Clan List",
-  "seo.clan.profile": "{name}'s profile on WotFans",
-  "seo.search.player": "WotFans Player Search",
-  "seo.exp.wn8": "Requirements for tanks - WotFans",
-  "seo.tanks.list": "Tank list",
-  "seo.login.view": "Login - WotFans",
-  "seo.your.account": "Your account - WotFans",
-  "seo.player.profile": "{name}'s profile on WotFans",
   "last.battle.time": "The last battle",
-  "seo.maps": "Maps list on WotFans",
   "player.name": "Player name",
   "clan.joined.at": "In clan since",
   "in.game.at": "In game since",
@@ -148,7 +177,10 @@
   "best.damage.players": "Biggest damage",
   "best.xp.players": "Biggest XP",
   "browser.name": "Device name",
+  "damage.ratio": "Damage ratio",
+  "win.ratio": "Win ratio",
   "log.out": "Log out",
+  "limit": "Limit",
   "contact": "Contact",
   "logged.date": "Logged date",
   "login.sessions": "Login sessions",

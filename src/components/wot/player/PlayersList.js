@@ -92,7 +92,7 @@ export default function PlayersList({ players = [] }) {
                     />
                   </FitTableTd>
                   <FitTableTd>
-                    <PlayerProfileButton account_id={player?.id} />
+                    <PlayerProfileButton account_id={player?.id} name={player?.name} />
                   </FitTableTd>
                 </Hidden>
               </TableTr>

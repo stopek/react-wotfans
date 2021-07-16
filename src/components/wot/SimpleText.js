@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { COLOR_TEXT } from "styles/colors";
+import { COLOR_TEXT, COLOR_THEME } from "styles/colors";
 
 const Text = styled.div`
   color: ${COLOR_TEXT};
   line-height: 1.3;
   padding: 25px 0;
   max-width: 500px;
-
   display: block;
   width: 100%;
   overflow-wrap: break-word;
@@ -17,6 +16,11 @@ const Text = styled.div`
   
   strong {
     font-weight: 700;
+  }
+  
+  a {
+    color: ${COLOR_THEME};
+    text-decoration: none;
   }
 
   span {

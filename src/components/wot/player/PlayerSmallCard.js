@@ -67,7 +67,7 @@ export default function PlayerSmallCard({ player = {}, check, ...props }) {
   const history = useHistory();
 
   return (
-    <Content onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id }))} {...props}>
+    <Content onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: player?.id, name: player?.name }))} {...props}>
       <Grid container spacing={1}>
         <Grid item sm={6} xs={12}>
           <NameWithStatistics>

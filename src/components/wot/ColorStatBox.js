@@ -11,7 +11,7 @@ const Bar = styled.span`
   padding: 5px;
   display: inline-block;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   font-size: ${props => props?.large ? 25 : 20}px;
   position: relative;
   text-align: center;
@@ -20,7 +20,7 @@ const Bar = styled.span`
   ${props => props?.small && `padding: 3px; font-size: 13px; border-radius: 0;`}
   
   @media ${breakpoint.md} {
-    font-size: ${props => props?.large ? 32 : 16}px;
+    font-size: ${props => props?.large ? 25 : 14}px;
   }
 
   > div {
@@ -50,7 +50,7 @@ const Value = styled.span`
 `;
 
 const getValue = (check_value, list, key) => {
-  let response_color = '#dbdbdb';
+  let response_color = '#3d3d3d';
   list.forEach((item) => {
     if (check_value >= item.value) {
       response_color = item[key];

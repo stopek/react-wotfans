@@ -50,6 +50,7 @@ export default function WotOverlay(
     ...props
   }
 ) {
+
   const isError = useSelector(selectError);
   const isNotFound = useSelector(selectNotFound);
   const isCrash = useSelector(selectCrash);

@@ -23,7 +23,7 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     {
       translation: 'creator',
       value: is_creator ? <PlayerNameWithConsoleLogo name={is_creator.name} /> : 'no.data',
-      button: is_creator ? <PlayerProfileButton account_id={is_creator.id} /> : null
+      button: is_creator ? <PlayerProfileButton account_id={is_creator.id} name={is_creator.name} /> : null
     },
     {
       translation: 'created.date',
@@ -32,7 +32,7 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     {
       translation: 'leader',
       value: is_leader ? <PlayerNameWithConsoleLogo name={is_leader.name} /> : 'no.data',
-      button: is_leader ? <PlayerProfileButton account_id={is_leader.id} /> : null
+      button: is_leader ? <PlayerProfileButton account_id={is_leader.id} name={is_leader.name} /> : null
     },
     {
       translation: 'amount',

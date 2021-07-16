@@ -3,10 +3,14 @@ import Cookie from "components/core/Cookie";
 import Flash from "components/core/Flash";
 import Seo from "components/core/Seo";
 import { getToken } from "helpers/cookies";
+import routeForLocale from "helpers/routeForLocale";
+import trim from "helpers/trim";
 import React, { useEffect } from "react";
-import { FormattedMessage } from "react-intl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router";
+import { withRouter } from "react-router-dom";
 import { clearMessages } from "reducers/flashSlice";
+import { selectedLanguage } from "reducers/languageSlice";
 import { getUser } from "reducers/wotSlice";
 
 const action = (dispatch, token) => {
@@ -16,9 +20,12 @@ const action = (dispatch, token) => {
   }
 }
 
-export default function Base({ children, seo, seo_values = {}, ...props }) {
+function Base({ match, children, seo, seo_values = {}, ...props }) {
   const dispatch = useDispatch();
   const token = getToken();
+  const language = useSelector(selectedLanguage);
+  const history = useHistory();
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,19 +44,30 @@ export default function Base({ children, seo, seo_values = {}, ...props }) {
 
   const values = Object.assign({}, seo?.values || {}, seo_values || {});
 
+  // const explode = trim(match.url, '/').split('/');
+  // if (!explode[0]?.length) {
+  //   const currentRoute = routeForLocale(match?.path, language, match?.params);
+  //
+  //   console.log(explode);
+  //   console.log(match);
+  //   console.log(currentRoute);
+  //
+  //   return null;
+  //   return <Redirect to={currentRoute} />
+  // }
+  //
+  //
+  // if (!match?.params?.locale) {
+  //   // return <Redirect to={currentRoute} />
+  // }
+
   return (
     <div {...props}>
-      {!!seo?.title && (
-        <FormattedMessage id={seo?.title}>
-          {translation => (
-            <Seo
-              title={translation[0]}
-              description={seo?.description}
-              values={values}
-            />
-          )}
-        </FormattedMessage>
-      )}
+      <Seo
+        title={seo?.title}
+        description={seo?.description}
+        values={values}
+      />
 
       {children}
 
@@ -57,4 +75,6 @@ export default function Base({ children, seo, seo_values = {}, ...props }) {
       <Cookie />
     </div>
   );
-};
+}
+
+export default withRouter(Base);

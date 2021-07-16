@@ -1,10 +1,10 @@
 import { Grid } from "@material-ui/core";
-import Tank from "components/wot/Tank";
+import Tank from "components/wot/tanks/Tank";
 import React from "react";
 
 export default function TanksList({ tanks = [], tier = '', ...props }) {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {tanks.map((tank) => (
         <Grid
           key={`tank-${tank?.id}`}

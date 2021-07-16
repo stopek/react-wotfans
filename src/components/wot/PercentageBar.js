@@ -10,6 +10,7 @@ const Content = styled.div`
   border-radius: ${RADIUS};
   background: ${COLOR_DARK_3};
   position: relative;
+  ${props => props?.down && `margin-top: 15px`}
 `;
 
 const Percent = styled.div`
@@ -36,7 +37,7 @@ export default function PercentageBar({ amount = 0, translation = '', total = 0 
   const percent = (100 * amount) / total;
 
   return (
-    <Content>
+    <Content down={translation?.length > 0}>
       {translation?.length > 0 && (
         <Title>
           <FormattedMessage id={translation} />

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadMapGenerator, selectMapGenerator } from "reducers/wotSlice";
 
-export default function MapRotatorPage() {
+export default function MapRotatorPage({ limit = [1, 1], filter = false, ads = false }) {
   const dispatch = useDispatch();
   const generator = useSelector(selectMapGenerator);
   const response_generator = generator?.response;
@@ -22,11 +22,14 @@ export default function MapRotatorPage() {
 
   return (
     <MapRotator
-      limit={[1, 10]}
+      limit={limit}
       server_date={server_date}
+      user_date={new Date()}
       maps={maps}
       cycle={4}
+      filter={filter}
       tier={`IX-X`}
+      ads={ads}
     />
   );
 }

@@ -15,7 +15,7 @@ export default function ContactContainer({ ...props }) {
         If you have any questions, suggestions for changes, ideas for further development or if you want to help: <br/>
         - email: <strong>wotfans.online@gmail.com</strong> <br/>
         - ps user: <strong>wotfans-online</strong> <br/>
-        - facebook: <strong>fb.me/wotfansonline</strong> <br/>
+        - facebook: <strong><a href={`https://fb.me/wotfansonline`} target={`_blank`} rel={`nofollow`}>fb.me/wotfansonline</a></strong> <br/>
       </SimpleText>
     </WotOverlay>
   );

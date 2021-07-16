@@ -23,7 +23,7 @@ export default function UserStatisticsChar({ raw = [], data = {} }) {
   Object.values(raw).forEach((history, k) => {
     data_array.data.push({
       x: date_format(date_parse(history.created_at, 'yyyy-MM-dd HH:mm:ss'), 'yyyy-MM-dd'),
-      y: history[data_array.key] > 0 ? valueFormat(history[data_array.key], 2) : null
+      y: history[data_array.key] > 0 ? valueFormat(history[data_array.key], 5) : null
     });
   });
 

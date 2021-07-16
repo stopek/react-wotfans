@@ -1,5 +1,5 @@
 import MapPreview from "components/wot/maps/MapPreview";
-import { format, subHours } from "date-fns";
+import { addHours, format, subHours } from "date-fns";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { COLOR_DARK, COLOR_RED, COLOR_THEME, RADIUS } from "styles/colors";
@@ -106,7 +106,7 @@ const Map = styled.div`
   z-index: 1;
 `;
 
-export default function MapRotatorList({ list = [], diff_hours }) {
+export default function MapRotatorList({ list = [], diff_hours, filter_maps }) {
   const [current, setCurrent] = useState(null);
 
   const preview = (key) => {
@@ -124,6 +124,10 @@ export default function MapRotatorList({ list = [], diff_hours }) {
         const is_current = (map.status === 'current' || current === key);
         const is_real_current = (map.status === 'current');
 
+        if (!!filter_maps && filter_maps?.length > 0 && !filter_maps.includes(map.map.id) && !is_current) {
+          return;
+        }
+
         return (
           <Item key={`map-${key}`} onClick={() => preview(key)}>
             {is_current && (
@@ -140,9 +144,9 @@ export default function MapRotatorList({ list = [], diff_hours }) {
               </Dot>
 
               <MapTime>
-                {format(subHours(map.from, diff_hours), 'HH:mm')}
+                {format(addHours(map.from, diff_hours), 'HH:mm')}
                 {` - `}
-                {format(subHours(map.to, diff_hours), 'HH:mm')}
+                {format(addHours(map.to, diff_hours), 'HH:mm')}
               </MapTime>
             </Content>
           </Item>

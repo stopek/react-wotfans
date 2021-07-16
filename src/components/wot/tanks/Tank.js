@@ -17,7 +17,7 @@ const hoverCss = css`
 
 const TankItem = styled.div`
   background: #cccccc;
-  border-radius: 10px;
+  border-radius: ${RADIUS};
   position: relative;
   transform: scale(0.95);
   ${props => props?.pointer && `cursor: pointer;`};
@@ -46,7 +46,9 @@ const TankName = styled.div`
   border-radius: ${RADIUS};
   font-size: 16px;
   
-  ${hoverCss}
+  ${hoverCss};
+  
+  opacity: ${props => props?.hover ? 0 : 1};
 `;
 
 const TankImage = styled.div`
@@ -56,12 +58,12 @@ const TankImage = styled.div`
   background-size: contain;
 `;
 
-const Wn8 = styled.div`
+const WNBox = styled.div`
   display: inline-flex;
   position: absolute;
   top: -5px;
   left: -5px;
-
+  gap: 5px;
   ${hoverCss}
 `;
 
@@ -127,13 +129,13 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
           <TankMarkOfMastery mark={statistics?.mark_of_mastery} size={30} />
         </MarkPosition>
 
-        <TankName hover={hover}>{tank?.name}</TankName>
+        <TankName hover={!hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />
 
         {!props?.no_wn8 && statistics?.battles > 0 && tank?.tier > 0 && (
-          <Wn8 title={stats?.weight} hover={hover}>
+          <WNBox title={stats?.weight} hover={hover}>
             <Wn8Bar value={stats?.wn8} unit={`WN8`} />
-          </Wn8>
+          </WNBox>
         )}
 
         {props?.price && (

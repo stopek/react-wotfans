@@ -9,7 +9,7 @@ export default function MapsListContainer({ ...props }) {
     <WotOverlay {...props}>
       <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
-          <MapRotatorPage />
+          <MapRotatorPage ads limit={[1, 5]} />
         </Grid>
 
         <Grid item md={8} xs={12}>

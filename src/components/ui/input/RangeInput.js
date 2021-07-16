@@ -10,7 +10,8 @@ export default function RangeInput(
     value = [],
     onChange,
     step = 10,
-    label = ''
+    label = '',
+    ...props
   }
 ) {
   return (
@@ -22,6 +23,7 @@ export default function RangeInput(
         aria-labelledby="discrete-slider-always"
         step={step}
         valueLabelDisplay="on"
+        {...props}
       />
 
       {label?.length > 0 && (

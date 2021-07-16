@@ -12,7 +12,7 @@ export default function SessionsContainer({ ...props }) {
     {
       translation: 'login.sessions',
       component: (
-        <PlayerSessions sessions={user?.response?.user?.player?.users} />
+        <PlayerSessions sessions={user?.response?.player?.users} />
       )
     },
   ];

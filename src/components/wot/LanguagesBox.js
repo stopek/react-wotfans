@@ -1,6 +1,7 @@
 import { default_languages } from "helpers/languages";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router";
 import { changeLanguage, selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_THEME } from "styles/colors";
@@ -10,9 +11,9 @@ const Languages = styled.div`
   bottom: 5px;
   display: flex;
   gap: 10px;
-  width: 50px;
+  width: 35px;
   flex-wrap: wrap;
-  z-index: 2000;
+  z-index: 1000;
   left: 10px;
 `;
 
@@ -31,13 +32,15 @@ const Language = styled.div`
   ${props => props?.current && `background: ${COLOR_THEME};`}
 `;
 
-export default function LanguagesBox() {
+function LanguagesBox({ match }) {
   const language = useSelector(selectedLanguage);
   const dispatch = useDispatch();
+  // const history = useHistory();
 
   const change = (language) => {
     document.documentElement.lang = language;
     dispatch(changeLanguage(language));
+    // return history.push(fillRoute(match.path, { locale: language }));
   }
 
   return (
@@ -52,3 +55,5 @@ export default function LanguagesBox() {
     </Languages>
   );
 }
+
+export default withRouter(LanguagesBox);

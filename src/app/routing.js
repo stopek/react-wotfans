@@ -29,6 +29,18 @@ const routing = [
     params: {
       seo: {
         title: 'seo.homepage',
+        description: 'seo.homepage.description',
+      }
+    }
+  },
+  {
+    header: "login.view",
+    route: LOGIN_URL,
+    Component: load('auth/LoginContainer'),
+    params: {
+      seo: {
+        title: 'seo.login.view',
+        description: 'seo.login.view.description',
       }
     }
   },
@@ -39,11 +51,17 @@ const routing = [
   {
     authorized: true,
     route: SESSIONS_URL,
-    Component: load('account/SessionsContainer'),
+    Component: load('account/SessionsContainer')
   },
   {
     route: CONTACT_URL,
     Component: load('ContactContainer'),
+    params: {
+      seo: {
+        title: 'seo.contact',
+        description: 'seo.contact.description',
+      }
+    }
   },
   // {
   //   header: "upload",
@@ -57,6 +75,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.clans.list',
+        description: 'seo.clans.list.description',
       }
     }
   },
@@ -67,6 +86,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.clan.profile',
+        description: 'seo.clan.profile.description',
       }
     }
   },
@@ -77,6 +97,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.tank.profile',
+        description: 'seo.tank.profile.description',
       }
     }
   },
@@ -87,6 +108,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.search.player',
+        description: 'seo.search.player.description',
       }
     }
   },
@@ -97,6 +119,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.player.profile',
+        description: 'seo.player.profile.description',
       }
     }
   },
@@ -107,6 +130,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.exp.wn8',
+        description: 'seo.exp.wn8.description',
       }
     }
   },
@@ -117,16 +141,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.tanks.list',
-      }
-    }
-  },
-  {
-    header: "login.view",
-    route: LOGIN_URL,
-    Component: load('auth/LoginContainer'),
-    params: {
-      seo: {
-        title: 'seo.login.view',
+        description: 'seo.tanks.list.description',
       }
     }
   },
@@ -138,6 +153,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.your.account',
+        description: 'seo.your.account.description',
       }
     }
   },
@@ -148,6 +164,7 @@ const routing = [
     params: {
       seo: {
         title: 'seo.maps',
+        description: 'seo.maps.description',
       }
     }
   },

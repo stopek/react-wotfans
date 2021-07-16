@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="%REACT_APP_DEFAULT_LANG%" itemscope itemtype="https://schema.org/WebPage" prefix="og: https://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="theme-color" content="#00bffc" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  </head>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="theme-color" content="#00bffc" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="supported"></div>
-    <div id="fb-root"></div>
-    <div id="root"></div>
+        <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+        <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#1c1c1c">
+        <meta property="og:image" content="%PUBLIC_URL%/share-image.jpg" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="supported"></div>
+        <div id="fb-root"></div>
+        <div id="root"></div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GA%"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '%REACT_APP_GA%');
-    </script>
+<!--        <script>-->
+<!--          window.fbAsyncInit = function () {-->
+<!--            FB.init({-->
+<!--              appId: '%REACT_APP_FACEBOOK_PAGE_ID%',-->
+<!--              cookie: true,-->
+<!--              xfbml: true,-->
+<!--              version: 'v11.0'-->
+<!--            });-->
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '%REACT_APP_FACEBOOK_PAGE_ID%',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v11.0'
-        });
+<!--            FB.AppEvents.logPageView();-->
+<!--          };-->
 
-        FB.AppEvents.logPageView();
-      };
+<!--          (function (d, s, id) {-->
+<!--            var js, fjs = d.getElementsByTagName(s)[0];-->
+<!--            if (d.getElementById(id)) {return;}-->
+<!--            js = d.createElement(s);-->
+<!--            js.id = id;-->
+<!--            js.src = "https://connect.facebook.net/en_US/sdk.js";-->
+<!--            fjs.parentNode.insertBefore(js, fjs);-->
+<!--          }(document, 'script', 'facebook-jssdk'));-->
+<!--        </script>-->
 
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-
-    <script>
-      const isIE = document.documentMode;
-      if (isIE) {
-        document.getElementById("supported").innerHTML =
-          '<div style="' +
-            'background: #1c1c1c; ' +
-            'color: #00bffc; ' +
-            'line-height: 1; ' +
-            'text-align: center; ' +
-            'font-size: 30px; ' +
-            'top: 0; ' +
-            'left: 0; ' +
-            'width: 100%; ' +
-            'height: 100%; ' +
-            'display: flex; ' +
-            'align-items: center; ' +
-            'justify-content: center; ' +
-            'flex-direction: column;' +
-            'font-family: Verdana, sans-serif; ' +
-            'position: absolute;' +
-            '"' +
-            '>' +
-            '<img src="%PUBLIC_URL%/logo192.png" style="margin-bottom: 15px;" />' +
-            '<strong>IE is not supported.</strong><small>Please install Chrome/Firefox/Opera.</small>' +
-          '</div>';
-      }
-    </script>
-  </body>
+        <script>
+          const isIE = document.documentMode;
+          if (isIE) {
+            document.getElementById("supported").innerHTML =
+              '<div style="' +
+              'background: #1c1c1c; ' +
+              'color: #00bffc; ' +
+              'line-height: 1; ' +
+              'text-align: center; ' +
+              'font-size: 30px; ' +
+              'top: 0; ' +
+              'left: 0; ' +
+              'width: 100%; ' +
+              'height: 100%; ' +
+              'display: flex; ' +
+              'align-items: center; ' +
+              'justify-content: center; ' +
+              'flex-direction: column;' +
+              'font-family: Verdana, sans-serif; ' +
+              'position: absolute;' +
+              '"' +
+              '>' +
+              '<img src="%PUBLIC_URL%/logo192.png" style="margin-bottom: 15px;" />' +
+              '<strong>IE is not supported.</strong><small>Please install Chrome/Firefox/Opera.</small>' +
+              '</div>';
+          }
+        </script>
+    </body>
 </html>

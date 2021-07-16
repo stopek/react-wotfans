@@ -1,7 +1,7 @@
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import styled from "styled-components";
-import { COLOR_PRICE_GOLD, COLOR_PRICE_SILVER, COLOR_PRICE_XP, RADIUS } from "styles/colors";
+import { COLOR_DARK, COLOR_PRICE_GOLD, COLOR_PRICE_SILVER, COLOR_PRICE_XP, RADIUS } from "styles/colors";
 
 const PriceBox = styled.div`
   display: inline-flex;
@@ -9,11 +9,12 @@ const PriceBox = styled.div`
   font-size: 12px;
   border-bottom-left-radius: ${RADIUS};
   border-top-right-radius: ${RADIUS};
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const Price = styled.div`
   padding: 5px;
+  color: ${COLOR_DARK};
   background: ${props => props?.color};
 `;
 

@@ -1,4 +1,43 @@
 {
+
+  "seo.homepage": "Portal dla fanów WOT ",
+  "seo.homepage.description": "Statystyki graczy i klanów, rozgrywki ligowe, newsy ze świata WOT. Portal dla graczy WOT - czy jesteś jednym z nich?",
+
+  "seo.contact": "Kontakt",
+  "seo.contact.description": "Masz jakieś pytania? Napisz do nas!",
+
+  "seo.clans.list": "Lista klanów",
+  "seo.clans.list.description": "Lista najlepszych klanów w WOT Console na WOTFANS - sprawdź czy Twój klan tam jest",
+
+  "seo.clan.profile": "Profil klanu {name}",
+  "seo.clan.profile.description": "Szczegóły klanu {name} w grze WOT Console na WOTFANS oraz graczy klanu {name}",
+
+  "seo.tank.profile": "Profil czołgu {name}",
+  "seo.tank.profile.description": "Statystyki czołgu {name} w grze WOT Console na WOTFANS",
+
+  "seo.search.player": "Szukaj gracza",
+  "seo.search.player.description": "Znajdź gracza WOT Console na WOTFANS i sprawdź jego statystyki",
+
+  "seo.player.profile": "Profil gracza {name}",
+  "seo.player.profile.description": "Szczegóły, statystyki gracza {name} w grze WOT Console na WOTFANS. Statystyki, lista czołgów i wiele więcej",
+
+  "seo.exp.wn8": "Wymagalności czołgów",
+  "seo.exp.wn8.description": "Lista wymagalności na czołgach, które pełnią ważną rolę przy obliczaniu WN8",
+
+  "seo.tanks.list": "Lista czołgów",
+  "seo.tanks.list.description": "Lista czołgów dostępnych w grze WOT dostępna na WOTFANS",
+
+  "seo.login.view": "Zaloguj się",
+  "seo.login.view.description": "Dołącz do nas i zostań WOTFANS'em",
+
+  "seo.your.account": "Twoje konto",
+  "seo.your.account.description": "Twoje konto Fana na WOTFANS",
+
+  "seo.maps": "Lista map + rotator",
+  "seo.maps.description": "Aktualna lista map dostępnych w WOT oraz rotator map",
+
+
+
   "not-found": "Przepraszamy, ale ten serwer jest niedostępny. 404 | Strona nie została odnaleziona",
   "try-again": "Spróbuj ponownie",
   "go-to-homepage": "Idź do strony głównej",
@@ -76,6 +115,8 @@
   "shots": "Strzałów",
   "spotted": "Wykryć",
   "survived.battles": "Przetrwanych bitew",
+  "damage.ratio": "Celność",
+  "win.ratio": "Wygrane",
   "wins": "Wygranych",
   "xp": "Punktów PD",
   "pie.wins": "wygrał",
@@ -95,17 +136,6 @@
   "clan.profile": "Profil klanu",
   "player.profile": "Profil gracza",
   "login.view": "Logowanie",
-  "seo.homepage": "Portal dla Fanów WOT - WotFans",
-  "seo.clans.list": "Lista klanów na WotFans",
-  "seo.clan.profile": "{name} na WotFans",
-  "seo.search.player": "Wyszukiwarka graczy na WotFans",
-  "seo.exp.wn8": "Wymagalności dla czołgów - WotFans",
-  "seo.tanks.list": "Lista czołgów",
-  "seo.tank.profile": "Profil czołgu {name} na WotFans",
-  "seo.login.view": "Logowanie - WotFans",
-  "seo.your.account": "Twoje konto - WotFans",
-  "seo.player.profile": "{name} na WotFans",
-  "seo.maps": "Lista map WOT na WotFans",
   "last.battle.time": "Ostatnia bitwa",
   "player.name": "Nazwa gracza",
   "clan.joined.at": "W klanie od",
@@ -188,6 +218,7 @@
   "wn8.great": "GREAT",
   "wn8.unicum": "UNICUM",
   "wn8.super.unicum": "SUPER UNICUM",
+  "limit": "Limit",
 
   "wn8.filter": "Filtruj według WN8",
   "efficiency": "Efektywność",

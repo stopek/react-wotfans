@@ -29,7 +29,7 @@ const WnInfo = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  color: ${props => props?.color};
+  color: ${COLOR_TEXT};
 
   span, strong {
     flex: 1;

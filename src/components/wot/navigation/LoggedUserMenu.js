@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import AssignmentIndRoundedIcon from '@material-ui/icons/AssignmentIndRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import HistoryRoundedIcon from '@material-ui/icons/HistoryRounded';
 import RecentActorsRoundedIcon from '@material-ui/icons/RecentActorsRounded';
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
@@ -23,7 +24,6 @@ import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER, RADIUS } from "styles/colors";
-import HistoryRoundedIcon from '@material-ui/icons/HistoryRounded';
 
 const StyledMenu = withStyles({
   paper: {
@@ -125,8 +125,9 @@ export default function LoggedUserMenu() {
     });
   }
 
-  const user_data = user?.response?.user?.player;
+  const user_data = user?.response?.player;
   const user_name = user_data?.name;
+  const user_id = user_data?.id;
 
   const menuItems = user?.response ? [
     {
@@ -137,7 +138,7 @@ export default function LoggedUserMenu() {
     {
       translation: 'menu.your.profile',
       icon: <RecentActorsRoundedIcon fontSize="small" />,
-      route: fillRoute(PLAYER_URL, { account_id: user_data?.id })
+      route: fillRoute(PLAYER_URL, { account_id: user_id, name: user_name })
     },
     !!user_data?.clan?.tag && {
       translation: 'menu.your.clan',
@@ -177,7 +178,15 @@ export default function LoggedUserMenu() {
             onClose={handleClose}
           >
             {menuItems.filter((item) => !!item).map((menu, key) => (
-              <StyledMenuItem onClick={() => history.push(menu.route)} key={`menu-item-${key}`}>
+              <StyledMenuItem
+                onClick={(event) => {
+                  event.preventDefault();
+                  history.push(menu.route);
+                }}
+                href={menu.route}
+                key={`menu-item-${key}`}
+                component={`a`}
+              >
                 <ListItemIcon>
                   {menu.icon}
                 </ListItemIcon>

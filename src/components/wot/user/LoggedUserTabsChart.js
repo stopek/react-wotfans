@@ -20,7 +20,7 @@ export default function LoggedUserTabsChart() {
   const user = useSelector(selectUser);
 
   const data = {
-    playerStatsHistories: user?.response?.user?.player?.playerStatsHistories ?? []
+    playerStatsHistories: user?.response?.player?.playerStatsHistories ?? []
   }
 
   const statistics_tab = [
@@ -48,6 +48,33 @@ export default function LoggedUserTabsChart() {
         <UserStatisticsChar
           raw={data.playerStatsHistories}
           data={{ id: "efficiency", key: 'efficiency', data: [] }}
+        />
+      )
+    },
+    {
+      translation: 'battles',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "battles", key: 'battles', data: [] }}
+        />
+      )
+    },
+    {
+      translation: 'win.ratio',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "win_ratio", key: 'win_ratio', data: [] }}
+        />
+      )
+    },
+    {
+      translation: 'damage.ratio',
+      component: (
+        <UserStatisticsChar
+          raw={data.playerStatsHistories}
+          data={{ id: "damage_ratio", key: 'damage_ratio', data: [] }}
         />
       )
     }

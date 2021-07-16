@@ -47,7 +47,7 @@ export default function BestPlayersOnTank(
               <FitTableTd>
                 <ButtonInput
                   color={`secondary`}
-                  onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: stat?.player?.id }))}
+                  onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: stat?.player?.id, name: stat?.player?.name }))}
                   label={`see.profile`}
                 />
               </FitTableTd>

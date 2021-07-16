@@ -4,11 +4,31 @@ import NotFound from "components/errors/NotFound";
 import TitledComponentHOC from "hoc/TitledComponentHOC";
 import LanguageProvider from "language";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { selectedLanguage } from "reducers/languageSlice";
 
 export default function RouterComponent() {
-  const routes_list = routes.map(({ authorized = false, route, header, Component, params }, key) => {
-    let RouteComponent = TitledComponentHOC(Component, { ...params, header: header }, authorized);
+  const language = useSelector(selectedLanguage);
+
+  // let routes_list = [];
+  //
+  // ['', ':locale'].forEach((locale) => {
+  //   Object.values(routes).forEach(({ authorized = false, route, header, Component, params }, key) => {
+  //     const RouteComponent = TitledComponentHOC(Component, { ...params, header: header }, authorized);
+  //     const currentRoute = routeForLocale(route, locale);
+  //
+  //     routes_list.push(() => (
+  //       <Route key={`route-${locale}-${key}`} strict exact path={currentRoute}>
+  //         <RouteComponent />
+  //       </Route>
+  //     ));
+  //   });
+  // });
+  //
+
+  const routes_list = routes.map(({ route, header, Component, params, ...rest }, key) => {
+    let RouteComponent = TitledComponentHOC(Component, { ...params });
     return (
       <Route key={key} strict exact path={route}>
         <RouteComponent />
@@ -18,7 +38,7 @@ export default function RouterComponent() {
 
   return (
     <LanguageProvider>
-      <Router>
+      <BrowserRouter>
         <ScrollTop>
           <Switch>
             {routes_list}
@@ -28,7 +48,7 @@ export default function RouterComponent() {
             </Route>
           </Switch>
         </ScrollTop>
-      </Router>
+      </BrowserRouter>
     </LanguageProvider>
   );
 };

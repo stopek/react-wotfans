@@ -12,7 +12,7 @@ export default function UpgradeContainer({ ...props }) {
       alignItems: 'center',
       background: COLOR_DARK_3,
       justifyContent: 'center'
-    }}>
+    }} {...props}>
       <div style={{
         background: `url(${image}) no-repeat center center`,
         width: '100%',

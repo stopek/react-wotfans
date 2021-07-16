@@ -17,7 +17,7 @@ export default function AccountContainer({ ...props }) {
         <Grid container spacing={2}>
           <Grid item md={4} xs={12}>
             <LoggedUserCard />
-            <MapRotatorPage />
+            <MapRotatorPage limit={[1, 12]} filter />
           </Grid>
 
           <Grid item md={8} xs={12}>

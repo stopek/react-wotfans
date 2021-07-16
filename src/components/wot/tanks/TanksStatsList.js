@@ -1,10 +1,14 @@
 import { Grid } from "@material-ui/core";
 import { wn8Ranges } from "app/settings";
-import Tank from "components/wot/Tank";
+import Tank from "components/wot/tanks/Tank";
 import React from "react";
 
 export default function TanksStatsList({ tanks_stats = [], grid_props = {}, filters = {}, ...props }) {
   let tanks = Object.values(tanks_stats);
+
+  if (filters?.battles?.length > 0) {
+    tanks = tanks.filter((tank_stat) => (tank_stat.battles >= filters.battles[0] && tank_stat.battles <= filters.battles[1]));
+  }
 
   if (filters?.tier?.length > 0) {
     tanks = tanks.filter((tank_stat) => filters?.tier.includes(tank_stat?.tank?.tier));
