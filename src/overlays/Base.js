@@ -3,14 +3,10 @@ import Cookie from "components/core/Cookie";
 import Flash from "components/core/Flash";
 import Seo from "components/core/Seo";
 import { getToken } from "helpers/cookies";
-import routeForLocale from "helpers/routeForLocale";
-import trim from "helpers/trim";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { clearMessages } from "reducers/flashSlice";
-import { selectedLanguage } from "reducers/languageSlice";
 import { getUser } from "reducers/wotSlice";
 
 const action = (dispatch, token) => {
@@ -23,19 +19,19 @@ const action = (dispatch, token) => {
 function Base({ match, children, seo, seo_values = {}, ...props }) {
   const dispatch = useDispatch();
   const token = getToken();
-  const language = useSelector(selectedLanguage);
-  const history = useHistory();
+  // const language = useSelector(selectedLanguage);
+  // const history = useHistory();
 
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      action(dispatch, token);
-    }, 10000);
-
-    return () => {
-      clearInterval(timer);
-    }
-  }, [dispatch, token]);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     action(dispatch, token);
+  //   }, 10000);
+  //
+  //   return () => {
+  //     clearInterval(timer);
+  //   }
+  // }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(clearMessages());

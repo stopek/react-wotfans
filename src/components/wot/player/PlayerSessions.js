@@ -1,59 +1,57 @@
-import { Hidden } from "@material-ui/core";
+import { requestToApi } from "api/actions";
+import { AuthWot } from "api/actions/auth_wot";
 import ButtonInput from "components/ui/input/ButtonInput";
-import React from "react";
-import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
-import { FitTableTd, SimpleTable, TableTbody, TableTdSmall, TableThead, TableTr } from "styles/GlobalStyled";
+import TableUI from "components/ui/TableUI";
+import Dot from "components/wot/Dot";
+import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getUser } from "reducers/wotSlice";
 
-const List = styled.div`
-  position: relative;
-  z-index: 2;
-  color: white;
-  margin: 15px 0;
-`;
-
-export default function PlayerSessions({ sessions = [] }) {
+export default function PlayerSessions({ sessions = [], session_id = 0 }) {
+  const dispatch = useDispatch();
+  const [logged_out, setLoggedOut] = useState([]);
   sessions = Object.values(sessions);
 
   if (!sessions?.length) {
     return null;
   }
 
+  const logOut = (id) => {
+    requestToApi(AuthWot.log_out_account, { id: id }, () => {
+      dispatch(setSuccessMessage(
+        'logout.success',
+        true
+      ));
+      setLoggedOut(logged_out.concat(id));
+      dispatch(getUser());
+    }, (error) => {
+      dispatch(setErrorMessage(error?.errors));
+    });
+  }
+
   return (
-    <List>
-      <SimpleTable>
-        <Hidden smDown>
-          <TableThead>
-            <TableTr>
-              <FitTableTd><FormattedMessage id={`logged.date`} /></FitTableTd>
-              <TableTdSmall><FormattedMessage id={`browser.name`} /></TableTdSmall>
-              <FitTableTd><FormattedMessage id={`log.out`} /></FitTableTd>
-            </TableTr>
-          </TableThead>
-        </Hidden>
-
-        <TableTbody>
-          {sessions.map((session) => {
-            return (
-              <TableTr key={`session-${session?.id}`} disable={session.deleted_at !== ''}>
-                <FitTableTd>
-                  {session.created_at}
-                </FitTableTd>
-
-                <TableTdSmall>
-                  {session?.user_agent}
-                </TableTdSmall>
-
-                <FitTableTd>
-                  {session.deleted_at === '' && (
-                    <ButtonInput label={`log.out`} />
-                  )}
-                </FitTableTd>
-              </TableTr>
-            );
-          })}
-        </TableTbody>
-      </SimpleTable>
-    </List>
+    <TableUI
+      headers={[
+        { id: 'created_at', translation: 'logged.date' },
+        { id: 'user_agent', translation: 'browser.name' },
+        { id: 'deleted_at' },
+      ]}
+      items={sessions}
+      parse={(item) => {
+        return {
+          created_at: item?.created_at,
+          user_agent: item?.user_agent,
+          deleted_at: item?.deleted_at === '' && !logged_out.includes(item?.id) && (
+            item?.id === session_id ? <Dot blinking={true} /> : (
+              <ButtonInput label={`log.out`} key={`button-${item.id}`} onClick={() => logOut(item.id)} />
+            )
+          ),
+          properties: {
+            class: 'disabled' //item.deleted_at !== '' ? 'disabled' : ''
+          }
+        }
+      }}
+    />
   );
 }

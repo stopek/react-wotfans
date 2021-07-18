@@ -4,13 +4,9 @@ import NotFound from "components/errors/NotFound";
 import TitledComponentHOC from "hoc/TitledComponentHOC";
 import LanguageProvider from "language";
 import React from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { selectedLanguage } from "reducers/languageSlice";
 
 export default function RouterComponent() {
-  const language = useSelector(selectedLanguage);
-
   // let routes_list = [];
   //
   // ['', ':locale'].forEach((locale) => {

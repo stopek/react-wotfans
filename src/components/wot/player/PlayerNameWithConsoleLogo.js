@@ -27,7 +27,10 @@ const Logo = styled.div`
   @media ${breakpoint.md} {
     width: 40px;
     height: 40px;
+    
+    ${props => props?.small && `width: 20px; height: 20px;`}
   }
+  
 `;
 
 const getConsoleLogo = (name) => {
@@ -51,7 +54,7 @@ const NameBox = styled.div`
   flex-direction: column;
 `;
 
-export default function PlayerNameWithConsoleLogo({ name = '', last_battle = '' }) {
+export default function PlayerNameWithConsoleLogo({ name = '', last_battle = '', small = false }) {
   const language = useSelector(selectedLanguage);
   const date_locale = getDateLocale(language);
 
@@ -66,7 +69,7 @@ export default function PlayerNameWithConsoleLogo({ name = '', last_battle = '' 
 
   return (
     <Name title={name}>
-      <Logo image={getConsoleLogo(platform)} />
+      <Logo image={getConsoleLogo(platform)} small={small} />
       <NameBox>
         <span>{nick}</span>
 

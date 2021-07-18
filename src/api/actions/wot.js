@@ -18,10 +18,6 @@ export class Wot {
     return Wot.action('player/search', params);
   }
 
-  static async logout(params) {
-    return Wot.action('logout', params);
-  }
-
   static async tanks(params) {
     return Wot.action('tanks', params);
   }
@@ -66,6 +62,10 @@ export class Wot {
 
   static async exp_wn8(params) {
     return Wot.action('expected', params);
+  }
+
+  static async moe(params) {
+    return Wot.action('moe', params);
   }
 
   static async load_players(params) {

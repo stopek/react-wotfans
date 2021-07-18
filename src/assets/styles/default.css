@@ -1,35 +1,49 @@
 body, html {
-    line-height: 1.4;
-    height: 100%;
-    background: #3c3c3c;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  line-height: 1.4;
+  height: 100%;
+  background: #3c3c3c;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
-
 body, body div, html, html div {
-    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, cursive;
+  font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, cursive;
 }
 
 * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 div {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #root {
-    overflow-x: hidden;
-    text-align: left;
-    width: 100%;
-    height: 100%;
+  overflow-x: hidden;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+#root:before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  opacity: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#root[aria-hidden=true]:before {
+  transition: all 0.2s ease-in-out;
+  z-index: 100;
+  opacity: 1;
 }
 
 /*# sourceMappingURL=default.css.map */

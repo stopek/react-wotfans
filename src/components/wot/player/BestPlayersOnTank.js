@@ -1,60 +1,37 @@
-import { PLAYER_URL } from "app/routes";
-import ButtonInput from "components/ui/input/ButtonInput";
+import TableUI from "components/ui/TableUI";
+import ClanProfileButton from "components/wot/clans/ClanProfileButton";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
-import fillRoute from "helpers/fillRoute";
+import PlayerProfileButton from "components/wot/player/PlayerProfileButton";
 import React from "react";
-import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router-dom";
-import { FitTableTd, SimpleTable, TableTbody, TableTdSmall, TableThead } from "styles/GlobalStyled";
-import styled from "styled-components";
-
-const Content = styled.div`
-  ${props => props?.max_height > 0 && (
-    `
-      max-height: ${props?.max_height}px;
-      overflow-y: auto;
-    `
-  )}
-`;
 
 export default function BestPlayersOnTank(
   {
-    header_translation = '',
     column_key = '',
-    max_height = 0,
     stats = []
   }
 ) {
-  const history = useHistory();
-
   return (
-    <Content max_height={max_height}>
-      <SimpleTable>
-        <TableThead>
-          <tr>
-            <TableTdSmall as={`th`} />
-            <FitTableTd as={`th`}><FormattedMessage id={`player.name`} /></FitTableTd>
-            <FitTableTd as={`th`} />
-          </tr>
-        </TableThead>
-        <TableTbody>
-          {Object.values(stats).map((stat, key) => (
-            <tr key={`stat-${column_key}-${key}`}>
-              <TableTdSmall>{stat[column_key]}</TableTdSmall>
-              <FitTableTd>
-                <PlayerNameWithConsoleLogo name={stat?.player?.name} />
-              </FitTableTd>
-              <FitTableTd>
-                <ButtonInput
-                  color={`secondary`}
-                  onClick={() => history.push(fillRoute(PLAYER_URL, { account_id: stat?.player?.id, name: stat?.player?.name }))}
-                  label={`see.profile`}
-                />
-              </FitTableTd>
-            </tr>
-          ))}
-        </TableTbody>
-      </SimpleTable>
-    </Content>
+    <TableUI
+      headers={[
+        { id: 'value' },
+        { id: 'player', translation: 'player.name' },
+        { id: 'profile', translation: 'see.profile' },
+        { id: 'clan', translation: 'clan' },
+        { id: 'clan.profile', translation: 'see.profile' },
+      ]}
+      nosort={['player', 'profile']}
+      rowsPerPateOptions={[10, 15, 25]}
+      items={stats}
+      without_top
+      parse={(item) => {
+        return {
+          value: item[column_key],
+          player: <PlayerNameWithConsoleLogo name={item?.player?.name} small />,
+          profile: <PlayerProfileButton account_id={item.player.id} name={item.player.name} small />,
+          clan: !!item.player.clan && item.player.clan.tag,
+          clan_profile: !!item.player.clan && <ClanProfileButton tag={item.player.clan.tag} small />
+        }
+      }}
+    />
   );
 }

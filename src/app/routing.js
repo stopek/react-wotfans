@@ -5,17 +5,20 @@ import {
   CLANS_URL,
   CONTACT_URL,
   EXP_WN8_URL,
+  GAMES_FORM,
+  GAMES_URL,
   LOGIN_URL,
   MAIN_URL,
   MAPS_URL,
+  MOE_URL,
   PLAYER_URL,
   SEARCH_URL,
   SESSIONS_URL,
   TANK_URL,
   TANKS_URL,
-  UPGRADE_URL
+  UPGRADE_URL,
+  WN8_CALCULATOR_URL
 } from "app/routes";
-import React from "react";
 
 const load = (component) => {
   return loadable(() => import(`containers/${component}`));
@@ -52,6 +55,21 @@ const routing = [
     authorized: true,
     route: SESSIONS_URL,
     Component: load('account/SessionsContainer')
+  },
+  {
+    authorized: true,
+    route: GAMES_URL,
+    Component: load('account/games/GamesContainer')
+  },
+  {
+    authorized: true,
+    route: GAMES_FORM,
+    Component: load('account/games/GamesFormContainer')
+  },
+  {
+    authorized: true,
+    route: WN8_CALCULATOR_URL,
+    Component: load('account/WN8CalculatorContainer')
   },
   {
     route: CONTACT_URL,
@@ -126,11 +144,22 @@ const routing = [
   {
     header: "exp.wn8",
     route: EXP_WN8_URL,
-    Component: load('tank/ExpMoeContainer'),
+    Component: load('tank/ExpectedContainer'),
     params: {
       seo: {
         title: 'seo.exp.wn8',
         description: 'seo.exp.wn8.description',
+      }
+    }
+  },
+  {
+    header: "moe",
+    route: MOE_URL,
+    Component: load('tank/MoeContainer'),
+    params: {
+      seo: {
+        title: 'seo.moe',
+        description: 'seo.moe.description',
       }
     }
   },

@@ -12,7 +12,7 @@
   "seo.clan.profile.description": "Details of the clan {name} on WOTFANS along with the list of players.",
 
   "seo.tank.profile": "{name}'s profile",
-  "seo.tank.profile.description": "Details of player {name} on WOTFANS. Statistics, tank list and much more.",
+  "seo.tank.profile.description": "Details of player {name} on WOTFANS. Statistics, tank list and much more. {description}",
 
   "seo.search.player": "Player Search",
   "seo.search.player.description": "Find a player on WOTFANS and check their stats.",
@@ -21,7 +21,7 @@
   "seo.player.profile.description": "Player profile {name} on WOTFANS. Statistics, tank list.",
 
   "seo.exp.wn8": "Requirements for tanks",
-  "seo.exp.wn8.description": "",
+  "seo.exp.wn8.description": "Tank requirements for WN8",
 
   "seo.tanks.list": "Tank list",
   "seo.tanks.list.description": "Tanks list on WOTFANS. All tanks in World Of Tanks.",
@@ -35,8 +35,29 @@
   "seo.maps": "Maps list",
   "seo.maps.description": "Maps list on WOTFANS",
 
+  "seo.moe": "Marks of Excellence",
+  "seo.moe.description": "WOT Tank Marks of Excellence on WOTFANS - see what damage you have to do to climb up",
 
 
+  "dense": "Dense view",
+  "hide.type": "Hide type",
+  "hide.tier": "Hide tier",
+  "hide.damage": "Hide damage",
+  "hide.def": "Hide def",
+  "hide.frag": "Hide frag",
+  "hide.spot": "Hide spot",
+  "hide.win": "Hide win",
+  "moe" : "Marks of Excellence",
+  "moe.1dmg": "⭐",
+  "moe.2dmg": "⭐⭐",
+  "moe.3dmg": "⭐⭐⭐",
+  "hide.moe_1dmg": "Hide ⭐",
+  "hide.moe_2dmg": "Hide ⭐⭐",
+  "hide.moe_3dmg": "Hide ⭐⭐⭐",
+  "hide.battles": "Hide battles",
+  "clan": "Clan",
+  "rows.per.page": "Per page",
+  "of": "of",
 
 
   "not-found": "Sorry, but this server is unavailable. 404 | Page not found",
@@ -52,7 +73,7 @@
   "exp.wn8": "EXP WN8",
   "tanks.list": "Tanks",
   "fundraising": "Support",
-  "see.profile": "View profile",
+  "see.profile": "Profile",
   "shortcut": "Abbreviation",
   "full.clan.name": "Full clan name",
   "created.date": "Creation date",
@@ -149,7 +170,7 @@
   "nation.ussr": "Soviet",
   "nation.sweden": "Swedish",
   "nation.uk": "UK",
-  "nation. Bohemia": "Czech",
+  "nation.czech": "Czech",
   "nation.italy": "Italian",
   "nation.poland": "Poland",
   "nation.usa": "USA",

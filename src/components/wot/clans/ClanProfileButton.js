@@ -4,7 +4,7 @@ import fillRoute from "helpers/fillRoute";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function ClanProfileButton({ tag = '' }) {
+export default function ClanProfileButton({ tag = '', ...props }) {
   const history = useHistory();
   const url = fillRoute(CLAN_URL, { tag: tag });
 
@@ -20,6 +20,7 @@ export default function ClanProfileButton({ tag = '' }) {
       as={`a`}
       href={url}
       label={`see.profile`}
+      {...props}
     />
   );
 }

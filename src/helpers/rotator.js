@@ -39,25 +39,6 @@ export const mapsResultList = (current_date, result_maps, limit = [1, 1]) => {
   return display_maps;
 }
 
-export const copyDateIS = (copy_from, copy_to) => {
-  let time;
-
-  time = setMinutes(copy_to, getMinutes(copy_from));
-  time = setSeconds(time, getSeconds(copy_from));
-
-  return time;
-}
-
-export const diffAndAddHours = (date_from, date_to, date_set) => {
-  let hours = differenceInHours(date_from, date_to);
-
-  if (typeof date_set !== 'undefined') {
-    date_to = date_set;
-  }
-
-  return subHours(date_to, hours);
-}
-
 export const mapsIntervalsList = (maps, cycle, server_date) => {
   let i = 0;
   const result_maps = [];

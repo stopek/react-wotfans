@@ -4,7 +4,7 @@ import fillRoute from "helpers/fillRoute";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function TankProfileButton({ tank_id = 0 }) {
+export default function TankProfileButton({ tank_id = 0, small, large }) {
   const history = useHistory();
   const url = fillRoute(TANK_URL, { tank_id: tank_id });
 
@@ -20,6 +20,8 @@ export default function TankProfileButton({ tank_id = 0 }) {
       as={`a`}
       href={url}
       label={`see.profile`}
+      small={small}
+      large={large}
     />
   );
 }

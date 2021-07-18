@@ -1,6 +1,6 @@
 import PlayerSessions from "components/wot/player/PlayerSessions";
 import Tabs from "components/wot/Tabs";
-import WotOverlay from "overlays/Wot";
+import AccountOverlay from "overlays/Account";
 import React from 'react';
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/wotSlice";
@@ -12,16 +12,19 @@ export default function SessionsContainer({ ...props }) {
     {
       translation: 'login.sessions',
       component: (
-        <PlayerSessions sessions={user?.response?.player?.users} />
+        <PlayerSessions
+          sessions={user?.response?.player?.users}
+          session_id={user?.response?.session_id}
+        />
       )
     },
   ];
 
   return (
-    <WotOverlay {...props}>
+    <AccountOverlay {...props}>
       {user?.response && (
         <Tabs tabs={statistics_tab} />
       )}
-    </WotOverlay>
+    </AccountOverlay>
   );
 }

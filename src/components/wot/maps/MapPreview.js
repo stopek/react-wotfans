@@ -1,5 +1,4 @@
 import React from "react";
-import ReactPlayer from "react-player";
 import styled from "styled-components";
 
 const Content = styled.div`
@@ -9,36 +8,48 @@ const Content = styled.div`
   overflow: hidden;
 `;
 
-const Map = styled(ReactPlayer)`
+const Map = styled.div`
   width: 100% !important;
   height: 100% !important;
   z-index: 3;
+  position: relative;
+  background: url(${props => props?.poster}) no-repeat center center;
+  background-size: cover;
 
   video {
     object-fit: cover;
+    object-position: center center;
+    width: 100%;
+    height: 100%;
   }
 `;
 
 export default function MapPreview({ video, height = 300, autoplay = true, loop = true, ...props }) {
   video = process.env.REACT_APP_DATA_URL + video;
 
-  const webm = video + '.webm';
   const mp4 = video + '_1.mp4';
+  const poster = video + '.jpg';
 
   return (
     <Content height={height}>
       <Map
-        playing={autoplay}
-        muted={true}
-        controls={false}
-        playsinline={autoplay}
-        loop={loop}
-        url={[
-          { src: mp4, type: 'video/mp4' },
-          { src: webm, type: 'video/webm' },
-        ]}
         {...props}
-      />
+        poster={poster}
+      >
+        {autoplay && (
+          <video
+            muted={true}
+            controls={false}
+            playsInline={true}
+            loop={loop}
+            autoPlay={autoplay}
+            {...props}
+          >
+            <source src={mp4} type={'video/mp4'} />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </Map>
     </Content>
   );
 }

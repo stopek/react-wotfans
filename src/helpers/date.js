@@ -2,7 +2,7 @@ import {
   addDays,
   format,
   formatDistance,
-  fromUnixTime,
+  fromUnixTime, getISODay,
   parse,
   setHours,
   setMinutes,
@@ -37,5 +37,7 @@ export const date_parse = (date, format_pattern = 'yyyy-MM-dd') => {
 }
 
 export function getMondayOfDate(fromDate) {
-  return addDays(setSeconds(setMinutes(setHours(startOfWeek(fromDate), 0), 0), 0), 1);
+  const offsetDays = - (getISODay(fromDate) - 1);
+
+  return setSeconds(setMinutes(setHours(addDays(fromDate, offsetDays), 0), 0), 0);
 }

@@ -4,34 +4,8 @@ import RangeInput from "components/ui/input/RangeInput";
 import SelectInput from "components/ui/input/SelectInput";
 import DarkBox from "components/wot/DarkBox";
 import TanksStatsList from "components/wot/tanks/TanksStatsList";
+import { getTiersFromTanksStats } from "helpers/tanks";
 import React, { useState } from "react";
-
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
-
-const getTiersFromTanksStats = (tanks_stats = []) => {
-  tanks_stats = Object.values(tanks_stats);
-  if (!tanks_stats?.length) {
-    return [];
-  }
-
-  let tiers = [];
-  tanks_stats.forEach((tank_stat) => {
-    tiers.push(tank_stat.tank.tier);
-  });
-
-  tiers = tiers.filter(onlyUnique).sort(function (a, b) {
-    return a - b;
-  });
-
-  const key_value = [];
-  tiers.forEach((tier) => {
-    key_value.push({ label: tier, value: tier });
-  });
-
-  return key_value;
-}
 
 export default function TanksListAndFilters(
   {

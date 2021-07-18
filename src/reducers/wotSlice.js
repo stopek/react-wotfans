@@ -19,10 +19,14 @@ const initialState = {
   map_generator: [],
   user_tanks_achievements: [],
   exp_wn8_list: [],
+  moe_list: [],
   tanks: [],
   search_tank: {},
 
-  get_user: {}
+  get_user: {},
+
+  games: [],
+  game: {}
 };
 
 const ignoreChangingAction = [
@@ -85,9 +89,11 @@ export const userTanks = handleRejectValues('wot/user_tanks', Wot.user_tanks);
 export const userTanksAchievements = handleRejectValues('wot/user_tanks_achievements', Wot.user_tanks_achievements);
 export const clansList = handleRejectValues('wot/clans_list', Wot.clans);
 export const expWn8List = handleRejectValues('wot/wn8', Wot.exp_wn8);
+export const moeList = handleRejectValues('wot/moe', Wot.moe);
 export const loadTanks = handleRejectValues('wot/tanks', Wot.tanks);
 
 export const getUser = handleRejectValues('wot/get_user', AuthWot.get_user);
+
 
 export const wotSlice = createSlice({
   name: "wot",
@@ -101,7 +107,10 @@ export const wotSlice = createSlice({
     },
     clearSearchPlayers: (state) => {
       state.search_players = {};
-    }
+    },
+    setGameParam: (state, action) => {
+      state.game = Object.assign({}, state.game, action.payload);
+    },
   },
 
   extraReducers: builder => {
@@ -153,6 +162,13 @@ export const wotSlice = createSlice({
       })
       .addCase(expWn8List.fulfilled, (state, action) => {
         state.exp_wn8_list = action.payload;
+      })
+
+      .addCase(moeList.pending, (state) => {
+        state.moe_list = [];
+      })
+      .addCase(moeList.fulfilled, (state, action) => {
+        state.moe_list = action.payload;
       })
 
       .addCase(loadPlayers.pending, (state) => {
@@ -250,7 +266,7 @@ export const wotSlice = createSlice({
   },
 });
 
-export const { setError, clearSearchPlayer, clearSearchPlayers } = wotSlice.actions;
+export const { setError, clearSearchPlayer, clearSearchPlayers, setGameParam } = wotSlice.actions;
 
 export const selectSearchPlayer = (state) => state.wot.search_player;
 export const selectSearchPlayers = (state) => state.wot.search_players;
@@ -265,9 +281,11 @@ export const selectLoadPlayers = (state) => state.wot.players_list;
 export const selectLoadMaps = (state) => state.wot.maps_list;
 export const selectMapGenerator = (state) => state.wot.map_generator;
 export const selectExpWn8List = (state) => state.wot.exp_wn8_list;
+export const selectMoeList = (state) => state.wot.moe_list;
 export const selectLoading = (state) => state.wot.loading;
 export const selectError = (state) => state.wot.error;
 export const selectNotFound = (state) => state.wot.not_found;
 export const selectCrash = (state) => state.wot.crash;
+export const selectGameItem = (state) => state.wot.game || {};
 
 export default wotSlice.reducer;

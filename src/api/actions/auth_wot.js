@@ -26,4 +26,12 @@ export class AuthWot {
   static async get_user(params) {
     return AuthWot.get('get_user', params);
   }
+
+  static async logout(params) {
+    return AuthWot.action('logout', params);
+  }
+
+  static async log_out_account(params) {
+    return AuthWot.action('log_out_account', params);
+  }
 }

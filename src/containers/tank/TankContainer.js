@@ -18,7 +18,7 @@ export default function TankContainer({ match, ...props }) {
 
   let data = {};
   if (tank?.response) {
-    data = { seo_values: { name: tank?.response?.tank?.name }, ...props };
+    data = { seo_values: { name: tank?.response?.tank?.name, description: tank?.response?.tank?.description }, ...props };
   }
 
   return (

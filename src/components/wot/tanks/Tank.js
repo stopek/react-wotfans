@@ -8,7 +8,7 @@ import { priceFormat } from "helpers/priceFormat";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { COLOR_SECOND, COLOR_THEME, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_SECOND, COLOR_THEME, RADIUS } from "styles/colors";
 
 const hoverCss = css`
   transition: all .2s ease-in-out;
@@ -16,7 +16,7 @@ const hoverCss = css`
 `;
 
 const TankItem = styled.div`
-  background: #cccccc;
+  background-color: ${COLOR_DARK_2};
   border-radius: ${RADIUS};
   position: relative;
   transform: scale(0.95);

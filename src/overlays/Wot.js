@@ -2,7 +2,7 @@ import { menuItems } from "app/settings";
 import Error from "components/core/Error";
 import FullPreloader from "components/core/FullPreloader";
 import Footer from "components/Footer";
-import DialMenu from "components/ui/menu/DialMenu";
+import MaterialMenu from "components/ui/menu/MaterialMenu";
 import LanguagesBox from "components/wot/LanguagesBox";
 import LoggedUserMenu from "components/wot/navigation/LoggedUserMenu";
 import Base from "overlays/Base";
@@ -67,7 +67,7 @@ export default function WotOverlay(
       {!isCrash && (
         <Content {...props}>
           <DialMenuContent>
-            <DialMenu actions={menuItems} />
+            <MaterialMenu actions={menuItems} />
           </DialMenuContent>
 
           <LoggedUserMenu />

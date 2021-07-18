@@ -1,13 +1,14 @@
 import { FormControlLabel, FormHelperText, Switch } from "@material-ui/core";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
 export default function SwitchInput(
   {
     theme = 'default_theme',
     onChange,
-    label,
+    translation,
     required,
     checked = false,
     help = null,
@@ -25,7 +26,7 @@ export default function SwitchInput(
           />
         }
         id={`standard-checkbox-input-${nanoid()}`}
-        label={label}
+        label={<FormattedMessage id={translation} />}
         onChange={(event) => onChange && onChange(event.target.checked)}
       />
       {help && (<FormHelperText>{help}</FormHelperText>)}

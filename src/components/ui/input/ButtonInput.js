@@ -14,6 +14,7 @@ export default function ButtonInput(
     icon,
     route,
     large,
+    small,
     before = true,
     ...props
   }
@@ -27,6 +28,9 @@ export default function ButtonInput(
   let size = 'medium';
   if (large) {
     size = 'large';
+  }
+  if (small) {
+    size = 'small';
   }
 
   return (

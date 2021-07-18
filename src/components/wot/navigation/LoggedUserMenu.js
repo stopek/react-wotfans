@@ -11,8 +11,9 @@ import RecentActorsRoundedIcon from '@material-ui/icons/RecentActorsRounded';
 import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRounded';
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
+import { AuthWot } from "api/actions/auth_wot";
 import { Wot } from "api/actions/wot";
-import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
+import { ACCOUNT_URL, CLAN_URL, GAMES_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
 import ProgressCircular from "components/ui/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
@@ -24,6 +25,7 @@ import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER, RADIUS } from "styles/colors";
+import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
 
 const StyledMenu = withStyles({
   paper: {
@@ -111,7 +113,7 @@ export default function LoggedUserMenu() {
   const logOut = (event) => {
     event.preventDefault();
 
-    requestToApi(Wot.logout, {}, () => {
+    requestToApi(AuthWot.logout, {}, () => {
       logOutUser();
 
       dispatch(setSuccessMessage(
@@ -140,6 +142,11 @@ export default function LoggedUserMenu() {
       icon: <RecentActorsRoundedIcon fontSize="small" />,
       route: fillRoute(PLAYER_URL, { account_id: user_id, name: user_name })
     },
+    // {
+    //   translation: 'menu.games',
+    //   icon: <SportsEsportsRoundedIcon fontSize="small" />,
+    //   route: GAMES_URL
+    // },
     !!user_data?.clan?.tag && {
       translation: 'menu.your.clan',
       icon: <SupervisorAccountRoundedIcon fontSize="small" />,

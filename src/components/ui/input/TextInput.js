@@ -4,6 +4,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import { nanoid } from "@reduxjs/toolkit";
 import Texts from "components/ui/Texts";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
 export default function TextInput(
@@ -98,7 +99,7 @@ export default function TextInput(
       <TextField
         variant={variant}
         id={`standard-text-input-${nanoid()}`}
-        label={label}
+        label={label && <FormattedMessage id={label} />}
         type={type}
         value={value}
         InputProps={input_props}

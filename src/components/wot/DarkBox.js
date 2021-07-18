@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import { COLOR_DARK, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, RADIUS } from "styles/colors";
 
 const Box = styled.div`
-  background: ${COLOR_DARK};
+  background: ${COLOR_DARK_2};
   padding: 0 20px;
   margin: 15px 0;
   border-radius: ${RADIUS};

@@ -4,7 +4,7 @@ import fillRoute from "helpers/fillRoute";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function PlayerProfileButton({ account_id = 0, name = '' }) {
+export default function PlayerProfileButton({ account_id = 0, name = '', ...props }) {
   const history = useHistory();
   const url = fillRoute(PLAYER_URL, { account_id: account_id, name: name });
 
@@ -20,6 +20,7 @@ export default function PlayerProfileButton({ account_id = 0, name = '' }) {
       as={`a`}
       href={url}
       label={`see.profile`}
+      {...props}
     />
   );
 }

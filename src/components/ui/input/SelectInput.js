@@ -54,10 +54,7 @@ function SelectInput(
       return null;
     }
 
-    const output_value_text = Array.isArray(selected) ?
-      selected.map((selection) => getMenuItemValue(selection)).join(', ') :
-      getMenuItemValue(selected);
-
+    const output_value_text = Array.isArray(selected) ? selected.map((selection) => getMenuItemValue(selection)).join(', ') : getMenuItemValue(selected);
     return (!!value_overlay ? value_overlay(output_value_text) : output_value_text);
   };
 

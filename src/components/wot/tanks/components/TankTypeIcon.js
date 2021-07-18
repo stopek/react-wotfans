@@ -2,7 +2,6 @@ import icon_artillery from "assets/icons/types/type_artillery.png";
 import icon_heavy from "assets/icons/types/type_heavy.png";
 import icon_light from "assets/icons/types/type_light.png";
 import icon_medium from "assets/icons/types/type_medium.png";
-
 import icon_td from "assets/icons/types/type_td.png";
 import React from "react";
 import styled from "styled-components";

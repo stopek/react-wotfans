@@ -2,6 +2,7 @@ import { Hidden } from "@material-ui/core";
 import ExpectedSmallCard from "components/wot/expected/ExpectedSmallCard";
 import TankProfileButton from "components/wot/tanks/TankProfileButton";
 import { numberResult } from "helpers/priceFormat";
+import { getTranslationByTankType } from "helpers/tanks";
 import { getTranslationByNation } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
@@ -26,22 +27,6 @@ const TankImage = styled.img`
   }
 `;
 
-const getTranslationByTankType = (type) => {
-  switch (type) {
-    case 'mediumTank':
-      return 'type.mediumTank';
-    case 'heavyTank':
-      return 'type.heavyTank';
-    case 'lightTank':
-      return 'type.lightTank';
-    case 'AT-SPG':
-      return 'type.td';
-    case 'SPG':
-      return 'type.artillery';
-    default:
-      return type;
-  }
-}
 
 export default function ExpectedFullList({ exp_wn8 = [] }) {
   exp_wn8 = Object.values(exp_wn8);

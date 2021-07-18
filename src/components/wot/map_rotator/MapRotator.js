@@ -7,8 +7,8 @@ import DarkBox from "components/wot/DarkBox";
 import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
 import ThanksBox from "components/wot/ThanksBox";
-import { addHours, getHours } from "date-fns";
-import { copyDateIS, mapsIntervalsList, mapsResultList } from "helpers/rotator";
+import { addSeconds, differenceInSeconds, format } from "date-fns";
+import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
 import { getUniqueByKeyMulti, sortByKeyMulti } from "helpers/user";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -38,22 +38,14 @@ export default function MapRotator(
     ads = false
   }
 ) {
-  //aktualna data użytkownika
   const [date, setDate] = useState(new Date());
-  const diffHours = getHours(user_date) - getHours(server_date);
   const [maps_ranges, setMapsRanges] = useState(limit);
   const [filter_maps, setFilterMaps] = useState([]);
 
-  server_date = addHours(server_date, getHours(date) - getHours(user_date));
+  const date_server = addSeconds(server_date, differenceInSeconds(date, user_date));
+  const result_maps = mapsIntervalsList(maps, cycle, date_server);
 
-  //aktualna data serwera korygowana o minuty/sekundy od użytkownika.
-  const server_date_correct = copyDateIS(date, server_date);
-
-  //lista map w oparciu o datę serwera
-  const result_maps = mapsIntervalsList(maps, cycle, server_date);
-
-  //lista map w oparciu skorygowany czas serwera
-  const output_maps = mapsResultList(server_date_correct, result_maps, maps_ranges);
+  const output_maps = mapsResultList(date_server, result_maps, maps_ranges);
 
   const filtersMapsList = getUniqueByKeyMulti(sortByKeyMulti(maps.map((map) => {
     return {
@@ -100,8 +92,10 @@ export default function MapRotator(
 
       <MapRotatorList
         list={output_maps}
-        diff_hours={diffHours}
+        diff_seconds={differenceInSeconds(date, date_server)}
         filter_maps={filter_maps}
+        date={date}
+        cycle_seconds={cycle * 60}
       />
 
       <ThanksBox>

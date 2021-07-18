@@ -1,8 +1,8 @@
 import { Grid } from "@material-ui/core";
+import ExpectedTankChanges from "components/wot/expected/ExpectedTankChanges";
+import MoeTanksChanges from "components/wot/moe/MoeTanksChanges";
 import BestPlayersOnTank from "components/wot/player/BestPlayersOnTank";
-import ExpectedTankChanges from "components/wot/tanks/ExpectedTankChanges";
 import TankBase from "components/wot/tanks/TankBase";
-import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -30,15 +30,20 @@ export default function TankPage({ tank = {}, wn8 = 0 }) {
           </WhiteSection>
         </Grid>
         <Grid item md={6} xs={12}>
-          <Header up down>
-            <FormattedMessage id={`avg.wn8`} />
-          </Header>
-          <Wn8Bar value={wn8} large />
+          {/*<Header up down>*/}
+          {/*  <FormattedMessage id={`avg.wn8`} />*/}
+          {/*</Header>*/}
+          {/*<Wn8Bar value={wn8} large />*/}
 
-          <Header down>
+          <Header up down>
             <FormattedMessage id={`exp.wn8`} />
           </Header>
           <ExpectedTankChanges expected={tank?.expTanks} />
+
+          <Header down>
+            <FormattedMessage id={`moe`} />
+          </Header>
+          <MoeTanksChanges moe={tank?.moeTanks} />
         </Grid>
 
         <Grid item md={4} xs={12}>

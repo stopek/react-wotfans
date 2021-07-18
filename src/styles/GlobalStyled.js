@@ -7,7 +7,7 @@ export const Header = styled.h2`
   font-size: 25px;
   position: relative;
   display: table;
-  margin: 55px 0;
+  margin: 35px 0;
 
   ${props => props?.up && `margin-top: 0;`}
   ${props => props?.down && `margin-bottom: 15px;`}

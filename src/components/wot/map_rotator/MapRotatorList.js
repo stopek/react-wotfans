@@ -1,8 +1,10 @@
+import ProgressLinear from "components/ui/ProgressLinear";
+import Dot from "components/wot/Dot";
 import MapPreview from "components/wot/maps/MapPreview";
-import { addHours, format, subHours } from "date-fns";
+import { addSeconds, format, getUnixTime } from "date-fns";
 import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { COLOR_DARK, COLOR_RED, COLOR_THEME, RADIUS } from "styles/colors";
+import styled from "styled-components";
+import { COLOR_DARK, RADIUS } from "styles/colors";
 
 const List = styled.div`
   color: white;
@@ -17,53 +19,9 @@ const List = styled.div`
   overflow: hidden;
 `;
 
-const pulseDot = keyframes`
-  0% {
-    -webkit-transform: scale(0.1, 0.1);
-    opacity: 0.0;
-  }
-
-  50% {
-    opacity: 1.0;
-  }
-
-  100% {
-    -webkit-transform: scale(1.2, 1.2);
-    opacity: 0.0;
-  }
-`;
-
 const Item = styled.div`
   width: 100%;
   position: relative;
-`;
-
-const Dot = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
-const Circle = styled.div`
-  width: 15px;
-  height: 15px;
-  background-color: ${props => props?.current ? COLOR_RED : COLOR_THEME};
-  border-radius: 50%;
-  position: absolute;
-`;
-
-const RingRing = styled.div`
-  border: 3px solid ${props => props?.current ? COLOR_RED : COLOR_THEME};
-  -webkit-border-radius: 30px;
-  height: 25px;
-  width: 25px;
-  position: absolute;
-  -webkit-animation: ${pulseDot} 2s ease-out;
-  -webkit-animation-iteration-count: infinite;
-  opacity: 0.0;
-  ${props => !props?.current && `animation-name: none;`}
 `;
 
 const MapName = styled.div`
@@ -106,8 +64,9 @@ const Map = styled.div`
   z-index: 1;
 `;
 
-export default function MapRotatorList({ list = [], diff_hours, filter_maps }) {
+export default function MapRotatorList({ list = [], diff_seconds, filter_maps, date, cycle_seconds }) {
   const [current, setCurrent] = useState(null);
+  const [currentVisible, setCurrentVisible] = useState(true);
 
   const preview = (key) => {
     if (current === key) {
@@ -121,34 +80,52 @@ export default function MapRotatorList({ list = [], diff_hours, filter_maps }) {
   return (
     <List>
       {list.map((map, key) => {
-        const is_current = (map.status === 'current' || current === key);
+        const is_current = ((map.status === 'current' && currentVisible) || current === key);
         const is_real_current = (map.status === 'current');
 
         if (!!filter_maps && filter_maps?.length > 0 && !filter_maps.includes(map.map.id) && !is_current) {
           return;
         }
 
+        const start = addSeconds(map.from, diff_seconds);
+        const end = addSeconds(map.to, diff_seconds);
+
+        let percentage;
+        if (is_real_current) {
+          percentage = 100 - ((getUnixTime(end) - getUnixTime(date)) * 100) / cycle_seconds;
+        }
+
         return (
-          <Item key={`map-${key}`} onClick={() => preview(key)}>
+          <Item key={`map-${key}-${map.map.id}`} onClick={() => {
+            if (is_real_current) {
+              return setCurrentVisible(!currentVisible);
+            }
+
+            preview(key);
+          }}>
             {is_current && (
-              <Map>
-                <MapPreview video={map.map?.video} height={250} />
-              </Map>
+              <>
+                <Map>
+                  <MapPreview video={map.map?.video} height={250} />
+                </Map>
+              </>
             )}
+
 
             <Content current={is_current}>
               <MapName>{map.map.name}</MapName>
-              <Dot>
-                <RingRing current={is_real_current} />
-                <Circle current={is_real_current} />
-              </Dot>
+
+              <Dot blinking={is_real_current} />
 
               <MapTime>
-                {format(addHours(map.from, diff_hours), 'HH:mm')}
+                {format(start, 'HH:mm')}
                 {` - `}
-                {format(addHours(map.to, diff_hours), 'HH:mm')}
+                {format(end, 'HH:mm')}
               </MapTime>
             </Content>
+            {is_real_current && (
+              <ProgressLinear value={percentage} />
+            )}
           </Item>
         );
       })}

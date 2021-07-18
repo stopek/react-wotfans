@@ -1,6 +1,16 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import hexToRgbA from "helpers/hexToRgbA";
-import { COLOR_GRAY, COLOR_SECOND, COLOR_TEXT, COLOR_TEXT_DARK, COLOR_THEME, RADIUS, } from "styles/colors";
+import {
+  COLOR_DARK,
+  COLOR_DARK_2,
+  COLOR_GRAY,
+  COLOR_GREY_DARK_3,
+  COLOR_SECOND,
+  COLOR_TEXT,
+  COLOR_TEXT_DARK,
+  COLOR_THEME,
+  RADIUS,
+} from "styles/colors";
 
 const default_theme = createMuiTheme({
   palette: {
@@ -22,10 +32,22 @@ const default_theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
+      label: {
+        whiteSpace: 'nowrap'
+      },
+      containedPrimary: {
+        '& svg': {
+          fill: 'white'
+        }
+      },
+      containedSizeSmall: {
+        fontSize: 11
+      },
       contained: {
         borderRadius: RADIUS,
         padding: '5px 25px',
         boxShadow: 'none',
+        lineHeight: 1,
         '&.MuiButton-contained': {
           fontSize: 15,
           fontWeight: 700,
@@ -33,7 +55,7 @@ const default_theme = createMuiTheme({
           lineHeight: 1,
           color: 'white',
           '& .MuiButton-label': {
-            color: 'white'
+            color: 'white',
           },
           '& .MuiSvgIcon-root': {
             fill: 'white'
@@ -79,6 +101,9 @@ const default_theme = createMuiTheme({
           fontSize: '1.5rem'
         }
       },
+      staticTooltipClosed: {
+        zIndex: -100
+      },
       tooltipPlacementRight: {
         cursor: 'pointer'
       }
@@ -89,6 +114,42 @@ const default_theme = createMuiTheme({
           fill: 'white'
         }
       },
+    },
+    MuiTablePagination: {
+      root: {
+        color: COLOR_TEXT
+      }
+    },
+    MuiTableContainer: {
+      root: {
+        background: COLOR_DARK,
+      }
+    },
+
+    MuiTableRow: {
+      root: {
+        '&.MuiTableRow-hover:hover': {
+          backgroundColor: COLOR_DARK_2
+        }
+      },
+    },
+    MuiTableCell: {
+      sizeSmall: {
+        padding: '5px 5px'
+      },
+      body: {
+        color: COLOR_TEXT,
+        borderBottom: `1px solid ${COLOR_DARK_2}`,
+        lineHeight: 1,
+        '& .MuiButtonBase-label': {
+          whiteSpace: 'no-wrap'
+        }
+      },
+      head: {
+        whiteSpace: 'nowrap',
+        borderBottom: 0,
+        background: COLOR_THEME
+      }
     },
     MuiTabs: {
       root: {
@@ -115,7 +176,12 @@ const default_theme = createMuiTheme({
     },
     MuiPaper: {
       root: {
-        borderRadius: RADIUS
+        borderRadius: RADIUS,
+        '&#table-pepper': {
+          background: COLOR_DARK_2,
+          color: 'white',
+          overflow: 'hidden'
+        }
       },
       rounded: {
         borderRadius: RADIUS
@@ -150,6 +216,57 @@ const default_theme = createMuiTheme({
     MuiSelect: {
       select: {},
     },
+    MuiButtonBase: {
+      root: {
+        '&.Mui-disabled': {
+          opacity: 0.3
+        },
+      }
+    },
+    MuiPopover: {
+      root: {
+        '&#customized-menu': {
+          '& .MuiPaper-root': {
+            background: 'transparent',
+            borderRadius: 0,
+            '& .MuiButtonBase-root': {
+              padding: '0',
+              margin: '5px 0',
+              background: 'transparent',
+              '&:hover': {
+                '& .MuiListItemIcon-root': {
+                  background: COLOR_THEME,
+                  '& svg': {
+                    fill: 'white'
+                  }
+                },
+                '& .MuiTypography-root': {
+                  color: COLOR_THEME
+                }
+              },
+              '& .MuiListItemIcon-root': {
+                background: 'white',
+                borderRadius: RADIUS,
+                minWidth: 'auto',
+                width: 35,
+                height: 35,
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: 5,
+                '& svg': {
+                  width: 25,
+                  height: 25,
+                  fill: COLOR_THEME
+                }
+              },
+              '& .MuiTypography-root': {
+                color: COLOR_TEXT
+              }
+            }
+          }
+        }
+      }
+    },
     MuiPickersModal: {
       dialogRoot: {
         borderRadius: RADIUS
@@ -176,6 +293,10 @@ const default_theme = createMuiTheme({
       }
     },
     MuiPagination: {
+      caption: {
+        display: 'flex',
+        flexWrap: 'no-wrap'
+      },
       root: {
         margin: '15px 0'
       },
@@ -238,7 +359,7 @@ const default_theme = createMuiTheme({
     MuiInputBase: {
       root: {
         padding: '10px 0',
-        width: '100%'
+        width: 'inherit'
       },
       input: {
         padding: 0,

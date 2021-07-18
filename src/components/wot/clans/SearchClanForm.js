@@ -3,7 +3,6 @@ import ButtonInput from "components/ui/input/ButtonInput";
 import RangeInput from "components/ui/input/RangeInput";
 import TextInput from "components/ui/input/TextInput";
 import React, { useState } from "react";
-import { FormattedMessage } from "react-intl";
 
 export default function SearchClanForm({ submit }) {
   const [clan, setClan] = useState('');
@@ -17,7 +16,7 @@ export default function SearchClanForm({ submit }) {
             onChange={(value) => setClan(value)}
             value={clan}
             variant={`standard`}
-            label={<FormattedMessage id={`type.clan.name`} />}
+            label={`type.clan.name`}
           />
         </Grid>
 
