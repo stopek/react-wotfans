@@ -65,7 +65,6 @@ export const tanksFilters = (tanks = [], filters = {}) => {
     return can_be;
   });
 
-
   if (filters?.tier?.length > 0) {
     tanks = tanks.filter((tank) => filters?.tier.includes(tank?.tank?.tier));
   }

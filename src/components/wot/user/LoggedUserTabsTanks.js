@@ -31,7 +31,9 @@ export default function LoggedUserTabsTanks() {
           <TanksListAndFilters
             tanks_stats={data.recently}
             grid_props={{ xl: 3 }}
+            card_props={{ battle_ago: true }}
             weight
+            nofilters
           />
         </>
       )
@@ -45,6 +47,7 @@ export default function LoggedUserTabsTanks() {
             grid_props={{ xl: 3 }}
             default_battles={[0, 20]}
             max_battles={100}
+            custom={{ wn8: true, battles: true, tier: true }}
             default_wn8={[
               getWNValueByColor(wn8Ranges, WN8_VERY_BAD),
               getWNValueByColor(wn8Ranges, WN8_BAD),

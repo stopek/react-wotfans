@@ -1,6 +1,6 @@
 import MapRotator from "components/wot/map_rotator/MapRotator";
 import { parse } from "date-fns";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadMapGenerator, selectMapGenerator } from "reducers/wotSlice";
 
@@ -8,6 +8,7 @@ export default function MapRotatorPage({ limit = [1, 1], filter = false, ads = f
   const dispatch = useDispatch();
   const generator = useSelector(selectMapGenerator);
   const response_generator = generator?.response;
+  const [date] = useState(new Date());
 
   useEffect(() => {
     dispatch(loadMapGenerator());
@@ -24,7 +25,7 @@ export default function MapRotatorPage({ limit = [1, 1], filter = false, ads = f
     <MapRotator
       limit={limit}
       server_date={server_date}
-      user_date={new Date()}
+      user_date={date}
       maps={maps}
       cycle={4}
       filter={filter}

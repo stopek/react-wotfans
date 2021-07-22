@@ -12,12 +12,13 @@ import { sortByActivityAndWN8 } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { COLOR_TEXT } from "styles/colors";
 import { FitTableTd, SimpleTable, TableTbody, TableTdSmall, TableThead, TableTr } from "styles/GlobalStyled";
 
 const List = styled.div`
   position: relative;
   z-index: 2;
-  color: white;
+  color: ${COLOR_TEXT};
   margin: 15px 0;
 `;
 

@@ -22,7 +22,7 @@ export default function IndexContainer({ ...props }) {
 
   useEffect(() => {
     loadClans(page);
-  }, [dispatch, page]);
+  }, [dispatch, page, clansList]);
 
   const handleSearchClan = (event, data) => {
     event.preventDefault();

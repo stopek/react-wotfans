@@ -1,14 +1,19 @@
 import { TANK_URL } from "app/routes";
 import TankMarkOfMastery from "components/wot/tanks/components/TankMarkOfMastery";
-import TankModalStats from "components/wot/tanks/TankModalStats";
+import TankNationBox from "components/wot/tanks/components/TankNationBox";
 import TankPriceBox from "components/wot/tanks/components/TankPriceBox";
+import TankModalStats from "components/wot/tanks/TankModalStats";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
+import { date_ago_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
+import { getDateLocale } from "helpers/languages";
 import { priceFormat } from "helpers/priceFormat";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { selectedLanguage } from "reducers/languageSlice";
 import styled, { css } from "styled-components";
-import { COLOR_DARK_2, COLOR_SECOND, COLOR_THEME, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_SECOND, COLOR_TEXT_ON_THEME, COLOR_THEME, RADIUS } from "styles/colors";
 
 const hoverCss = css`
   transition: all .2s ease-in-out;
@@ -45,9 +50,9 @@ const TankName = styled.div`
   padding: 5px;
   border-radius: ${RADIUS};
   font-size: 16px;
-  
+
   ${hoverCss};
-  
+
   opacity: ${props => props?.hover ? 0 : 1};
 `;
 
@@ -72,7 +77,7 @@ const Weight = styled.div`
   width: 70px;
   height: 70px;
   background: ${COLOR_THEME};
-  color: white;
+  color: ${COLOR_TEXT_ON_THEME};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,12 +92,32 @@ const Weight = styled.div`
 
 const MarkPosition = styled.div`
   position: absolute;
-  left: -1px;
+  left: 5px;
   border-radius: ${RADIUS};
   overflow: hidden;
-  bottom: -1px;
-
+  bottom: 5px;
+  display: flex;
   ${hoverCss}
+`;
+
+const TankNation = styled.div`
+  ${hoverCss};
+  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 25px;
+  opacity: ${props => props?.hover ? 0 : 1};
+`;
+
+const LastBattle = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  background: ${COLOR_SECOND};
+  padding: 5px;
+  line-height: 1;
+  color: white;
 `;
 
 export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props }) {
@@ -101,6 +126,9 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
 
   const history = useHistory();
   const route = fillRoute(TANK_URL, { tank_id: tank.id });
+
+  const language = useSelector(selectedLanguage);
+  const date_locale = getDateLocale(language);
 
   return (
     <>
@@ -128,6 +156,18 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         <MarkPosition hover={hover}>
           <TankMarkOfMastery mark={statistics?.mark_of_mastery} size={30} />
         </MarkPosition>
+
+        {props?.battle_ago && (
+          <LastBattle>
+            {date_ago_from_unix(statistics?.last_battle_time, 'yyyy-MM-dd HH:mm', {
+              locale: date_locale
+            })}
+          </LastBattle>
+        )}
+
+        <TankNation hover={!hover}>
+          <TankNationBox tank={tank} hidename />
+        </TankNation>
 
         <TankName hover={!hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />

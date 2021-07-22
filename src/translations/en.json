@@ -40,6 +40,8 @@
 
 
   "dense": "Dense view",
+  "facebook": "Facebook",
+
   "hide.type": "Hide type",
   "hide.tier": "Hide tier",
   "hide.damage": "Hide damage",
@@ -47,7 +49,7 @@
   "hide.frag": "Hide frag",
   "hide.spot": "Hide spot",
   "hide.win": "Hide win",
-  "moe" : "Marks of Excellence",
+  "moe" : "MoE",
   "moe.1dmg": "⭐",
   "moe.2dmg": "⭐⭐",
   "moe.3dmg": "⭐⭐⭐",
@@ -58,6 +60,10 @@
   "clan": "Clan",
   "rows.per.page": "Per page",
   "of": "of",
+  "char": "Char",
+  "moe_1dmg": "⭐",
+  "moe_2dmg": "⭐⭐",
+  "moe_3dmg": "⭐⭐⭐",
 
 
   "not-found": "Sorry, but this server is unavailable. 404 | Page not found",
@@ -69,7 +75,7 @@
   "menu.logout": "Logout",
   "homepage": "Home",
   "clans.list": "Clans",
-  "search.player": "Search for player",
+  "search.player": "Players",
   "exp.wn8": "EXP WN8",
   "tanks.list": "Tanks",
   "fundraising": "Support",

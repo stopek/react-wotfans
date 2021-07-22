@@ -8,6 +8,12 @@ import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { clearMessages } from "reducers/flashSlice";
 import { getUser } from "reducers/wotSlice";
+import styled from "styled-components";
+import { COLOR_DARK } from "styles/colors";
+
+const Content = styled.div`
+  background: ${COLOR_DARK};
+`;
 
 const action = (dispatch, token) => {
   if (token?.length > 0) {
@@ -17,21 +23,22 @@ const action = (dispatch, token) => {
 }
 
 function Base({ match, children, seo, seo_values = {}, ...props }) {
+  delete props['staticContext'];
+
   const dispatch = useDispatch();
   const token = getToken();
   // const language = useSelector(selectedLanguage);
   // const history = useHistory();
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      action(dispatch, token);
+    }, 30000);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     action(dispatch, token);
-  //   }, 10000);
-  //
-  //   return () => {
-  //     clearInterval(timer);
-  //   }
-  // }, [dispatch, token]);
+    return () => {
+      clearInterval(timer);
+    }
+  }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(clearMessages());
@@ -58,7 +65,7 @@ function Base({ match, children, seo, seo_values = {}, ...props }) {
   // }
 
   return (
-    <div {...props}>
+    <Content {...props}>
       <Seo
         title={seo?.title}
         description={seo?.description}
@@ -69,7 +76,7 @@ function Base({ match, children, seo, seo_values = {}, ...props }) {
 
       <Flash />
       <Cookie />
-    </div>
+    </Content>
   );
 }
 

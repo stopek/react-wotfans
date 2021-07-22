@@ -1,13 +1,15 @@
+import { hexToRgb } from "@material-ui/core";
 import ProgressLinear from "components/ui/ProgressLinear";
 import Dot from "components/wot/Dot";
 import MapPreview from "components/wot/maps/MapPreview";
 import { addSeconds, format, getUnixTime } from "date-fns";
+import hexToRgbA from "helpers/hexToRgbA";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { COLOR_DARK, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const List = styled.div`
-  color: white;
+  color: ${COLOR_TEXT};
   width: 100%;
   gap: 2px;
   display: flex;
@@ -44,7 +46,7 @@ const Content = styled.div`
   padding: 10px;
   display: flex;
   gap: 10px;
-  background-color: ${COLOR_DARK};
+  background-color: ${COLOR_DARK_2};
   cursor: pointer;
 
   ${props => props?.current && `
@@ -54,8 +56,8 @@ const Content = styled.div`
     left:0;
     white-space: nowrap;
     width: 100%;
-    background: rgb(28,28,28);
-    background: linear-gradient(180deg, rgba(28,28,28,1) 10%, rgba(28,28,28,0) 70%);
+    background: ${hexToRgb(COLOR_DARK_2)};
+    background: linear-gradient(180deg, ${hexToRgbA(COLOR_DARK_2, 1)} 10%, ${hexToRgbA(COLOR_DARK_2, 0)} 70%);
   `}
 `;
 
@@ -64,7 +66,16 @@ const Map = styled.div`
   z-index: 1;
 `;
 
-export default function MapRotatorList({ list = [], diff_seconds, filter_maps, date, cycle_seconds }) {
+export default function MapRotatorList(
+  {
+    list = [],
+    diff_seconds,
+    filter_maps,
+    date,
+    cycle_seconds,
+    advanced = false
+  }
+) {
   const [current, setCurrent] = useState(null);
   const [currentVisible, setCurrentVisible] = useState(true);
 
@@ -84,7 +95,7 @@ export default function MapRotatorList({ list = [], diff_seconds, filter_maps, d
         const is_real_current = (map.status === 'current');
 
         if (!!filter_maps && filter_maps?.length > 0 && !filter_maps.includes(map.map.id) && !is_current) {
-          return;
+          return null;
         }
 
         const start = addSeconds(map.from, diff_seconds);
@@ -111,7 +122,6 @@ export default function MapRotatorList({ list = [], diff_seconds, filter_maps, d
               </>
             )}
 
-
             <Content current={is_current}>
               <MapName>{map.map.name}</MapName>
 
@@ -123,7 +133,7 @@ export default function MapRotatorList({ list = [], diff_seconds, filter_maps, d
                 {format(end, 'HH:mm')}
               </MapTime>
             </Content>
-            {is_real_current && (
+            {is_real_current && advanced && (
               <ProgressLinear value={percentage} />
             )}
           </Item>

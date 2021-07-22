@@ -3,8 +3,6 @@ import hexToRgbA from "helpers/hexToRgbA";
 import {
   COLOR_DARK,
   COLOR_DARK_2,
-  COLOR_GRAY,
-  COLOR_GREY_DARK_3,
   COLOR_SECOND,
   COLOR_TEXT,
   COLOR_TEXT_DARK,
@@ -153,8 +151,9 @@ const default_theme = createMuiTheme({
     },
     MuiTabs: {
       root: {
-        background: 'rgba(0, 0, 0, 0.5)',
-        borderRadius: RADIUS
+        background: COLOR_DARK_2,
+        borderRadius: RADIUS,
+        minHeight: 'auto',
       },
       indicator: {
         background: COLOR_THEME
@@ -165,10 +164,20 @@ const default_theme = createMuiTheme({
         padding: 10
       }
     },
+    MuiBottomNavigation: {
+      root: {
+        backgroundColor: 'transparent'
+      }
+    },
+    MuiBottomNavigationAction: {
+      label: {
+        color: COLOR_TEXT
+      }
+    },
     MuiTab: {
       root: {
         maxWidth: 'none',
-        color: 'white',
+        color: COLOR_TEXT,
       },
       wrapper: {
         color: COLOR_TEXT
@@ -179,7 +188,7 @@ const default_theme = createMuiTheme({
         borderRadius: RADIUS,
         '&#table-pepper': {
           background: COLOR_DARK_2,
-          color: 'white',
+          color: COLOR_TEXT,
           overflow: 'hidden'
         }
       },
@@ -226,6 +235,9 @@ const default_theme = createMuiTheme({
     MuiPopover: {
       root: {
         '&#customized-menu': {
+          '&.MuiPopover-root': {
+            background: hexToRgbA(COLOR_DARK, '0.8')
+          },
           '& .MuiPaper-root': {
             background: 'transparent',
             borderRadius: 0,
@@ -396,7 +408,7 @@ const default_theme = createMuiTheme({
       root: {
         '&': {
           fontSize: 16,
-          color: COLOR_GRAY,
+          color: COLOR_TEXT,
         },
       },
     }

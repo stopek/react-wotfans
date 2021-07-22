@@ -8,8 +8,10 @@ import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
 import { CLANS_URL, CONTACT_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, MOE_URL, SEARCH_URL, TANKS_URL } from "app/routes";
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
 import StarOutlineRoundedIcon from '@material-ui/icons/StarOutlineRounded';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import React from "react";
 import {
+  COLOR_TEXT,
   WN8_ABOVE_AVERAGE,
   WN8_AVERAGE,
   WN8_BAD,
@@ -29,10 +31,14 @@ export const menuItems = [
   { translation: 'exp.wn8', i: 4, icon: <TuneRoundedIcon />, route: EXP_WN8_URL },
   { translation: 'moe', i: 5, icon: <StarOutlineRoundedIcon />, route: MOE_URL },
   { translation: 'tanks.list', i: 6, icon: <TankIcon />, route: TANKS_URL },
-  { translation: 'maps.list', i: 7, icon: <MapRoundedIcon />, route: MAPS_URL },
-  { translation: 'contact', i: 8, icon: <MailRoundedIcon />, route: CONTACT_URL },
-  { translation: 'fundraising', i: 9, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' }
+  { translation: 'maps.list', i: 7, icon: <MapRoundedIcon />, route: MAPS_URL }
 ];
+
+export const footerMenuItems = [
+  { translation: 'contact', i: 1, icon: <MailRoundedIcon />, route: CONTACT_URL },
+  { translation: 'fundraising', i: 2, icon: <AttachMoneyRoundedIcon />, href: 'https://paypal.me/pools/c/8Am8kdJ6bj' },
+  { translation: 'facebook', i: 3, icon: <FacebookIcon />, href: 'https://fb.me/wotfansonline' }
+]
 
 export const tiersList = [
   { value: 1, label: 1 },
@@ -110,7 +116,7 @@ export const efficiencyRanges = [
 ];
 
 export const nivoTheme = {
-  textColor: "#ffffff",
+  textColor: COLOR_TEXT,
   fontSize: 11,
   tooltip: {
     container: {
@@ -129,25 +135,297 @@ export const nivoTheme = {
     },
     ticks: {
       line: {
-        stroke: "#777777",
+        stroke: COLOR_TEXT,
         strokeWidth: 1
       }
     }
   },
   crosshair: {
     line: {
-      stroke: '#ffffff',
+      stroke: COLOR_TEXT,
       strokeWidth: 1,
       strokeOpacity: 1,
     },
   },
   grid: {
     line: {
-      stroke: "#ffffff",
+      stroke: COLOR_TEXT,
       strokeWidth: 1
     }
   }
 }
+export const pie_sample = [
+  {
+    "id": "japan",
+    "color": "hsl(168, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 268
+      },
+      {
+        "x": "helicopter",
+        "y": 130
+      },
+      {
+        "x": "boat",
+        "y": 248
+      },
+      {
+        "x": "train",
+        "y": 221
+      },
+      {
+        "x": "subway",
+        "y": 55
+      },
+      {
+        "x": "bus",
+        "y": 184
+      },
+      {
+        "x": "car",
+        "y": 262
+      },
+      {
+        "x": "moto",
+        "y": 99
+      },
+      {
+        "x": "bicycle",
+        "y": 217
+      },
+      {
+        "x": "horse",
+        "y": 97
+      },
+      {
+        "x": "skateboard",
+        "y": 161
+      },
+      {
+        "x": "others",
+        "y": 67
+      }
+    ]
+  },
+  {
+    "id": "france",
+    "color": "hsl(146, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 112
+      },
+      {
+        "x": "helicopter",
+        "y": 123
+      },
+      {
+        "x": "boat",
+        "y": 98
+      },
+      {
+        "x": "train",
+        "y": 27
+      },
+      {
+        "x": "subway",
+        "y": 81
+      },
+      {
+        "x": "bus",
+        "y": 263
+      },
+      {
+        "x": "car",
+        "y": 162
+      },
+      {
+        "x": "moto",
+        "y": 101
+      },
+      {
+        "x": "bicycle",
+        "y": 227
+      },
+      {
+        "x": "horse",
+        "y": 231
+      },
+      {
+        "x": "skateboard",
+        "y": 164
+      },
+      {
+        "x": "others",
+        "y": 298
+      }
+    ]
+  },
+  {
+    "id": "us",
+    "color": "hsl(25, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 199
+      },
+      {
+        "x": "helicopter",
+        "y": 208
+      },
+      {
+        "x": "boat",
+        "y": 70
+      },
+      {
+        "x": "train",
+        "y": 229
+      },
+      {
+        "x": "subway",
+        "y": 35
+      },
+      {
+        "x": "bus",
+        "y": 27
+      },
+      {
+        "x": "car",
+        "y": 60
+      },
+      {
+        "x": "moto",
+        "y": 149
+      },
+      {
+        "x": "bicycle",
+        "y": 151
+      },
+      {
+        "x": "horse",
+        "y": 172
+      },
+      {
+        "x": "skateboard",
+        "y": 253
+      },
+      {
+        "x": "others",
+        "y": 16
+      }
+    ]
+  },
+  {
+    "id": "germany",
+    "color": "hsl(208, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 195
+      },
+      {
+        "x": "helicopter",
+        "y": 149
+      },
+      {
+        "x": "boat",
+        "y": 32
+      },
+      {
+        "x": "train",
+        "y": 265
+      },
+      {
+        "x": "subway",
+        "y": 298
+      },
+      {
+        "x": "bus",
+        "y": 76
+      },
+      {
+        "x": "car",
+        "y": 135
+      },
+      {
+        "x": "moto",
+        "y": 218
+      },
+      {
+        "x": "bicycle",
+        "y": 8
+      },
+      {
+        "x": "horse",
+        "y": 256
+      },
+      {
+        "x": "skateboard",
+        "y": 254
+      },
+      {
+        "x": "others",
+        "y": 6
+      }
+    ]
+  },
+  {
+    "id": "norway",
+    "color": "hsl(172, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 125
+      },
+      {
+        "x": "helicopter",
+        "y": 15
+      },
+      {
+        "x": "boat",
+        "y": 22
+      },
+      {
+        "x": "train",
+        "y": 29
+      },
+      {
+        "x": "subway",
+        "y": 211
+      },
+      {
+        "x": "bus",
+        "y": 197
+      },
+      {
+        "x": "car",
+        "y": 14
+      },
+      {
+        "x": "moto",
+        "y": 293
+      },
+      {
+        "x": "bicycle",
+        "y": 175
+      },
+      {
+        "x": "horse",
+        "y": 139
+      },
+      {
+        "x": "skateboard",
+        "y": 242
+      },
+      {
+        "x": "others",
+        "y": 211
+      }
+    ]
+  }
+];
 
 export const pie_data = [
   {

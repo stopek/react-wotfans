@@ -6,7 +6,6 @@ import Dot from "components/wot/Dot";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getUser } from "reducers/wotSlice";
 
 export default function PlayerSessions({ sessions = [], session_id = 0 }) {
   const dispatch = useDispatch();
@@ -24,7 +23,6 @@ export default function PlayerSessions({ sessions = [], session_id = 0 }) {
         true
       ));
       setLoggedOut(logged_out.concat(id));
-      dispatch(getUser());
     }, (error) => {
       dispatch(setErrorMessage(error?.errors));
     });

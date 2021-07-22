@@ -11,6 +11,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@nivo/bar": "^0.70.1",
     "@nivo/core": "^0.70.1",
+    "d3-shape": "^3.0.1",
     "date-fns-tz": "^1.1.4",
     "env-cmd": "^10.1.0",
     "framer-motion": "^4.1.17",

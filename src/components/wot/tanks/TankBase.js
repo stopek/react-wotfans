@@ -3,7 +3,6 @@ import TankNationBox from "components/wot/tanks/components/TankNationBox";
 import TankTypeIcon from "components/wot/tanks/components/TankTypeIcon";
 import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
-import { getTranslationByNation } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
@@ -15,7 +14,7 @@ const BoxesInfo = styled.div`
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr;
-  
+
   @media ${breakpoint.md} {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -50,7 +49,7 @@ const TankName = styled.h2`
   @media ${breakpoint.md} {
     font-size: 30px;
   }
-  
+
   ${props => props?.more && `
     cursor: pointer;
     

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import { changeLanguage, selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
-import { COLOR_DARK, COLOR_THEME } from "styles/colors";
+import { COLOR_DARK, COLOR_TEXT, COLOR_THEME } from "styles/colors";
 
 const Languages = styled.div`
   position: absolute;
@@ -25,7 +25,7 @@ const Language = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${COLOR_TEXT};
   text-transform: uppercase;
   cursor: pointer;
   width: 100%;

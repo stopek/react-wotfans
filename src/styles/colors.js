@@ -1,12 +1,20 @@
 export const COLOR_THEME = "#00bffc";
-export const COLOR_DARK = '#1c1c1c';
-export const COLOR_DARK_2 = '#2a2a2a';
+
+// export const COLOR_DARK = '#f5f5f5';
+// export const COLOR_DARK_2 = '#c2c2c2';
+// export const COLOR_DARK_3 = '#666666';
+// export const COLOR_SECOND = '#296c5b';
+// export const COLOR_SECOND_DARKER = '#1c5245';
+// export const COLOR_TEXT = '#383838';
+// export const COLOR_TEXT_ON_THEME = '#ffffff';
+
+export const COLOR_DARK = '#18191a';
+export const COLOR_DARK_2 = '#242526';
 export const COLOR_DARK_3 = '#0c0c0c';
 export const COLOR_SECOND = '#296c5b';
 export const COLOR_SECOND_DARKER = '#1c5245';
-
-export const COLOR_TEXT = '#cacaca';
-export const COLOR_TEXT_ON_THEME = 'white';
+export const COLOR_TEXT = '#dcdcdc';
+export const COLOR_TEXT_ON_THEME = '#ffffff';
 
 export const COLOR_GREY_DARK_3 = '#373737';
 export const COLOR_GREY_DARK = '#505050';

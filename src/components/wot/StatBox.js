@@ -2,7 +2,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
-import { COLOR_DARK, COLOR_THEME, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_TEXT, COLOR_THEME, RADIUS } from "styles/colors";
 
 const Box = styled.div`
   display: flex;
@@ -13,10 +13,10 @@ const Box = styled.div`
   z-index: 2;
   width: 100%;
   height: 100%;
-  background: ${COLOR_DARK};
+  background: ${COLOR_DARK_2};
   border-radius: ${RADIUS};
   line-height: 1;
-  color: white;
+  color: ${COLOR_TEXT};
   flex-wrap: nowrap;
 
   &:hover {
@@ -32,7 +32,7 @@ const Title = styled.div`
 const Value = styled.div`
   font-size: 20px;
   font-weight: 700;
-  
+
   @media ${breakpoint.md} {
     font-size: 35px;
   }
@@ -52,7 +52,6 @@ const Content = styled.div`
   flex: 4;
   padding: 15px;
 `;
-
 
 export default function StatBox({ translation, value, button, tank }) {
   return (

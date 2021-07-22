@@ -5,13 +5,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, RADIUS } from "styles/colors";
 
 const CharContainer = styled.div`
   height: 430px;
   color: white;
   margin-bottom: 25px;
-  background: ${hexToRgbA(COLOR_DARK, 1)};
+  background: ${hexToRgbA(COLOR_DARK_2, 1)};
   position: relative;
   border-radius: ${RADIUS};
 `;

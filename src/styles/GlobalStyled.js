@@ -1,6 +1,14 @@
+import hexToRgbA from "helpers/hexToRgbA";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
-import { COLOR_DARK, COLOR_DARK_2, COLOR_GREY_DARK_3, COLOR_TEXT_ON_THEME, COLOR_THEME } from "styles/colors";
+import {
+  COLOR_DARK,
+  COLOR_DARK_2,
+  COLOR_GREY_DARK_3,
+  COLOR_TEXT,
+  COLOR_TEXT_ON_THEME,
+  COLOR_THEME
+} from "styles/colors";
 
 export const Header = styled.h2`
   color: white;
@@ -11,7 +19,6 @@ export const Header = styled.h2`
 
   ${props => props?.up && `margin-top: 0;`}
   ${props => props?.down && `margin-bottom: 15px;`}
-  
   &:after {
     display: block;
     width: 50%;
@@ -34,12 +41,12 @@ export const LargeHeader = styled.div`
   font-weight: 700;
   margin: 0 0 5px 0;
   position: relative;
-  color: white;
+  color: ${COLOR_TEXT};
 
   @media ${breakpoint.md} {
     font-size: 45px;
   }
-  
+
   small {
     display: block;
     font-size: 15px;
@@ -53,7 +60,7 @@ export const Wn8BarContent = styled.div`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  
+
   @media ${breakpoint.lg} {
     font-size: 30px;
     top: 50%;
@@ -82,7 +89,6 @@ export const TableTdSmall = styled.td`
 export const FitTableTd = styled(TableTdSmall)`
   width: 0;
   white-space: nowrap;
-  
   small {
     display: block;
     font-size: 70%;
@@ -102,8 +108,11 @@ export const TableTbody = styled.tbody`
     }
 
     &:hover {
-      background: ${COLOR_GREY_DARK_3};
+      background: ${hexToRgbA(COLOR_DARK_2, 0.8)};
       opacity: 1;
+    }
+    td {
+      color: ${COLOR_TEXT};
     }
   }
 `;

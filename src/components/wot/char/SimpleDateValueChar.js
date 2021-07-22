@@ -1,9 +1,7 @@
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from "@nivo/line";
 import { nivoTheme } from "app/settings";
 import { format } from "date-fns";
-import { date_parse } from "helpers/date";
 import { getDateLocale } from "helpers/languages";
-import { valueFormat } from "helpers/priceFormat";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
@@ -11,43 +9,24 @@ import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
 
 const Content = styled.div`
-  width: 100%;
-  height: 350px;
+  height: 200px;
 `;
 
-export default function UserStatisticsChar({ raw = [], data = {} }) {
-  let data_array = Object.assign({}, data);
+export default function SimpleDateValueChar({ data }) {
   const language = useSelector(selectedLanguage);
-
-  Object.values(raw).forEach((history, k) => {
-    data_array.data.push({
-      x: date_parse(history.created_at, 'yyyy-MM-dd HH:mm:ss'),
-      y: history[data_array.key] > 0 ? valueFormat(history[data_array.key], 5) : null
-    });
-  });
-
-  if (!data_array.data?.length) {
-    data_array.data = [{ x: new Date(), y: 0 }];
-  }
 
   return (
     <Content>
       <ResponsiveLine
-        data={[data_array]}
+        data={data}
         theme={nivoTheme}
-        margin={{ top: 30, right: 10, bottom: 50, left: 60 }}
+        margin={{ top: 0, right: 0, bottom: 50, left: 60 }}
         xScale={{
           type: 'time',
           format: '%Y-%m-%d',
           useUTC: false,
           precision: 'day',
         }}
-        sliceTooltip={({ slice }) => {
-          return (
-            <>test?</>
-          )
-        }}
-        enableSlices="x"
         colors={COLOR_THEME}
         xFormat="time:%Y-%m-%d"
         yScale={{
@@ -56,12 +35,10 @@ export default function UserStatisticsChar({ raw = [], data = {} }) {
           stacked: true, reverse: false
         }}
         yFormat=" >-.2f"
-        curve="natural"
+        curve="catmullRom"
         axisTop={null}
         axisRight={null}
-        enableArea={true}
         axisBottom={{
-          tickValues: 'every day',
           format: (value) => format(new Date(value), 'do MMM', { locale: getDateLocale(language) }),
           orient: 'bottom',
           tickSize: 5,
@@ -72,12 +49,15 @@ export default function UserStatisticsChar({ raw = [], data = {} }) {
           orient: 'left',
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: -35,
+          tickRotation: 0,
         }}
         pointSize={10}
+        pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
+        pointLabelYOffset={-12}
         useMesh={true}
+        enableSlices={'y'}
       />
     </Content>
   );

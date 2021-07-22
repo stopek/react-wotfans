@@ -7,7 +7,7 @@ import DarkBox from "components/wot/DarkBox";
 import DiscordLink from "components/wot/DiscordLink";
 import MapRotatorList from "components/wot/map_rotator/MapRotatorList";
 import ThanksBox from "components/wot/ThanksBox";
-import { addSeconds, differenceInSeconds, format } from "date-fns";
+import { addSeconds, differenceInSeconds } from "date-fns";
 import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
 import { getUniqueByKeyMulti, sortByKeyMulti } from "helpers/user";
 import React, { useState } from "react";
@@ -38,21 +38,22 @@ export default function MapRotator(
     ads = false
   }
 ) {
-  const [date, setDate] = useState(new Date());
-  const [maps_ranges, setMapsRanges] = useState(limit);
-  const [filter_maps, setFilterMaps] = useState([]);
-
-  const date_server = addSeconds(server_date, differenceInSeconds(date, user_date));
-  const result_maps = mapsIntervalsList(maps, cycle, date_server);
-
-  const output_maps = mapsResultList(date_server, result_maps, maps_ranges);
-
   const filtersMapsList = getUniqueByKeyMulti(sortByKeyMulti(maps.map((map) => {
     return {
       label: map.map.name,
       value: map.map.id
     };
   }), 'label'), 'value');
+
+  const [date, setDate] = useState(new Date());
+  const [maps_ranges, setMapsRanges] = useState(limit);
+  const [filter_maps, setFilterMaps] = useState([]);
+
+  const start_current_difference = differenceInSeconds(date, user_date);
+  const date_server = addSeconds(server_date, start_current_difference);
+  const result_maps = mapsIntervalsList(maps, cycle, date_server);
+  const output_maps = mapsResultList(date_server, result_maps, maps_ranges);
+  const seconds_difference = differenceInSeconds(date, date_server);
 
   return (
     <Rotator>
@@ -92,10 +93,11 @@ export default function MapRotator(
 
       <MapRotatorList
         list={output_maps}
-        diff_seconds={differenceInSeconds(date, date_server)}
+        diff_seconds={seconds_difference}
         filter_maps={filter_maps}
         date={date}
         cycle_seconds={cycle * 60}
+        advanced={filter}
       />
 
       <ThanksBox>

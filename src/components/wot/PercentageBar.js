@@ -2,7 +2,7 @@ import { percentageDisplay } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { COLOR_DARK_3, COLOR_SECOND, RADIUS } from "styles/colors";
+import { COLOR_DARK_3, COLOR_SECOND, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const Content = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ const Content = styled.div`
   border-radius: ${RADIUS};
   background: ${COLOR_DARK_3};
   position: relative;
-  ${props => props?.down && `margin-top: 15px`}
+  ${props => props?.down && `margin-top: 15px;`}
 `;
 
 const Percent = styled.div`
@@ -24,6 +24,7 @@ const Percent = styled.div`
   line-height: 1;
   font-size: 10px;
   white-space: nowrap;
+  color: ${COLOR_TEXT};
 `;
 
 const Title = styled.div`

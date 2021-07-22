@@ -1,6 +1,7 @@
 import Empty from "components/core/Empty";
 import ClanProfileButton from "components/wot/clans/ClanProfileButton";
 import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
+import UnderlineHeader from "components/wot/headers/UnderlineHeader";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import StatsList from "components/wot/StatsList";
 import TankModalStats from "components/wot/tanks/TankModalStats";
@@ -17,9 +18,8 @@ import {
 } from "helpers/priceFormat";
 import { sortByWeight, sortByWN8 } from "helpers/user";
 import React, { useState } from "react";
-import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { Header, LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
+import { LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
 const ClanBox = styled.div`
   font-size: 60%;
@@ -114,9 +114,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
 
       {haveStats ? (
         <>
-          <Header>
-            <FormattedMessage id={`stats`} />
-          </Header>
+          <UnderlineHeader translation={`stats`} />
           <StatsList list={[
             { translation: 'global.rating', value: player?.global_rating },
             { translation: 'battles', value: player_battles },
@@ -170,12 +168,10 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
 
           {wn8_boost_tanks?.length > 0 && (
             <>
-              <Header>
-                <FormattedMessage id={`wn8.tanks`} />
-                <small>
-                  <FormattedMessage id={`wn8.tanks.message`} />
-                </small>
-              </Header>
+              <UnderlineHeader
+                translation={`wn8.tanks`}
+                small={`wn8.tanks.message`}
+              />
 
               <TanksStatsList
                 tanks_stats={wn8_boost_tanks}
@@ -186,19 +182,19 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
 
           {Object.values(tanksStats)?.length > 0 && (
             <>
-              <Header>
-                <FormattedMessage id={`tanks.list`} />
-              </Header>
+              <UnderlineHeader translation={`tanks.list`} />
               <TanksListAndFilters
                 tanks_stats={sortByWN8(tanksStats)}
+                custom={{ wn8: true, battles: true, name: true, tier: true, nation: true, type: true, premium: true }}
               />
             </>
           )}
         </>
       ) : (
-        <Empty message={<FormattedMessage id={`no.stats.header`} />}>
-          <FormattedMessage id={`no.stats.message`} />
-        </Empty>
+        <Empty
+          translation={`no.stats.header`}
+          message={`no.stats.message`}
+        />
       )}
     </>
   );

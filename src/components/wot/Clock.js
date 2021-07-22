@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const Time = styled.div`
-  background: white;
+  background: ${COLOR_DARK_2};
   font-size: 35px;
   display: table;
   line-height: 1;
@@ -12,7 +12,7 @@ const Time = styled.div`
   border-radius: ${RADIUS};
   font-weight: 700;
   margin: 0 auto 15px auto;
-  color: black;
+  color: ${COLOR_TEXT};
 `;
 
 export default function Clock({ setDate, date }) {
@@ -24,7 +24,7 @@ export default function Clock({ setDate, date }) {
     return () => {
       clearInterval(timer);
     }
-  }, [date]);
+  }, [date, setDate]);
 
   return (
     <Time>

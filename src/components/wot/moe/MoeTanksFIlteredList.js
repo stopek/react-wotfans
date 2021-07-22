@@ -23,14 +23,13 @@ function ExpectedTanksFilteredList({ tanks = [], intl }) {
     setSettings(Object.assign({}, settings, name_value));
   }
 
-  console.log(filters);
-
   return (
     <>
       <DarkBox>
         <TankFilters
           filters={filters}
           setFilters={setFilters}
+          custom={{ type: true, tier: true, nation: true, name: true, premium: true }}
         />
         <Grid container>
           {['type', 'tier', 'moe_1dmg', 'moe_2dmg', 'moe_3dmg', 'battles'].map((option) => (

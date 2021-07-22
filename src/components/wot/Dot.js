@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { COLOR_RED, COLOR_SECOND, COLOR_THEME } from "styles/colors";
+import { COLOR_SECOND, COLOR_THEME } from "styles/colors";
 
 const pulseDot = keyframes`
   0% {

@@ -12,8 +12,7 @@ import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRo
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
 import { AuthWot } from "api/actions/auth_wot";
-import { Wot } from "api/actions/wot";
-import { ACCOUNT_URL, CLAN_URL, GAMES_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
+import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
 import ProgressCircular from "components/ui/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
@@ -24,8 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK, COLOR_SECOND, COLOR_SECOND_DARKER, RADIUS } from "styles/colors";
-import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
+import { COLOR_DARK_2, COLOR_SECOND, COLOR_SECOND_DARKER, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const StyledMenu = withStyles({
   paper: {
@@ -52,24 +50,25 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    '& svg': { fill: 'white' },
+    '& svg': { fill: COLOR_TEXT },
     '&:hover': {
       backgroundColor: COLOR_SECOND,
-      color: 'white',
+      color: COLOR_TEXT,
     },
   },
 }))(MenuItem);
 
 const Content = styled.div`
-  position: absolute;
-  right: 15px;
-  top: 10px;
+  background: ${COLOR_DARK_2};
+  right: 5px;
   z-index: 1000;
-  background: ${COLOR_DARK};
   padding: 0 5px;
   display: flex;
   border-radius: ${RADIUS};
-
+  line-height: 1;
+  gap: 15px;
+  position: absolute;
+  top: 5px;
   svg {
     width: 35px !important;
     height: 35px !important;
@@ -84,7 +83,7 @@ const OpenMenuIcon = styled.div`
   gap: 10px;
 
   svg {
-    fill: white;
+    fill: ${COLOR_TEXT};
     width: 40px;
     height: 40px;
   }

@@ -14,7 +14,7 @@ import { getTranslationByNation } from "helpers/user";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { COLOR_GREY_DARK_3, COLOR_TEXT } from "styles/colors";
+import { COLOR_SECOND, COLOR_TEXT_ON_THEME } from "styles/colors";
 
 const NationBox = styled.div`
   display: inline-flex;
@@ -22,7 +22,7 @@ const NationBox = styled.div`
   font-size: 12px;
   overflow: hidden;
   align-items: center;
-  background: ${COLOR_GREY_DARK_3};
+  background: ${COLOR_SECOND};
   border-radius: 25px;
 `;
 
@@ -40,7 +40,7 @@ const Nation = styled.div`
   padding: 0 20px 0 10px;
   line-height: 1;
   text-transform: uppercase;
-  color: ${COLOR_TEXT};
+  color: ${COLOR_TEXT_ON_THEME};
 `;
 
 const getIconByType = (type) => {
@@ -74,7 +74,7 @@ const getIconByType = (type) => {
   }
 }
 
-export default function TankNationBox({ tank = {}, ...props }) {
+export default function TankNationBox({ tank = {}, hidename = false, ...props }) {
   const icon = getIconByType(tank?.nation);
   if (!icon) {
     return null;
@@ -83,9 +83,11 @@ export default function TankNationBox({ tank = {}, ...props }) {
   return (
     <NationBox {...props}>
       <Flag icon={icon} />
-      <Nation>
-        <FormattedMessage id={getTranslationByNation(tank.nation)} />
-      </Nation>
+      {!hidename && (
+        <Nation>
+          <FormattedMessage id={getTranslationByNation(tank.nation)} />
+        </Nation>
+      )}
     </NationBox>
   );
 }

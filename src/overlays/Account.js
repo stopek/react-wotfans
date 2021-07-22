@@ -14,7 +14,7 @@ export default function AccountOverlay({ children, ...props }) {
         <Grid container spacing={2}>
           <Grid item md={4} xs={12}>
             <LoggedUserCard />
-            <MapRotatorPage limit={[1, 12]} filter />
+            <MapRotatorPage limit={[1, 7]} filter />
           </Grid>
 
           <Grid item md={8} xs={12}>

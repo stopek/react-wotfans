@@ -9,11 +9,11 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const Card = styled.div`
-  background: ${COLOR_DARK};
-  color: white;
+  background: ${COLOR_DARK_2};
+  color: ${COLOR_TEXT};
   padding: 25px;
   font-weight: 700;
   font-size: 30px;
@@ -62,7 +62,8 @@ export default function LoggedUserCard() {
       <Text>
         {!!player?.last_battle_time && (
           <>
-            <FormattedMessage id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
+            <FormattedMessage
+              id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
           </>
         )}
         {player?.is_locked && (

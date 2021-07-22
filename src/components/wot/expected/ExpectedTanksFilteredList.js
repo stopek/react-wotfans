@@ -26,6 +26,7 @@ export default function ExpectedTanksFilteredList({ tanks = [] }) {
         <TankFilters
           filters={filters}
           setFilters={setFilters}
+          custom={{ type: true, tier: true, nation: true, name: true, premium: true }}
         />
         <Grid container>
           {['type', 'tier', 'damage', 'def', 'frag', 'spot', 'win'].map((option) => (
@@ -40,7 +41,7 @@ export default function ExpectedTanksFilteredList({ tanks = [] }) {
         </Grid>
       </DarkBox>
 
-      <ExpectedTable tanks={tanks} />
+      <ExpectedTable tanks={tanks} settings={settings} />
     </>
   );
 }

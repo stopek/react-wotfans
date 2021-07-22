@@ -8,13 +8,14 @@ import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
-import { RADIUS } from "styles/colors";
+import { COLOR_TEXT, RADIUS } from "styles/colors";
 
 const Name = styled.span`
   display: inline-flex;
   gap: 10px;
   align-items: center;
   white-space: nowrap;
+  color: ${COLOR_TEXT};
 `;
 
 const Logo = styled.div`
@@ -57,6 +58,7 @@ const NameBox = styled.div`
 export default function PlayerNameWithConsoleLogo({ name = '', last_battle = '', small = false }) {
   const language = useSelector(selectedLanguage);
   const date_locale = getDateLocale(language);
+
 
   if (!name) {
     return null;

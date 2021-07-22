@@ -4,9 +4,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
-
-const Content = styled.div``;
 
 export default function TableHeader(props) {
   const { order, orderBy, onRequestSort, headCells, nosort } = props;
