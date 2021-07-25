@@ -1,3 +1,4 @@
+import Error from "components/core/Error";
 import ClansList from "components/wot/clans/ClansList";
 import SearchClanForm from "components/wot/clans/SearchClanForm";
 import SimplePagination from "components/wot/SimplePagination";
@@ -35,6 +36,10 @@ export default function IndexContainer({ ...props }) {
 
   return (
     <WotOverlay {...props}>
+      {!clans_length && (
+        <Error message={`loading.not.found`} surprise={`nothingness`} />
+      )}
+
       <SearchClanForm submit={handleSearchClan} />
 
       {pages > 1 && (

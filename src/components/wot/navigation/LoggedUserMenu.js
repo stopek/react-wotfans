@@ -12,8 +12,8 @@ import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRo
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
 import { AuthWot } from "api/actions/auth_wot";
-import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL } from "app/routes";
-import ProgressCircular from "components/ui/ProgressCircular";
+import { ACCOUNT_URL, CLAN_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL, WN8_CALCULATOR_URL } from "app/routes";
+import ProgressCircular from "components/ui/progress/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
 import { isLogged, logOutUser } from "helpers/user";
@@ -24,6 +24,7 @@ import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK_2, COLOR_SECOND, COLOR_SECOND_DARKER, COLOR_TEXT, RADIUS } from "styles/colors";
+import EmojiSymbolsRoundedIcon from '@material-ui/icons/EmojiSymbolsRounded';
 
 const StyledMenu = withStyles({
   paper: {
@@ -146,6 +147,11 @@ export default function LoggedUserMenu() {
     //   icon: <SportsEsportsRoundedIcon fontSize="small" />,
     //   route: GAMES_URL
     // },
+    {
+      translation: 'menu.wn8.calculator',
+      icon: <EmojiSymbolsRoundedIcon fontSize="small" />,
+      route: WN8_CALCULATOR_URL
+    },
     !!user_data?.clan?.tag && {
       translation: 'menu.your.clan',
       icon: <SupervisorAccountRoundedIcon fontSize="small" />,

@@ -17,6 +17,7 @@ import {
   TANK_URL,
   TANKS_URL,
   UPGRADE_URL,
+  WN8_CALCULATOR_TANK_URL,
   WN8_CALCULATOR_URL
 } from "app/routes";
 
@@ -68,8 +69,14 @@ const routing = [
   },
   {
     authorized: true,
-    route: WN8_CALCULATOR_URL,
-    Component: load('account/WN8CalculatorContainer')
+    route: [WN8_CALCULATOR_URL, WN8_CALCULATOR_TANK_URL],
+    Component: load('account/WN8CalculatorContainer'),
+    params: {
+      seo: {
+        title: 'seo.wn8.calculator',
+        description: 'seo.wn8.calculator.description',
+      }
+    }
   },
   {
     route: CONTACT_URL,

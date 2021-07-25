@@ -28,13 +28,14 @@ export const Header = styled.h2`
   }
 `;
 
-export default function UnderlineHeader({ translation, small = '', ...props }) {
+export default function UnderlineHeader({ translation, small = '', values = {}, ...props }) {
   return (
     <Header {...props}>
-      <FormattedMessage id={translation} />
+      <FormattedMessage id={translation} values={values} />
+
       {small?.length > 0 && (
         <small>
-          <FormattedMessage id={small} />
+          <FormattedMessage id={small} values={values} />
         </small>
       )}
     </Header>

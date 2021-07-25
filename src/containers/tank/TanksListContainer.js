@@ -45,6 +45,7 @@ export default function TanksListContainer({ ...props }) {
             onChange={(value) => setTankName(value)}
             value={tank_name}
             variant={`standard`}
+            autoFocus
             suffix={<ButtonInput label={`search.tank`} variant={`text`} onClick={() => search(1)} />}
           />
         </Grid>

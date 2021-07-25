@@ -7,6 +7,7 @@ import { perBattleCalculator, perBattleDisplay, priceFormat } from "helpers/pric
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 
 const Card = styled.div`
   width: 100%;
@@ -17,11 +18,13 @@ const StatsList = styled.ol`
   list-style: none;
   padding: 0;
   margin: 15px 0;
+  white-space: nowrap;
 `;
 
 const Gap = styled.div`
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 `;
 
 const StatsItem = styled.li`
@@ -29,14 +32,26 @@ const StatsItem = styled.li`
   color: black;
   padding: 5px;
   display: flex;
+  flex-wrap: wrap;
 
-  span {
-    flex: 1;
-    text-align: right;
+  @media ${breakpoint.md} {
+    flex-wrap: nowrap;
   }
 
-  strong {
-    flex: 5;
+  span {
+    flex: 2;
+    @media ${breakpoint.md} {
+      text-align: right;
+    }
+  }
+
+  > strong {
+    display: flex;
+    width: 100%;
+    @media ${breakpoint.md} {
+      flex: 8;
+      display: inline-flex;
+    }
   }
 
   &:not(:last-child) {
@@ -55,13 +70,12 @@ const Stat = ({ translation, value, value2 }) => {
         <FormattedMessage id={translation} />
       </strong>
       <span>{value}</span>
-      <span>{value2}</span>
+      {!!value2 && <span>{value2}</span>}
     </StatsItem>
   );
 }
 
 export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...props }) {
-
   const statsList = [
     { translation: 'capture.points', value: statistics?.capture_points },
     { translation: 'damage.assisted.radio', value: statistics?.damage_assisted_radio },
@@ -88,14 +102,14 @@ export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...pr
   return (
     <Card>
       <Grid container spacing={2}>
-        <Grid item md={6} xs={12}>
+        <Grid item lg={6} md={4} xs={12}>
           <TankBase
             tank={tank}
             {...props}
           />
         </Grid>
 
-        <Grid item md={6} xs={12}>
+        <Grid item lg={6} md={8} xs={12}>
           {tank?.tier > 0 && (
             <Gap>
               <Wn8Bar value={stats?.wn8} unit={`WN8`} />
@@ -120,7 +134,7 @@ export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...pr
             <Stat
               translation={`battles`}
               value={statistics?.battles || 0}
-              value2={<FormattedMessage id={`per.battle`} />}
+              value2={<strong><FormattedMessage id={`per.battle`} /></strong>}
             />
 
             {statsList.map((stat, key) => (

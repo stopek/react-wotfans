@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const FooterBox = styled.div`
   margin-top: auto;
+  padding-top: 55px;
 `;
 
 export default function Footer() {

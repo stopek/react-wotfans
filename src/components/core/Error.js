@@ -21,21 +21,24 @@ const Boxes = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 900;
   margin: 0 0 5px 0;
   color: ${COLOR_RED};
   text-transform: uppercase;
 `
 
-export default function Error({ message = '', ...props }) {
+export default function Error({ message = '', surprise = 'ups',  ...props }) {
   const history = useHistory();
 
   return (
-    <ErrorContent>
-      <H1>
-        Ups...
-      </H1>
+    <ErrorContent {...props}>
+      {surprise?.length > 0 && (
+        <H1>
+          <FormattedMessage id={surprise} />...
+        </H1>
+      )}
+
       {message?.length > 0 && (
         <FormattedMessage id={message} />
       )}

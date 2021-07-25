@@ -3,24 +3,30 @@ import { nationList, premiumFilter, tiersList, typeList, wn8Ranges } from "app/s
 import RangeInput from "components/ui/input/RangeInput";
 import SelectInput from "components/ui/input/SelectInput";
 import TextInput from "components/ui/input/TextInput";
+import CountDownProgressCircular from "components/ui/progress/CountDownProgressCircular";
 import React, { useState } from "react";
 
 export default function TankFilters({ filters, setFilters, custom = {}, settings = {} }) {
+  const ms = 1000;
+
   const [name, setName] = useState(filters?.tank_name || '');
-  const [timer, setTimer] = useState(null);
+  const [timeout, setTimer] = useState(null);
 
   const set = (name_value) => {
+    clearTimeout(timeout);
+    setTimer(null);
+
     setFilters(Object.assign({}, filters, name_value));
   }
 
   const setNameHandle = (value) => {
     setName(value);
 
-    clearTimeout(timer);
+    clearTimeout(timeout);
 
     setTimer(setTimeout(() => {
       set({ tank_name: value });
-    }, 1000));
+    }, ms));
   }
 
   return (
@@ -29,9 +35,11 @@ export default function TankFilters({ filters, setFilters, custom = {}, settings
         <Grid item md xs={12}>
           <TextInput
             label={`tank.name`}
+            autoFocus
             onChange={(value) => setNameHandle(value)}
             value={name}
             variant={`standard`}
+            suffix={!!timeout && <CountDownProgressCircular key={`progress-${timeout}`} size={15} start={ms} steps={10} />}
           />
         </Grid>
       )}

@@ -4,20 +4,19 @@ import { COLOR_TEXT, COLOR_THEME } from "styles/colors";
 
 const Text = styled.div`
   color: ${COLOR_TEXT};
-  line-height: 1.3;
-  padding: 25px 0;
-  max-width: 500px;
+  line-height: 1.7;
+  ${props => !props?.full && `max-width: 700px;`}
   display: block;
   width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
-  
+
   strong {
-    font-weight: 700;
+    font-weight: 900;
   }
-  
+
   a {
     color: ${COLOR_THEME};
     text-decoration: none;
@@ -25,15 +24,21 @@ const Text = styled.div`
 
   span {
     display: block;
-    line-height: 1.5;
     font-size: 15px;
-    margin-top: 15px;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
   }
 `;
 
-export default function SimpleText({ children }) {
+export default function SimpleText({ children, ...props }) {
   return (
-    <Text>
+    <Text {...props}>
       {children}
     </Text>
   );

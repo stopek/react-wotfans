@@ -10,7 +10,7 @@ export default function PlayerProfileButton({ account_id = 0, name = '', ...prop
 
   const handleProfileClick = (event) => {
     event.preventDefault();
-    return history.push(url);
+    history.push(url);
   }
 
   return (

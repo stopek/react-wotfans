@@ -65,12 +65,13 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
 
   //boostowe czołgi
   const wn8_boost_tanks = sortByWeight(tanksStats).slice(0, 12);
-  const preview = (tank) => {
+  const previewHighlightedTank = (tank) => {
     setPreviewTank(tank);
-    setOpen(true);
     setPreviewStats(tanks_wn8[tank.id] || {});
     setPreviewStatistics(Object.values(tanksStats).find((tank_stat) => tank_stat.tank.id === tank.id) || {});
+    setOpen(true);
   }
+
 
   return (
     <>
@@ -80,7 +81,6 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
         statistics={preview_statistics}
         setOpen={setOpen}
         open={open}
-        card_props={{ more: true }}
       />
 
       <LargeHeader>
@@ -140,7 +140,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
               tank: {
                 tank: ps?.max_damage_tank,
                 props: {
-                  onClick: () => preview(ps?.max_damage_tank)
+                  onClick: () => previewHighlightedTank(ps?.max_damage_tank)
                 }
               }
             },
@@ -150,7 +150,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
               tank: {
                 tank: ps?.max_frags_tank,
                 props: {
-                  onClick: () => preview(ps?.max_frags_tank)
+                  onClick: () => previewHighlightedTank(ps?.max_frags_tank)
                 }
               }
             },
@@ -160,7 +160,7 @@ export default function PlayerDetails({ player = {}, statistics = {} }) {
               tank: {
                 tank: ps?.max_xp_tank,
                 props: {
-                  onClick: () => preview(ps?.max_xp_tank)
+                  onClick: () => previewHighlightedTank(ps?.max_xp_tank)
                 }
               }
             },

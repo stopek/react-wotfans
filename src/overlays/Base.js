@@ -6,12 +6,14 @@ import { getToken } from "helpers/cookies";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { Element } from 'react-scroll'
 import { clearMessages } from "reducers/flashSlice";
 import { getUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK } from "styles/colors";
 
-const Content = styled.div`
+
+const Content = styled(Element)`
   background: ${COLOR_DARK};
 `;
 
@@ -25,19 +27,13 @@ const action = (dispatch, token) => {
 function Base({ match, children, seo, seo_values = {}, ...props }) {
   delete props['staticContext'];
 
+  const values = Object.assign({}, seo?.values || {}, seo_values || {});
   const dispatch = useDispatch();
   const token = getToken();
-  // const language = useSelector(selectedLanguage);
-  // const history = useHistory();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      action(dispatch, token);
-    }, 30000);
-
-    return () => {
-      clearInterval(timer);
-    }
+    const timer = setInterval(() => action(dispatch, token), 30000);
+    return () => clearInterval(timer)
   }, [dispatch, token]);
 
   useEffect(() => {
@@ -45,27 +41,8 @@ function Base({ match, children, seo, seo_values = {}, ...props }) {
     action(dispatch, token);
   }, [dispatch, token]);
 
-  const values = Object.assign({}, seo?.values || {}, seo_values || {});
-
-  // const explode = trim(match.url, '/').split('/');
-  // if (!explode[0]?.length) {
-  //   const currentRoute = routeForLocale(match?.path, language, match?.params);
-  //
-  //   console.log(explode);
-  //   console.log(match);
-  //   console.log(currentRoute);
-  //
-  //   return null;
-  //   return <Redirect to={currentRoute} />
-  // }
-  //
-  //
-  // if (!match?.params?.locale) {
-  //   // return <Redirect to={currentRoute} />
-  // }
-
   return (
-    <Content {...props}>
+    <Content name={`main`} id={`main`} {...props}>
       <Seo
         title={seo?.title}
         description={seo?.description}

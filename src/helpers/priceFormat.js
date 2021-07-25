@@ -10,8 +10,8 @@ export const xpResult = (value) => {
   return format_number(value, 5, ',', '');
 }
 
-export const numberResult = (value) => {
-  return format_number(value, 5, ',', ' ');
+export const numberResult = (value, decimals = 5) => {
+  return format_number(value, decimals, ',', ' ');
 }
 
 export const percentageDisplay = (value, decimals = 3) => {

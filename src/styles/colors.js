@@ -27,6 +27,7 @@ export const COLOR_TEXT_DARK = "#4e4e4e";
 export const COLOR_BLUE = '#2196f3';
 export const COLOR_RED = '#f44336';
 export const COLOR_GREEN = '#4caf50';
+export const COLOR_VIOLET = '#793db6';
 
 export const RADIUS = '5px';
 

@@ -18,10 +18,10 @@ export default function TanksStatsList({ tanks_stats = [], grid_props = {}, filt
             tank={tank_stat?.tank}
             statistics={tank_stat}
             stats={{
-              wn8: tank_stat?.wn8 || 0,
-              wn7: tank_stat?.wn7 || 0,
-              weight: tank_stat?.weight || 0,
-              efficiency: tank_stat?.efficiency || 0
+              wn8: tank_stat?.wn8?.wn ?? tank_stat?.wn8 ?? -1,
+              wn7: tank_stat?.wn7?.wn ?? tank_stat?.wn7 ?? -1,
+              weight: tank_stat?.wn8?.weight ?? tank_stat?.weight ?? -1,
+              efficiency: tank_stat?.efficiency?.wn ?? tank_stat?.efficiency ?? -1
             }}
             {...props}
           />

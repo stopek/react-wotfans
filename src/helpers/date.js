@@ -24,8 +24,12 @@ export const date_ago_from_unix = (date, format_pattern, headers = {}) => {
   return formatDistance(d, new Date(), Object.assign({}, { addSuffix: true }, headers));
 }
 
-export const date_format = (date, format_pattern = "yyyy-MM-dd") => {
-  return date ? format(date, format_pattern) : null;
+export const date_format = (date, format_pattern = "yyyy-MM-dd", headers = {}) => {
+  return date ? format(date, format_pattern, headers) : null;
+}
+
+export const date_from_api = (date, output_format = 'yyyy-MM-dd HH:mm:ss', format_pattern = "yyyy-MM-dd HH:mm:ss", headers = {}) => {
+  return date_format(date_parse(date, format_pattern), output_format, headers);
 }
 
 export const date_parse = (date, format_pattern = 'yyyy-MM-dd') => {

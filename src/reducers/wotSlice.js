@@ -8,11 +8,11 @@ const initialState = {
   error: false,
   not_found: false,
   crash: false,
+  unauthorized: false,
 
   search_player: {},
   search_players: {},
   search_clan: {},
-  user_tanks: {},
   clans_list: [],
   players_list: [],
   maps_list: [],
@@ -24,19 +24,20 @@ const initialState = {
   search_tank: {},
 
   get_user: {},
+  user_tanks: {},
 
   games: [],
   game: {}
 };
 
-const ignoreChangingAction = [
+const ignoring = [
   'wot/get_user/fulfilled',
-  'wot/get_user/pending'
+  'wot/get_user/pending',
+  'wot/get_user/rejected'
 ];
 
 function isPendingAction(action: AnyAction) {
-  if (ignoreChangingAction.includes(action?.type)) return false;
-
+  if (ignoring.includes(action?.type)) return false;
   return action.type.endsWith('pending');
 }
 
@@ -45,6 +46,7 @@ function isUnauthorizedAction(action: AnyAction) {
 }
 
 function isRejectedErrorAction(action: AnyAction) {
+  if (ignoring.includes(action?.type)) return false;
   return action.type.endsWith('rejected') && false === [404, 500].includes(action?.payload?.status);
 }
 
@@ -53,12 +55,12 @@ function isRejectedNotFoundAction(action: AnyAction) {
 }
 
 function isCrashedAction(action: AnyAction) {
+  if (ignoring.includes(action?.type)) return false;
   return action.type.endsWith('rejected') && action?.payload?.status === 500;
 }
 
 function isFulfilledAction(action: AnyAction) {
-  if (ignoreChangingAction.includes(action?.type)) return false;
-
+  if (ignoring.includes(action?.type)) return false;
   return action.type.endsWith('fulfilled');
 }
 
@@ -85,7 +87,7 @@ export const loadMaps = handleRejectValues('wot/load_maps', Wot.load_maps);
 export const loadMapGenerator = handleRejectValues('wot/map_generator', Wot.map_generator);
 export const searchClan = handleRejectValues('wot/search_clan', Wot.search_clan);
 export const searchTank = handleRejectValues('wot/search_tank', Wot.search_tank);
-export const userTanks = handleRejectValues('wot/user_tanks', Wot.user_tanks);
+// export const userTanks = handleRejectValues('wot/user_tanks', Wot.user_tanks);
 export const userTanksAchievements = handleRejectValues('wot/user_tanks_achievements', Wot.user_tanks_achievements);
 export const clansList = handleRejectValues('wot/clans_list', Wot.clans);
 export const expWn8List = handleRejectValues('wot/wn8', Wot.exp_wn8);
@@ -93,6 +95,7 @@ export const moeList = handleRejectValues('wot/moe', Wot.moe);
 export const loadTanks = handleRejectValues('wot/tanks', Wot.tanks);
 
 export const getUser = handleRejectValues('wot/get_user', AuthWot.get_user);
+export const fetchUserTanks = handleRejectValues('wot/user_tanks', AuthWot.user_tanks);
 
 
 export const wotSlice = createSlice({
@@ -107,6 +110,9 @@ export const wotSlice = createSlice({
     },
     clearSearchPlayers: (state) => {
       state.search_players = {};
+    },
+    clearPlayerTanks: (state) => {
+      state.user_tanks = {};
     },
     setGameParam: (state, action) => {
       state.game = Object.assign({}, state.game, action.payload);
@@ -140,6 +146,13 @@ export const wotSlice = createSlice({
       })
       .addCase(searchTank.fulfilled, (state, action) => {
         state.search_tank = action.payload;
+      })
+
+      .addCase(fetchUserTanks.pending, (state) => {
+        state.user_tanks = {};
+      })
+      .addCase(fetchUserTanks.fulfilled, (state, action) => {
+        state.user_tanks = action.payload;
       })
 
       .addCase(loadTanks.pending, (state) => {
@@ -178,9 +191,9 @@ export const wotSlice = createSlice({
         state.players_list = action.payload;
       })
 
-      .addCase(searchPlayerById.pending, (state) => {
+      .addCase(searchPlayerById.pending, (state, action) => {
+
         state.search_player = {};
-        state.user_tanks = {};
       })
       .addCase(searchPlayerById.fulfilled, (state, action) => {
         state.search_player = action.payload;
@@ -192,13 +205,6 @@ export const wotSlice = createSlice({
       })
       .addCase(searchClan.fulfilled, (state, action) => {
         state.search_clan = action.payload;
-      })
-
-      .addCase(userTanks.pending, (state) => {
-        state.user_tanks = {};
-      })
-      .addCase(userTanks.fulfilled, (state, action) => {
-        state.user_tanks = action.payload;
       })
 
       .addCase(userTanksAchievements.pending, (state) => {
@@ -234,14 +240,7 @@ export const wotSlice = createSlice({
           state.loading = false;
           state.not_found = false;
           state.error = false;
-        }
-      )
-      .addMatcher(
-        isRejectedNotFoundAction,
-        (state) => {
-          state.loading = false;
-          state.not_found = true;
-          state.error = false;
+          state.unauthorized = false;
         }
       )
       .addMatcher(
@@ -250,8 +249,18 @@ export const wotSlice = createSlice({
           state.loading = false;
           state.not_found = false;
           state.error = false;
+          state.unauthorized = true;
 
           logOutUser();
+        }
+      )
+      .addMatcher(
+        isRejectedNotFoundAction,
+        (state) => {
+          state.loading = false;
+          state.not_found = true;
+          state.error = false;
+          state.unauthorized = false;
         }
       ).addMatcher(
       isCrashedAction,
@@ -260,13 +269,14 @@ export const wotSlice = createSlice({
         state.not_found = false;
         state.error = false;
         state.crash = true;
+        state.unauthorized = false;
       }
     )
     ;
   },
 });
 
-export const { setError, clearSearchPlayer, clearSearchPlayers, setGameParam } = wotSlice.actions;
+export const { setError, clearSearchPlayer, clearSearchPlayers, clearPlayerTanks, setGameParam } = wotSlice.actions;
 
 export const selectSearchPlayer = (state) => state.wot.search_player;
 export const selectSearchPlayers = (state) => state.wot.search_players;
@@ -282,10 +292,12 @@ export const selectLoadMaps = (state) => state.wot.maps_list;
 export const selectMapGenerator = (state) => state.wot.map_generator;
 export const selectExpWn8List = (state) => state.wot.exp_wn8_list;
 export const selectMoeList = (state) => state.wot.moe_list;
+export const selectGameItem = (state) => state.wot.game || {};
+
 export const selectLoading = (state) => state.wot.loading;
 export const selectError = (state) => state.wot.error;
 export const selectNotFound = (state) => state.wot.not_found;
 export const selectCrash = (state) => state.wot.crash;
-export const selectGameItem = (state) => state.wot.game || {};
+export const selectUnauthorized = (state) => state.wot.unauthorized;
 
 export default wotSlice.reducer;

@@ -1,14 +1,26 @@
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import MailRoundedIcon from '@material-ui/icons/MailRounded';
 import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
-import { CLANS_URL, CONTACT_URL, EXP_WN8_URL, MAIN_URL, MAPS_URL, MOE_URL, SEARCH_URL, TANKS_URL } from "app/routes";
-import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
 import StarOutlineRoundedIcon from '@material-ui/icons/StarOutlineRounded';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import TuneRoundedIcon from '@material-ui/icons/TuneRounded';
+import {
+  CLAN_URL,
+  CLANS_URL,
+  CONTACT_URL,
+  EXP_WN8_URL,
+  MAIN_URL,
+  MAPS_URL,
+  MOE_URL,
+  PLAYER_URL,
+  SEARCH_URL,
+  TANK_URL,
+  TANKS_URL
+} from "app/routes";
+import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
 import React from "react";
 import {
   COLOR_TEXT,
@@ -25,13 +37,19 @@ import {
 } from "styles/colors";
 
 export const menuItems = [
-  { translation: 'homepage', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL },
-  { translation: 'clans.list', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL },
-  { translation: 'search.player', i: 3, icon: <SearchRoundedIcon />, route: SEARCH_URL },
-  { translation: 'exp.wn8', i: 4, icon: <TuneRoundedIcon />, route: EXP_WN8_URL },
-  { translation: 'moe', i: 5, icon: <StarOutlineRoundedIcon />, route: MOE_URL },
-  { translation: 'tanks.list', i: 6, icon: <TankIcon />, route: TANKS_URL },
-  { translation: 'maps.list', i: 7, icon: <MapRoundedIcon />, route: MAPS_URL }
+  { translation: 'homepage', i: 1, icon: <HomeRoundedIcon />, route: MAIN_URL, active: [MAIN_URL] },
+  { translation: 'clans.list', i: 2, icon: <PeopleAltRoundedIcon />, route: CLANS_URL, active: [CLAN_URL, CLANS_URL] },
+  {
+    translation: 'search.player',
+    i: 3,
+    icon: <SearchRoundedIcon />,
+    route: SEARCH_URL,
+    active: [SEARCH_URL, PLAYER_URL]
+  },
+  { translation: 'exp.wn8', i: 4, icon: <TuneRoundedIcon />, route: EXP_WN8_URL, active: [EXP_WN8_URL] },
+  { translation: 'moe', i: 5, icon: <StarOutlineRoundedIcon />, route: MOE_URL, active: [MOE_URL] },
+  { translation: 'tanks.list', i: 6, icon: <TankIcon />, route: TANKS_URL, active: [TANKS_URL, TANK_URL] },
+  { translation: 'maps.list', i: 7, icon: <MapRoundedIcon />, route: MAPS_URL, active: [MAPS_URL] }
 ];
 
 export const footerMenuItems = [

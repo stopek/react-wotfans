@@ -1,6 +1,6 @@
 import routes from "app/routing";
 import ScrollTop from "components/core/ScrollTop";
-import NotFound from "components/errors/NotFound";
+import NotFound from "components/core/NotFound";
 import TitledComponentHOC from "hoc/TitledComponentHOC";
 import LanguageProvider from "language";
 import React from "react";
@@ -23,8 +23,8 @@ export default function RouterComponent() {
   // });
   //
 
-  const routes_list = routes.map(({ route, header, Component, params, ...rest }, key) => {
-    let RouteComponent = TitledComponentHOC(Component, { ...params });
+  const routes_list = routes.map(({ route, header, Component, params }, key) => {
+    let RouteComponent = TitledComponentHOC(Component, params);
     return (
       <Route key={key} strict exact path={route}>
         <RouteComponent />

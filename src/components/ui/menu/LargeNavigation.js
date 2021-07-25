@@ -16,7 +16,7 @@ export default function LargeNavigation({ theme = 'default_theme', items = [] })
       <BottomNavigation showLabels>
         {items.map((item) => (
           <BottomNavigationAction
-            key={`large-menu-${item.id}`}
+            key={`large-menu-${item.i}`}
             label={<FormattedMessage id={item.translation} />}
             onClick={(event) => handleClickItem(event, item.href, item.route)}
             icon={item.icon}

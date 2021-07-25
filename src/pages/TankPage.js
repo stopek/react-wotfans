@@ -1,16 +1,15 @@
 import { Grid } from "@material-ui/core";
 import SimpleDateValueChar from "components/wot/char/SimpleDateValueChar";
 import ExpectedTankChanges from "components/wot/expected/ExpectedTankChanges";
+import UnderlineHeader from "components/wot/headers/UnderlineHeader";
 import MoeTanksChanges from "components/wot/moe/MoeTanksChanges";
 import BestPlayersOnTank from "components/wot/player/BestPlayersOnTank";
 import Tabs from "components/wot/Tabs";
 import TankBase from "components/wot/tanks/TankBase";
 import { valueFormat } from "helpers/priceFormat";
 import React from "react";
-import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import { COLOR_TEXT, RADIUS } from "styles/colors";
-import { Header } from "styles/GlobalStyled";
 
 const WhiteSection = styled.div`
   background: white;
@@ -25,7 +24,6 @@ const Content = styled.div`
 
 const getDataToChar = (data, y_maps) => {
   let output = [];
-
 
   y_maps.forEach((y_map) => {
     let temp_data = [];
@@ -90,12 +88,12 @@ export default function TankPage({ tank = {}, wn8 = 0 }) {
   return (
     <Content>
       <Grid container spacing={2}>
-        <Grid item md={6} xs={12}>
+        <Grid item lg={6} md={4} xs={12}>
           <WhiteSection>
             <TankBase tank={tank} />
           </WhiteSection>
         </Grid>
-        <Grid item md={6} xs={12}>
+        <Grid item lg={6} md={8} xs={12}>
           {/*<Header up down>*/}
           {/*  <FormattedMessage id={`avg.wn8`} />*/}
           {/*</Header>*/}
@@ -106,12 +104,12 @@ export default function TankPage({ tank = {}, wn8 = 0 }) {
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <Header down>
-            <FormattedMessage id={`best.damage.players`} />
-            <small>
-              <FormattedMessage id={`out.of.all.garage.tanks`} />
-            </small>
-          </Header>
+          <UnderlineHeader
+            translation={`best.damage.players`}
+            small={`out.of.all.garage.tanks`}
+            down
+          />
+
           <BestPlayersOnTank
             max_height={500}
             column_key={`max_damage`}
@@ -120,12 +118,11 @@ export default function TankPage({ tank = {}, wn8 = 0 }) {
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <Header down>
-            <FormattedMessage id={`best.frags.players`} />
-            <small>
-              <FormattedMessage id={`out.of.all.garage.tanks`} />
-            </small>
-          </Header>
+          <UnderlineHeader
+            translation={`best.frags.players`}
+            small={`out.of.all.garage.tanks`}
+            down
+          />
 
           <BestPlayersOnTank
             max_height={500}
@@ -135,12 +132,11 @@ export default function TankPage({ tank = {}, wn8 = 0 }) {
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <Header down>
-            <FormattedMessage id={`best.xp.players`} />
-            <small>
-              <FormattedMessage id={`out.of.all.garage.tanks`} />
-            </small>
-          </Header>
+          <UnderlineHeader
+            translation={`best.xp.players`}
+            small={`out.of.all.garage.tanks`}
+            down
+          />
 
           <BestPlayersOnTank
             max_height={500}

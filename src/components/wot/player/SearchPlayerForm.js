@@ -12,6 +12,7 @@ export default function SearchPlayerForm({ submit }) {
         onChange={(value) => setPlayer(value)}
         value={player}
         variant={`standard`}
+        autoFocus
         label={`type.player.name`}
       />
 

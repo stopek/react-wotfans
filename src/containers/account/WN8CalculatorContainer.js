@@ -1,10 +1,11 @@
-import WotOverlay from "overlays/Wot";
+import AccountOverlay from "overlays/Account";
+import Wn8InfoPage from "pages/Wn8InfoPage";
 import React from 'react';
 
 export default function WN8CalculatorContainer({ ...props }) {
   return (
-    <WotOverlay {...props} full>
-      kalkulator soon.
-    </WotOverlay>
+    <AccountOverlay {...props}>
+      <Wn8InfoPage />
+    </AccountOverlay>
   );
 }

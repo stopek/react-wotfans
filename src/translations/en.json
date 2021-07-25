@@ -38,12 +38,21 @@
   "seo.moe": "Marks of Excellence",
   "seo.moe.description": "WOT Tank Marks of Excellence on WOTFANS - see what damage you have to do to climb up",
 
+  "seo.wn8.calculator": "Calculate Your WN8",
+  "seo.wn8.calculator.description": "Calculate your WN8 - check Your WN8 on Tanks",
 
+  "min.explain": "among the two values will choose the smaller one",
+  "max.explain": "among the two values will choose the larger",
+  "find.tank.to.wn8": "Find your tank to check the details of WN8",
+
+  "menu.wn8.calculator": "Your WN8",
   "dense": "Dense view",
   "facebook": "Facebook",
-
+  "nothingness": "Nothingness",
   "hide.type": "Hide type",
+  "current.expected.for": "Current expected values for",
   "hide.tier": "Hide tier",
+  "back": "Back",
   "hide.damage": "Hide damage",
   "hide.def": "Hide def",
   "hide.frag": "Hide frag",
@@ -79,6 +88,7 @@
   "exp.wn8": "EXP WN8",
   "tanks.list": "Tanks",
   "fundraising": "Support",
+  "ups": "Ooops",
   "see.profile": "Profile",
   "shortcut": "Abbreviation",
   "full.clan.name": "Full clan name",

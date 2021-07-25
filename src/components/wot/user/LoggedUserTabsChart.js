@@ -1,6 +1,7 @@
 import UserStatisticsChar from "components/wot/char/UserStatisticsChar";
 import Tabs from "components/wot/Tabs";
 import hexToRgbA from "helpers/hexToRgbA";
+import { sortByKeyMulti } from "helpers/user";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/wotSlice";
@@ -22,6 +23,13 @@ export default function LoggedUserTabsChart() {
   const data = {
     playerStatsHistories: user?.response?.player?.playerStatsHistories ?? []
   }
+
+  const battles_list = sortByKeyMulti(data.playerStatsHistories, 'created_at', false);
+  const new_list = battles_list.map((item, key) => {
+    return Object.assign({}, item, {
+      battles: key > 0 ? item.battles - battles_list[key - 1].battles : 0
+    });
+  });
 
   const statistics_tab = [
     {
@@ -55,7 +63,7 @@ export default function LoggedUserTabsChart() {
       translation: 'battles',
       component: (
         <UserStatisticsChar
-          raw={data.playerStatsHistories}
+          raw={new_list}
           data={{ id: "battles", key: 'battles', data: [] }}
         />
       )

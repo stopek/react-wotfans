@@ -18,8 +18,12 @@ export const sortByNumberMulti = (list, key) => {
   });
 }
 
-export const sortByKeyMulti = (list, key) => {
+export const sortByKeyMulti = (list, key, desc = true) => {
   return Object.values(list).sort(function (a, b) {
+    if (!desc) {
+      return b[key] > a[key] ? -1 : 1;
+    }
+
     return b[key] > a[key] ? 1 : -1;
   });
 }

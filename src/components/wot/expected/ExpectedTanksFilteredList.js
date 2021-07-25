@@ -1,4 +1,5 @@
 import { Grid } from "@material-ui/core";
+import Error from "components/core/Error";
 import SwitchInput from "components/ui/input/SwitchInput";
 import DarkBox from "components/wot/DarkBox";
 import ExpectedTable from "components/wot/expected/ExpectedTable";
@@ -40,6 +41,10 @@ export default function ExpectedTanksFilteredList({ tanks = [] }) {
           ))}
         </Grid>
       </DarkBox>
+
+      {!tanks?.length && (
+        <Error message={`loading.not.found`} surprise={`nothingness`} />
+      )}
 
       <ExpectedTable tanks={tanks} settings={settings} />
     </>

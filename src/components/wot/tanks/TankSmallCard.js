@@ -4,6 +4,7 @@ import TankNameWithIconType from "components/wot/tanks/TankNameWithIconType";
 import TankProfileButton from "components/wot/tanks/TankProfileButton";
 import React from "react";
 import styled from "styled-components";
+import { breakpoint } from "styles/breakpoints";
 import { COLOR_DARK_2 } from "styles/colors";
 
 const Card = styled.div`
@@ -23,7 +24,6 @@ const ImageBackground = styled.div`
 `;
 
 const Image = styled.div`
-  width: 250px;
   min-height: 150px;
   background-size: contain;
   display: flex;
@@ -31,6 +31,11 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
   position: relative;
+  width: 150px;
+  
+  @media ${breakpoint.md} {
+    width: 250px;
+  }
 `;
 
 const Details = styled.div`

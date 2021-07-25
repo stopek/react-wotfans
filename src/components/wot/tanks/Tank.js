@@ -26,7 +26,7 @@ const TankItem = styled.div`
   position: relative;
   transform: scale(0.95);
   ${props => props?.pointer && `cursor: pointer;`};
-  ${props => props?.premium && `
+  ${props => props?.is_premium && `
       background: #ffcf40;
       background: linear-gradient(to right,#bf953f,#fcf6ba);
   `};
@@ -130,6 +130,24 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
   const language = useSelector(selectedLanguage);
   const date_locale = getDateLocale(language);
 
+  const handleCLick = (event) => {
+    event.preventDefault();
+
+    if (props?.tank_profile) {
+      history.push(route);
+      return;
+    }
+
+    if (!props?.no_stats) {
+      setOpen(true);
+      return;
+    }
+
+    if (props?.onChoiceTank) {
+      return props?.onChoiceTank(statistics);
+    }
+  }
+
   return (
     <>
       {!props?.no_stats && (
@@ -145,9 +163,9 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
       <TankItem
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={() => (props?.tank_profile ? history.push(route) : setOpen(true))}
-        premium={tank?.is_premium || false}
-        pointer={!props?.no_stats || props?.tank_profile}
+        onClick={handleCLick}
+        is_premium={tank?.is_premium || false}
+        pointer={!props?.no_stats || props?.tank_profile || !!props?.onChoiceTank}
       >
         {props?.weight && (
           <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%', 4)}</Weight>

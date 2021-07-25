@@ -10,6 +10,7 @@ export const LOGIN_URL = "/login";
 export const ACCOUNT_URL = "/account";
 export const SESSIONS_URL = ACCOUNT_URL + "/sessions";
 export const WN8_CALCULATOR_URL = ACCOUNT_URL + "/wn8";
+export const WN8_CALCULATOR_TANK_URL = WN8_CALCULATOR_URL + "/:tank_id";
 export const GAMES_URL = ACCOUNT_URL + "/games";
 export const GAMES_FORM = GAMES_URL + "/form/:game_id?";
 export const TANK_URL = "/tank/:tank_id";

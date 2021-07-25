@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function AccountContainer({ ...props }) {
   return (
-    <AccountOverlay {...props}>
+    <AccountOverlay main {...props}>
       <LoggedUserTabsChart />
       <LoggedUserTabsTanks />
     </AccountOverlay>

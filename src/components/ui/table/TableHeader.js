@@ -23,7 +23,7 @@ export default function TableHeader(props) {
               active={orderBy === cell.id}
               style={{ cursor: nosort.includes(cell.id) ? 'normal' : 'pointer' }}
               direction={orderBy === cell.id ? order : 'asc'}
-              onClick={(!nosort.includes(cell.id) || cell.id === 'child') && createSortHandler(cell.id)}
+              onClick={((!nosort.includes(cell.id) || cell.id === 'child') && createSortHandler(cell.id)) || null}
             >
               {cell?.translation && (
                 <FormattedMessage id={cell.translation} />

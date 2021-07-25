@@ -1,6 +1,7 @@
 import { TANK_URL } from "app/routes";
 import TankNationBox from "components/wot/tanks/components/TankNationBox";
 import TankTypeIcon from "components/wot/tanks/components/TankTypeIcon";
+import TankNameWithIconType from "components/wot/tanks/TankNameWithIconType";
 import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
@@ -15,7 +16,11 @@ const BoxesInfo = styled.div`
   gap: 10px;
   grid-template-columns: 1fr;
 
-  @media ${breakpoint.md} {
+  @media ${breakpoint.sm} {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media ${breakpoint.lg} {
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
@@ -45,18 +50,17 @@ const TankName = styled.h2`
   gap: 15px;
   align-items: center;
   color: black;
+  flex-wrap: wrap;
 
   @media ${breakpoint.md} {
     font-size: 30px;
   }
+  cursor: pointer;
 
-  ${props => props?.more && `
-    cursor: pointer;
-    
-    &:hover {
-      color: ${COLOR_THEME};
-    }
-  `}
+  &:hover {
+    color: ${COLOR_THEME};
+  }
+
 `;
 
 const Description = styled.p`
@@ -75,9 +79,7 @@ const Image = styled.div`
   display: flex;
 `;
 
-export default function TankBase({ tank = {}, more }) {
-  const history = useHistory();
-
+export default function TankBase({ tank = {} }) {
   const infos_data = [
     { translation: 'tier', value: tank.tier },
     tank?.price_credit > 0 && { translation: 'price.silver', value: priceFormat(tank?.price_credit, ',', '', 0) },
@@ -87,12 +89,12 @@ export default function TankBase({ tank = {}, more }) {
 
   return (
     <>
-      <TankName more={more} onClick={() => more && history.push(fillRoute(TANK_URL, { tank_id: tank?.id }))}>
-        <TankTypeIcon type={tank?.type} dark />
-        {tank?.name}
+      <TankName>
+        <TankNameWithIconType tank={tank} />
         <TankNationBox tank={tank} />
       </TankName>
       <Image image={tank?.image} premium={tank?.is_premium} />
+
       <Description>
         {tank?.description}
       </Description>

@@ -3,7 +3,7 @@ import instance from "api/service";
 import fillRoute from "helpers/fillRoute";
 
 export class AuthWot {
-  static async action(action, params = {}) {
+  static async post(action, params = {}) {
     const path = fillRoute(AUTH_WOT_ENDPOINT, {
       action: action
     });
@@ -27,11 +27,15 @@ export class AuthWot {
     return AuthWot.get('get_user', params);
   }
 
+  static async user_tanks(params) {
+    return AuthWot.post('user_tanks', params);
+  }
+
   static async logout(params) {
-    return AuthWot.action('logout', params);
+    return AuthWot.post('logout', params);
   }
 
   static async log_out_account(params) {
-    return AuthWot.action('log_out_account', params);
+    return AuthWot.post('log_out_account', params);
   }
 }

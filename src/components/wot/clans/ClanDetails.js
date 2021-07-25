@@ -53,7 +53,6 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
     });
   });
 
-
   const statisticsTabs = [
     {
       translation: 'wn8',

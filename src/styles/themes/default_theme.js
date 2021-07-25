@@ -75,12 +75,12 @@ const default_theme = createMuiTheme({
         }
       }
     },
-    MuiCircularProgress: {
-      svg: {
-        width: 40,
-        height: 40
-      }
-    },
+    // MuiCircularProgress: {
+    //   svg: {
+    //     width: 40,
+    //     height: 40
+    //   }
+    // },
     MuiFab: {
       root: {
         width: 35,

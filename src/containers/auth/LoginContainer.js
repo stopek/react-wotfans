@@ -47,22 +47,25 @@ export default function LoginContainer({ ...props }) {
       />
 
       <SimpleText>
-        <FormattedMessage id={`login.message.1`} />
-        <div>
+        <p>
+          <FormattedMessage id={`login.message.1`} />
+        </p>
+        <p>
           <strong><FormattedMessage id={`login.message.2`} /></strong>
-        </div>
-        <span>
+        </p>
+        <p>
           <FormattedMessage id={`login.message.3`} />
-        </span>
+        </p>
+        <p>
+          <ButtonInput
+            as={`a`}
+            href={`${process.env.REACT_APP_BACKEND_SERVICE_URL}${LOGIN_ENDPOINT}`}
+            rel={`nofollow`}
+            label={`log.in`}
+            large
+          />
+        </p>
       </SimpleText>
-
-      <ButtonInput
-        as={`a`}
-        href={`${process.env.REACT_APP_BACKEND_SERVICE_URL}${LOGIN_ENDPOINT}`}
-        rel={`nofollow`}
-        label={`log.in`}
-        large
-      />
     </WotOverlay>
   );
 }

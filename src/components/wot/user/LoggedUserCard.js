@@ -3,13 +3,15 @@ import EfficiencyBar from "components/wot/efficiency/EfficiencyBar";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
-import { date_from_unix } from "helpers/date";
+import { date_from_api, date_from_unix } from "helpers/date";
+import { getDateLocale } from "helpers/languages";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
+import { selectedLanguage } from "reducers/languageSlice";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
-import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
+import { COLOR_DARK_2, COLOR_TEXT, COLOR_TEXT_DARK, RADIUS } from "styles/colors";
 
 const Card = styled.div`
   background: ${COLOR_DARK_2};
@@ -24,9 +26,20 @@ const Card = styled.div`
 
 const Text = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 5px;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 300;
+  flex-direction: column;
+  border-bottom: 1px solid ${COLOR_TEXT_DARK};
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+
+  > div {
+    display: flex;
+    gap: 5px;
+  }
 `;
 
 const Details = styled.div`
@@ -49,6 +62,7 @@ export default function LoggedUserCard() {
   const user = useSelector(selectUser);
   const player = user?.response?.player;
   const statistics = user?.response?.statistics;
+  const language = useSelector(selectedLanguage);
 
   return (
     <Card>
@@ -61,17 +75,27 @@ export default function LoggedUserCard() {
 
       <Text>
         {!!player?.last_battle_time && (
-          <>
-            <FormattedMessage
-              id={`last.battle.time`} />: {date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}{` `}
-          </>
+          <div>
+            <span><FormattedMessage id={`last.battle.time`} />:</span>
+            <strong>{date_from_unix(player?.last_battle_time, 'yyyy-MM-dd HH:mm')}</strong>
+            {player?.is_locked && (
+              <span><LoopRoundedIcon /></span>
+            )}
+          </div>
         )}
-        {player?.is_locked && (
-          <LoopRoundedIcon />
+
+        {!!player?.updated_at && (
+          <div>
+            <span><FormattedMessage id={`last.update`} />:</span>
+            <strong>
+              {date_from_api(player?.updated_at, 'do MMM, HH:mm', 'yyyy-MM-dd HH:mm:ss', {
+                  locale: getDateLocale(language)
+                }
+              )}
+            </strong>
+          </div>
         )}
       </Text>
-
-      <hr />
 
       <StatisticsBar>
         <Wn8Bar value={statistics?.wn8} unit={`WN8`} />

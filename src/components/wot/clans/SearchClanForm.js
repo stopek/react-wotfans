@@ -16,6 +16,7 @@ export default function SearchClanForm({ submit }) {
             onChange={(value) => setClan(value)}
             value={clan}
             variant={`standard`}
+            autoFocus
             label={`type.clan.name`}
           />
         </Grid>

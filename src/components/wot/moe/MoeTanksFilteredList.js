@@ -1,17 +1,19 @@
 import { Grid } from "@material-ui/core";
+import Error from "components/core/Error";
 import SwitchInput from "components/ui/input/SwitchInput";
 import TableUI from "components/ui/TableUI";
 import DarkBox from "components/wot/DarkBox";
 import TankFilters from "components/wot/tanks/TankFilters";
 import TankSmallCard from "components/wot/tanks/TankSmallCard";
 import { valueFormat } from "helpers/priceFormat";
-import { getTranslationByTankType, tanksFilters } from "helpers/tanks";
+import { getTiersFromTanksStats, getTranslationByTankType, tanksFilters } from "helpers/tanks";
 import React, { useState } from "react";
 import { injectIntl } from "react-intl";
 
 function ExpectedTanksFilteredList({ tanks = [], intl }) {
   const [filters, setFilters] = useState({});
   const [settings, setSettings] = useState({});
+  const tiersList =  getTiersFromTanksStats(tanks);
 
   if (!Object.keys(tanks)?.length) {
     return null;
@@ -29,6 +31,9 @@ function ExpectedTanksFilteredList({ tanks = [], intl }) {
         <TankFilters
           filters={filters}
           setFilters={setFilters}
+          settings={{
+            tiersList: tiersList
+          }}
           custom={{ type: true, tier: true, nation: true, name: true, premium: true }}
         />
         <Grid container>
@@ -43,6 +48,10 @@ function ExpectedTanksFilteredList({ tanks = [], intl }) {
           ))}
         </Grid>
       </DarkBox>
+
+      {!tanks?.length && (
+        <Error message={`loading.not.found`} surprise={`nothingness`} />
+      )}
 
       {tanks?.length > 0 && (
         <TableUI

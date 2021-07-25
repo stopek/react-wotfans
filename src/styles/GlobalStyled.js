@@ -1,39 +1,7 @@
 import hexToRgbA from "helpers/hexToRgbA";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
-import {
-  COLOR_DARK,
-  COLOR_DARK_2,
-  COLOR_GREY_DARK_3,
-  COLOR_TEXT,
-  COLOR_TEXT_ON_THEME,
-  COLOR_THEME
-} from "styles/colors";
-
-export const Header = styled.h2`
-  color: white;
-  font-size: 25px;
-  position: relative;
-  display: table;
-  margin: 35px 0;
-
-  ${props => props?.up && `margin-top: 0;`}
-  ${props => props?.down && `margin-bottom: 15px;`}
-  &:after {
-    display: block;
-    width: 50%;
-    position: absolute;
-    bottom: -5px;
-    height: 2px;
-    background: ${COLOR_THEME};
-    content: '';
-  }
-
-  small {
-    display: block;
-    font-size: 60%;
-  }
-`;
+import { COLOR_DARK, COLOR_DARK_2, COLOR_TEXT, COLOR_TEXT_ON_THEME, COLOR_THEME } from "styles/colors";
 
 export const LargeHeader = styled.div`
   font-size: 25px;
@@ -89,6 +57,7 @@ export const TableTdSmall = styled.td`
 export const FitTableTd = styled(TableTdSmall)`
   width: 0;
   white-space: nowrap;
+
   small {
     display: block;
     font-size: 70%;
@@ -111,6 +80,7 @@ export const TableTbody = styled.tbody`
       background: ${hexToRgbA(COLOR_DARK_2, 0.8)};
       opacity: 1;
     }
+
     td {
       color: ${COLOR_TEXT};
     }

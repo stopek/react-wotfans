@@ -1,5 +1,5 @@
 import { hexToRgb } from "@material-ui/core";
-import ProgressLinear from "components/ui/ProgressLinear";
+import ProgressLinear from "components/ui/progress/ProgressLinear";
 import Dot from "components/wot/Dot";
 import MapPreview from "components/wot/maps/MapPreview";
 import { addSeconds, format, getUnixTime } from "date-fns";

@@ -1,11 +1,10 @@
-import MoeTanksFIlteredList from "components/wot/moe/MoeTanksFIlteredList";
+import UnderlineHeader from "components/wot/headers/UnderlineHeader";
+import MoeTanksFilteredList from "components/wot/moe/MoeTanksFilteredList";
 import ThanksBox from "components/wot/ThanksBox";
 import WotOverlay from "overlays/Wot";
 import React, { useEffect } from 'react';
-import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { moeList, selectMoeList } from "reducers/wotSlice";
-import { Header } from "styles/GlobalStyled";
 
 export default function MoeContainer({ ...props }) {
   const dispatch = useDispatch();
@@ -18,17 +17,19 @@ export default function MoeContainer({ ...props }) {
     <WotOverlay {...props}>
       {response && (
         <>
-          <Header up>
-            <FormattedMessage id={`last.update`} />
-            <small><FormattedMessage id={`version`} />: {response?.update?.version}</small>
-          </Header>
+          <UnderlineHeader
+            translation={`seo.moe`}
+            small={`version`}
+            values={{ version: response?.update?.version }}
+            up
+          />
 
           <ThanksBox>
             Expected values and MoE values are provided by wotclans.com.br - visit his
             <a href={`https://wotclans.com.br`} target={`_blank`} rel={`nofollow`}>website</a>
           </ThanksBox>
 
-          <MoeTanksFIlteredList tanks={response?.tanks} />
+          <MoeTanksFilteredList tanks={response?.tanks} />
         </>
       )}
     </WotOverlay>
