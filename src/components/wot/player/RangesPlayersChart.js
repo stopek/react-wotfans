@@ -1,5 +1,5 @@
 import { ResponsiveBar } from '@nivo/bar'
-import { nivoTheme } from "app/settings";
+import { nivoTheme } from "styles/nivoTheme";
 import PlayerWnTooltip from "components/wot/player/chart/PlayerWnTooltip";
 import { sortByNumberMulti } from "helpers/user";
 import React from "react";
@@ -64,7 +64,7 @@ function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
         axisRight={null}
         axisBottom={null}
         axisLeft={{
-          tickSize: 5,   
+          tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
         }}

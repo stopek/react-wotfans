@@ -35,7 +35,6 @@ export default function TankFilters({ filters, setFilters, custom = {}, settings
         <Grid item md xs={12}>
           <TextInput
             label={`tank.name`}
-            autoFocus
             onChange={(value) => setNameHandle(value)}
             value={name}
             variant={`standard`}

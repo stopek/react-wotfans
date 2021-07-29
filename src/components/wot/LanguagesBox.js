@@ -1,4 +1,4 @@
-import { default_languages } from "helpers/languages";
+import { getLanguages } from "helpers/languages";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
@@ -32,20 +32,17 @@ const Language = styled.div`
   ${props => props?.current && `background: ${COLOR_THEME};`}
 `;
 
-function LanguagesBox({ match }) {
+function LanguagesBox() {
   const language = useSelector(selectedLanguage);
   const dispatch = useDispatch();
-  // const history = useHistory();
-
   const change = (language) => {
     document.documentElement.lang = language;
     dispatch(changeLanguage(language));
-    // return history.push(fillRoute(match.path, { locale: language }));
   }
 
   return (
     <Languages>
-      {Object.values(default_languages).map((lang) => (
+      {getLanguages().map((lang) => (
         <Language
           key={`language-${lang.value}`}
           current={language === lang.value}

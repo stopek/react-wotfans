@@ -3,6 +3,7 @@ import icon_heavy from "assets/icons/types/type_heavy.png";
 import icon_light from "assets/icons/types/type_light.png";
 import icon_medium from "assets/icons/types/type_medium.png";
 import icon_td from "assets/icons/types/type_td.png";
+import PropTypes from 'prop-types';
 import React from "react";
 import styled from "styled-components";
 
@@ -14,23 +15,28 @@ const Icon = styled.div`
   ${props => props?.dark && `filter: brightness(-150%);`}
 `;
 
-const getIconByType = (type) => {
-  switch (type) {
-    case 'mediumTank':
-      return icon_medium;
-    case 'heavyTank':
-      return icon_heavy;
-    case 'SPG':
-      return icon_artillery;
-    case 'AT-SPG':
-      return icon_td;
-    default:
-      return icon_light;
-  }
+const getIconByTankType = (type) => {
+  return {
+    'mediumTank': icon_medium,
+    'heavyTank': icon_heavy,
+    'SPG': icon_artillery,
+    'AT-SPG': icon_td
+  }[type] ?? icon_light;
 }
 
-export default function TankTypeIcon({ type = '', size = 30, ...props }) {
+function TankTypeIcon({ type, size, ...props }) {
   return (
-    <Icon size={size} image={getIconByType(type)} {...props} />
+    <Icon size={size} image={getIconByTankType(type)} {...props} />
   );
 }
+
+TankTypeIcon.propTypes = {
+  type: PropTypes.string.isRequired,
+  size: PropTypes.number
+};
+
+TankTypeIcon.defaultProps = {
+  size: 20
+}
+
+export default TankTypeIcon;

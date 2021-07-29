@@ -1,12 +1,8 @@
-import { TANK_URL } from "app/routes";
 import TankNationBox from "components/wot/tanks/components/TankNationBox";
-import TankTypeIcon from "components/wot/tanks/components/TankTypeIcon";
 import TankNameWithIconType from "components/wot/tanks/TankNameWithIconType";
-import fillRoute from "helpers/fillRoute";
 import { priceFormat } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
 import { COLOR_SECOND, COLOR_THEME } from "styles/colors";
@@ -60,7 +56,6 @@ const TankName = styled.h2`
   &:hover {
     color: ${COLOR_THEME};
   }
-
 `;
 
 const Description = styled.p`

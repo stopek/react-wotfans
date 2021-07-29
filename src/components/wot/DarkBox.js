@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { COLOR_DARK_2, RADIUS } from "styles/colors";
+import PropTypes from 'prop-types';
 
 const Box = styled.div`
   background: ${COLOR_DARK_2};
@@ -10,10 +11,16 @@ const Box = styled.div`
   ${props => props?.padding && `padding-left: 45px; padding-right: 45px;`}
 `;
 
-export default function DarkBox({ children, ...props }) {
+function DarkBox({ children, ...props }) {
   return (
     <Box {...props}>
       {children}
     </Box>
   );
 }
+
+DarkBox.propTypes = {
+  children: PropTypes.element.isRequired
+}
+
+export default DarkBox;

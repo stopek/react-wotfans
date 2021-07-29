@@ -38,12 +38,12 @@ export default function ClansList({ clans = [] }) {
         <Hidden smDown>
           <TableThead>
             <TableTr>
-              <FitTableTd as={`th`}>
+              <TableTdSmall as={`th`}>
                 <FormattedMessage id={`shortcut`} />
-              </FitTableTd>
-              <FitTableTd as={`th`}>
+              </TableTdSmall>
+              <TableTdSmall as={`th`}>
                 <FormattedMessage id={`active.players.percentage`} />
-              </FitTableTd>
+              </TableTdSmall>
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`wn8`} />
               </FitTableTd>
@@ -65,10 +65,10 @@ export default function ClansList({ clans = [] }) {
               </Hidden>
 
               <Hidden smDown>
-                <FitTableTd>
+                <TableTdSmall>
                   {clan?.tag}
                   <small>{clan?.name}</small>
-                </FitTableTd>
+                </TableTdSmall>
                 <TableTdSmall>
                   <PercentageBar amount={clan?.active_players ?? 0} total={clan?.members_count ?? 0} />
                 </TableTdSmall>

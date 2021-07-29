@@ -1,5 +1,5 @@
 import { ResponsiveLine } from "@nivo/line";
-import { nivoTheme } from "app/settings";
+import { nivoTheme } from "styles/nivoTheme";
 import { format } from "date-fns";
 import { getDateLocale } from "helpers/languages";
 import React from "react";

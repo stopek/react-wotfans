@@ -1,18 +1,33 @@
-import { pl, ru } from 'date-fns/locale'
-import en_translations from "translations/en.json";
-import pl_translations from "translations/pl.json";
-import ru_translation from "translations/ru.json";
+import { application_languages } from "app/settings";
 
-export const default_languages = {
-  en: { label: "EN", value: "en", date_locale: null, translations: en_translations },
-  ru: { label: "RU", value: "ru", date_locale: ru, translations: ru_translation },
-  pl: { label: "PL", value: "pl", date_locale: pl, translations: pl_translations },
-};
+export function getLanguages() {
+  return application_languages;
+}
+
+export function getLanguagesValues() {
+  return getLanguages().map((language) => language.value);
+}
+
+export function findLanguageItem(language_name) {
+  return getLanguages().find((language) => language.value === language_name);
+}
 
 export function getDateLocale(language_name) {
-  return default_languages[language_name].date_locale;
+  return findLanguageItem(language_name).date_locale;
 }
 
 export function getDateTranslations(language_name) {
-  return default_languages[language_name].translations;
+  return findLanguageItem(language_name).translations;
+}
+
+export const getDefaultLanguage = () => {
+  const browser_language = navigator.language.split(/[-_]/)[0];
+
+  const available_language = getLanguagesValues().includes(browser_language);
+  if (available_language) {
+    document.documentElement.lang = browser_language;
+    return browser_language;
+  }
+
+  return process.env.REACT_APP_DEFAULT_LANG;
 }

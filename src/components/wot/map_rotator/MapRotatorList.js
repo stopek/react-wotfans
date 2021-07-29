@@ -4,6 +4,7 @@ import Dot from "components/wot/Dot";
 import MapPreview from "components/wot/maps/MapPreview";
 import { addSeconds, format, getUnixTime } from "date-fns";
 import hexToRgbA from "helpers/hexToRgbA";
+import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
@@ -66,16 +67,7 @@ const Map = styled.div`
   z-index: 1;
 `;
 
-export default function MapRotatorList(
-  {
-    list = [],
-    diff_seconds,
-    filter_maps,
-    date,
-    cycle_seconds,
-    advanced = false
-  }
-) {
+function MapRotatorList({ list, diff_seconds, filter_maps, date, cycle_seconds, advanced }) {
   const [current, setCurrent] = useState(null);
   const [currentVisible, setCurrentVisible] = useState(true);
 
@@ -91,8 +83,8 @@ export default function MapRotatorList(
   return (
     <List>
       {list.map((map, key) => {
-        const is_current = ((map.status === 'current' && currentVisible) || current === key);
         const is_real_current = (map.status === 'current');
+        const is_current = ((is_real_current && currentVisible) || current === key);
 
         if (!!filter_maps && filter_maps?.length > 0 && !filter_maps.includes(map.map.id) && !is_current) {
           return null;
@@ -133,6 +125,7 @@ export default function MapRotatorList(
                 {format(end, 'HH:mm')}
               </MapTime>
             </Content>
+
             {is_real_current && advanced && (
               <ProgressLinear value={percentage} />
             )}
@@ -142,3 +135,18 @@ export default function MapRotatorList(
     </List>
   );
 }
+
+MapRotatorList.propTypes = {
+  list: PropTypes.array.isRequired,
+  diff_seconds: PropTypes.number.isRequired,
+  cycle_seconds: PropTypes.number.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
+  filter_maps: PropTypes.arrayOf(PropTypes.number),
+  advanced: PropTypes.bool
+}
+
+MapRotatorList.defaultProps = {
+  advanced: false
+}
+
+export default MapRotatorList;

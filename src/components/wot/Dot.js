@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { COLOR_SECOND, COLOR_THEME } from "styles/colors";
@@ -37,17 +38,17 @@ const Circle = styled.div`
 
 const RingRing = styled.div`
   border: 3px solid ${props => props?.current ? COLOR_THEME : COLOR_SECOND};
-  -webkit-border-radius: 30px;
   height: 25px;
   width: 25px;
   position: absolute;
-  -webkit-animation: ${pulseDot} 2s ease-out;
-  -webkit-animation-iteration-count: infinite;
+  animation: ${pulseDot} 2s ease-out;
+  animation-iteration-count: infinite;
   opacity: 0.0;
   ${props => !props?.current && `animation-name: none;`}
+  border-radius: 50%;
 `;
 
-export default function Dot({ blinking = false }) {
+function Dot({ blinking }) {
   return (
     <Content>
       <RingRing current={blinking} />
@@ -55,3 +56,13 @@ export default function Dot({ blinking = false }) {
     </Content>
   );
 }
+
+Dot.propTypes = {
+  blinking: PropTypes.bool,
+}
+
+Dot.defaultProps = {
+  blinking: false
+}
+
+export default Dot;

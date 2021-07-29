@@ -10,6 +10,7 @@ import ThanksBox from "components/wot/ThanksBox";
 import { addSeconds, differenceInSeconds } from "date-fns";
 import { mapsIntervalsList, mapsResultList } from "helpers/rotator";
 import { getUniqueByKeyMulti, sortByKeyMulti } from "helpers/user";
+import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLOR_TEXT_DARK } from "styles/colors";
@@ -22,22 +23,7 @@ const Tier = styled.div`
   margin: auto;
 `;
 
-const Rotator = styled.div`
-  width: 100%;
-`;
-
-export default function MapRotator(
-  {
-    limit = [1, 5],
-    server_date = '',
-    user_date = '',
-    maps = {},
-    cycle = 4,
-    tier = '',
-    filter = false,
-    ads = false
-  }
-) {
+function MapRotator({ limit, server_date, user_date, maps, cycle, tier, filter, ads }) {
   const filtersMapsList = getUniqueByKeyMulti(sortByKeyMulti(maps.map((map) => {
     return {
       label: map.map.name,
@@ -56,7 +42,7 @@ export default function MapRotator(
   const seconds_difference = differenceInSeconds(date, date_server);
 
   return (
-    <Rotator>
+    <>
       <Clock
         date={date}
         setDate={setDate}
@@ -106,9 +92,11 @@ export default function MapRotator(
         Do you have any question for him? <DiscordLink username={`wzorek2000#8053`} />
       </ThanksBox>
 
-      <Tier>
-        {tier}
-      </Tier>
+      {tier?.length > 0 && (
+        <Tier>
+          {tier}
+        </Tier>
+      )}
 
       {ads && (
         <Adsense
@@ -119,6 +107,26 @@ export default function MapRotator(
           responsive=""
         />
       )}
-    </Rotator>
+    </>
   );
 }
+
+MapRotator.propTypes = {
+  server_date: PropTypes.instanceOf(Date).isRequired,
+  user_date: PropTypes.instanceOf(Date).isRequired,
+  maps: PropTypes.array.isRequired,
+  limit: PropTypes.arrayOf(PropTypes.number),
+  tier: PropTypes.string,
+  cycle: PropTypes.number,
+  ads: PropTypes.bool,
+  filter: PropTypes.bool
+}
+
+MapRotator.defaultProps = {
+  limit: [1, 1],
+  cycle: 4,
+  ads: false,
+  filter: false
+}
+
+export default MapRotator;

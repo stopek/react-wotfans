@@ -26,7 +26,7 @@ export default function TankNameWithIconType({ tank = {} }) {
 
   return (
     <Content onClick={handleClick} href={url}>
-      <TankTypeIcon type={tank?.type} size={20} />
+      <TankTypeIcon type={tank?.type} />
       {tank?.name}
     </Content>
   );

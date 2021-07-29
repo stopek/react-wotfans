@@ -1,4 +1,5 @@
 import { priceFormat } from "helpers/priceFormat";
+import PropTypes from 'prop-types';
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -17,9 +18,7 @@ const Bar = styled.span`
   text-align: center;
   line-height: 1;
 
-  ${props => props?.small && `padding: 3px; font-size: 13px; border-radius: 0;`}
-  
-  @media ${breakpoint.md} {
+  ${props => props?.small && `padding: 3px; font-size: 13px; border-radius: 0;`} @media ${breakpoint.md} {
     font-size: ${props => props?.large ? 25 : 14}px;
   }
 
@@ -60,7 +59,7 @@ const getValue = (check_value, list, key) => {
   return response_color;
 }
 
-export default function ColorStatBox({ list = [], value = -1, unit = '', large = false, small = false }) {
+function ColorStatBox({ list, value, unit, large, small }) {
   const color = getValue(value, list, 'background');
 
   return (
@@ -77,3 +76,20 @@ export default function ColorStatBox({ list = [], value = -1, unit = '', large =
     </Bar>
   );
 }
+
+ColorStatBox.propTypes = {
+  list: PropTypes.array.isRequired,
+  value: PropTypes.number,
+  unit: PropTypes.string,
+  large: PropTypes.bool,
+  small: PropTypes.bool
+}
+
+ColorStatBox.defaultProps = {
+  unit: '',
+  large: false,
+  value: -1,
+  small: false
+}
+
+export default ColorStatBox;

@@ -8,11 +8,17 @@ import StatsList from "components/wot/StatsList";
 import Tabs from "components/wot/Tabs";
 import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
-import { date_from_unix } from "helpers/date";
+import { date_from_api, date_from_unix } from "helpers/date";
+import { getDateLocale } from "helpers/languages";
 import React from "react";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { selectedLanguage } from "reducers/languageSlice";
 import { LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
 export default function ClanDetails({ clan = {}, statistics = {} }) {
+  const language = useSelector(selectedLanguage);
+
   const is_creator = clan?.creator;
   const is_leader = clan?.leader;
   let players = Object.values(clan.players);
@@ -92,10 +98,21 @@ export default function ClanDetails({ clan = {}, statistics = {} }) {
         <div>
           {clan?.tag}
           <small>{clan?.name}</small>
+          {!!clan?.checked_at && (
+            <small>
+              <span><FormattedMessage id={`last.update`} />:{` `}</span>
+              <strong>
+                {date_from_api(clan?.checked_at, 'do MMM, HH:mm', 'yyyy-MM-dd HH:mm:ss', {
+                    locale: getDateLocale(language)
+                  }
+                )}
+              </strong>
+            </small>
+          )}
         </div>
 
         <Wn8BarContent>
-          <Wn8Bar value={statistics?.wn8 || 0} unit={`WN8`} large />
+          <Wn8Bar value={clan?.wn8 || 0} unit={`WN8`} large />
           <WN7Bar value={statistics?.wn7 || 0} unit={`WN7`} large />
           <WN7Bar value={statistics?.efficiency || 0} unit={`EFFI`} large />
         </Wn8BarContent>

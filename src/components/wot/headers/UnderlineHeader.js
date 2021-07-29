@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -28,7 +29,7 @@ export const Header = styled.h2`
   }
 `;
 
-export default function UnderlineHeader({ translation, small = '', values = {}, ...props }) {
+function UnderlineHeader({ translation, small, values, ...props }) {
   return (
     <Header {...props}>
       <FormattedMessage id={translation} values={values} />
@@ -41,3 +42,11 @@ export default function UnderlineHeader({ translation, small = '', values = {}, 
     </Header>
   );
 }
+
+UnderlineHeader.propTypes = {
+  translation: PropTypes.string.isRequired,
+  small: PropTypes.string,
+  values: PropTypes.object
+}
+
+export default UnderlineHeader;

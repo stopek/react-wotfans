@@ -172,7 +172,7 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         )}
 
         <MarkPosition hover={hover}>
-          <TankMarkOfMastery mark={statistics?.mark_of_mastery} size={30} />
+          <TankMarkOfMastery mark={statistics?.mark_of_mastery} />
         </MarkPosition>
 
         {props?.battle_ago && (
@@ -184,7 +184,7 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         )}
 
         <TankNation hover={!hover}>
-          <TankNationBox tank={tank} hidename />
+          <TankNationBox tank={tank} without_name />
         </TankNation>
 
         <TankName hover={!hover}>{tank?.name}</TankName>

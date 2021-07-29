@@ -2,22 +2,12 @@ import first from "assets/icons/marks/1.jpg";
 import second from "assets/icons/marks/2.jpg";
 import third from "assets/icons/marks/3.jpg";
 import m from "assets/icons/marks/m.jpg";
+import PropTypes from 'prop-types';
 import React from "react";
 import styled from "styled-components";
 
-const imageFromMark = (mark) => {
-  switch (mark) {
-    case 1:
-      return third;
-    case 2:
-      return second;
-    case 3:
-      return first;
-    case 4:
-      return m;
-    default:
-      return null;
-  }
+const imageFromMarkValue = (mark) => {
+  return { 1: third, 2: second, 3: first, 4: m }[mark] ?? null;
 }
 
 const Content = styled.div`
@@ -27,12 +17,12 @@ const Content = styled.div`
   background-size: contain;
 `;
 
-export default function TankMarkOfMastery({ mark = 0, size = 100 }) {
+function TankMarkOfMastery({ mark, size }) {
   if (mark <= 0) {
     return null;
   }
 
-  const image = imageFromMark(mark);
+  const image = imageFromMarkValue(mark);
   if (!image) {
     return null;
   }
@@ -41,3 +31,14 @@ export default function TankMarkOfMastery({ mark = 0, size = 100 }) {
     <Content image={image} size={size} />
   );
 }
+
+TankMarkOfMastery.propTypes = {
+  mark: PropTypes.number,
+  size: PropTypes.number
+}
+
+TankMarkOfMastery.defaultProps = {
+  size: 30
+}
+
+export default TankMarkOfMastery;

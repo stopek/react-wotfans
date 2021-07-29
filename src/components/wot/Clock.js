@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import PropTypes from 'prop-types';
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
@@ -15,7 +16,7 @@ const Time = styled.div`
   color: ${COLOR_TEXT};
 `;
 
-export default function Clock({ setDate, date }) {
+function Clock({ setDate, date }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date());
@@ -32,3 +33,10 @@ export default function Clock({ setDate, date }) {
     </Time>
   );
 }
+
+Clock.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  setDate: PropTypes.func.isRequired
+}
+
+export default Clock;

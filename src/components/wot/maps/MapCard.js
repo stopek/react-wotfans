@@ -2,6 +2,8 @@ import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import ButtonInput from "components/ui/input/ButtonInput";
 import MapPreview from "components/wot/maps/MapPreview";
+import PropTypes from "prop-types";
+import { MapPropType } from "proptypes/MapPropType";
 import React, { useState } from 'react';
 import styled from "styled-components";
 
@@ -31,14 +33,16 @@ const Button = styled.div`
   padding: 5px;
 `;
 
-export default function MapCard({ map = {}, height = 300 }) {
-  const [preview, setPreview] = useState(false)
+function MapCard({ map, height }) {
+  const [preview, setPreview] = useState(false);
+
   return (
     <Card>
       <Header>
         <Name>
           {map.name}
         </Name>
+
         {!!map.video && (
           <Button>
             <ButtonInput
@@ -48,6 +52,7 @@ export default function MapCard({ map = {}, height = 300 }) {
           </Button>
         )}
       </Header>
+
       <MapPreview
         video={map.video}
         autoplay={preview}
@@ -58,3 +63,14 @@ export default function MapCard({ map = {}, height = 300 }) {
     </Card>
   );
 }
+
+MapCard.propTypes = {
+  map: MapPropType,
+  height: PropTypes.number
+}
+
+MapCard.defaultProps = {
+  height: 300
+}
+
+export default MapCard;
