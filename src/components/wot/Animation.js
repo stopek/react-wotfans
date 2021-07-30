@@ -11,7 +11,6 @@ const Content = styled.div`
 `;
 
 export default function Animation() {
-
   return (
     <Content>
       <Particles

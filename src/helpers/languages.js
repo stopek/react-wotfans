@@ -29,5 +29,5 @@ export const getDefaultLanguage = () => {
     return browser_language;
   }
 
-  return process.env.REACT_APP_DEFAULT_LANG;
+  return process.env.REACT_APP_DEFAULT_LANG ?? '';
 }

@@ -8,7 +8,7 @@ export function saveToken(token) {
   Cookies.set("token", token);
 }
 
-export function getToken() {
+export function getToken(): ?string {
   const token = Cookies.get("token") || null;
   return token;
 }

@@ -43,7 +43,7 @@ function MapCard({ map, height }) {
           {map.name}
         </Name>
 
-        {!!map.video && (
+        {map.video.length > 0 && (
           <Button>
             <ButtonInput
               onClick={() => setPreview(!preview)}
