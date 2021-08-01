@@ -21,6 +21,7 @@ import {
   TANKS_URL
 } from "app/routes";
 import { ReactComponent as TankIcon } from "assets/svg/tank-icon-2.svg";
+import { pl, ru } from 'date-fns/locale'
 import React from "react";
 import {
   WN8_ABOVE_AVERAGE,
@@ -34,7 +35,6 @@ import {
   WN8_VERY_BAD,
   WN8_VERY_GOOD
 } from "styles/colors";
-import { pl, ru } from 'date-fns/locale'
 import en_translations from "translations/en.json";
 import pl_translations from "translations/pl.json";
 import ru_translation from "translations/ru.json";
@@ -70,16 +70,16 @@ export const footerMenuItems = [
 ]
 
 export const tiersList = [
-  { value: 1, label: 1 },
-  { value: 2, label: 2 },
-  { value: 3, label: 3 },
-  { value: 4, label: 4 },
-  { value: 5, label: 5 },
-  { value: 6, label: 6 },
-  { value: 7, label: 7 },
-  { value: 8, label: 8 },
-  { value: 9, label: 9 },
-  { value: 10, label: 10 },
+  { value: 1, label: '1' },
+  { value: 2, label: '2' },
+  { value: 3, label: '3' },
+  { value: 4, label: '4' },
+  { value: 5, label: '5' },
+  { value: 6, label: '6' },
+  { value: 7, label: '7' },
+  { value: 8, label: '8' },
+  { value: 9, label: '9' },
+  { value: 10, label: '10' },
 ];
 
 export const nationList = [

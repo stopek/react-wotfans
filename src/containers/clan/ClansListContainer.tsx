@@ -14,7 +14,6 @@ export default function ClansListContainer({ ...props }) {
   const [page, setPage] = useState(1);
   const [data, setData] = useState({});
 
-
   const isClansLoaded = !!clans?.response;
   const pages = clans?.response?.pagination?.pages || 0;
 

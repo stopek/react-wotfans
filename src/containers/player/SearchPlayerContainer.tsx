@@ -63,21 +63,19 @@ export default function SearchPlayerContainer({ ...props }) {
           <SimplePagination
             page={page}
             setPage={setPage}
-            pages={players?.response?.pagination?.pages}
+            pages={players?.response?.pagination?.pages || 0}
           />
         )}
 
         {players?.response && (
-          <PlayersList
-            players={players_list}
-          />
+          <PlayersList players={players_list} />
         )}
 
         {isMorePages && (
           <SimplePagination
             page={page}
             setPage={setPage}
-            pages={players?.response?.pagination?.pages}
+            pages={players?.response?.pagination?.pages || 0}
           />
         )}
       </>

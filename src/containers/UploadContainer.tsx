@@ -1,3 +1,5 @@
+export default null;
+
 /**
  // import { requestToApi } from "api/actions";
  // import { Wot } from "api/actions/wot";

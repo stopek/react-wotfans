@@ -20,8 +20,7 @@ import {
   WN8_CALCULATOR_URL
 } from "app/routes";
 import AsyncLoader from "components/AsyncLoader";
-import Loadable from 'react-loadable';
-import OptionsWithoutRender = LoadableExport.OptionsWithoutRender;
+import Loadable, { OptionsWithoutRender } from 'react-loadable';
 
 interface IProps {}
 

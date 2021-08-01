@@ -1,11 +1,11 @@
-import Axios from "axios";
+import Axios, { AxiosResponse, CancelTokenSource } from "axios";
 
-export function requestToApi(
-  callback,
-  paramsAssoc,
-  successCallback,
-  errorCallback
-) {
+export const requestToApi = (
+  callback: (params: any, source: CancelTokenSource) => Promise<AxiosResponse>,
+  paramsAssoc?: object,
+  successCallback?: (response: any) => any,
+  errorCallback?: (parsed: any, error: any) => any
+) => {
   const CancelToken = Axios.CancelToken;
   const source = CancelToken.source();
 

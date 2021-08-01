@@ -1,10 +1,8 @@
-import type { MapInterface } from "interfaces/MapInterface";
+import { MapMapListInterface } from "interfaces/MapMapListInterface";
 
 export interface MapGeneratorResponseInterface {
   response: {
     date: string,
-    maps: Array<{
-      map: MapInterface
-    }>
+    maps: MapMapListInterface
   }
 }

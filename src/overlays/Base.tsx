@@ -5,44 +5,50 @@ import Cookie from "components/core/Cookie";
 import Flash from "components/core/Flash";
 import Seo from "components/core/Seo";
 import { getToken } from "helpers/cookies";
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { Element } from 'react-scroll'
 import { clearMessages } from "reducers/flashSlice";
 import { getUser } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_DARK } from "styles/colors";
 
-
 const Content = styled(Element)`
   background: ${COLOR_DARK};
 `;
 
-const action = (token: string) => {
+const action = (token: string | null) => {
   return (dispatch: AppDispatch) => {
-    if (token?.length > 0) {
+    if (!!token) {
       instance.defaults.headers.common["X-Auth-Token"] = token;
-      dispatch(getUser());
+      dispatch<any>(getUser());
     }
   }
 }
 
-function Base({ match, children, seo, seo_values = {}, ...props }) {
-  delete props['staticContext'];
+type BaseType = {
+  children: JSX.Element | JSX.Element[],
+  seo?: {
+    values: object,
+    title?: string,
+    description?: string
+  },
+  seo_values?: object
+}
 
+function Base({ children, seo, seo_values = {}, ...props }: BaseType) {
   const values = Object.assign({}, seo?.values || {}, seo_values || {});
   const dispatch = useAppDispatch();
   const token = getToken();
 
   useEffect(() => {
-    const timer = setInterval(() => action(dispatch, token), 30000);
+    const timer = setInterval(() => dispatch<any>(action(token)), 30000);
     return () => clearInterval(timer)
   }, [dispatch, token]);
 
   useEffect(() => {
     dispatch(clearMessages());
-    action(dispatch, token);
+    dispatch<any>(action(token));
   }, [dispatch, token]);
 
   return (
@@ -61,4 +67,10 @@ function Base({ match, children, seo, seo_values = {}, ...props }) {
   );
 }
 
-export default withRouter(Base);
+Base.propTypes = {
+  children: PropTypes.element,
+  seo: PropTypes.object,
+  seo_values: PropTypes.object
+}
+
+export default Base;

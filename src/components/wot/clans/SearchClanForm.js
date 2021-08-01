@@ -13,7 +13,7 @@ export default function SearchClanForm({ submit }) {
       <Grid container spacing={2}>
         <Grid item md={6} xs={12}>
           <TextInput
-            onChange={(value) => setClan(value)}
+            handleChange={(value) => setClan(value)}
             value={clan}
             variant={`standard`}
             autoFocus
@@ -23,7 +23,7 @@ export default function SearchClanForm({ submit }) {
 
         <Grid item md={6} xs={12}>
           <RangeInput
-            onChange={(value) => setAmount(value)}
+            handleChange={(value) => setAmount(value)}
             value={amount}
             step={5}
             label={`amount`}

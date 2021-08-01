@@ -9,4 +9,11 @@ const themeMap: { [key: string]: Theme } = {
   default_theme
 };
 
-export const themes = ['default_theme'];
+export enum Themes {
+  DefaultTheme = 'default_theme',
+  OtherTheme = 'other_theme'
+}
+
+export let themesList = [Themes.DefaultTheme, Themes.OtherTheme];
+
+export type themesTypes = Themes.DefaultTheme | Themes.OtherTheme

@@ -15,7 +15,9 @@ const Content = styled(Base)`
 export default function MinimalOverlay({ children, ...props }: OverlayInterface) {
   return (
     <Content {...props}>
-      {children}
+      <>
+        {children}
+      </>
 
       <Footer />
     </Content>

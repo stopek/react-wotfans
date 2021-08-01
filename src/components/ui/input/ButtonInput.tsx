@@ -1,17 +1,15 @@
-import { Button } from "@material-ui/core";
+import { Button, ButtonProps } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from 'react';
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router";
-import { themes } from "styles/themes/base";
+import { Themes, themesTypes } from "styles/themes/base";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
-type ButtonInputType = {
+interface ButtonInputInterface extends ButtonProps {
   label?: string,
   onClick?: (event: React.InputHTMLAttributes<HTMLButtonElement>) => void,
-  theme: string,
-  variant: string,
-  color: string,
+  theme?: themesTypes,
   icon?: JSX.Element,
   route?: string,
   large?: boolean,
@@ -19,10 +17,24 @@ type ButtonInputType = {
   before?: boolean
 }
 
-function ButtonInput({ label, onClick, theme, variant, color, icon, route, large, small, before, ...props }: ButtonInputType) {
+const ButtonInput: React.FC<ButtonInputInterface> = (
+  {
+    label,
+    onClick,
+    theme = Themes.DefaultTheme,
+    variant,
+    color,
+    icon,
+    route,
+    large,
+    small,
+    before,
+    ...props
+  }
+) => {
   const history = useHistory();
 
-  const go = (event: Event) => {
+  const go = (event: React.InputHTMLAttributes<HTMLButtonElement>) => {
     if (route) {
       return history.push(route);
     }
@@ -34,13 +46,7 @@ function ButtonInput({ label, onClick, theme, variant, color, icon, route, large
     return null;
   }
 
-  let size = 'medium';
-  if (large) {
-    size = 'large';
-  }
-  if (small) {
-    size = 'small';
-  }
+  let size: ButtonProps['size'] = (large ? 'large' : (small ? 'small' : 'medium'));
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,7 +59,7 @@ function ButtonInput({ label, onClick, theme, variant, color, icon, route, large
         {...props}
       >
         {before && icon && icon}
-        {label?.length > 0 && (
+        {!!label && (
           <FormattedMessage id={label} />
         )}
         {!before && icon && icon}
@@ -65,9 +71,6 @@ function ButtonInput({ label, onClick, theme, variant, color, icon, route, large
 ButtonInput.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
-  theme: PropTypes.oneOf(themes),
-  variant: PropTypes.string,
-  color: PropTypes.string,
   icon: PropTypes.element,
   route: PropTypes.string,
   large: PropTypes.bool,
@@ -76,7 +79,6 @@ ButtonInput.propTypes = {
 }
 
 ButtonInput.defaultProps = {
-  theme: 'default_theme',
   variant: 'contained',
   color: 'primary',
   before: true,

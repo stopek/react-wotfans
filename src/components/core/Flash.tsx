@@ -1,7 +1,7 @@
-import { backgroundByType, prepareMessages } from "helpers/flashHelper";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { backgroundByType, MessageTypes, prepareMessages } from "helpers/flashHelper";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { useDispatch, useSelector } from "react-redux";
 import { flashMessages } from "reducers/flashSlice";
 import styled, { keyframes } from "styled-components";
 import { RADIUS } from "styles/colors";
@@ -19,11 +19,17 @@ const Messages = styled.div`
 `;
 
 const slideDownAnimation = keyframes`
- 0% { bottom: 15px; opacity: 0; }
- 100% { bottom: 0; opacity: 1; }
+  0% {
+    bottom: 15px;
+    opacity: 0;
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
+  }
 `;
 
-const Message = styled.div`
+const Message = styled.div<{ type: MessageTypes }>`
   background: ${(props) => backgroundByType(props?.type)};
   color: white;
   font-weight: 300;
@@ -40,13 +46,18 @@ const Message = styled.div`
 `;
 
 export default function Flash() {
-  const messages = useSelector(flashMessages);
-  const dispatch = useDispatch();
+  const messages = useAppSelector(flashMessages);
+  const dispatch = useAppDispatch();
 
   const messages_list = prepareMessages(dispatch, messages).map((item) => {
     return (
-      <Message key={item.id} type={item.type} data-id={item.id} onLoad={item.remove()}>
-        <FormattedMessage id={item.display_message} />
+      <Message
+        key={item.id}
+        type={item.type}
+        data-id={item.id}
+        // onLoad={item.remove()}
+      >
+        {!!item.display_message && <FormattedMessage id={item.display_message} />}
       </Message>
     );
   });

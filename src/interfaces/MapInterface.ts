@@ -1,5 +1,5 @@
 export interface MapInterface {
   id: number,
   name: string,
-  video?: string
+  video: string
 }

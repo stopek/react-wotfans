@@ -5,7 +5,9 @@ import React from "react";
 export default function FullOverlay({ children, ...props }: OverlayInterface) {
   return (
     <Base {...props}>
-      {children}
+      <>
+        {children}
+      </>
     </Base>
   );
 }

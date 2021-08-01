@@ -19,7 +19,7 @@ export default function GameForm({ game = {} }) {
           <TextInput
             label={`game.name`}
             required
-            onChange={(value) => dispatch(setGameParam({ name: value }))}
+            handleChange={(value) => dispatch(setGameParam({ name: value }))}
             value={game?.name || ''}
           />
         </Grid>
@@ -27,7 +27,7 @@ export default function GameForm({ game = {} }) {
           <SelectInput
             translation={'game.type'}
             current={game?.type || ''}
-            onChange={(value) => dispatch(setGameParam({ type: value }))}
+            handleChange={(value) => dispatch(setGameParam({ type: value }))}
             options={gamesTypes}
           />
         </Grid>
@@ -35,7 +35,7 @@ export default function GameForm({ game = {} }) {
           <TextInput
             label={`game.short.description`}
             required
-            onChange={(value) => dispatch(setGameParam({ short_description: value }))}
+            handleChange={(value) => dispatch(setGameParam({ short_description: value }))}
             value={game?.short_description || ''}
             multiline
           />
@@ -44,7 +44,7 @@ export default function GameForm({ game = {} }) {
           <TextInput
             label={`game.description`}
             required
-            onChange={(value) => dispatch(setGameParam({ description: value }))}
+            handleChange={(value) => dispatch(setGameParam({ description: value }))}
             value={game?.description || ''}
             multiline
           />
@@ -53,7 +53,7 @@ export default function GameForm({ game = {} }) {
           <TextInput
             label={`game.awards.description`}
             required
-            onChange={(value) => dispatch(setGameParam({ awards_description: value }))}
+            handleChange={(value) => dispatch(setGameParam({ awards_description: value }))}
             value={game?.awards_description || ''}
             multiline
           />
@@ -62,7 +62,7 @@ export default function GameForm({ game = {} }) {
           <TextInput
             label={`game.rule.description`}
             required
-            onChange={(value) => dispatch(setGameParam({ rule_description: value }))}
+            handleChange={(value) => dispatch(setGameParam({ rule_description: value }))}
             value={game?.rule_description || ''}
             multiline
           />

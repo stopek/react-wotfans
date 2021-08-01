@@ -5,11 +5,15 @@ import { RootState } from "app/store";
 import { logOutUser } from "helpers/user";
 import { ClanResponseInterface } from "interfaces/response/ClanResponseInterface";
 import { ClansListResponseInterface } from "interfaces/response/ClansListResponseInterface";
+import { ExpectedResponseInterface } from "interfaces/response/ExpectedResponseInterface";
 import { LoggedUserResponseInterface } from "interfaces/response/LoggedUserResponseInterface";
 import { MapGeneratorResponseInterface } from "interfaces/response/MapGeneratorResponseInterface";
 import { MapsListResponseInterface } from "interfaces/response/MapsListResponseInterface";
+import { MoeResponseInterface } from "interfaces/response/MoeResponseInterface";
 import { PlayerResponseInterface } from "interfaces/response/PlayerResponseInterface";
 import { PlayersListResponseInterface } from "interfaces/response/PlayersListResponseInterface";
+import { TankResponseInterface } from "interfaces/response/TankResponseInterface";
+import { TanksResponseInterface } from "interfaces/response/TanksResponseInterface";
 
 type SliceState = {
   loading: false | true,
@@ -24,14 +28,14 @@ type SliceState = {
   get_user: LoggedUserResponseInterface | null,
   search_player: PlayerResponseInterface | null,
   clans_list: ClansListResponseInterface | null,
-
   search_players: PlayersListResponseInterface | null,
+  exp_wn8_list: ExpectedResponseInterface | null,
+  moe_list: MoeResponseInterface | null,
+  search_tank: TankResponseInterface | null,
+  tanks: TanksResponseInterface | null,
+
   players_list: [],
   user_tanks_achievements: [],
-  exp_wn8_list: [],
-  moe_list: [],
-  tanks: [],
-  search_tank: {},
   user_tanks: {},
   games: [],
   game: {}
@@ -51,13 +55,13 @@ const initialState: SliceState = {
   search_player: null,
   clans_list: null,
   search_players: null,
+  exp_wn8_list: null,
+  moe_list: null,
+  search_tank: null,
+  tanks: null,
 
   players_list: [],
   user_tanks_achievements: [],
-  exp_wn8_list: [],
-  moe_list: [],
-  tanks: [],
-  search_tank: {},
   user_tanks: {},
   games: [],
   game: {}
@@ -99,7 +103,7 @@ function isFulfilledAction(action: AnyAction) {
 
 export const handleRejectValues = (name: string, action: any) => createAsyncThunk(
   name,
-  async (data: object, { rejectWithValue }) => {
+  async (data: object | undefined, { rejectWithValue }) => {
     try {
       return await action(data);
     } catch (error) {
@@ -171,9 +175,9 @@ export const wotSlice = createSlice({
       })
 
       .addCase(searchTank.pending, (state) => {
-        state.search_tank = {};
+        state.search_tank = null;
       })
-      .addCase(searchTank.fulfilled, (state, action) => {
+      .addCase(searchTank.fulfilled, (state, action: PayloadAction<TankResponseInterface>) => {
         state.search_tank = action.payload;
       })
 
@@ -185,9 +189,9 @@ export const wotSlice = createSlice({
       })
 
       .addCase(loadTanks.pending, (state) => {
-        state.tanks = [];
+        state.tanks = null;
       })
-      .addCase(loadTanks.fulfilled, (state, action) => {
+      .addCase(loadTanks.fulfilled, (state, action: PayloadAction<TanksResponseInterface>) => {
         state.tanks = action.payload;
       })
 
@@ -199,16 +203,16 @@ export const wotSlice = createSlice({
       })
 
       .addCase(expWn8List.pending, (state) => {
-        state.exp_wn8_list = [];
+        state.exp_wn8_list = null;
       })
-      .addCase(expWn8List.fulfilled, (state, action) => {
+      .addCase(expWn8List.fulfilled, (state, action: PayloadAction<ExpectedResponseInterface>) => {
         state.exp_wn8_list = action.payload;
       })
 
       .addCase(moeList.pending, (state) => {
-        state.moe_list = [];
+        state.moe_list = null;
       })
-      .addCase(moeList.fulfilled, (state, action) => {
+      .addCase(moeList.fulfilled, (state, action: PayloadAction<MoeResponseInterface>) => {
         state.moe_list = action.payload;
       })
 

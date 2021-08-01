@@ -1,10 +1,10 @@
-import { PaginationInterface } from "interfaces/PaginationInterface";
+import { PaginationResponseInterface } from "interfaces/PaginationResponseInterface";
 import { PlayerInterface } from "interfaces/PlayerInterface";
 
 export interface PlayersListResponseInterface {
   response: {
     data: PlayerInterface[],
-    pagination: PaginationInterface,
+    pagination: PaginationResponseInterface,
     statistics: {
       efficiency: [],
       wn7: [],

@@ -41,9 +41,9 @@ export default function Header() {
   return (
     <>
       <Hidden mdUp>
-        <LoggedUserMenu mobile />
+        <LoggedUserMenu />
         <DialMenuContent>
-          <MaterialMenu actions={menuItems} />
+          <MaterialMenu actions={menuItems} open={false} />
         </DialMenuContent>
       </Hidden>
 

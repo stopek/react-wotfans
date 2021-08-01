@@ -1,9 +1,9 @@
 import { ClanInterface } from "interfaces/ClanInterface";
-import { PaginationInterface } from "interfaces/PaginationInterface";
+import { PaginationResponseInterface } from "interfaces/PaginationResponseInterface";
 
 export interface ClansListResponseInterface {
   response: {
     data: ClanInterface[],
-    pagination: PaginationInterface
+    pagination: PaginationResponseInterface
   }
 }

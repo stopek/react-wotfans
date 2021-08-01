@@ -15,7 +15,7 @@ function SearchPlayerForm({ submit }: SearchPlayerFormType) {
     <form onSubmit={(event) => submit(event, { player_name: player })}>
       <TextInput
         required
-        onChange={(value: string) => setPlayer(value)}
+        handleChange={(value: string) => setPlayer(value)}
         value={player}
         variant={`standard`}
         autoFocus

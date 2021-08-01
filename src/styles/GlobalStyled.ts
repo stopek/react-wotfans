@@ -64,7 +64,7 @@ export const FitTableTd = styled(TableTdSmall)`
   }
 `;
 
-export const TableTr = styled.tr`
+export const TableTr = styled.tr<{ disable?: boolean }>`
   ${props => !!props?.disable && `opacity: 0.2;`}
 `;
 
