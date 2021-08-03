@@ -16,7 +16,7 @@ interface SettingsInterface {
   [x: string]: boolean | undefined
 }
 
-export default function ExpectedTanksFilteredList({ tanks = [] }: ExpectedTanksFilteredList) {
+function ExpectedTanksFilteredList({ tanks }: ExpectedTanksFilteredList) {
   const [filters, setFilters] = useState({});
   const [settings, setSettings] = useState<SettingsInterface>({});
 
@@ -61,3 +61,5 @@ export default function ExpectedTanksFilteredList({ tanks = [] }: ExpectedTanksF
     </>
   );
 }
+
+export default ExpectedTanksFilteredList;

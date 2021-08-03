@@ -1,6 +1,4 @@
 import { ExpectedInterface } from "interfaces/ExpectedInterface";
-import { TankInterface } from "interfaces/TankInterface";
+import { WithTankRelationInterface } from "interfaces/WithTankRelationInterface";
 
-export interface ExpectedListInterface extends ExpectedInterface {
-  tank: TankInterface,
-}
+export interface ExpectedListInterface extends ExpectedInterface, WithTankRelationInterface {}

@@ -1,7 +1,9 @@
 import { wn8Ranges } from "app/settings";
 import { valueFormat } from "helpers/priceFormat";
+import { SearchTankFormInterface } from "interfaces/form/SearchTankFormInterface";
+import { WithTankRelationInterface } from "interfaces/WithTankRelationInterface";
 
-export const getTranslationByTankType = (type) => {
+export const getTranslationByTankType = (type: string) => {
   switch (type) {
     case 'mediumTank':
       return 'type.mediumTank';
@@ -71,17 +73,22 @@ export const getTiersFromTanksStats = (tanks_stats = []) => {
   return key_value;
 }
 
-export const tanksFilters = (tanks = [], filters = {}) => {
+export const tanksFilters = (tanks: WithTankRelationInterface[], filters: SearchTankFormInterface) => {
   tanks = Object.values(tanks);
 
-  if (filters?.tank_name?.length > 0) {
-    tanks = tanks.filter((tank) => tank?.tank?.name.toLowerCase().includes(filters.tank_name.toLowerCase()));
+  if (!!filters?.tank_name) {
+    tanks = tanks.filter(
+      (tank) => !filters?.tank_name && tank?.tank?.name.toLowerCase().includes(filters?.tank_name?.toLowerCase())
+    );
   }
+
+  type FilteredType = keyof SearchTankFormInterface
 
   tanks = tanks.filter((tank) => {
     let can_be = true;
+    const filterBy: FilteredType = ['tier', 'nation', 'type'];
 
-    ['tier', 'nation', 'type'].forEach((v) => {
+    filterBy.forEach((v) => {
       if (filters[v]?.length > 0) {
         if (!filters[v].includes(tank?.tank[v])) {
           can_be = false;
@@ -92,22 +99,22 @@ export const tanksFilters = (tanks = [], filters = {}) => {
     return can_be;
   });
 
-  if (filters?.tier?.length > 0) {
-    tanks = tanks.filter((tank) => filters?.tier.includes(tank?.tank?.tier));
+  if (!!filters?.tier) {
+    tanks = tanks.filter((tank) => filters?.tier && filters?.tier.includes(tank?.tank?.tier));
   }
 
-  if (filters?.premium?.length > 0) {
+  if (!!filters?.premium) {
     tanks = tanks.filter((tank) => (
       (filters?.premium === 'only_premium' && tank?.tank?.is_premium) ||
       (filters?.premium === 'without_premium' && !tank?.tank?.is_premium)
     ))
   }
 
-  if (filters?.battles?.length > 0) {
-    tanks = tanks.filter((tank) => (tank.battles >= filters.battles[0] && tank.battles <= filters.battles[1]));
+  if (!!filters?.battles) {
+    tanks = tanks.filter((tank) => (tank.battles >= filters?.battles[0] && tank.battles <= filters?.battles[1]));
   }
 
-  if (filters?.wn8?.length > 0) {
+  if (!!filters?.wn8) {
     const all_wn8 = wn8Ranges;
     const filter_wn8 = filters?.wn8;
 
