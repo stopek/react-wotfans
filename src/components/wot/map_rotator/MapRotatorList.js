@@ -7,7 +7,7 @@ import hexToRgbA from "helpers/hexToRgbA";
 import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import styled from "styled-components";
-import { COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
+import { COLOR_BLUE, COLOR_DARK_2, COLOR_TEXT, RADIUS } from "styles/colors";
 
 const List = styled.div`
   color: ${COLOR_TEXT};
@@ -20,6 +20,8 @@ const List = styled.div`
   justify-content: center;
   border-radius: ${RADIUS};
   overflow: hidden;
+  position: relative;
+  z-index: 100;
 `;
 
 const Item = styled.div`
@@ -67,6 +69,31 @@ const Map = styled.div`
   z-index: 1;
 `;
 
+const Overlay = styled.div`
+  font-size: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  z-index: 1000;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  line-height: 1;
+  
+  span {
+    font-size: 30px;
+    font-weight: 700;
+  }
+`;
+
+const Blue = styled.strong`
+  color: ${COLOR_BLUE};
+`;
+
 function MapRotatorList({ list, diff_seconds, filter_maps, date, cycle_seconds, advanced }) {
   const [current, setCurrent] = useState(null);
   const [currentVisible, setCurrentVisible] = useState(true);
@@ -82,6 +109,10 @@ function MapRotatorList({ list, diff_seconds, filter_maps, date, cycle_seconds, 
 
   return (
     <List>
+      <Overlay>
+        <span>temporarily unavailable</span>
+        <strong>stay in <Blue>tank</Blue></strong>
+      </Overlay>
       {list.map((map, key) => {
         const is_real_current = (map.status === 'current');
         const is_current = ((is_real_current && currentVisible) || current === key);

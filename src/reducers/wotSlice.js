@@ -25,6 +25,7 @@ const initialState = {
 
   get_user: {},
   user_tanks: {},
+  maps_guess: [],
 
   games: [],
   game: {}
@@ -33,8 +34,14 @@ const initialState = {
 const ignoring = [
   'wot/get_user/fulfilled',
   'wot/get_user/pending',
-  'wot/get_user/rejected'
+  'wot/get_user/rejected',
+  'wot/map_guess/pending',
+  'wot/map_guess/fulfilled'
 ];
+
+const ignoring404 = [
+  'wot/map_guess/rejected'
+]
 
 function isPendingAction(action: AnyAction) {
   if (ignoring.includes(action?.type)) return false;
@@ -51,6 +58,8 @@ function isRejectedErrorAction(action: AnyAction) {
 }
 
 function isRejectedNotFoundAction(action: AnyAction) {
+  if (ignoring404.includes(action?.type)) return false;
+
   return action.type.endsWith('rejected') && action?.payload?.status === 404;
 }
 
@@ -90,6 +99,7 @@ export const userTanksAchievements = handleRejectValues('wot/user_tanks_achievem
 export const clansList = handleRejectValues('wot/clans_list', Wot.clans);
 export const expWn8List = handleRejectValues('wot/wn8', Wot.exp_wn8);
 export const moeList = handleRejectValues('wot/moe', Wot.moe);
+export const guessList = handleRejectValues('wot/map_guess', Wot.map_guess);
 export const loadTanks = handleRejectValues('wot/tanks', Wot.tanks);
 export const getUser = handleRejectValues('wot/get_user', AuthWot.get_user);
 export const fetchUserTanks = handleRejectValues('wot/user_tanks', AuthWot.user_tanks);
@@ -128,6 +138,10 @@ export const wotSlice = createSlice({
       })
       .addCase(loadMaps.fulfilled, (state, action) => {
         state.maps_list = action.payload;
+      })
+
+      .addCase(guessList.fulfilled, (state, action) => {
+        state.maps_guess = action.payload;
       })
 
       .addCase(loadMapGenerator.pending, (state) => {
@@ -258,7 +272,8 @@ export const wotSlice = createSlice({
           state.crash = false;
           state.unauthorized = false;
         }
-      ).addMatcher(
+      )
+      .addMatcher(
       isCrashedAction,
       (state) => {
         state.loading = false;
@@ -287,6 +302,7 @@ export const selectLoadMaps = (state) => state.wot.maps_list;
 export const selectMapGenerator = (state) => state.wot.map_generator;
 export const selectExpWn8List = (state) => state.wot.exp_wn8_list;
 export const selectMoeList = (state) => state.wot.moe_list;
+export const selectMapGuess = (state) => state.wot.maps_guess;
 export const selectGameItem = (state) => state.wot.game || {};
 
 export const selectLoading = (state) => state.wot.loading;

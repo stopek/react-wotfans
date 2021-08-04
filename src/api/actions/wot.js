@@ -68,6 +68,10 @@ export class Wot {
     return Wot.post('moe', params);
   }
 
+  static async map_guess(params) {
+    return Wot.post('maps/guess', params);
+  }
+
   static async load_players(params) {
     return Wot.post('load_players', params);
   }

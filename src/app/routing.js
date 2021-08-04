@@ -8,7 +8,7 @@ import {
   GAMES_FORM,
   GAMES_URL,
   LOGIN_URL,
-  MAIN_URL,
+  MAIN_URL, MAPS_GUESS_URL,
   MAPS_URL,
   MOE_URL,
   PLAYER_URL,
@@ -51,6 +51,10 @@ const routing = [
   {
     route: UPGRADE_URL,
     Component: load('system/UpgradeContainer'),
+  },
+  {
+    route: MAPS_GUESS_URL,
+    Component: load('map/MapsGuessContainer'),
   },
   {
     authorized: true,

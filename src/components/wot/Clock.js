@@ -16,11 +16,11 @@ const Time = styled.div`
   color: ${COLOR_TEXT};
 `;
 
-function Clock({ setDate, date }) {
+function Clock({ setDate, date, interval = 1000, format_time = 'HH:mm:ss' }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date());
-    }, 1000);
+    }, interval);
 
     return () => {
       clearInterval(timer);
@@ -29,7 +29,7 @@ function Clock({ setDate, date }) {
 
   return (
     <Time>
-      {format(date, 'HH:mm:ss')}
+      {format(date, format_time)}
     </Time>
   );
 }

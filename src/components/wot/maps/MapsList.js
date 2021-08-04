@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { MapPropType } from "proptypes/MapPropType";
 import React from "react";
 
-function MapsList({ maps }) {
+function MapsList({ maps, grid_props = {}, card_props = {} }) {
   return (
     <Grid spacing={2} container>
       {maps.map((map) => (
-        <Grid item xs={12} md={6} xl={4} key={`map-${map.id}`}>
-          <MapCard map={map} />
+        <Grid item xs={12} md={6} xl={4} key={`map-${map.id}`} {...grid_props}>
+          <MapCard map={map} {...card_props} />
         </Grid>
       ))}
     </Grid>
