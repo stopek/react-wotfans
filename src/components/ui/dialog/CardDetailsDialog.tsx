@@ -25,7 +25,9 @@ const styles = {
 
 function CardDetailsDialog(
   {
-    handleClose, open, image,
+    handleClose,
+    open,
+    image,
     theme = 'default_theme',
     children, ...props
   }

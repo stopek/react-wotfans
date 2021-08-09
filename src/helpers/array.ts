@@ -1,4 +1,4 @@
-export const multidimensionalValuesKeyValue = (list, key, value_key) => {
+export const multidimensionalValuesKeyValue = (list: [], key: string, value_key: string) => {
   let output = {};
 
   list.forEach((item) => {

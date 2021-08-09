@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { breakpoint } from "styles/breakpoints";
@@ -9,7 +10,7 @@ const List = styled.div`
   @media ${breakpoint.md} {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   @media ${breakpoint.lg} {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -19,7 +20,11 @@ const Item = styled.div`
   height: 500px;
 `;
 
-export default function CharsList({ list = [] }) {
+type CharsListTYpe = {
+  list: string[]
+}
+
+function CharsList({ list = [] }: CharsListTYpe) {
   return (
     <List>
       {list.map((char, key) => (
@@ -30,3 +35,9 @@ export default function CharsList({ list = [] }) {
     </List>
   );
 }
+
+CharsList.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.node).isRequired
+}
+
+export default CharsList;

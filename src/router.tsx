@@ -7,22 +7,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export default function RouterComponent() {
-  // let routes_list = [];
-  //
-  // ['', ':locale'].forEach((locale) => {
-  //   Object.values(routes).forEach(({ authorized = false, route, header, Component, params }, key) => {
-  //     const RouteComponent = TitledComponentHOC(Component, { ...params, header: header }, authorized);
-  //     const currentRoute = routeForLocale(route, locale);
-  //
-  //     routes_list.push(() => (
-  //       <Route key={`route-${locale}-${key}`} strict exact path={currentRoute}>
-  //         <RouteComponent />
-  //       </Route>
-  //     ));
-  //   });
-  // });
-  //
-
   const routes_list = routes.map(({ route, header, Component, params }, key) => {
     let RouteComponent = TitledComponentHOC(Component, params);
     return (

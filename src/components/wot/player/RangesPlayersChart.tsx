@@ -1,20 +1,28 @@
 import { ResponsiveBar } from '@nivo/bar'
-import { nivoTheme } from "styles/nivoTheme";
 import PlayerWnTooltip from "components/wot/player/chart/PlayerWnTooltip";
 import { sortByNumberMulti } from "helpers/user";
+import { PlayerInterface } from "interfaces/PlayerInterface";
+import { WNRangeInterface } from "interfaces/WNRangeInterface";
 import React from "react";
-import { injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 import styled from "styled-components";
+import { nivoTheme } from "styles/nivoTheme";
 
 const Content = styled.div`
   width: 100%;
   height: 250px;
-  position: relative; 
+  position: relative;
 `;
 
-function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
-  let colors = {};
-  let summary = {};
+interface RangesPlayersChart extends WrappedComponentProps {
+  ranges: WNRangeInterface[],
+  players: PlayerInterface[],
+  data_key: keyof PlayerInterface
+}
+
+function RangesPlayersChart({ players, intl, ranges, data_key }: RangesPlayersChart) {
+  let colors: Record<string, string> = {};
+  let summary: Record<string, number> = {};
   const totalPlayers = players?.length || 0;
 
   ranges.forEach((wn) => {
@@ -24,14 +32,14 @@ function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
   Object.values(players).forEach((player) => {
     let found = false;
 
-    sortByNumberMulti(ranges, 'value').forEach(({ value, translation }) => {
+    sortByNumberMulti<WNRangeInterface>(ranges, 'value').forEach(({ value, translation }) => {
       const translated = intl.formatMessage({ id: translation });
 
       if (!summary[translated]) {
         summary[translated] = 0;
       }
 
-      if (player[data_key] >= value && !found) {
+      if ((player[data_key] || 0) >= value && !found) {
         summary[translated] += 1;
         found = true;
       }
@@ -59,7 +67,6 @@ function RangesPlayersChart({ players = [], intl, ranges = [], data_key }) {
         margin={{ top: 10, right: 150, bottom: 5, left: 40 }}
         padding={0.2}
         colors={(bar) => colors[bar.id] ?? 'black'}
-        colorBy="indexValue"
         axisTop={null}
         axisRight={null}
         axisBottom={null}

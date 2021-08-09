@@ -1,6 +1,7 @@
+import { Theme } from "@nivo/core";
 import { COLOR_TEXT } from "styles/colors";
 
-export const nivoTheme = {
+export const nivoTheme: Theme = {
   textColor: COLOR_TEXT,
   fontSize: 11,
   tooltip: {

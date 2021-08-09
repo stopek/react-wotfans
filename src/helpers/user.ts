@@ -1,7 +1,6 @@
 import instance from "api/service";
 import { getToken, removeToken } from "helpers/cookies";
 import { PlayerInterface } from "interfaces/PlayerInterface";
-import { WN8Interface } from "interfaces/WN8Interface";
 import { WNRangeInterface } from "interfaces/WNRangeInterface";
 
 export function isLogged() {
@@ -15,11 +14,13 @@ export const logOutUser = () => {
   removeToken();
 }
 
-export const sortByNumberMulti = (list: [], key: string) => {
+export const sortByNumberMulti = <T>(list: T[], key: keyof T): T[] => {
   return Object.values(list).sort(function (a, b) {
     return b[key] > a[key] ? 1 : -1;
   });
 }
+
+
 
 export const sortByKeyMulti = <T>(list: T, key: string, desc: boolean = true) => {
   return Object.values(list).sort(function (a, b) {

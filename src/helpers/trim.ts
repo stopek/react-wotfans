@@ -1,4 +1,4 @@
-export default function trim(str, chars) {
+export default function trim(str: string, chars: string) {
   let
     start = 0,
     end = str.length;

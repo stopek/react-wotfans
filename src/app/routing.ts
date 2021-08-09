@@ -20,20 +20,20 @@ import {
   WN8_CALCULATOR_URL
 } from "app/routes";
 import AsyncLoader from "components/AsyncLoader";
+import { RouterComponentProps } from "interfaces/router/RouterComponentProps";
+import { RoutingItemInterface } from "interfaces/router/RoutingItemInterface";
 import Loadable, { OptionsWithoutRender } from 'react-loadable';
 
-interface IProps {}
-
 const load = (component: string) => {
-  const loadableOptions: OptionsWithoutRender<IProps> = {
+  const loadableOptions: OptionsWithoutRender<RouterComponentProps> = {
     loader: () => import(`containers/${component}`),
     loading: AsyncLoader,
-  };
+  }
 
   return Loadable(loadableOptions);
 }
 
-const routing = [
+const routing: RoutingItemInterface = [
   {
     header: "homepage",
     route: MAIN_URL,
