@@ -1,12 +1,25 @@
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
+import { MenuItemInterface } from "interfaces/MenuItemInterface";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router";
+import { Themes, themesTypes } from "styles/themes/base";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
-export default function LargeNavigation({ theme = 'default_theme', items = [] }) {
+interface LargeNavigationType {
+  theme?: themesTypes,
+  items: MenuItemInterface[]
+}
+
+const LargeNavigation: React.FC<LargeNavigationType> = (
+  {
+    theme = Themes.DefaultTheme,
+    items = []
+  }
+) => {
   const history = useHistory();
-  const handleClickItem = (event, href, route) => {
+
+  const handleClickItem = (event: React.SyntheticEvent<any>, href?: string, route?: string) => {
     event.preventDefault();
     !!route ? history.push(route) : window.open(href, '_blank');
   }
@@ -26,3 +39,5 @@ export default function LargeNavigation({ theme = 'default_theme', items = [] })
     </ThemeProvider>
   );
 }
+
+export default LargeNavigation;

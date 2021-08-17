@@ -2,7 +2,6 @@ import { InputAdornment, InputLabelProps, TextField } from "@material-ui/core";
 import { InputProps as StandardInputProps } from "@material-ui/core/Input/Input";
 import { BaseTextFieldProps } from "@material-ui/core/TextField/TextField";
 import { nanoid } from "@reduxjs/toolkit";
-import Texts from "components/ui/Texts";
 import PropTypes from "prop-types";
 import React, { ChangeEvent } from "react";
 import { FormattedMessage } from "react-intl";
@@ -69,9 +68,9 @@ const TextInput: React.FC<TextInputType> = (
       />
 
       {!!hint && (
-        <Texts size="12px" line_height={1.3} display="block">
+        <>
           {hint}
-        </Texts>
+        </>
       )}
     </ThemeProvider>
   );

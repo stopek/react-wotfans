@@ -42,6 +42,7 @@ export default function Header() {
     <>
       <Hidden mdUp>
         <LoggedUserMenu />
+
         <DialMenuContent>
           <MaterialMenu actions={menuItems} open={false} />
         </DialMenuContent>
@@ -52,6 +53,7 @@ export default function Header() {
           <MainMenuContent>
             <MainMenu items={menuItems} />
           </MainMenuContent>
+
           <LoggedUserMenu />
         </TopBar>
       </Hidden>

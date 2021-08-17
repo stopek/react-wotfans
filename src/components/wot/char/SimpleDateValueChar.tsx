@@ -1,5 +1,4 @@
-import { ResponsiveLine } from "@nivo/line";
-import { nivoTheme } from "styles/nivoTheme";
+import { ResponsiveLine, Serie } from "@nivo/line";
 import { format } from "date-fns";
 import { getDateLocale } from "helpers/languages";
 import React from "react";
@@ -7,13 +6,21 @@ import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
+import { nivoTheme } from "styles/nivoTheme";
 
 const Content = styled.div`
   height: 200px;
 `;
 
-export default function SimpleDateValueChar({ data }) {
+interface SimpleDateValueCharInterface {
+  data: Serie[]
+}
+
+export default function SimpleDateValueChar({ data }: SimpleDateValueCharInterface) {
   const language = useSelector(selectedLanguage);
+
+  const locale = getDateLocale(language);
+  const options = locale ? { locale: locale } : {}
 
   return (
     <Content>
@@ -39,14 +46,14 @@ export default function SimpleDateValueChar({ data }) {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          format: (value) => format(new Date(value), 'do MMM', { locale: getDateLocale(language) }),
-          orient: 'bottom',
+          format: (value) => format(new Date(value), 'do MMM', options),
+          // orient: 'bottom',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: -35,
         }}
         axisLeft={{
-          orient: 'left',
+          // orient: 'left',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,

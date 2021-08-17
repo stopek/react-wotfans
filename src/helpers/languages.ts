@@ -8,16 +8,16 @@ export function getLanguagesValues() {
   return getLanguages().map((language) => language.value);
 }
 
-export function findLanguageItem(language_name) {
-  return getLanguages().find((language) => language.value === language_name);
+export function findLanguageItem(language_name: string) {
+  return getLanguages().find((language) => language.value === language_name) || null;
 }
 
-export function getDateLocale(language_name) {
-  return findLanguageItem(language_name).date_locale;
+export function getDateLocale(language_name: string) {
+  return findLanguageItem(language_name)?.date_locale;
 }
 
-export function getDateTranslations(language_name) {
-  return findLanguageItem(language_name).translations;
+export function getDateTranslations(language_name: string) {
+  return findLanguageItem(language_name)?.translations;
 }
 
 export const getDefaultLanguage = () => {

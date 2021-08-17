@@ -1,8 +1,9 @@
-import { Dialog, DialogContent, withStyles } from "@material-ui/core";
+import { Dialog, DialogContent, DialogProps, withStyles } from "@material-ui/core";
 import ButtonInput from "components/ui/input/ButtonInput";
 import React from "react";
 import styled from "styled-components";
 import { RADIUS } from "styles/colors";
+import { Themes, themesTypes } from "styles/themes/base";
 import ThemeProvider from "styles/themes/ThemeProvider";
 
 const ActionButtonContainer = styled.div`
@@ -23,15 +24,20 @@ const styles = {
   }
 };
 
-function CardDetailsDialog(
+interface CardDetailsInterface extends DialogProps {
+  theme?: themesTypes,
+  handleClose: (event: React.InputHTMLAttributes<HTMLButtonElement>) => void
+}
+
+const CardDetailsDialog: React.FC<CardDetailsInterface> = (
   {
     handleClose,
     open,
-    image,
-    theme = 'default_theme',
-    children, ...props
+    theme = Themes.DefaultTheme,
+    children,
+    ...props
   }
-) {
+) => {
   return (
     <ThemeProvider theme={theme}>
       <Dialog

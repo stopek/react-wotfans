@@ -1,3 +1,4 @@
+import { TableRowProps } from "@material-ui/core";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import TableCell from "@material-ui/core/TableCell";
@@ -5,18 +6,24 @@ import TableRow from "@material-ui/core/TableRow";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { finalValue } from "helpers/table";
+import { TableRowInterface } from "interfaces/TableRowInterface";
 import React, { useState } from "react";
-import { injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
-function Row({ row = [], index, intl, exclude }) {
+interface SelectInputType extends TableRowProps, WrappedComponentProps {
+  row: TableRowInterface,
+  index: number,
+  exclude: Array<{ [index: keyof TableRowInterface]: boolean }>
+}
+
+const Row: React.FC<SelectInputType> = ({ row, index, intl, exclude }) => {
   const [open, setOpen] = useState(false);
 
-  const children = Object
-    .values(row)
-    .find((item) => (typeof item === 'object' && !!item?.child))
-    ?.child;
-
-  // const properties = Object.keys(row).find((k) => k === 'properties');
+  const children =
+    Object
+      .values(row)
+      .find((item) => (typeof item === 'object' && !!item?.child))
+      ?.child;
 
   return (
     <>
@@ -29,15 +36,18 @@ function Row({ row = [], index, intl, exclude }) {
           </TableCell>
         )}
 
-        {Object.keys(row).filter((key) => !row[key]?.child && !['properties'].includes(key) && (!exclude[key] || exclude[key] === false)).map((key, no) => {
-          const item = row[key];
+        {Object
+          .keys(row)
+          .filter((key: any) => !row[key]?.child && !['properties'].includes(key) && (!exclude[key] || exclude[key] === false))
+          .map((key: any, no) => {
+            const item: object = row[key];
 
-          return (
-            <TableCell key={`item-${index}-${key}-${no}`}>
-              {finalValue(item, intl)}
-            </TableCell>
-          );
-        })}
+            return (
+              <TableCell key={`item-${index}-${key}-${no}`}>
+                {finalValue(item, intl)}
+              </TableCell>
+            );
+          })}
       </TableRow>
 
       {children && (

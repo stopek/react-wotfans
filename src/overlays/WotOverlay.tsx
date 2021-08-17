@@ -42,6 +42,7 @@ function WotOverlay({ title, children, full, ...props }: OverlayInterface) {
   return (
     <Content full={full} {...props}>
       <Header />
+
       <Container>
         {isCrash && (
           <Error message={`crash.error`} />

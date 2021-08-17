@@ -1,5 +1,5 @@
-type CreateUrlParamsType = {
-  [key: string]: string
+export type CreateUrlParamsType = {
+  [key: string]: string | number
 }
 
 export default function createUrlParams(url: string, params: CreateUrlParamsType[]) {

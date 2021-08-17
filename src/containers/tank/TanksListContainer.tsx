@@ -86,7 +86,7 @@ export default function TanksListContainer({ ...props }) {
           <>
             <TanksList
               tanks={tanks?.response?.data}
-              no_wn8 price no_stats tank_profile
+              card_props={{ no_wn8: true, price: true, no_stats: true, tank_profile: true }}
             />
 
             {tanks?.response?.pagination?.pages > 1 && (

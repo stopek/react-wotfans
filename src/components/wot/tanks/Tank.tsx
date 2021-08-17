@@ -8,6 +8,8 @@ import { date_ago_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
 import { getDateLocale } from "helpers/languages";
 import { priceFormat } from "helpers/priceFormat";
+import { TankInterface } from "interfaces/TankInterface";
+import { TankStatInterface } from "interfaces/TankStatInterface";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -15,12 +17,12 @@ import { selectedLanguage } from "reducers/languageSlice";
 import styled, { css } from "styled-components";
 import { COLOR_DARK_2, COLOR_SECOND, COLOR_TEXT_ON_THEME, COLOR_THEME, RADIUS } from "styles/colors";
 
-const hoverCss = css`
+const hoverCss = css<{ hover: boolean }>`
   transition: all .2s ease-in-out;
   opacity: ${props => props?.hover ? 0.1 : 1};
 `;
 
-const TankItem = styled.div`
+const TankItem = styled.div<{ pointer: boolean, is_premium: boolean }>`
   background-color: ${COLOR_DARK_2};
   border-radius: ${RADIUS};
   position: relative;
@@ -50,13 +52,12 @@ const TankName = styled.div`
   padding: 5px;
   border-radius: ${RADIUS};
   font-size: 16px;
+  opacity: ${props => props?.hover ? 0 : 1};
 
   ${hoverCss};
-
-  opacity: ${props => props?.hover ? 0 : 1};
 `;
 
-const TankImage = styled.div`
+const TankImage = styled.div<{ image: string }>`
   width: 100%;
   height: 150px;
   background: url(${props => props?.image}) no-repeat center center;
@@ -120,7 +121,30 @@ const LastBattle = styled.div`
   color: white;
 `;
 
-export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props }) {
+export interface TankCardSettingsInterface {
+  weight?: boolean,
+  no_stats?: boolean,
+  tank_profile?: boolean,
+  battle_ago?: boolean,
+  no_wn8?: boolean,
+  price?: boolean,
+}
+
+export interface TankStatsSettingsInterface {
+  weight?: number,
+  wn7?: number,
+  wn8?: number,
+  efficiency?: number
+}
+
+interface TankCardInterface extends TankCardSettingsInterface {
+  tank: TankInterface,
+  statistics?: TankStatInterface,
+  stats?: TankStatsSettingsInterface,
+  onChoiceTank?: (statistics?: TankStatInterface) => any,
+}
+
+export default function Tank({ tank, stats, statistics, ...props }: TankCardInterface) {
   const [hover, setHover] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -130,9 +154,7 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
   const language = useSelector(selectedLanguage);
   const date_locale = getDateLocale(language);
 
-  const handleCLick = (event) => {
-    event.preventDefault();
-
+  const handleCLick = () => {
     if (props?.tank_profile) {
       history.push(route);
       return;
@@ -190,8 +212,8 @@ export default function Tank({ tank = {}, stats = {}, statistics = {}, ...props 
         <TankName hover={!hover}>{tank?.name}</TankName>
         <TankImage image={tank?.image} />
 
-        {!props?.no_wn8 && statistics?.battles > 0 && tank?.tier > 0 && (
-          <WNBox title={stats?.weight} hover={hover}>
+        {!!statistics && !props?.no_wn8 && statistics?.battles > 0 && tank?.tier > 0 && (
+          <WNBox hover={hover}>
             <Wn8Bar value={stats?.wn8} unit={`WN8`} />
           </WNBox>
         )}

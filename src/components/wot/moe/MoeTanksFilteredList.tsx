@@ -7,13 +7,18 @@ import TankFilters from "components/wot/tanks/TankFilters";
 import TankSmallCard from "components/wot/tanks/TankSmallCard";
 import { valueFormat } from "helpers/priceFormat";
 import { getTiersFromTanksStats, getTranslationByTankType, tanksFilters } from "helpers/tanks";
+import { TankInterface } from "interfaces/TankInterface";
 import React, { useState } from "react";
-import { injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
-function ExpectedTanksFilteredList({ tanks = [], intl }) {
+interface ExpectedTanksFilteredListType extends WrappedComponentProps {
+  tanks: TankInterface[]
+}
+
+const ExpectedTanksFilteredList: React.FC<ExpectedTanksFilteredListType> = ({ tanks, intl }) => {
   const [filters, setFilters] = useState({});
   const [settings, setSettings] = useState({});
-  const tiersList =  getTiersFromTanksStats(tanks);
+  const tiersList = getTiersFromTanksStats(tanks);
 
   if (!Object.keys(tanks)?.length) {
     return null;
@@ -28,25 +33,27 @@ function ExpectedTanksFilteredList({ tanks = [], intl }) {
   return (
     <>
       <DarkBox>
-        <TankFilters
-          filters={filters}
-          setFilters={setFilters}
-          settings={{
-            tiersList: tiersList
-          }}
-          custom={{ type: true, tier: true, nation: true, name: true, premium: true }}
-        />
-        <Grid container>
-          {['type', 'tier', 'moe_1dmg', 'moe_2dmg', 'moe_3dmg', 'battles'].map((option) => (
-            <Grid item md sm={6} xs={6} key={`filter-expected-${option}`}>
-              <SwitchInput
-                checked={settings[option] || false}
-                translation={`hide.${option}`}
-                onChange={(checked) => set({ [option]: checked })}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <>
+          <TankFilters
+            filters={filters}
+            setFilters={setFilters}
+            settings={{
+              tiersList: tiersList
+            }}
+            custom={{ type: true, tier: true, nation: true, name: true, premium: true }}
+          />
+          <Grid container>
+            {['type', 'tier', 'moe_1dmg', 'moe_2dmg', 'moe_3dmg', 'battles'].map((option) => (
+              <Grid item md sm={6} xs={6} key={`filter-expected-${option}`}>
+                <SwitchInput
+                  checked={settings[option] || false}
+                  translation={`hide.${option}`}
+                  onChange={(checked) => set({ [option]: checked })}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </>
       </DarkBox>
 
       {!tanks?.length && (

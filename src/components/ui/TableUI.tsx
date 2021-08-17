@@ -7,44 +7,58 @@ import Row from "components/ui/table/Row";
 import TableFooter from "components/ui/table/TableFooter";
 import TableHeader from "components/ui/table/TableHeader";
 import { getComparator, stableSort } from "helpers/table";
-import React from 'react';
-import { injectIntl } from "react-intl";
+import { TableHeaderItem } from "interfaces/TableHeaderItem";
+import { TableRowInterface } from "interfaces/TableRowInterface";
+import React, { useState } from 'react';
+import { injectIntl, WrappedComponentProps } from "react-intl";
+import { Themes, themesTypes } from "styles/themes/base";
 import ThemeProvider from "styles/themes/ThemeProvider";
+
+interface TableUIInterface extends WrappedComponentProps {
+  theme?: themesTypes,
+  without_top?: boolean,
+  headers: TableHeaderItem[],
+  rowsPerPateOptions: number[],
+  items: [],
+  nosort: string[],
+  exclude: { [key: string]: any },
+  parse: (data: any) => any
+}
 
 function TableUI(
   {
-    theme = 'default_theme',
-    items = [], headers = [],
+    theme = Themes.DefaultTheme,
+    items = [],
+    headers = [],
     parse,
-    exclude = {},
+    exclude,
     nosort = [],
     intl,
     rowsPerPateOptions = [25, 50, 100],
     ...props
-  }
+  }: TableUIInterface
 ) {
-  const [dense, setDense] = React.useState(true);
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPateOptions[0]);
-  const [page, setPage] = React.useState(0);
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [dense, setDense] = useState(true);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPateOptions[0]);
+  const [page, setPage] = useState(0);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('name');
 
-  const handleChangeDense = (checked) => {
+  const handleChangeDense = (checked: boolean) => {
     setDense(checked);
   };
 
-
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (event: any, property: string) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -85,12 +99,11 @@ function TableUI(
             <TableBody>
               {stableSort(items, getComparator(order, orderBy), parse)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, key) => (
+                .map((row: TableRowInterface, key: number) => (
                   <Row
                     key={`table-row-${key}`}
                     row={row}
                     index={key}
-                    intl={intl}
                     exclude={exclude}
                   />
                 ))}

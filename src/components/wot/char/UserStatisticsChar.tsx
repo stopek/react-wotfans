@@ -63,13 +63,13 @@ export default function UserStatisticsChar({ raw = [], data = {} }) {
         axisBottom={{
           tickValues: 'every day',
           format: (value) => format(new Date(value), 'do MMM', { locale: getDateLocale(language) }),
-          orient: 'bottom',
+          // orient: 'bottom',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: -35,
         }}
         axisLeft={{
-          orient: 'left',
+          // orient: 'left',
           tickSize: 5,
           tickPadding: 5,
           tickRotation: -35,

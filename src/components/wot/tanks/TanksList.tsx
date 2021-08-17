@@ -1,8 +1,14 @@
 import { Grid } from "@material-ui/core";
-import Tank from "components/wot/tanks/Tank";
+import Tank, { TankCardSettingsInterface } from "components/wot/tanks/Tank";
+import { TankInterface } from "interfaces/TankInterface";
 import React from "react";
 
-export default function TanksList({ tanks = [], tier = '', ...props }) {
+type TanksListType = {
+  tanks: TankInterface[],
+  card_props: TankCardSettingsInterface
+}
+
+function TanksList({ tanks, card_props }: TanksListType) {
   return (
     <Grid container spacing={1}>
       {tanks.map((tank) => (
@@ -12,10 +18,12 @@ export default function TanksList({ tanks = [], tier = '', ...props }) {
         >
           <Tank
             tank={tank}
-            {...props}
+            {...card_props}
           />
         </Grid>
       ))}
     </Grid>
   );
 }
+
+export default TanksList;

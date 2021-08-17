@@ -1,5 +1,4 @@
 import ButtonInput from "components/ui/input/ButtonInput";
-import Texts from "components/ui/Texts";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { RADIUS } from "styles/colors";
@@ -12,8 +11,15 @@ const Content = styled.div`
   border-radius: ${RADIUS};
 `;
 
-const Text = styled.div`
+const TextContent = styled.div`
   margin: 25px 0;
+  display: block;
+`;
+
+const Text = styled.div`
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export default function Crash({ message = 'Internal error', ...props }) {
@@ -21,15 +27,15 @@ export default function Crash({ message = 'Internal error', ...props }) {
 
   return (
     <Content>
-      <Text>
-        <Texts size={"22px"} weight={600} display="block">
+      <TextContent>
+        <Text>
           {message}
-        </Texts>
+        </Text>
 
-        <Texts size={"13px"} weight={600} display="block" top={10} bottom={10}>
+        <Text>
           Podczas wykonywania tej czynności wystąpił wewnętrzny problem. <br />
           Jeśli sytuacja będzie się powtarzała napisz nam o tym
-        </Texts>
+        </Text>
 
         {!type && !props?.children && (
           <ButtonInput
@@ -37,7 +43,7 @@ export default function Crash({ message = 'Internal error', ...props }) {
             label={`report.problem`}
           />
         )}
-      </Text>
+      </TextContent>
 
       {props?.children}
     </Content>

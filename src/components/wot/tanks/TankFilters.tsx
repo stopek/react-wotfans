@@ -17,7 +17,7 @@ type TankFiltersType = {
   custom: CustomTypes<SearchTankFormInterface>,
   settings?: {
     tiersList?: [],
-    max_battles?: number
+    max_battles?: number,
   }
 }
 
@@ -61,8 +61,7 @@ function TankFilters({ filters, setFilters, custom, settings }: TankFiltersType)
             handleChange={(value) => setNameHandle(value)}
             value={name}
             variant={`standard`}
-            suffix={!!timer ?
-              <CountDownProgressCircular key={`progress-${timer}`} size={15} start={ms} steps={10} /> : <></>}
+            suffix={!!timer ? <CountDownProgressCircular key={`progress-${timer}`} size={15} start={ms} steps={10} /> : <></>}
           />
         </Grid>
       )}

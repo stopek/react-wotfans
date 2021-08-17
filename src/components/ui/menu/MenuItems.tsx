@@ -42,6 +42,7 @@ function MenuItems({ actions = [], close }: MenuItemsType) {
           <ListItemIcon>
             {action.icon}
           </ListItemIcon>
+
           <ListItemText primary={<FormattedMessage id={action.translation} />} />
         </StyledMenuItem>
       ))}

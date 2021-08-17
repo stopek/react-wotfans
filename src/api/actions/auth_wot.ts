@@ -1,10 +1,10 @@
 import { AUTH_WOT_ENDPOINT } from "api/endpoints";
 import instance from "api/service";
-import createUrlParams from "helpers/createUrlParams";
+import createUrlParams, { CreateUrlParamsType } from "helpers/createUrlParams";
 import fillRoute from "helpers/fillRoute";
 
 export class AuthWot {
-  static async post(action: string, params: object = {}) {
+  static async post(action: string, params: CreateUrlParamsType[]) {
     const path = fillRoute(AUTH_WOT_ENDPOINT, {
       action: action
     });
@@ -12,10 +12,11 @@ export class AuthWot {
     const response = await instance.post(path, {
       data: params
     });
+
     return response.data;
   }
 
-  static async get(action: string, params: object = {}) {
+  static async get(action: string, params: CreateUrlParamsType[]) {
     const path = fillRoute(AUTH_WOT_ENDPOINT, {
       action: action
     });
@@ -26,19 +27,19 @@ export class AuthWot {
     return response.data;
   }
 
-  static async get_user(params: object) {
+  static async get_user(params: CreateUrlParamsType[]) {
     return AuthWot.get('get_user', params);
   }
 
-  static async user_tanks(params: object) {
+  static async user_tanks(params: CreateUrlParamsType[]) {
     return AuthWot.post('user_tanks', params);
   }
 
-  static async logout(params: object) {
+  static async logout(params: CreateUrlParamsType[]) {
     return AuthWot.post('logout', params);
   }
 
-  static async log_out_account(params: object) {
+  static async log_out_account(params: CreateUrlParamsType[]) {
     return AuthWot.post('log_out_account', params);
   }
 }
