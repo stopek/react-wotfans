@@ -1,3 +1,4 @@
+import { useAppSelector } from "app/hooks";
 import { TANK_URL } from "app/routes";
 import TankMarkOfMastery from "components/wot/tanks/components/TankMarkOfMastery";
 import TankNationBox from "components/wot/tanks/components/TankNationBox";
@@ -10,8 +11,8 @@ import { getDateLocale } from "helpers/languages";
 import { priceFormat } from "helpers/priceFormat";
 import { TankInterface } from "interfaces/TankInterface";
 import { TankStatInterface } from "interfaces/TankStatInterface";
+import { TankStatsSettingsInterface } from "interfaces/TankStatsSettingsInterface";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled, { css } from "styled-components";
@@ -130,13 +131,6 @@ export interface TankCardSettingsInterface {
   price?: boolean,
 }
 
-export interface TankStatsSettingsInterface {
-  weight?: number,
-  wn7?: number,
-  wn8?: number,
-  efficiency?: number
-}
-
 interface TankCardInterface extends TankCardSettingsInterface {
   tank: TankInterface,
   statistics?: TankStatInterface,
@@ -151,7 +145,7 @@ export default function Tank({ tank, stats, statistics, ...props }: TankCardInte
   const history = useHistory();
   const route = fillRoute(TANK_URL, { tank_id: tank.id });
 
-  const language = useSelector(selectedLanguage);
+  const language = useAppSelector(selectedLanguage);
   const date_locale = getDateLocale(language);
 
   const handleCLick = () => {
@@ -193,9 +187,11 @@ export default function Tank({ tank, stats, statistics, ...props }: TankCardInte
           <Weight hover={hover}>{priceFormat(stats?.weight, ',', '%', 4)}</Weight>
         )}
 
-        <MarkPosition hover={hover}>
-          <TankMarkOfMastery mark={statistics?.mark_of_mastery} />
-        </MarkPosition>
+        {!!statistics && (
+          <MarkPosition hover={hover}>
+            <TankMarkOfMastery mark={statistics.mark_of_mastery} />
+          </MarkPosition>
+        )}
 
         {props?.battle_ago && (
           <LastBattle>

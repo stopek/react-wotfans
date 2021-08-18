@@ -13,7 +13,7 @@ import { injectIntl, WrappedComponentProps } from "react-intl";
 interface SelectInputType extends TableRowProps, WrappedComponentProps {
   row: TableRowInterface,
   index: number,
-  exclude: Array<{ [index: keyof TableRowInterface]: boolean }>
+  exclude: { [key: string]: any },
 }
 
 const Row: React.FC<SelectInputType> = ({ row, index, intl, exclude }) => {

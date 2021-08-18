@@ -1,8 +1,8 @@
 import { priceFormat } from "helpers/priceFormat";
+import { TankInterface } from "interfaces/TankInterface";
 import React from "react";
 import styled from "styled-components";
 import { COLOR_DARK, COLOR_PRICE_GOLD, COLOR_PRICE_SILVER, COLOR_PRICE_XP, RADIUS } from "styles/colors";
-import PropTypes from 'prop-types';
 
 const PriceBox = styled.div`
   display: inline-flex;
@@ -19,7 +19,11 @@ const Price = styled.div`
   background: ${props => props?.color};
 `;
 
-function TankPriceBox({ tank = {}, ...props }) {
+type TankPriceBoxType = {
+  tank: TankInterface
+}
+
+const TankPriceBox: React.FC<TankPriceBoxType> = ({ tank, ...props }) => {
   return (
     <PriceBox {...props}>
       {tank?.price_credit > 0 && (
@@ -37,12 +41,13 @@ function TankPriceBox({ tank = {}, ...props }) {
   );
 }
 
-TankPriceBox.propTypes = {
-  tank: PropTypes.shape({
-    price_credit: PropTypes.number,
-    price_gold: PropTypes.number,
-    prices_xp: PropTypes.number
-  })
-}
+//@todo - wrocić do typowania
+// TankPriceBox.propTypes = {
+//   tank: PropTypes.shape({
+//     price_credit: PropTypes.number.isRequired,
+//     price_gold: PropTypes.number.isRequired,
+//     prices_xp: PropTypes.number.isRequired
+//   })
+// }
 
 export default TankPriceBox;

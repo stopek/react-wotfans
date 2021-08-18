@@ -1,15 +1,22 @@
 import { TANK_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
 import fillRoute from "helpers/fillRoute";
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function TankProfileButton({ tank_id = 0, small, large }) {
+type TankProfileButtonType = {
+  tank_id: number,
+  small?: boolean,
+  large?: boolean
+}
+
+export default function TankProfileButton({ tank_id, small, large }: TankProfileButtonType) {
   const history = useHistory();
   const url = fillRoute(TANK_URL, { tank_id: tank_id });
 
-  const handleProfileClick = (event) => {
+  const handleProfileClick = (event: SyntheticEvent) => {
     event.preventDefault();
+
     return history.push(url);
   }
 
@@ -17,7 +24,6 @@ export default function TankProfileButton({ tank_id = 0, small, large }) {
     <ButtonInput
       color={`secondary`}
       onClick={handleProfileClick}
-      as={`a`}
       href={url}
       label={`see.profile`}
       small={small}

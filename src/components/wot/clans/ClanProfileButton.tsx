@@ -1,14 +1,18 @@
 import { CLAN_URL } from "app/routes";
 import ButtonInput from "components/ui/input/ButtonInput";
 import fillRoute from "helpers/fillRoute";
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function ClanProfileButton({ tag = '', ...props }) {
+type ClanProfileButtonType = {
+  tag: string
+}
+
+export default function ClanProfileButton({ tag, ...props }: ClanProfileButtonType) {
   const history = useHistory();
   const url = fillRoute(CLAN_URL, { tag: tag });
 
-  const handleProfileClick = (event) => {
+  const handleProfileClick = (event: SyntheticEvent) => {
     event.preventDefault();
     return history.push(url);
   }

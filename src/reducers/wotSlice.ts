@@ -12,6 +12,7 @@ import { MapsListResponseInterface } from "interfaces/response/MapsListResponseI
 import { MoeResponseInterface } from "interfaces/response/MoeResponseInterface";
 import { PlayerResponseInterface } from "interfaces/response/PlayerResponseInterface";
 import { PlayersListResponseInterface } from "interfaces/response/PlayersListResponseInterface";
+import { PlayerTanksResponseInterface } from "interfaces/response/PlayerTanksResponseInterface";
 import { TankResponseInterface } from "interfaces/response/TankResponseInterface";
 import { TanksResponseInterface } from "interfaces/response/TanksResponseInterface";
 
@@ -33,10 +34,10 @@ type SliceState = {
   moe_list: MoeResponseInterface | null,
   search_tank: TankResponseInterface | null,
   tanks: TanksResponseInterface | null,
+  user_tanks: PlayerTanksResponseInterface | null,
 
   players_list: [],
   user_tanks_achievements: [],
-  user_tanks: {},
   games: [],
   game: {}
 }
@@ -59,10 +60,10 @@ const initialState: SliceState = {
   moe_list: null,
   search_tank: null,
   tanks: null,
+  user_tanks: null,
 
   players_list: [],
   user_tanks_achievements: [],
-  user_tanks: {},
   games: [],
   game: {}
 }
@@ -145,7 +146,7 @@ export const wotSlice = createSlice({
       state.search_players = null;
     },
     clearPlayerTanks: (state) => {
-      state.user_tanks = {};
+      state.user_tanks = null;
     },
     setGameParam: (state, action) => {
       state.game = Object.assign({}, state.game, action.payload);
@@ -182,9 +183,9 @@ export const wotSlice = createSlice({
       })
 
       .addCase(fetchUserTanks.pending, (state) => {
-        state.user_tanks = {};
+        state.user_tanks = null;
       })
-      .addCase(fetchUserTanks.fulfilled, (state, action) => {
+      .addCase(fetchUserTanks.fulfilled, (state, action: PayloadAction<PlayerTanksResponseInterface>) => {
         state.user_tanks = action.payload;
       })
 

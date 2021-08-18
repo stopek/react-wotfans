@@ -6,7 +6,8 @@ import PercentageBar from "components/wot/PercentageBar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { date_from_unix } from "helpers/date";
 import fillRoute from "helpers/fillRoute";
-import React from "react";
+import { ClanInterface } from "interfaces/ClanInterface";
+import React, { SyntheticEvent } from "react";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -19,16 +20,19 @@ const Clans = styled.div`
   color: ${COLOR_TEXT};
 `;
 
-export default function ClansList({ clans = [] }) {
+type ClansListType = {
+  clans: ClanInterface[]
+}
+
+export default function ClansList({ clans }: ClansListType) {
   const history = useHistory();
-  clans = Object.values(clans);
+
   if (!clans?.length) {
     return null;
   }
 
-  const handleProfileClick = (event, tag) => {
+  const handleProfileClick = (event: SyntheticEvent, tag: string) => {
     event.preventDefault();
-
     return history.push(fillRoute(CLAN_URL, { tag: tag }));
   }
 
@@ -41,15 +45,19 @@ export default function ClansList({ clans = [] }) {
               <TableTdSmall as={`th`}>
                 <FormattedMessage id={`shortcut`} />
               </TableTdSmall>
+
               <TableTdSmall as={`th`}>
                 <FormattedMessage id={`active.players.percentage`} />
               </TableTdSmall>
+
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`wn8`} />
               </FitTableTd>
+
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`created.date`} />
               </FitTableTd>
+
               <FitTableTd as={`th`}>
                 <FormattedMessage id={`details`} />
               </FitTableTd>
@@ -61,7 +69,10 @@ export default function ClansList({ clans = [] }) {
           {clans.map((clan, clan_key) => (
             <TableTr key={`clan-${clan_key}`}>
               <Hidden mdUp>
-                <ClanSmallCard clan={clan} check={handleProfileClick} as={`td`} />
+                <ClanSmallCard
+                  clan={clan}
+                  check={handleProfileClick}
+                />
               </Hidden>
 
               <Hidden smDown>
@@ -69,19 +80,27 @@ export default function ClansList({ clans = [] }) {
                   {clan?.tag}
                   <small>{clan?.name}</small>
                 </TableTdSmall>
+
                 <TableTdSmall>
-                  <PercentageBar amount={clan?.active_players ?? 0} total={clan?.members_count ?? 0} />
+                  <PercentageBar
+                    amount={clan?.active_players ?? 0}
+                    total={clan?.members_count ?? 0}
+                  />
                 </TableTdSmall>
+
                 <FitTableTd>
                   <Wn8Bar value={clan?.wn8} />
                 </FitTableTd>
-                <FitTableTd>{date_from_unix(clan?.clan_created_at)}</FitTableTd>
+
+                <FitTableTd>
+                  {date_from_unix(clan?.clan_created_at)}
+                </FitTableTd>
+
                 <FitTableTd>
                   <ButtonInput
                     color={`secondary`}
                     label={`see.profile`}
                     onClick={(event) => handleProfileClick(event, clan?.tag)}
-                    as={`a`}
                     href={fillRoute(CLAN_URL, { tag: clan?.tag })}
                   />
                 </FitTableTd>

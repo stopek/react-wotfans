@@ -17,8 +17,8 @@ function MoeTanksChanges({ moe }: MoeTankChangesType) {
         { id: 'moe_3dmg', translation: 'moe.3dmg' },
         { id: 'battles', translation: 'battles' },
       ]}
-      items={moe}
-      rowsPerPateOptions={[10, 15, 25]}
+      items={moe as []}
+      rowsPerPageOptions={[10, 15, 25]}
       without_top
       parse={(item: TankMoeInterface) => {
         return {

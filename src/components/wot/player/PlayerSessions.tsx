@@ -1,14 +1,14 @@
 import { requestToApi } from "api/actions";
 import { AuthWot } from "api/actions/auth_wot";
+import { useAppDispatch } from "app/hooks";
 import ButtonInput from "components/ui/input/ButtonInput";
 import TableUI from "components/ui/TableUI";
 import Dot from "components/wot/Dot";
 import { setErrorMessage, setSuccessMessage } from "helpers/flashHelper";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
 export default function PlayerSessions({ sessions = [], session_id = 0 }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [logged_out, setLoggedOut] = useState([]);
   sessions = Object.values(sessions);
 

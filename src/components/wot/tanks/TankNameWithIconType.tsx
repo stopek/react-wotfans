@@ -1,6 +1,7 @@
 import { TANK_URL } from "app/routes";
 import TankTypeIcon from "components/wot/tanks/components/TankTypeIcon";
 import fillRoute from "helpers/fillRoute";
+import { TankInterface } from "interfaces/TankInterface";
 import React from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -15,18 +16,23 @@ const Content = styled.a`
   text-decoration: none;
 `;
 
-export default function TankNameWithIconType({ tank = {} }) {
+type TankNameWithIconTypeType = {
+  tank: TankInterface
+}
+
+export default function TankNameWithIconType({ tank }: TankNameWithIconTypeType) {
   const history = useHistory();
   const url = fillRoute(TANK_URL, { tank_id: tank?.id });
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+
     return history.push(url);
   }
 
   return (
     <Content onClick={handleClick} href={url}>
-      <TankTypeIcon type={tank?.type} />
+      <TankTypeIcon type={tank?.type} size={20} />
       {tank?.name}
     </Content>
   );

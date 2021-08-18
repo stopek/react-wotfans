@@ -1,14 +1,14 @@
 import { ResponsiveLine } from '@nivo/line'
-import { nivoTheme } from "styles/nivoTheme";
+import { useAppSelector } from "app/hooks";
 import { format } from "date-fns";
 import { date_parse } from "helpers/date";
 import { getDateLocale } from "helpers/languages";
 import { valueFormat } from "helpers/priceFormat";
 import React from "react";
-import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
+import { nivoTheme } from "styles/nivoTheme";
 
 const Content = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const Content = styled.div`
 
 export default function UserStatisticsChar({ raw = [], data = {} }) {
   let data_array = Object.assign({}, data);
-  const language = useSelector(selectedLanguage);
+  const language = useAppSelector(selectedLanguage);
 
   Object.values(raw).forEach((history, k) => {
     data_array.data.push({

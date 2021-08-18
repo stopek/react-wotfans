@@ -2,14 +2,15 @@ import TableUI from "components/ui/TableUI";
 import ClanProfileButton from "components/wot/clans/ClanProfileButton";
 import PlayerNameWithConsoleLogo from "components/wot/player/PlayerNameWithConsoleLogo";
 import PlayerProfileButton from "components/wot/player/PlayerProfileButton";
+import { MaxOnTankInterface } from "interfaces/MaxOnTankInterface";
 import React from "react";
 
-export default function BestPlayersOnTank(
-  {
-    column_key = '',
-    stats = []
-  }
-) {
+type BestPlayerOnTank = {
+  stats: MaxOnTankInterface[],
+  column_key: string
+}
+
+function BestPlayersOnTank({ column_key, stats }: BestPlayerOnTank) {
   return (
     <TableUI
       headers={[
@@ -20,8 +21,8 @@ export default function BestPlayersOnTank(
         { id: 'clan.profile', translation: 'see.profile' },
       ]}
       nosort={['player', 'profile']}
-      rowsPerPateOptions={[10, 15, 25]}
-      items={stats}
+      rowsPerPageOptions={[10, 15, 25]}
+      items={stats as []}
       without_top
       parse={(item) => {
         return {
@@ -35,3 +36,5 @@ export default function BestPlayersOnTank(
     />
   );
 }
+
+export default BestPlayersOnTank;

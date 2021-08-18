@@ -7,7 +7,7 @@ import React from "react";
 import { injectIntl, WrappedComponentProps } from "react-intl";
 
 interface ExpectedTableInterface extends WrappedComponentProps {
-  tanks: ExpectedListInterface[] | [],
+  tanks: ExpectedListInterface[],
   settings: Record<string, React.ReactNode>
 }
 
@@ -28,7 +28,7 @@ function ExpectedTable({ tanks, settings, intl }: ExpectedTableInterface) {
             { id: 'win', translation: 'exp.win' },
           ]}
           exclude={settings}
-          items={tanks}
+          items={tanks as []}
           parse={(item: ExpectedListInterface) => {
             return {
               name: item.tank?.name,

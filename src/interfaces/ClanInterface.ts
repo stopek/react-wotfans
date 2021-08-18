@@ -5,5 +5,5 @@ export interface ClanInterface {
   clan_created_at?: string,
   members_count?: number,
   name?: string,
-  wn8?: string
+  wn8?: number
 }

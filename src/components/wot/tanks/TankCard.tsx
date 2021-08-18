@@ -4,6 +4,9 @@ import TankBase from "components/wot/tanks/TankBase";
 import WN7Bar from "components/wot/wn7/WN7Bar";
 import Wn8Bar from "components/wot/wn8/Wn8Bar";
 import { perBattleCalculator, perBattleDisplay, priceFormat } from "helpers/priceFormat";
+import { TankInterface } from "interfaces/TankInterface";
+import { TankStatInterface } from "interfaces/TankStatInterface";
+import { TankStatsSettingsInterface } from "interfaces/TankStatsSettingsInterface";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -63,7 +66,13 @@ const StatsItem = styled.li`
   }
 `;
 
-const Stat = ({ translation, value, value2 }) => {
+type StatType = {
+  translation: string,
+  value: string | number,
+  value2?: string | number | JSX.Element
+}
+
+const Stat = ({ translation, value, value2 }: StatType) => {
   return (
     <StatsItem>
       <strong>
@@ -75,7 +84,13 @@ const Stat = ({ translation, value, value2 }) => {
   );
 }
 
-export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...props }) {
+type TankCardType = {
+  tank: TankInterface,
+  statistics?: TankStatInterface,
+  stats?: TankStatsSettingsInterface,
+}
+
+export default function TankCard({ tank, stats, statistics, ...props }: TankCardType) {
   const statsList = [
     { translation: 'capture.points', value: statistics?.capture_points },
     { translation: 'damage.assisted.radio', value: statistics?.damage_assisted_radio },
@@ -137,14 +152,18 @@ export default function TankCard({ tank = {}, stats = {}, statistics = {}, ...pr
               value2={<strong><FormattedMessage id={`per.battle`} /></strong>}
             />
 
-            {statsList.map((stat, key) => (
-              <Stat
-                key={`stat-${key}`}
-                translation={stat.translation}
-                value={stat.value || 0}
-                value2={perBattleDisplay(perBattleCalculator(stat.value, statistics?.battles))}
-              />
-            ))}
+            {!!statistics && (
+              <>
+                {statsList.map((stat, key) => (
+                  <Stat
+                    key={`stat-${key}`}
+                    translation={stat.translation}
+                    value={stat.value || 0}
+                    value2={perBattleDisplay(perBattleCalculator(stat.value || 0, statistics?.battles))}
+                  />
+                ))}
+              </>
+            )}
           </StatsList>
         </Grid>
       </Grid>

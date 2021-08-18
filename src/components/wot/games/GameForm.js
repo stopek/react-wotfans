@@ -3,14 +3,14 @@ import { gamesTypes } from "app/settings";
 import SelectInput from "components/ui/input/SelectInput";
 import TextInput from "components/ui/input/TextInput";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { setGameParam } from "reducers/wotSlice";
+import { useAppDispatch } from "src/app/hooks";
 import styled from "styled-components";
 
 const Content = styled.div``;
 
 export default function GameForm({ game = {} }) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Content>

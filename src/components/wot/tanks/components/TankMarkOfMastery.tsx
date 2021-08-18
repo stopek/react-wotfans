@@ -6,18 +6,23 @@ import PropTypes from 'prop-types';
 import React from "react";
 import styled from "styled-components";
 
-const imageFromMarkValue = (mark) => {
+const imageFromMarkValue = (mark: number) => {
   return { 1: third, 2: second, 3: first, 4: m }[mark] ?? null;
 }
 
-const Content = styled.div`
+const Content = styled.div<{ size: number, image: string }>`
   width: ${props => props?.size}px;
   height: ${props => props?.size}px;
   background: url(${props => props?.image}) no-repeat center center;
   background-size: contain;
 `;
 
-function TankMarkOfMastery({ mark, size }) {
+type TankMarkOfMasteryType = {
+  mark: number,
+  size: number
+}
+
+function TankMarkOfMastery({ mark, size }: TankMarkOfMasteryType) {
   if (mark <= 0) {
     return null;
   }

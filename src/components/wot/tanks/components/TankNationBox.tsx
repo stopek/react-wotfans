@@ -11,6 +11,7 @@ import japan from "assets/flags/241-japan.png";
 import italy from "assets/flags/263-italy.png";
 import merc from "assets/flags/merc.png";
 import { getTranslationByNation } from "helpers/user";
+import { TankInterface } from "interfaces/TankInterface";
 import PropTypes from 'prop-types';
 import React from "react";
 import { FormattedMessage } from "react-intl";
@@ -27,7 +28,7 @@ const NationBox = styled.div`
   border-radius: 25px;
 `;
 
-const Flag = styled.div`
+const Flag = styled.div<{ icon: string }>`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -44,20 +45,32 @@ const Nation = styled.div`
   color: ${COLOR_TEXT_ON_THEME};
 `;
 
-const getIconByType = (type) => {
-  return {
-    ussr, sweden, uk, czech, italy, poland, usa, france, japan, china, merc, germany
-  }[type] ?? null;
+type CountriesType = {
+  [key: string]: string
 }
 
-function TankNationBox({ tank, without_name, ...props }) {
+const countries: CountriesType = {
+  ussr, sweden, uk, czech, italy, poland,
+  usa, france, japan, china, merc, germany
+}
+
+const getIconByType = (type: string) => {
+  return countries[type] ?? null;
+}
+
+type TankNationBox = {
+  tank: TankInterface,
+  without_name?: boolean
+}
+
+const TankNationBox: React.FC<TankNationBox> = ({ tank, without_name }) => {
   const icon = getIconByType(tank?.nation);
   if (!icon) {
     return null;
   }
 
   return (
-    <NationBox {...props}>
+    <NationBox>
       <Flag icon={icon} />
       {!without_name && (
         <Nation>
@@ -69,7 +82,7 @@ function TankNationBox({ tank, without_name, ...props }) {
 }
 
 TankNationBox.propTypes = {
-  tank: PropTypes.object,
+  //@todo - typowanie tank.
   without_name: PropTypes.bool
 }
 

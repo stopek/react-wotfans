@@ -14,7 +14,7 @@ import SupervisorAccountRoundedIcon from '@material-ui/icons/SupervisorAccountRo
 import VpnLockRoundedIcon from '@material-ui/icons/VpnLockRounded';
 import { requestToApi } from "api/actions";
 import { AuthWot } from "api/actions/auth_wot";
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { ACCOUNT_URL, CLAN_URL, GAMES_URL, LOGIN_URL, PLAYER_URL, SESSIONS_URL, WN8_CALCULATOR_URL } from "app/routes";
 import ProgressCircular from "components/ui/progress/ProgressCircular";
 import fillRoute from "helpers/fillRoute";
@@ -23,7 +23,6 @@ import { isLogged, logOutUser } from "helpers/user";
 import { MenuItemInterface } from "interfaces/MenuItemInterface";
 import React, { useState } from 'react';
 import { FormattedMessage } from "react-intl";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "reducers/wotSlice";
 import styled from "styled-components";
@@ -81,7 +80,7 @@ export default function LoggedUserMenu() {
   const history = useHistory();
   const user = useAppSelector(selectUser);
   const [anchorEl, setAnchorEl] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = (event: React.ChangeEvent<any>) => {
     setAnchorEl(event.currentTarget);

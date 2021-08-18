@@ -1,6 +1,5 @@
-import { ExpectedListInterface } from "interfaces/ExpectedListInterface";
+import { ExpectedInterface } from "interfaces/ExpectedInterface";
 import { MaxOnTankInterface } from "interfaces/MaxOnTankInterface";
-import { MoeInterface } from "interfaces/MoeInterface";
 import { TankExpectedInterface } from "interfaces/TankExpectedInterface";
 import { TankMoeInterface } from "interfaces/TankMoeInterface";
 
@@ -22,5 +21,7 @@ export interface TankInterface {
   moeTanks: TankMoeInterface[],
   max_frags_stats: MaxOnTankInterface[],
   max_xp_stats: MaxOnTankInterface[],
-  max_damage_stats: MaxOnTankInterface[]
+  max_damage_stats: MaxOnTankInterface[],
+
+  current_expected: ExpectedInterface,
 }

@@ -18,6 +18,7 @@ import {
 } from "helpers/priceFormat";
 import { sortByWeight, sortByWN8 } from "helpers/user";
 import { PlayerInterface } from "interfaces/PlayerInterface";
+import { TankInterface } from "interfaces/TankInterface";
 import { TankStatInterface } from "interfaces/TankStatInterface";
 import { UserStatistics } from "interfaces/UserStatistics";
 import React, { useState } from "react";
@@ -39,10 +40,10 @@ type PlayerDetailsType = {
 }
 
 const PlayerDetails: React.FC<PlayerDetailsType> = ({ player, statistics }) => {
-  const [previewTank, setPreviewTank] = useState({});
+  const [previewTank, setPreviewTank] = useState<TankInterface>();
+  const [preview_stats, setPreviewStats] = useState(undefined);
+  const [preview_statistics, setPreviewStatistics] = useState(undefined);
   const [open, setOpen] = useState(false);
-  const [preview_stats, setPreviewStats] = useState({});
-  const [preview_statistics, setPreviewStatistics] = useState({});
 
 
   const ps = player.stats[0] || {};
@@ -81,13 +82,15 @@ const PlayerDetails: React.FC<PlayerDetailsType> = ({ player, statistics }) => {
 
   return (
     <>
-      <TankModalStats
-        tank={previewTank}
-        stats={preview_stats}
-        statistics={preview_statistics}
-        setOpen={setOpen}
-        open={open}
-      />
+      {!!previewTank && (
+        <TankModalStats
+          tank={previewTank}
+          stats={preview_stats}
+          statistics={preview_statistics}
+          setOpen={setOpen}
+          open={open}
+        />
+      )}
 
       <LargeHeader>
         <PlayerNameWithConsoleLogo name={player?.name} />

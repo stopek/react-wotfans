@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import React from "react";
 import styled from "styled-components";
 
-const Icon = styled.div`
+const Icon = styled.div<{ size: number, image: string, dark?: boolean }>`
   width: ${props => props?.size}px;
   height: ${props => props?.size}px;
   background: url(${props => props?.image}) no-repeat center center;
@@ -15,7 +15,7 @@ const Icon = styled.div`
   ${props => props?.dark && `filter: brightness(-150%);`}
 `;
 
-const getIconByTankType = (type) => {
+const getIconByTankType = (type: string) => {
   return {
     'mediumTank': icon_medium,
     'heavyTank': icon_heavy,
@@ -24,15 +24,24 @@ const getIconByTankType = (type) => {
   }[type] ?? icon_light;
 }
 
-function TankTypeIcon({ type, size, ...props }) {
+type TankTypeIconType = {
+  type: string,
+  size: number
+}
+
+const TankTypeIcon: React.FC<TankTypeIconType> = ({ type, size, ...props }: TankTypeIconType) => {
   return (
-    <Icon size={size} image={getIconByTankType(type)} {...props} />
+    <Icon
+      size={size}
+      image={getIconByTankType(type)}
+      {...props}
+    />
   );
 }
 
 TankTypeIcon.propTypes = {
   type: PropTypes.string.isRequired,
-  size: PropTypes.number
+  size: PropTypes.number.isRequired
 };
 
 TankTypeIcon.defaultProps = {

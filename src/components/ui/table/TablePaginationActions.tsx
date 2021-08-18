@@ -1,24 +1,38 @@
 import IconButton from "@material-ui/core/IconButton";
+import { TablePaginationActionsProps } from "@material-ui/core/TablePagination/TablePaginationActions";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import React from "react";
 
-export default function TablePaginationActions({ count, page, rowsPerPage, onChangePage, ...props }) {
-  const handleFirstPageButtonClick = (event) => {
+interface TablePaginationActionsInterface extends TablePaginationActionsProps {
+  count: number,
+  page: number,
+  rowsPerPage: number
+}
+
+const TablePaginationActions: React.FC<TablePaginationActionsInterface> = (
+  {
+    count,
+    page,
+    rowsPerPage,
+    onChangePage
+  }
+) => {
+  const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onChangePage(event, 0);
   };
 
-  const handleBackButtonClick = (event) => {
+  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = (event) => {
+  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onChangePage(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (event) => {
+  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
@@ -51,3 +65,5 @@ export default function TablePaginationActions({ count, page, rowsPerPage, onCha
     </>
   );
 }
+
+export default TablePaginationActions;

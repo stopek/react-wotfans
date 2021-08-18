@@ -13,7 +13,7 @@ const Name = styled.div`
   padding: 0 15px 0 0;
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ pointer?: boolean }>`
   display: inline-flex;
   border-radius: ${RADIUS};
   gap: 5px;
@@ -21,7 +21,7 @@ const Content = styled.div`
   background: black;
   padding: 5px 0;
   white-space: nowrap;
-  
+
   ${props => props?.pointer && `cursor: pointer;`}
 `;
 

@@ -18,10 +18,10 @@ interface TableUIInterface extends WrappedComponentProps {
   theme?: themesTypes,
   without_top?: boolean,
   headers: TableHeaderItem[],
-  rowsPerPateOptions: number[],
+  rowsPerPageOptions?: number[],
   items: [],
-  nosort: string[],
-  exclude: { [key: string]: any },
+  nosort?: string[],
+  exclude?: { [key: string]: any },
   parse: (data: any) => any
 }
 
@@ -31,17 +31,17 @@ function TableUI(
     items = [],
     headers = [],
     parse,
-    exclude,
+    exclude = {},
     nosort = [],
     intl,
-    rowsPerPateOptions = [25, 50, 100],
+    rowsPerPageOptions = [25, 50, 100],
     ...props
   }: TableUIInterface
 ) {
   const [dense, setDense] = useState(true);
-  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPateOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
   const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState('name');
 
   const handleChangeDense = (checked: boolean) => {
@@ -79,7 +79,7 @@ function TableUI(
             handleChangePage={handleChangePage}
             handleChangeRowsPerPage={handleChangeRowsPerPage}
             page={page}
-            rowsPerPageOptions={rowsPerPateOptions}
+            rowsPerPageOptions={rowsPerPageOptions}
           />
         )}
 
@@ -89,7 +89,7 @@ function TableUI(
             size={dense ? 'small' : 'medium'}
           >
             <TableHeader
-              headCells={headers}
+              headers={headers}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -119,7 +119,7 @@ function TableUI(
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           page={page}
-          rowsPerPageOptions={rowsPerPateOptions}
+          rowsPerPageOptions={rowsPerPageOptions}
         />
       </Box>
     </ThemeProvider>

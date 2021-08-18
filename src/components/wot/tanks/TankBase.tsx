@@ -1,6 +1,7 @@
 import TankNationBox from "components/wot/tanks/components/TankNationBox";
 import TankNameWithIconType from "components/wot/tanks/TankNameWithIconType";
 import { priceFormat } from "helpers/priceFormat";
+import { TankInterface } from "interfaces/TankInterface";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -63,7 +64,7 @@ const Description = styled.p`
   color: gray;
 `;
 
-const Image = styled.div`
+const Image = styled.div<{ image: string }>`
   width: 100%;
   min-height: 200px;
   background-color: #e7e7e7;
@@ -74,13 +75,25 @@ const Image = styled.div`
   display: flex;
 `;
 
-export default function TankBase({ tank = {} }) {
-  const infos_data = [
+type TankBaseInterface = {
+  tank: TankInterface
+}
+
+type InfosDataType = Array<{
+  translation: string, value: any, disable?: boolean
+}>;
+
+export default function TankBase({ tank }: TankBaseInterface) {
+  const infos_data: InfosDataType = [
     { translation: 'tier', value: tank.tier },
-    tank?.price_credit > 0 && { translation: 'price.silver', value: priceFormat(tank?.price_credit, ',', '', 0) },
-    tank?.price_gold > 0 && { translation: 'price.gold', value: priceFormat(tank?.price_gold, ',', '', 0) },
-    tank?.prices_xp > 0 && { translation: 'price.xp', value: priceFormat(tank?.prices_xp, ',', '', 0) }
-  ];
+    {
+      translation: 'price.silver',
+      value: priceFormat(tank?.price_credit, ',', '', 0),
+      disable: tank?.price_credit <= 0
+    },
+    { translation: 'price.gold', value: priceFormat(tank?.price_gold, ',', '', 0), disable: tank?.price_gold <= 0 },
+    { translation: 'price.xp', value: priceFormat(tank?.prices_xp, ',', '', 0), disable: tank?.prices_xp <= 0 }
+  ].filter((element) => !element?.disable);
 
   return (
     <>
@@ -88,14 +101,14 @@ export default function TankBase({ tank = {} }) {
         <TankNameWithIconType tank={tank} />
         <TankNationBox tank={tank} />
       </TankName>
-      <Image image={tank?.image} premium={tank?.is_premium} />
+      <Image image={tank?.image} />
 
       <Description>
         {tank?.description}
       </Description>
 
       <BoxesInfo>
-        {infos_data.filter((item) => !!item).map((item, key) => (
+        {infos_data.map((item, key) => (
           <BoxInfos key={`box-info-${key}`}>
             <FormattedMessage id={item.translation} />
             <span>{item.value}</span>

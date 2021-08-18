@@ -1,3 +1,4 @@
+import { Value } from "@nivo/bar";
 import { percentageCalculator, percentageDisplay } from "helpers/priceFormat";
 import React from "react";
 import { FormattedMessage } from "react-intl";
@@ -41,7 +42,16 @@ const WnInfo = styled.div`
   }
 `;
 
-export default function PlayerWnTooltip({ data = {} }) {
+type PlayerWnTooltipType = {
+  data: {
+    id: Value,
+    value: number,
+    color: string,
+    totalPlayers: number
+  }
+}
+
+function PlayerWnTooltip({ data }: PlayerWnTooltipType) {
   const playersPercentage = percentageCalculator(data.value, data.totalPlayers);
 
   return (
@@ -58,3 +68,5 @@ export default function PlayerWnTooltip({ data = {} }) {
     </Tooltip>
   );
 }
+
+export default PlayerWnTooltip;

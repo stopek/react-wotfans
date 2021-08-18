@@ -16,7 +16,7 @@ const Role = styled.span`
   z-index: 10;
 `;
 
-const RoleFullName = styled.div`
+const RoleFullName = styled.div<{ hover?: boolean }>`
   position: absolute;
   opacity: 0;
   left: 0;
@@ -31,7 +31,7 @@ const RoleFullName = styled.div`
   line-height: 1;
 `;
 
-const Letter = styled.div`
+const Letter = styled.div<{ color: string }>`
   position: relative;
   z-index: 2;
   background: ${props => props?.color};
@@ -49,7 +49,7 @@ const Letter = styled.div`
 `;
 
 
-const getRoleColor = (role_name) => {
+const getRoleColor = (role_name: string) => {
   switch (role_name) {
     case 'c':
       return COLOR_ROLE_COMMANDER;
@@ -64,7 +64,11 @@ const getRoleColor = (role_name) => {
   }
 }
 
-export default function PlayerClanRoleIcon({ role_name = '' }) {
+type PlayerClanRoleIconType = {
+  role_name: string
+}
+
+export default function PlayerClanRoleIcon({ role_name }: PlayerClanRoleIconType) {
   const [hover, setHover] = useState(false);
 
   const role_letter = (!!role_name && role_name[0]) || '?';
@@ -77,6 +81,7 @@ export default function PlayerClanRoleIcon({ role_name = '' }) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >{role_letter}</Letter>
+
       <RoleFullName
         hover={hover}
         color={color}

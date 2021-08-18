@@ -1,8 +1,8 @@
 import { ResponsiveLine, Serie } from "@nivo/line";
+import { useAppSelector } from "app/hooks";
 import { format } from "date-fns";
 import { getDateLocale } from "helpers/languages";
 import React from "react";
-import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
 import styled from "styled-components";
 import { COLOR_THEME } from "styles/colors";
@@ -17,7 +17,7 @@ interface SimpleDateValueCharInterface {
 }
 
 export default function SimpleDateValueChar({ data }: SimpleDateValueCharInterface) {
-  const language = useSelector(selectedLanguage);
+  const language = useAppSelector(selectedLanguage);
 
   const locale = getDateLocale(language);
   const options = locale ? { locale: locale } : {}

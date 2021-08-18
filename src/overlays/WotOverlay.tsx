@@ -1,3 +1,4 @@
+import { useAppSelector } from "app/hooks";
 import Error from "components/core/Error";
 import FullPreloader from "components/core/FullPreloader";
 import Footer from "components/Footer";
@@ -7,7 +8,6 @@ import { OverlayInterface } from "interfaces/OverlayInterface";
 import Base from "overlays/Base";
 import PropTypes from 'prop-types';
 import React from "react";
-import { useSelector } from "react-redux";
 import { selectCrash, selectError, selectNotFound } from "reducers/wotSlice";
 import styled from "styled-components";
 import { COLOR_TEXT } from "styles/colors";
@@ -35,9 +35,9 @@ const Container = styled.div`
 `;
 
 function WotOverlay({ title, children, full, ...props }: OverlayInterface) {
-  const isError = useSelector(selectError);
-  const isNotFound = useSelector(selectNotFound);
-  const isCrash = useSelector(selectCrash);
+  const isError = useAppSelector(selectError);
+  const isNotFound = useAppSelector(selectNotFound);
+  const isCrash = useAppSelector(selectCrash);
 
   return (
     <Content full={full} {...props}>

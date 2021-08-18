@@ -1,7 +1,7 @@
+import { useAppSelector } from "app/hooks";
 import Preloader from "components/core/Preloader";
 import PropTypes from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
 import { selectLoading } from "reducers/wotSlice";
 import styled, { keyframes } from "styled-components";
 
@@ -36,7 +36,7 @@ type FullPreloaderType = {
 }
 
 function FullPreloader({ force }: FullPreloaderType) {
-  const loader = useSelector(selectLoading);
+  const loader = useAppSelector(selectLoading);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@material-ui/core";
 import PropTypes from "prop-types";
-import React from 'react';
+import React, { MouseEventHandler, SyntheticEvent } from 'react';
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router";
 import { Themes, themesTypes } from "styles/themes/base";
@@ -8,7 +8,7 @@ import ThemeProvider from "styles/themes/ThemeProvider";
 
 interface ButtonInputInterface extends ButtonProps {
   label?: string,
-  onClick?: (event: React.InputHTMLAttributes<HTMLButtonElement>) => void,
+  onClick?: (event: SyntheticEvent) => void,
   theme?: themesTypes,
   icon?: JSX.Element,
   route?: string,
@@ -34,7 +34,7 @@ const ButtonInput: React.FC<ButtonInputInterface> = (
 ) => {
   const history = useHistory();
 
-  const go = (event: React.InputHTMLAttributes<HTMLButtonElement>) => {
+  const go = (event: SyntheticEvent) => {
     if (route) {
       return history.push(route);
     }

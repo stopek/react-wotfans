@@ -1,10 +1,11 @@
 import { PlayerInterface } from "interfaces/PlayerInterface";
 import { TankInterface } from "interfaces/TankInterface";
-import { WN8Interface } from "interfaces/WN8Interface";
+import { Wn8DetailsInterface } from "interfaces/Wn8DetailsInterface";
 
-export interface TankStatInterface extends WN8Interface{
+export interface TankStatInterface {
   player: PlayerInterface,
   tank: TankInterface,
+  wn8: Wn8DetailsInterface | number,
 
   battle_life_time: number,
   battles: number,

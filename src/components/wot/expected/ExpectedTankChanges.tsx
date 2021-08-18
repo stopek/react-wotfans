@@ -19,8 +19,8 @@ function ExpectedTankChanges({ expected }: ExpectedTableType) {
         { id: 'spot', translation: 'exp.spot' },
         { id: 'win', translation: 'exp.win' },
       ]}
-      items={expected}
-      rowsPerPateOptions={[10, 15, 25]}
+      items={expected as []}
+      rowsPerPageOptions={[10, 15, 25]}
       without_top
       parse={(item: TankExpectedInterface) => {
         return {

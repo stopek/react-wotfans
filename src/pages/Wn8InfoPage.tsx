@@ -1,4 +1,5 @@
 import { Grid } from "@material-ui/core";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { WN8_CALCULATOR_TANK_URL, WN8_CALCULATOR_URL } from "app/routes";
 import FullPreloader from "components/core/FullPreloader";
 import ButtonInput from "components/ui/input/ButtonInput";
@@ -10,9 +11,10 @@ import fillRoute from "helpers/fillRoute";
 import mainScroll from "helpers/mainScroll";
 import { numberResult } from "helpers/priceFormat";
 import { sortByWN8 } from "helpers/user";
+import { TankStatInterface } from "interfaces/TankStatInterface";
+import { Wn8DetailsInterface } from "interfaces/Wn8DetailsInterface";
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { fetchUserTanks, selectUserTanks } from "reducers/wotSlice";
 import styled from "styled-components";
@@ -106,20 +108,21 @@ const Variable5 = styled(Variable2)`
 export default function Wn8InfoPage() {
   const { tank_id } = useParams();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const tanks = useSelector(selectUserTanks);
+  const tanks = useAppSelector(selectUserTanks);
 
-  const current_stat = tanks?.response?.tanks?.find((stat) => parseInt(stat?.tank?.id) === parseInt(tank_id));
+  const current_stat = tanks?.response?.tanks?.find((tank) => tank?.tank?.id === parseInt(tank_id));
   const current_expected = current_stat?.tank?.current_expected;
-  const wn_props = current_stat?.wn8?.properties;
+  const current_wn = current_stat?.wn8 as Wn8DetailsInterface;
+  const wn_props = current_wn.properties;
 
   const expected_table = ['damage', 'def', 'frag', 'spot', 'win'];
-  const stats_table = ['damage_assisted_track', 'damage_dealt', 'spotted', 'frags', 'capture_points', 'wins'];
+  const stats_table: Array<keyof TankStatInterface> = ['damage_assisted_track', 'damage_dealt', 'spotted', 'frags', 'capture_points', 'wins'];
 
-  useEffect(() => dispatch(fetchUserTanks()), []);
+  useEffect(() => dispatch<any>(fetchUserTanks()), []);
 
-  const choiceTank = (stat) => {
+  const choiceTank = (stat: TankStatInterface) => {
     mainScroll();
     history.push(fillRoute(WN8_CALCULATOR_TANK_URL, { tank_id: stat?.tank?.id }));
   }
@@ -141,10 +144,8 @@ export default function Wn8InfoPage() {
               <Grid item lg={2} xs={12}>
                 <Tank
                   tank={current_stat?.tank}
-                  stats={{ wn8: current_stat?.wn8?.wn }}
-                  statistics={{
-                    battles: current_stat?.battles,
-                  }}
+                  stats={{ wn8: current_wn.wn }}
+                  statistics={current_stat}
                   no_stats
                 />
                 <Table>

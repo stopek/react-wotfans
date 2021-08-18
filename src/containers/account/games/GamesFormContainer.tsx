@@ -1,12 +1,12 @@
 import { Grid } from "@material-ui/core";
+import { useAppSelector } from "app/hooks";
 import GameForm from "components/wot/games/GameForm";
 import AccountOverlay from "overlays/Account";
 import React from 'react';
-import { useSelector } from "react-redux";
 import { selectGameItem } from "reducers/wotSlice";
 
 export default function GamesFormContainer({ ...props }) {
-  const game = useSelector(selectGameItem);
+  const game = useAppSelector(selectGameItem);
 
   return (
     <AccountOverlay {...props}>

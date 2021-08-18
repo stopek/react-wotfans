@@ -4,9 +4,13 @@ import RangeInput from "components/ui/input/RangeInput";
 import TextInput from "components/ui/input/TextInput";
 import React, { useState } from "react";
 
-export default function SearchClanForm({ submit }) {
+type SearchClanFormType = {
+  submit: (event: React.SyntheticEvent, data: object) => void
+}
+
+export default function SearchClanForm({ submit }: SearchClanFormType) {
   const [clan, setClan] = useState('');
-  const [amount, setAmount] = useState([0, 100]);
+  const [amount, setAmount] = useState<number[]>([0, 100]);
 
   return (
     <form onSubmit={(event) => submit(event, { clan_name: clan, amount: amount })}>
@@ -23,7 +27,7 @@ export default function SearchClanForm({ submit }) {
 
         <Grid item md={6} xs={12}>
           <RangeInput
-            handleChange={(value) => setAmount(value)}
+            handleChange={(value) => setAmount(Array.isArray(value) ? value : [])}
             value={amount}
             step={5}
             label={`amount`}

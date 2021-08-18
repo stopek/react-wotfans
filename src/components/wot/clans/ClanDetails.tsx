@@ -12,12 +12,12 @@ import { date_from_api, date_from_unix } from "helpers/date";
 import { getDateLocale } from "helpers/languages";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { useSelector } from "react-redux";
 import { selectedLanguage } from "reducers/languageSlice";
+import { useAppSelector } from "src/app/hooks";
 import { LargeHeader, Wn8BarContent } from "styles/GlobalStyled";
 
 export default function ClanDetails({ clan = {}, statistics = {} }) {
-  const language = useSelector(selectedLanguage);
+  const language = useAppSelector(selectedLanguage);
 
   const is_creator = clan?.creator;
   const is_leader = clan?.leader;
